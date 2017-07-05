@@ -6,6 +6,10 @@
 @import "compass/reset";
 @import "compass/css3";
 
+////////////////////////////////
+//// Generic Styles Below //////
+////////////////////////////////
+
 body * {
     line-height: 1.0em;
     box-sizing: border-box;
@@ -14,107 +18,6 @@ body * {
 a {
     cursor: pointer;
     @include transition(0.2s);
-}
-
-//The header of the website, common in all pages
-//E.g.
-//-----------------
-//  (site_header)
-//-----------------
-//   (site_nav)
-//-----------------
-//  (site_main)
-//-----------------
-//  (site_footer)
-//-----------------
-#site_header {
-    padding: 15px;
-}
-
-
-//The navigation of the website, common in all pages
-#site_nav {
-    padding: 15px;
-
-    .item {
-        display: inline-block;
-        border-right: 1px solid #c2c2c2;
-        padding: 0px 10px 0px;
-        font-size: 16px;
-
-        a {
-            text-decoration: none;
-            color: blue;
-
-            &:visited {
-                color: blue;
-            }
-
-            &:hover {
-                font-size: 18px;
-            }
-        }
-
-        &:last-child {
-            border-right: none;
-        }
-
-        &.active {
-           a {
-            font-weight: bold;
-            text-decoration: underline;    
-           }
-        }
-    }
-}
-
-#development_nav {
-    .title {
-        float: left;
-        font-size: 18px;
-        border-bottom: none;
-    }
-    .item {
-        display: inline-block;
-        border-right: 1px solid #c2c2c2;
-        padding: 0px 10px 0px;
-        font-size: 16px;
-
-        a {
-            text-decoration: none;
-            color: blue;
-            &:visited {
-                color: blue;
-            }
-
-            &:hover {
-                font-size: 18px;
-            }
-        }
-
-        &:last-child {
-            border-right: none;
-        }
-
-        &.active {
-           a {
-            font-weight: bold;
-            text-decoration: underline;    
-           }
-        }
-    }
-}
-
-//The main section of the website, common in all pages
-#site_main {
-    padding: 15px;
-}
-
-//The footer section of the website, common in all pages
-#site_footer {
-    text-align: center;
-    font-size: 10px;
-    color: #5e5e5e;
 }
 
 //LOGO
@@ -212,11 +115,6 @@ a {
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 5px;
-}
-
-//Custom name style for projects list
-#projects_list .name {
-    font-size: 20px;
 }
 
 //For basic information, usually below a name or title
@@ -343,21 +241,23 @@ a {
 //  -----(ITEM)-------
 //  Fried Chicken (name)
 //  ------------------
-.section_information .item {
-    display: block;
-    padding: 0px;
-    border-bottom: 1px solid #c2c2c2;
-    a {
-        color: black;
+.section_information { 
+    .item {
         display: block;
-        padding: 10px 5px 10px;
-        text-decoration: none;
-        &:hover {
+        padding: 0px;
+        border-bottom: 1px solid #c2c2c2;
+        a {
             color: black;
-            background-color: #e2edff;
-        }
-        &:visited {
-            color: black;
+            display: block;
+            padding: 10px 5px 10px;
+            text-decoration: none;
+            &:hover {
+                color: black;
+                background-color: #e2edff;
+            }
+            &:visited {
+                color: black;
+            }
         }
     }
 }
@@ -449,6 +349,117 @@ a {
     box-sizing: border-box;
 }
 
+#site_main:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+//////////////////////////////
+/// Customizations Below /////
+//////////////////////////////
+
+//The header of the website, common in all pages
+//E.g.
+//-----------------
+//  (site_header)
+//-----------------
+//   (site_nav)
+//-----------------
+//  (site_main)
+//-----------------
+//  (site_footer)
+//-----------------
+#site_header {
+    padding: 15px;
+}
+
+
+//The navigation of the website, common in all pages
+#site_nav {
+    padding: 15px;
+
+    .item {
+        display: inline-block;
+        border-right: 1px solid #c2c2c2;
+        padding: 0px 10px 0px;
+        font-size: 16px;
+
+        a {
+            text-decoration: none;
+            color: blue;
+
+            &:visited {
+                color: blue;
+            }
+
+            &:hover {
+                font-size: 18px;
+            }
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &.active {
+           a {
+            font-weight: bold;
+            text-decoration: underline;    
+           }
+        }
+    }
+}
+
+#development_nav {
+    .title {
+        float: left;
+        font-size: 18px;
+        border-bottom: none;
+    }
+    .item {
+        display: inline-block;
+        border-right: 1px solid #c2c2c2;
+        padding: 0px 10px 0px;
+        font-size: 16px;
+
+        a {
+            text-decoration: none;
+            color: blue;
+            &:visited {
+                color: blue;
+            }
+
+            &:hover {
+                font-size: 18px;
+            }
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &.active {
+           a {
+            font-weight: bold;
+            text-decoration: underline;    
+           }
+        }
+    }
+}
+
+//The main section of the website, common in all pages
+#site_main {
+    padding: 15px;
+}
+
+//The footer section of the website, common in all pages
+#site_footer {
+    text-align: center;
+    font-size: 10px;
+    color: #5e5e5e;
+}
+
 //Customize sections
 .home_panel {
     #tasks_section {
@@ -502,30 +513,7 @@ a {
     }
 }
 
-#site_main:after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
-//Customize users list
-#users_list {
-    .key.user {
-        float: none;
-        display: block;
-        font-size: 16px;
-    }
-
-    .value.user {
-        float: none;
-        display: block;
-        font-size: 14px;
-    }
-
-    .progress_description {
-        margin-top: 10px;
-    }
-}
 
 //Customize profile section
 #profile_section, #task_details_section {
@@ -553,3 +541,45 @@ a {
         margin-bottom: 10px;
     }
 }
+
+#tasks_section, #projects_section {
+    .info {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+}
+
+//Customize tasks list
+#tasks_list {
+  
+}
+
+//Customize projects list
+#projects_list {
+    .name {
+        font-size: 20px;
+    }
+}
+
+//Customize users list
+#users_list {
+
+    .key.user {
+        float: none;
+        display: block;
+        font-size: 16px;
+    }
+
+    .value.user {
+        float: none;
+        display: block;
+        font-size: 14px;
+    }
+
+    .progress_description {
+        margin-top: 10px;
+    }
+}
+
+
+
