@@ -479,7 +479,7 @@ a {
 }
 
 /* line 546, ../sass/screen.scss */
-#tasks_section .info, #projects_section .info {
+#tasks_section .info, #projects_section .info, #users_section .info {
   margin-top: 10px;
   font-size: 18px;
 }
