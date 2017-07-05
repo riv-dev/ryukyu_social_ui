@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/screen.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+  </head>
+  <body>
+      <!--<nav ng-if="loggedin_user" id="development_nav">
+        <h2 class="title">Development Navigation (Microservices): </h2>
+        <ul class="links">
+          <li class="item"><a href="/users_service">User Management Service</a></li>
+          <li class="item"><a href="/user_photos_service">User Photos Service</a></li>
+          <li class="item"><a href="/projects_service">Projects Service</a></li>
+          <li class="item"><a href="/simple_tasks_service">Simple Tasks Service</a></li>
+        </ul>
+      </nav>-->
+
+      <header id="site_header">
+        <h1 class="logo">Ryukyu Social</h1>
+        <p class="message login_status" ng-if="login_status">{{login_status}}</p>
+        <p class="message flash {{flash_level}}" ng-if="flash_message">{{flash_message}}</p>
+      </header>
+
+      <nav ng-if="loggedin_user" id="site_nav">
+        <ul class="links">
+          <li class="item active"><a href="./home-panel">Home Panel</a></li>
+          <li class="item"><a href="./user-panel/{{loggedin_user.id}}">My Profile</a></li>
+          <li class="item item--login" ng-if="!loggedin_user"><a href="./login">Log In</a></li>
+          <li class="item item--logout" ng-if="loggedin_user"><a href="./logout">Log Out</a></li>
+        </ul>
+      </nav>
+
+      <main id="site_main" class="{{panel_class}}" ng-view>
+
+      </main>
+
+      <script src="javascripts/config/routes.js"></script>
+      <script src="javascripts/controllers/home_panel_controller.js"></script>
+      <script src="javascripts/controllers/user_panel_controller.js"></script>
+      <script src="javascripts/controllers/project_panel_controller.js"></script>
+      <script src="javascripts/controllers/task_panel_controller.js"></script>
+      <script src="javascripts/controllers/login_controller.js"></script>
+      <script src="javascripts/controllers/logout_controller.js"></script>
+      <footer id="site_footer">
+          <small>Ryukyu Interactive Vietnam</small>
+      </footer>
+  </body>
+</html>

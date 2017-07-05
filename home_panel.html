@@ -1,0 +1,76 @@
+<p ng-if="!loggedin_user" class="message main">Welcome to Ryukyu Social</p>
+<p ng-if="!loggedin_user" class="message main">Please <a href="./login">log in</a></p>
+
+<section ng-if="loggedin_user" id="tasks_section" class="section">
+    <header class="section_header">
+        <h2 class="title">Company Task Board</h2>
+    </header>
+    <ul id="tasks_list" class="section_information">
+        <li class="item" ng-repeat="task in tasks">
+            <a href="./task-panel/{{task.id}}">
+                <h3 class="name">{{task.name}}</h3>
+                <p class="info">
+                    {{task.description}}
+                </p>
+                <dl class="attributes">
+                    <dt class="key assigned_to">Assigned to:</dt>
+                    <dd class="value_item assigned_to {{cssLast($last)}}" ng-repeat="task_user in task.users">
+                        <em class="key user">{{task_user.firstname}} {{task_user.lastname}}: </em>
+                        <p class="value user">{{task_user.progress_description}}</p>
+                    </dd>
+                    <dd class="value value--none assigned_to" ng-if="!task.users || task.users.length == 0">
+                        Need Assignee
+                    </dd>
+                    <dt class="key deadline">Deadline:</dt>
+                    <dd class="value deadline" ng-if="task.deadline">{{task.deadline}}</dd>
+                    <dd class="value value--none deadline" ng-if="!task.deadline">Not defined</dd>
+                    <dt class="key project">Project:</dt>
+                    <dd class="value project" ng-if="task.project_name">{{task.project_name}}</dd>
+                    <dd class="value value--none project" ng-if="!task.project_name">Not Assigned</dd>
+                </dl>
+            </a>
+        </li>
+    </ul>
+</section>
+
+<section ng-if="loggedin_user" id="projects_section" class="section">
+    <header class="section_header">
+        <h2 class="title">Projects List</h2>
+    </header>
+    <ul id="projects_list" class="section_information">
+        <li class="item" ng-repeat="project in projects">
+            <a href="./project-panel/{{project.id}}">
+                <h3 class="name">{{project.name}}</h3>
+                <dl class="attributes">
+                    <dt class="key users">Users:</dt>
+                    <dd class="value_item users  {{cssLast($last)}}" ng-repeat="project_user in project.users">
+                        <em class="key role" ng-if="project_user.role">{{project_user.role}}: </em>
+                        <em class="key key--none role" ng-if="!project_user.role">Undefined Role: </em>
+                        <p class="value role">{{project_user.firstname}} {{project_user.lastname}}</p>
+                    </dd>
+                    <dd class="value value--none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
+                    <dt class="key tasks_rank">Task Rank:</dt>
+                    <dd class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
+                        <span class="key rank">{{$index + 1}}</span>
+                        <p class="value rank">{{project_task.name}}</p>
+                    </dd>
+                    <dd class="value value--none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
+                </dl>
+            </a>
+        </li>
+    </ul>
+</section>
+
+<section ng-if="loggedin_user" id="users_section" class="section">
+    <header class="section_header">
+        <h2 class="title">Users List</h2>
+    </header>
+    <ul id="users_list" class="section_information">
+        <li class="item" ng-repeat="user in users">
+            <a href="./user-panel/{{user.id}}">
+                <h3 class="key user">{{user.title}}</h3>
+                <p class="value user">{{user.firstname}} {{user.lastname}}</p>
+            </a>
+        </li>
+    </ul>
+</section>

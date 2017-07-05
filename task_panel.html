@@ -1,0 +1,41 @@
+<section id="task_details_section" class="section">
+    <header class="section_header">
+        <h2 class="title">{{this_task.name}}</h2>
+    </header>
+
+    <dl class="attributes">
+        <dt class="key status">Status:</dt>
+        <dd class="value status">{{this_task.status}}</dd>
+        <dt class="key deadline">Deadline:</dt>
+        <dd class="value deadline" ng-if="this_task.deadline">{{this_task.deadline}}</dd>            
+        <dd class="value value--none deadline" ng-if="!this_task.deadline">Not defined</dd>           
+        <dt class="key priority">Effort:</dt>
+        <dd class="value priority" ng-if="this_task.priority">{{this_task.priority}}</dd>
+        <dd class="value value--none priority" ng-if="!this_task.priority">Not defined</dd>        
+        <dt class="key project">Project:</dt>
+        <dd class="value project" ng-if="this_task.project_name">{{this_task.project_name}}</dd>
+        <dd class="value value--none project" ng-if="!this_task.project_name">Not assigned</dd>              
+        <dt class="key description">Description:</dt>
+        <dd class="value description">{{this_task.description}}</dd>
+    </dl>
+</section>
+
+<section id="users_section" class="section">
+    <header class="section_header">
+        <h2 class="title">Users Assigned to Task</h2>
+    </header>
+    <ul id="users_list" class="section_information">
+        <li class="item" ng-repeat="user in users">
+            <a href="./user-panel/{{user.user_id}}">
+                <h3 class="key user" ng-if="user.title">{{user.title}}</h3>
+                <h3 class="key key--none user" ng-if="!user.title">Undefined Title</h2>
+                <p class="value user">{{user.firstname}} {{user.lastname}}</p>
+                <dl class="attributes">
+                    <dt class="key progress_description">Progress Description:</dt>
+                    <dd class="value progress_description">{{user.progress_description}}</dd>
+                </dl>
+            </a>
+        </li>
+    </ul>
+    <p class="info--none" ng-if="!users || users.length == 0">Needs Assignee</p>
+</section>
