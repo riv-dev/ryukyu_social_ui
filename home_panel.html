@@ -4,6 +4,9 @@
 <section ng-if="loggedin_user" id="tasks_section" class="section">
     <header class="section_header">
         <h2 class="title">Company Task Board</h2>
+        <ul class="links">
+            <li class="item"><a href="./tasks/new">Add Task</a></li>
+        </ul>
     </header>
     <ul id="tasks_list" class="section_information">
         <li class="item" ng-repeat="task in tasks">
@@ -21,6 +24,9 @@
                     <dd class="value value--none assigned_to" ng-if="!task.users || task.users.length == 0">
                         Need Assignee
                     </dd>
+                    <dt class="key priority">Priority:</dt>
+                    <dd class="value priority" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
+                    <dd class="value value--none priority" ng-if="!task.priority">Not defined</dd>     
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline" ng-if="task.deadline">{{task.deadline}}</dd>
                     <dd class="value value--none deadline" ng-if="!task.deadline">Not defined</dd>
@@ -36,6 +42,9 @@
 <section ng-if="loggedin_user" id="projects_section" class="section">
     <header class="section_header">
         <h2 class="title">Projects List</h2>
+        <ul class="links">
+            <li class="item"><a href="./projects/new">Add Project</a></li>
+        </ul>
     </header>
     <ul id="projects_list" class="section_information">
         <li class="item" ng-repeat="project in projects">
@@ -64,6 +73,9 @@
 <section ng-if="loggedin_user" id="users_section" class="section">
     <header class="section_header">
         <h2 class="title">Users List</h2>
+        <ul class="links">
+            <li ng-if="loggedin_user.admin" class="item"><a href="./users/new">Add User</a></li>
+        </ul>
     </header>
     <ul id="users_list" class="section_information">
         <li class="item" ng-repeat="user in users">

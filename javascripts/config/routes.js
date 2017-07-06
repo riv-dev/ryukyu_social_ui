@@ -11,6 +11,12 @@ app.service('CommonFunctions', function() {
       var base64 = base64Url.replace('-', '+').replace('_', '/');
       return JSON.parse(window.atob(base64));
     };
+
+    function twoDigits(d) {
+      if(0 <= d && d < 10) return "0" + d.toString();
+      if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+      return d.toString();
+    }
       
     this.setFlashMessage = function(scope, localStorage) {
         if(localStorage.flash_message) {
@@ -47,6 +53,11 @@ app.service('CommonFunctions', function() {
             delete localStorage.loggedin_user;
         }
     }
+
+    this.formatDate = function(dateString) {
+      var date = new Date(dateString);
+      return date.getUTCFullYear() + "-" + twoDigits(1 + date.getUTCMonth()) + "-" + twoDigits(date.getUTCDate()) + " " + twoDigits(date.getUTCHours()) + ":" + twoDigits(date.getUTCMinutes()) + ":" + twoDigits(date.getUTCSeconds());
+    };
 });
 
 app.config(function($routeProvider, $locationProvider) {
@@ -78,6 +89,18 @@ app.config(function($routeProvider, $locationProvider) {
   .when("/task-panel/:task_id", {
     templateUrl: "task_panel.html",
     controller: "taskPanelController"
+  })
+  .when("/tasks/new", {
+    templateUrl: "new_task.html",
+    controller: "newTaskController"
+  })
+  .when("/projects/new", {
+    templateUrl: "new_project.html",
+    controller: "newProjectController"
+  })
+  .when("/users/new", {
+    templateUrl: "new_user.html",
+    controller: "newUserController"
   });
 
   // use the HTML5 History API

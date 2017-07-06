@@ -1,0 +1,62 @@
+<form class="form login" name="new_task_form">
+    <h2 class="title">New Task</h2>
+    <p class="field">
+        <label class="label" for="name">Name: </label>
+        <input class="input" type="text" ng-model="name">
+        <ul class="validation_errors" ng-if="errors.name">
+            <li class="item" ng-repeat="x in errors.name">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field">
+        <label class="label" for="description">Description: </label>
+        <textarea class="input area" type="text" ng-model="description"></textarea>
+        <ul class="validation_errors" ng-if="errors.description">
+            <li class="item" ng-repeat="x in errors.description">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field"><label class="label" for="priority">Priority: </label>
+        <select class="input select" ng-options="priority.level as priority.label for priority in priorities track by priority.level" ng-model="priority_level"></select>
+        <ul class="validation_errors" ng-if="errors.description">
+            <li class="item" ng-repeat="x in errors.description">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field">
+        <label class="label" for="priority">Status: </label>
+        <select class="input select" ng-options="status for status in statuses" ng-model="status"></select>
+        <ul class="validation_errors" ng-if="errors.priority">
+            <li class="item" ng-repeat="x in errors.priority">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field">
+        <label class="label" for="deadline">Deadline: </label>
+        <input name="deadline_input" class="input date" type="datetime-local" ng-model="deadline">
+        <ul class="validation_errors" ng-if="errors.deadline">
+            <li class="item" ng-repeat="x in errors.deadline">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field"><label class="label" for="project_id">Project: </label>
+        <select class="input select" ng-options="project.id as project.name for project in projects track by project.id" ng-model="project_id"></select>
+        <ul class="validation_errors" ng-if="errors.project">
+            <li class="item" ng-repeat="x in errors.project">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field"><label class="label" for="user_id">Assign to: </label>
+        <select class="input select" ng-options="user as user.firstname for user in users track by user.id" ng-model="user"></select>
+    </p>
+    <p class="field">
+        <input class="button submit" type="submit" value="Add Task" ng-click="post()">
+    </p>
+    <p class="field"><a href=".">Cancel</a></p>
+</form>

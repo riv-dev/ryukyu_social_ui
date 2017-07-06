@@ -13,6 +13,9 @@
     <dl class="attributes">
         <dt class="key status">Status:</dt>
         <dd class="value status">{{this_project.status}}</dd>
+        <dt class="key start_date">Start Date:</dt>
+        <dd class="value start_date" ng-if="this_project.start_date">{{this_project.start_date}}</dd>            
+        <dd class="value value--none start_date" ng-if="!this_project.start_date">Not defined</dd>         
         <dt class="key deadline">Deadline:</dt>
         <dd class="value deadline" ng-if="this_project.deadline">{{this_project.deadline}}</dd>            
         <dd class="value value--none deadline" ng-if="!this_project.deadline">Not defined</dd>           
@@ -47,6 +50,9 @@
                     <dd class="value value--none assigned_to" ng-if="!task.users || task.users.length == 0">
                         Need Assignee
                     </dd>
+                    <dt class="key priority">Priority:</dt>
+                    <dd class="value priority" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
+                    <dd class="value value--none priority" ng-if="!task.priority">Not defined</dd>
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline" ng-if="task.deadline">{{task.deadline}}</dd>
                     <dd class="value value--none deadline" ng-if="!task.deadline">Not defined</dd>

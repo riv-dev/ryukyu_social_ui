@@ -3,7 +3,7 @@
         <h2 class="title">{{this_user.title}}</h2>
         <p class="name">{{this_user.firstname}} {{this_user.lastname}}</p>
     </header>
-    <figure class="figure">
+    <figure ng-if="this_user_photo.uri" class="figure">
         <p class="image">
             <img src = "{{this_user_photo.uri}}" />
         </p>
@@ -12,6 +12,8 @@
         </figcaption>
     </figure>
     <dl class="attributes">
+        <dt class="key email"><em ng-if="loggedin_user.id==this_user.id">My </em>Email:</dt>
+        <dd class="value email">{{this_user.email}}</dd>
         <dt class="key status"><em ng-if="loggedin_user.id==this_user.id">My </em>Status:</dt>
         <dd class="value status">{{this_user.status}}</dd>
         <dt class="key bio"><em ng-if="loggedin_user.id==this_user.id">My </em>Bio:</dt>
@@ -48,6 +50,9 @@
                         <em class="key user">{{task_user.firstname}} {{task_user.lastname}}: </em>
                         <p class="value user">{{task_user.progress_description}}</p>
                     </dd>
+                    <dt class="key priority">Priority:</dt>
+                    <dd class="value priority" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
+                    <dd class="value value--none priority" ng-if="!task.priority">Not defined</dd>
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline" ng-if="task.deadline">{{task.deadline}}</dd>
                     <dd class="value value--none deadline" ng-if="!task.deadline">Not defined</dd>

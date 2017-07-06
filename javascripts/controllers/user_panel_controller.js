@@ -5,6 +5,22 @@ app.controller('userPanelController', function($scope, $http, $routeParams, $loc
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
+    $scope.getPriorityLabel = function(index) {
+        var priorities = [
+            "Not Important at All",
+            "Slightly Important",
+            "Important",
+            "Fairly Important",
+            "Verty Important"
+        ]
+
+        if(index) {
+            return priorities[index];
+        } else {
+            return null;
+        }
+    }
+
     $scope.cssLast = function(isLast) {
         if(isLast) {
             return "last";

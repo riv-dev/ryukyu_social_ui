@@ -2,8 +2,26 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
     $scope.$parent.hero = "Task Panel";
     $scope.$parent.panel_class = "task_panel";
 
+
+
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
+
+    $scope.getPriorityLabel = function(index) {
+        var priorities = [
+            "Not Important at All",
+            "Slightly Important",
+            "Important",
+            "Fairly Important",
+            "Verty Important"
+        ]
+
+        if(index) {
+            return priorities[index];
+        } else {
+            return null;
+        }
+    }
 
     $scope.cssLast = function(isLast) {
         if(isLast) {
