@@ -52,9 +52,6 @@
             </li>
         </ul>
     </p>
-    <p class="field"><label class="label" for="user_id">Assign to: </label>
-        <select class="input select" ng-options="user as user.firstname for user in users track by user.id" ng-model="user"></select>
-    </p>
     <p class="field">
         <input class="button submit" type="submit" value="Add Task" ng-click="post()">
     </p>
