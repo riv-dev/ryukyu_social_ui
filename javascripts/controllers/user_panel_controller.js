@@ -152,7 +152,7 @@ app.controller('userPanelController', function($scope, $http, $routeParams, $loc
                 //Get all users on the current task
                 $http({
                     method: 'GET',
-                    url: tasksApiBaseURL + '/tasks/'+current_task.id+'/users',
+                    url: tasksApiBaseURL + '/tasks/'+current_task.task_id+'/users',
                     headers: {
                        'x-access-token': CommonFunctions.getToken()
                     },

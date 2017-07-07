@@ -46,7 +46,7 @@
                         {{this_task_user.progress_description}}
                     </dd>
                     <dt class="key assigned_to" ng-if="task.users.length > 1">Also assigned to this task:</dt>
-                    <dd class="value_item assigned_to {{cssLast($last)}}" ng-if="task.users.length > 1" ng-repeat="task_user in task.users">
+                    <dd class="value_item assigned_to {{cssLast($last)}}" ng-if="task_user.user_id != this_user.id" ng-repeat="task_user in task.users">
                         <em class="key user">{{task_user.firstname}} {{task_user.lastname}}: </em>
                         <p class="value user">{{task_user.progress_description}}</p>
                     </dd>
