@@ -43,6 +43,32 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         }
     }
 
+    var get_task_details = function() {
+        //Get task information
+        $http({
+            method: 'GET',
+            url: tasksApiBaseURL + '/tasks/' + $routeParams.task_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.this_task = response.data;
+
+            //Get the project name assigned to the task
+            if($scope.this_task.project_id) { 
+                $http({
+                    method: 'GET',
+                    url: projectsApiBaseURL + '/projects/' + $scope.this_task.project_id,
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    }
+                }).then(function (response) {
+                    $scope.this_task.project_name = response.data.name;
+                });
+            }
+        });        
+    }
+
     var get_users_assigned_to_task = function() {
         //Get the task's users
         $http({
@@ -112,6 +138,22 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         });                
     }
 
+    $scope.remove_task = function() {
+        //(this) is equivalent to ($scope) inside the function
+        $http({
+            method: 'DELETE',
+            url: tasksApiBaseURL + '/tasks/' + $routeParams.task_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            //Refresh assigned users
+            $localStorage.flash_message = "Deleted Task: " + $scope.this_task.name;
+            $scope.$parent.flash_level = "alert";
+            window.history.back();
+        });          
+    }
+
     $scope.remove_user = function(user) {
         //(this) is equivalent to ($scope) inside the function
         $http({
@@ -128,28 +170,7 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
 
     if($localStorage.loggedin_user) {
         //Get task information
-        $http({
-            method: 'GET',
-            url: tasksApiBaseURL + '/tasks/' + $routeParams.task_id,
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            $scope.this_task = response.data;
-
-            //Get the project name assigned to the task
-            if($scope.this_task.project_id) { 
-                $http({
-                    method: 'GET',
-                    url: projectsApiBaseURL + '/projects/' + $scope.this_task.project_id,
-                    headers: {
-                        'x-access-token': CommonFunctions.getToken()
-                    }
-                }).then(function (response) {
-                    $scope.this_task.project_name = response.data.name;
-                });
-            }
-        });
+        get_task_details();
 
         //Get the user's assigned to the task
         get_users_assigned_to_task();

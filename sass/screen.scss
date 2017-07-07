@@ -216,6 +216,36 @@ a {
     position: relative;
 }
 
+//GENERIC LINK STYLING
+.links {
+    padding: 15px;
+    .item {
+        display: inline-block;
+        border-right: 1px solid #c2c2c2;
+        padding: 0px 10px 0px;
+        font-size: 16px;
+        a {
+            text-decoration: none;
+            color: blue;
+            &:visited {
+                color: blue;
+            }
+            &:hover {
+                font-size: 18px;
+            }
+        }
+        &:last-child {
+            border-right: none;
+        }
+        &.active {
+            a {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
 //SECTION_INFORMATION ITEM
 //Main list items, main information.  
 //E.g. 
@@ -243,6 +273,10 @@ a {
         position: absolute;
         right: 0px;
         bottom: 8px;
+        padding: 0px;
+        .item {
+            text-decoration: underline;
+        }
     }
     &:after {
         content: "";
@@ -481,65 +515,7 @@ a {
 
 //The navigation of the website, common in all pages
 #site_nav {
-    padding: 15px;
-    .item {
-        display: inline-block;
-        border-right: 1px solid #c2c2c2;
-        padding: 0px 10px 0px;
-        font-size: 16px;
-        a {
-            text-decoration: none;
-            color: blue;
-            &:visited {
-                color: blue;
-            }
-            &:hover {
-                font-size: 18px;
-            }
-        }
-        &:last-child {
-            border-right: none;
-        }
-        &.active {
-            a {
-                font-weight: bold;
-                text-decoration: underline;
-            }
-        }
-    }
-}
 
-#development_nav {
-    .title {
-        float: left;
-        font-size: 18px;
-        border-bottom: none;
-    }
-    .item {
-        display: inline-block;
-        border-right: 1px solid #c2c2c2;
-        padding: 0px 10px 0px;
-        font-size: 16px;
-        a {
-            text-decoration: none;
-            color: blue;
-            &:visited {
-                color: blue;
-            }
-            &:hover {
-                font-size: 18px;
-            }
-        }
-        &:last-child {
-            border-right: none;
-        }
-        &.active {
-            a {
-                font-weight: bold;
-                text-decoration: underline;
-            }
-        }
-    }
 }
 
 //The main section of the website, common in all pages

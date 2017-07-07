@@ -18,6 +18,10 @@
         <dt class="key description">Description:</dt>
         <dd class="value description">{{this_task.description}}</dd>
     </dl>
+    <ul class="links">
+        <li class="item edit"><a href="./tasks/{{this_task.id}}/edit">Edit Task</a></li>
+        <li class="item delete"><a ng-click="remove_task()">Delete Task</a></li>
+    </ul>
 </section>
 
 <section id="users_section" class="section">

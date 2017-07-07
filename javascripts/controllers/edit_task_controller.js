@@ -1,9 +1,19 @@
-app.controller('newTaskController', function($scope, $http, $location, $localStorage, CommonFunctions) {
+app.controller('editTaskController', function($scope, $http, $location, $localStorage, $routeParams, CommonFunctions) {
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
+    var mysqlTimeStampToDate = function (timestamp) {
+      //function parses mysql datetime string and returns javascript Date object
+      //input has to be in this format: 2007-06-05 15:26:02
+      var regex=/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9]) (?:([0-2][0-9]):([0-5][0-9]):([0-5][0-9]))?$/;
+      var parts=timestamp.replace(regex,"$1 $2 $3 $4 $5 $6").split(' ');
+      return new Date(parts[0],parts[1]-1,parts[2],parts[3],parts[4],parts[5]);
+    }
+
     if($localStorage.loggedin_user) {
-        $scope.$parent.hero = "Add Task";
+        $scope.$parent.hero = "Edit Task";
+
+        $scope.this_task_id = $routeParams.task_id;
 
         $scope.priorities = [
             {label: "Very Important", level: 4},
@@ -22,6 +32,22 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
         $scope.status = $scope.statuses[0];
         $scope.user_id = null;
 
+        //Get the task details to fill in form defaults
+        //Get all projects 
+        $http({
+            method: 'GET',
+            url: tasksApiBaseURL + '/tasks/' + $routeParams.task_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.name = response.data.name;
+            $scope.description = response.data.description;
+            $scope.priority_level = response.data.priority;
+            $scope.status = response.data.status;
+            $scope.project_id = response.data.project_id;
+        });
+
         //Get all projects 
         $http({
             method: 'GET',
@@ -33,10 +59,10 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
             $scope.projects = response.data;
         });
 
-        $scope.post = function() {
+        $scope.put = function() {
             //Validate the date
             if($scope.task_form.deadline_input.$touched && !$scope.deadline) {
-                $scope.$parent.flash_message = "Error adding task.";
+                $scope.$parent.flash_message = "Error editing task.";
                 $scope.$parent.flash_level = "fail";
                 $scope.errors = {}; 
                 $scope.errors.deadline = ["Please select date and type in the time"];
@@ -55,20 +81,20 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
             }
 
             $http({
-                method: 'POST',
-                url: tasksApiBaseURL + '/tasks',
+                method: 'PUT',
+                url: tasksApiBaseURL + '/tasks/' + $routeParams.task_id,
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
                 data: {name: $scope.name, description: $scope.description, priority: $scope.priority_level, status: $scope.status, deadline: mysqlDate, project_id: $scope.project_id} 
             }).then(
                 function successCallback(response) {
-                    $localStorage.flash_message = "Successfully added task!";
+                    $localStorage.flash_message = "Successfully updated task!";
                     $scope.$parent.flash_level = "success";
-                    $location.path('/');
+                    $location.path('./task-panel/'+$routeParams.task_id);
                 },
                 function errorCallback(response) {
-                    $scope.$parent.flash_message = "Error adding task.";
+                    $scope.$parent.flash_message = "Error editing task.";
                     $scope.$parent.flash_level = "fail";
                     $scope.errors = {};
                     var responseError;
