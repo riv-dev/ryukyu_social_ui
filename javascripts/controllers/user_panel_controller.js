@@ -47,9 +47,13 @@ app.controller('userPanelController', function($scope, $http, $routeParams, $loc
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 }
-            }).then(function (response) {
+            }).then(
+            function successCallback(response) {
                 $scope.this_user_photo = response.data;
                 $scope.this_user_photo.uri = userPhotosApiBaseURL+"/users/"+$routeParams.user_id+"/photo.image";
+            },
+            function errorCallback(response) { 
+                $scope.this_user_photo = {};
             });
         });
 
