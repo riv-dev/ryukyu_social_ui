@@ -27,22 +27,21 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         }
     }
 
-    if($localStorage.loggedin_user) {
+    $scope.assign_user = function() {
         //Get project information
         $http({
-            method: 'GET',
-            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
+            method: 'POST',
+            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id + '/users/' + $scope.selected_user_id,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
         }).then(function (response) {
-            $scope.this_project = response.data;
-            $scope.this_project_photo = {};
-            $scope.this_project_photo.uri = "./images/default_project.png";
-            $scope.this_project_photo.caption = "Todo project photo microservice";
-        });
+            //Refresh assigned users
+            get_project_users();
+        });        
+    }
 
-
+    $scope.get_project_users = function() {
         //Get the project's users
         $http({
             method: 'GET',
@@ -75,6 +74,55 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
                 });                    
             }
         });
+    }
+
+    $scope.remove_project = function() {
+        //(this) is equivalent to ($scope) inside the function
+        $http({
+            method: 'DELETE',
+            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            //Refresh assigned users
+            $localStorage.flash_message = "Deleted Project: " + $scope.this_project.name;
+            $scope.$parent.flash_level = "alert";
+            window.history.back();
+        });          
+    }
+
+    $scope.remove_user = function(user) {
+        //(this) is equivalent to ($scope) inside the function
+        $http({
+            method: 'DELETE',
+            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id + '/users/' +  user.user_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            //Refresh assigned users
+            get_project_users();
+        });      
+    }
+
+    if($localStorage.loggedin_user) {
+        //Get project information
+        $http({
+            method: 'GET',
+            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.this_project = response.data;
+            $scope.this_project_photo = {};
+            $scope.this_project_photo.uri = "./images/default_project.png";
+            $scope.this_project_photo.caption = "Todo project photo microservice";
+        });
+
+
+        get_project_users();
 
         //Get the project's tasks
         $http({

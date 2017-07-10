@@ -73,6 +73,19 @@
                 <h3 class="key key--none user" ng-if="!user.role">Undefined Role</h2>
                 <p class="value user">{{user.firstname}} {{user.lastname}}</p>
             </a>
+            <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == user.user_id"
+                ng-click="remove_user(user)" title="Remove User"
+                >Remove User</button>
         </li>
     </ul>
+
+    <form class="form assign_user">
+        <p class="title">Assign User to Project: </p>
+        <p class="field"><label class="label" for="selected_user_id">User Name: </label>
+            <select class="input select" ng-options="user.id as getFullName(user) for user in users track by user.id" ng-model="selected_user_id"></select>
+        </p>        
+        <p class="field">
+            <input class="button" type="submit" value="Assign User" ng-click="assign_user()">
+        </p>        
+    </form>
 </section>

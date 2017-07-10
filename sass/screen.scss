@@ -24,6 +24,14 @@ a {
     color: #383838;
     font-size: 36px;
     padding-bottom: 10px;
+
+    a {
+        text-decoration: none;
+        color: black;
+        &:visited {
+            color: black;
+        }
+    }
 }
 
 //MESSAGE
