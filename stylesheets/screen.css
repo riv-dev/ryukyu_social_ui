@@ -499,7 +499,17 @@ a {
   border-radius: 2px;
 }
 
-/* line 523, ../sass/screen.scss */
+/* line 517, ../sass/screen.scss */
+.disabled {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* line 532, ../sass/screen.scss */
 .section {
   float: left;
   width: 33.33%;
@@ -507,103 +517,103 @@ a {
   box-sizing: border-box;
 }
 
-/* line 530, ../sass/screen.scss */
+/* line 539, ../sass/screen.scss */
 #site_main:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* line 550, ../sass/screen.scss */
+/* line 559, ../sass/screen.scss */
 #site_header {
   padding: 15px;
 }
 
-/* line 560, ../sass/screen.scss */
+/* line 569, ../sass/screen.scss */
 #site_main {
   padding: 15px;
 }
 
-/* line 565, ../sass/screen.scss */
+/* line 574, ../sass/screen.scss */
 #site_footer {
   text-align: center;
   font-size: 10px;
   color: #5e5e5e;
 }
 
-/* line 573, ../sass/screen.scss */
+/* line 582, ../sass/screen.scss */
 .home_panel #tasks_section {
   width: 30%;
 }
-/* line 576, ../sass/screen.scss */
+/* line 585, ../sass/screen.scss */
 .home_panel #projects_section {
   width: 40%;
 }
-/* line 579, ../sass/screen.scss */
+/* line 588, ../sass/screen.scss */
 .home_panel #users_section {
   width: 30%;
 }
 
-/* line 585, ../sass/screen.scss */
+/* line 594, ../sass/screen.scss */
 .user_panel #profile_section {
   width: 33.33%;
 }
-/* line 588, ../sass/screen.scss */
+/* line 597, ../sass/screen.scss */
 .user_panel #tasks_section {
   width: 33.33%;
 }
-/* line 591, ../sass/screen.scss */
+/* line 600, ../sass/screen.scss */
 .user_panel #projects_section {
   width: 33.33%;
 }
 
-/* line 597, ../sass/screen.scss */
+/* line 606, ../sass/screen.scss */
 .project_panel #profile_section {
   width: 33.33%;
 }
-/* line 600, ../sass/screen.scss */
+/* line 609, ../sass/screen.scss */
 .project_panel #tasks_section {
   width: 33.33%;
 }
-/* line 603, ../sass/screen.scss */
+/* line 612, ../sass/screen.scss */
 .project_panel #users_section {
   width: 33.33%;
 }
 
-/* line 609, ../sass/screen.scss */
+/* line 618, ../sass/screen.scss */
 .task_panel #task_details_section {
   width: 67%;
 }
-/* line 612, ../sass/screen.scss */
+/* line 621, ../sass/screen.scss */
 .task_panel #users_section {
   width: 33%;
 }
 
-/* line 620, ../sass/screen.scss */
+/* line 629, ../sass/screen.scss */
 #profile_section .section_header,
 #task_details_section .section_header {
   border-bottom: none;
 }
-/* line 623, ../sass/screen.scss */
+/* line 632, ../sass/screen.scss */
 #profile_section .title,
 #task_details_section .title {
   font-size: 40px;
   border-bottom: none;
 }
-/* line 627, ../sass/screen.scss */
+/* line 636, ../sass/screen.scss */
 #profile_section .name,
 #task_details_section .name {
   font-size: 34px;
   font-weight: normal;
   color: #5e5e5e;
 }
-/* line 632, ../sass/screen.scss */
+/* line 641, ../sass/screen.scss */
 #profile_section .figure,
 #task_details_section .figure {
   border: 1px solid black;
   width: 50%;
 }
-/* line 636, ../sass/screen.scss */
+/* line 645, ../sass/screen.scss */
 #profile_section .key,
 #profile_section .value,
 #task_details_section .key,
@@ -612,38 +622,38 @@ a {
   margin-bottom: 10px;
 }
 
-/* line 646, ../sass/screen.scss */
+/* line 655, ../sass/screen.scss */
 #tasks_section .info,
 #projects_section .info,
 #users_section .info {
   padding-top: 10px;
   font-size: 18px;
 }
-/* line 652, ../sass/screen.scss */
+/* line 661, ../sass/screen.scss */
 #tasks_section .info.assigned_user:before,
 #projects_section .info.assigned_user:before,
 #users_section .info.assigned_user:before {
   content: "*";
 }
 
-/* line 663, ../sass/screen.scss */
+/* line 672, ../sass/screen.scss */
 #projects_list .name {
   font-size: 20px;
 }
 
-/* line 670, ../sass/screen.scss */
+/* line 679, ../sass/screen.scss */
 #users_list .key.user {
   float: none;
   display: block;
   font-size: 16px;
 }
-/* line 675, ../sass/screen.scss */
+/* line 684, ../sass/screen.scss */
 #users_list .value.user {
   float: none;
   display: block;
   font-size: 14px;
 }
-/* line 680, ../sass/screen.scss */
+/* line 689, ../sass/screen.scss */
 #users_list .progress_description {
   margin-top: 10px;
 }

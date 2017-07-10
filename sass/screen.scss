@@ -514,6 +514,15 @@ a {
     }
 }
 
+.disabled {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 //Main sections of the website
 //E.g.
 //|Tasks List Section|    |Projects List Section|    |Users List Section    |

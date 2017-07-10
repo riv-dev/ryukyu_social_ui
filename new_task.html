@@ -45,7 +45,7 @@
         </ul>
     </p>
     <p class="field"><label class="label" for="project_id">Project: </label>
-        <select class="input select" ng-options="project.id as project.name for project in projects" ng-model="project_id"></select>
+        <select class="input select" ng-options="project.id as project.name for project in projects" ng-model="project_id" ng-disabled="disabled()"></select>
         <ul class="validation_errors" ng-if="errors.project">
             <li class="item" ng-repeat="x in errors.project">
                 {{x}}

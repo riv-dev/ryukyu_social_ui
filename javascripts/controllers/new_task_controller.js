@@ -1,4 +1,4 @@
-app.controller('newTaskController', function($scope, $http, $location, $localStorage, CommonFunctions) {
+app.controller('newTaskController', function($scope, $http, $location, $localStorage, $routeParams, CommonFunctions) {
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
@@ -22,6 +22,14 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
         $scope.status = $scope.statuses[0];
         $scope.user_id = null;
 
+        $scope.disabled = function() {
+            if($routeParams.project_id) {
+                return "disabled";
+            } else {
+                return null;
+            }
+        }
+
         //Get all projects 
         $http({
             method: 'GET',
@@ -31,6 +39,11 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
             }
         }).then(function (response) {
             $scope.projects = response.data;
+
+            //Set the project for this task if it is defined in the route
+            if($routeParams.project_id) {
+                $scope.project_id = parseInt($routeParams.project_id);
+            }
         });
 
         $scope.post = function() {
@@ -65,7 +78,7 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully added task!";
                     $scope.$parent.flash_level = "success";
-                    $location.path('/');
+                    window.history.back();
                 },
                 function errorCallback(response) {
                     $scope.$parent.flash_message = "Error adding task.";

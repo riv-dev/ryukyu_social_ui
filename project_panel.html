@@ -37,6 +37,9 @@
 <section id="tasks_section" class="section">
     <header class="section_header">
         <h2 class="title">Project Task Board</h2>
+        <ul class="links">
+            <li class="item"><a href="./projects/{{this_project.id}}/tasks/new">Add Task</a></li>
+        </ul>
     </header>
     <ul id="tasks_list" class="section_information">
         <li class="item" ng-repeat="task in tasks">
