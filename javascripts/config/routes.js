@@ -102,6 +102,10 @@ app.config(function($routeProvider, $locationProvider) {
     templateUrl: "new_project.html",
     controller: "newProjectController"
   })
+  .when("/projects/:project_id/edit", {
+    templateUrl: "edit_project.html",
+    controller: "editProjectController"
+  })
   .when("/projects/:project_id/users/:user_id/edit", {
     templateUrl: "edit_project_permissions.html",
     controller: "editProjectPermissionsController"

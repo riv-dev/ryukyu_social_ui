@@ -28,6 +28,10 @@
         <dt class="key description">Description:</dt>
         <dd class="value description">{{this_project.description}}</dd>
     </dl>
+    <ul class="links">
+        <li class="item edit"><a href="./projects/{{this_project.id}}/edit">Edit Project</a></li>
+        <li class="item delete"><a ng-click="remove_project()">Delete Project</a></li>
+    </ul>
 </section>
 
 <section id="tasks_section" class="section">

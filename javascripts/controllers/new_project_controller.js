@@ -5,26 +5,18 @@ app.controller('newProjectController', function($scope, $http, $location, $local
     if($localStorage.loggedin_user) {
         $scope.$parent.hero = "Add Project";
 
-        $scope.priorities = [
-            {label: "Very Important", level: 4},
-            {label: "Fairly Important", level: 3},
-            {label: "Important", level: 2},
-            {label: "Slighly Important", level: 1},
-            {label: "Not at all Important", level: 0}
-        ];
-
         $scope.statuses = [
             "new",
             "doing",
             "finished"
-        ]
+        ];
 
         $scope.status = $scope.statuses[0];
         $scope.user_id = null;
 
         $scope.post = function() {
             //Validate the date
-            if($scope.new_task_form.deadline_input.$touched && !$scope.deadline) {
+            if($scope.project_form.deadline_input.$touched && !$scope.deadline) {
                 $scope.$parent.flash_message = "Error adding project.";
                 $scope.$parent.flash_level = "fail";
                 $scope.errors = {}; 
@@ -44,7 +36,7 @@ app.controller('newProjectController', function($scope, $http, $location, $local
             }
 
             //Validate the date
-            if($scope.new_task_form.start_date_input.$touched && !$scope.start_date) {
+            if($scope.project_form.start_date_input.$touched && !$scope.start_date) {
                 $scope.$parent.flash_message = "Error adding project.";
                 $scope.$parent.flash_level = "fail";
                 $scope.errors = {}; 

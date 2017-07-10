@@ -100,7 +100,6 @@ app.controller('userPanelController', function($scope, $http, $routeParams, $loc
                         }).then(function (response) {
                             var i = parseInt(response.config["params"]["i"]);
                             var j = parseInt(response.config["params"]["j"]);
-                            $scope.projects[i]["users"][j].role = response.data.role;
                             $scope.projects[i]["users"][j].firstname = response.data.firstname; 
                             $scope.projects[i]["users"][j].lastname = response.data.lastname; 
                         });                          
