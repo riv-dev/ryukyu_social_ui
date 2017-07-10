@@ -41,7 +41,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         });        
     }
 
-    $scope.get_project_users = function() {
+    var get_project_users = function() {
         //Get the project's users
         $http({
             method: 'GET',
