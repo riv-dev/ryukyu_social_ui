@@ -30,7 +30,7 @@
     </header>
     <ul id="users_list" class="section_information">
         <li class="item {{is_mine_class(assigned_user)}}" ng-repeat="assigned_user in assigned_users">
-            <p class="info assigned_user" ng-if="loggedin_user.id == assigned_user.user_id">You are assigned to this task.</p>
+            <!--<p class="info assigned_user" ng-if="loggedin_user.id == assigned_user.user_id">You are assigned to this task.</p>-->
             <a href="./user-panel/{{assigned_user.user_id}}">
                 <h3 class="key user" ng-if="assigned_user.title">{{assigned_user.title}}</h3>
                 <h3 class="key key--none user" ng-if="!assigned_user.title">Undefined Title</h2>

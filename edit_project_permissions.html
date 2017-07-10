@@ -1,0 +1,34 @@
+<form class="form project_permissions" name="project_permissions_form">
+    <h2 class="title">Edit Project Permissions for {{firstname}} {{lastname}}</h2>
+    <p class="field">
+        <label class="label" for="role">Role: </label>
+        <input class="input" type="text" ng-model="role">
+        <ul class="validation_errors" ng-if="errors.role">
+            <li class="item" ng-repeat="x in errors.role">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field">
+        <label class="label" for="status">Status: </label>
+        <select class="input select" ng-options="status for status in statuses" ng-model="status"></select>
+        <ul class="validation_errors" ng-if="errors.status">
+            <li class="item" ng-repeat="x in errors.status">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field">
+        <label class="label" for="write_access">Write Access: </label>
+        <select class="input select" ng-options="write_access.level as write_access.label for write_access in write_accesses" ng-model="write_access_level"></select>
+        <ul class="validation_errors" ng-if="errors.write_access">
+            <li class="item" ng-repeat="x in errors.write_access">
+                {{x}}
+            </li>
+        </ul>
+    </p>
+    <p class="field">
+        <input class="button submit" type="submit" value="Update" ng-click="put()">
+    </p>
+    <p class="field"><a href="./project-panel/{{this_project_id}}">Cancel</a></p>
+</form>

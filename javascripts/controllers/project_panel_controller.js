@@ -27,14 +27,23 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         }
     }
 
+    $scope.getFullName = function(user) {
+        if(user.title) {
+            return user.firstname + " " + user.lastname + " (" + user.title + ")";
+        } else {
+            return user.firstname + " " + user.lastname;
+        }
+    }
+
     $scope.assign_user = function() {
         //Get project information
         $http({
             method: 'POST',
-            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id + '/users/' + $scope.selected_user_id,
+            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id + '/users',
             headers: {
                 'x-access-token': CommonFunctions.getToken()
-            }
+            },
+            data: {user_id: $scope.selected_user_id}
         }).then(function (response) {
             //Refresh assigned users
             get_project_users();
@@ -50,10 +59,10 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
                 'x-access-token': CommonFunctions.getToken()
             }
         }).then(function (response) {
-            $scope.users = response.data;
+            $scope.assigned_users = response.data;
 
             for(var i=0;i<response.data.length;i++) {
-                var current_user = $scope.users[i];
+                var current_user = $scope.assigned_users[i];
                 //When grabbing project users, the "id" field is not the user_id.
                 //"id" field is actually the id of the link between the project and the user
                 //Use the "user_id" field
@@ -69,8 +78,8 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
                         'i': i
                     }
                 }).then(function (response) {
-                    $scope.users[parseInt(response.config["params"]["i"])]["firstname"] = response.data.firstname;
-                    $scope.users[parseInt(response.config["params"]["i"])]["lastname"] = response.data.lastname;
+                    $scope.assigned_users[parseInt(response.config["params"]["i"])]["firstname"] = response.data.firstname;
+                    $scope.assigned_users[parseInt(response.config["params"]["i"])]["lastname"] = response.data.lastname;
                 });                    
             }
         });
@@ -194,6 +203,18 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
                 });                   
             }
         });        
+
+
+        //Get all users for assigning new users
+        $http({
+            method: 'GET',
+            url: usersApiBaseURL + '/users',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.users = response.data;
+        });
     } 
 
 });

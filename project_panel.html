@@ -67,14 +67,16 @@
         <h2 class="title">Users Assigned to Project</h2>
     </header>
     <ul id="users_list" class="section_information">
-        <li class="item" ng-repeat="user in users">
-            <a href="./user-panel/{{user.user_id}}">
-                <h3 class="key user" ng-if="user.role">{{user.role}}</h3>
-                <h3 class="key key--none user" ng-if="!user.role">Undefined Role</h2>
-                <p class="value user">{{user.firstname}} {{user.lastname}}</p>
+        <li class="item" ng-repeat="assigned_user in assigned_users">
+            <a href="./user-panel/{{assigned_user.user_id}}">
+                <h3 class="key user" ng-if="assigned_user.role">{{assigned_user.role}}</h3>
+                <h3 class="key key--none user" ng-if="!assigned_user.role">Undefined Role</h2>
+                <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>
             </a>
-            <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == user.user_id"
-                ng-click="remove_user(user)" title="Remove User"
+            <a class="button edit" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}/edit" 
+               ng-if="loggedin_user.admin || has_write_access()">Permissions</a>
+            <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == assigned_user.user_id || has_write_access()"
+                ng-click="remove_user(assigned_user)" title="Remove User"
                 >Remove User</button>
         </li>
     </ul>

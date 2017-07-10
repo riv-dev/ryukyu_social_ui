@@ -452,6 +452,36 @@ a {
     }
 }
 
+.button.edit {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    width: 18px;
+    text-indent: 9999px;
+    color: black;
+    margin: 0px;
+    padding: 0px !important;
+
+    &:hover {
+        background-color: transparent !important;
+        color: #2377ff !important;
+    }
+
+    &:before {
+        position: absolute;
+        text-indent: 0px;
+        left: 3px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f023";
+    }
+}
+
 //Customized forms
 .form.assign_user {
     background-color: #e2edff;

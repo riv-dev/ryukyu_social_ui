@@ -20,17 +20,17 @@
     </p>
     <p class="field"><label class="label" for="priority">Priority: </label>
         <select class="input select" ng-options="priority.level as priority.label for priority in priorities track by priority.level" ng-model="priority_level"></select>
-        <ul class="validation_errors" ng-if="errors.description">
-            <li class="item" ng-repeat="x in errors.description">
+        <ul class="validation_errors" ng-if="errors.priority">
+            <li class="item" ng-repeat="x in errors.priority">
                 {{x}}
             </li>
         </ul>
     </p>
     <p class="field">
-        <label class="label" for="priority">Status: </label>
+        <label class="label" for="status">Status: </label>
         <select class="input select" ng-options="status for status in statuses" ng-model="status"></select>
-        <ul class="validation_errors" ng-if="errors.priority">
-            <li class="item" ng-repeat="x in errors.priority">
+        <ul class="validation_errors" ng-if="errors.status">
+            <li class="item" ng-repeat="x in errors.status">
                 {{x}}
             </li>
         </ul>
@@ -46,11 +46,6 @@
     </p>
     <p class="field"><label class="label" for="project_id">Project: </label>
         <select class="input select" ng-options="project.id as project.name for project in projects track by project.id" ng-model="project_id"></select>
-        <ul class="validation_errors" ng-if="errors.project">
-            <li class="item" ng-repeat="x in errors.project">
-                {{x}}
-            </li>
-        </ul>
     </p>
     <p class="field">
         <input class="button submit" type="submit" value="Update Task" ng-click="put()">

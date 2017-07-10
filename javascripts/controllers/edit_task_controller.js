@@ -29,9 +29,6 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
             "finished"
         ]
 
-        $scope.status = $scope.statuses[0];
-        $scope.user_id = null;
-
         //Get the task details to fill in form defaults
         //Get all projects 
         $http({
