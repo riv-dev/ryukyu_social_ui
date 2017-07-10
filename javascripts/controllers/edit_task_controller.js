@@ -87,7 +87,7 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully updated task!";
                     $scope.$parent.flash_level = "success";
-                    $location.path('./task-panel/'+$routeParams.task_id);
+                    window.history.back();
                 },
                 function errorCallback(response) {
                     $scope.$parent.flash_message = "Error editing task.";

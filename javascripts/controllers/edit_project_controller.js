@@ -80,7 +80,7 @@ app.controller('editProjectController', function($scope, $http, $location, $loca
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully edited project!";
                     $scope.$parent.flash_level = "success";
-                    $location.path('./project-panel/' + $routeParams.project_id);
+                    window.history.back();
                 },
                 function errorCallback(response) {
                     $scope.$parent.flash_message = "Error editing project.";

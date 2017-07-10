@@ -117,6 +117,10 @@ app.config(function($routeProvider, $locationProvider) {
   .when("/users/new", {
     templateUrl: "new_user.html",
     controller: "newUserController"
+  })
+  .when("/users/:user_id/edit", {
+    templateUrl: "edit_user.html",
+    controller: "editUserController"
   });
 
   // use the HTML5 History API

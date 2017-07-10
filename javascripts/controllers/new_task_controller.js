@@ -22,12 +22,16 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
         $scope.status = $scope.statuses[0];
         $scope.user_id = null;
 
-        $scope.disabled = function() {
+        $scope.project_defined = function() {
             if($routeParams.project_id) {
-                return "disabled";
+                return true;
             } else {
                 return null;
             }
+        }
+
+        $scope.back = function() {
+            window.history.back();
         }
 
         //Get all projects 

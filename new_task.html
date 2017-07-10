@@ -45,7 +45,7 @@
         </ul>
     </p>
     <p class="field"><label class="label" for="project_id">Project: </label>
-        <select class="input select" ng-options="project.id as project.name for project in projects" ng-model="project_id" ng-disabled="disabled()"></select>
+        <select class="input select" ng-options="project.id as project.name for project in projects" ng-model="project_id" ng-disabled="project_defined()"></select>
         <ul class="validation_errors" ng-if="errors.project">
             <li class="item" ng-repeat="x in errors.project">
                 {{x}}
@@ -55,5 +55,5 @@
     <p class="field">
         <input class="button submit" type="submit" value="Add Task" ng-click="post()">
     </p>
-    <p class="field"><a href=".">Cancel</a></p>
+    <p class="field"><a ng-click="back()" href="./">Cancel</a></p>
 </form>
