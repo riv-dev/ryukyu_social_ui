@@ -19,6 +19,7 @@
         <dd class="value description">{{this_task.description}}</dd>
     </dl>
     <ul class="links">
+        <li ng-if="this_user_id" class="item back"><a href="./users/{{this_user_id}}">Go Back to User</a></li>
         <li ng-if="this_project_id" class="item back"><a href="./projects/{{this_project_id}}">Go Back to Project</a></li>
         <li class="item edit"><a href="./tasks/{{this_task.id}}/edit">Edit Task</a></li>
         <li class="item delete"><a ng-click="remove_task()">Delete Task</a></li>

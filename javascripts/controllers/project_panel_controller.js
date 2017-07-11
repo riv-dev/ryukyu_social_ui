@@ -5,6 +5,10 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
+    if($routeParams.user_id) {
+        $scope.this_user_id = $routeParams.user_id;
+    }
+
     $scope.prettyDate = function(isoDateStr) {
         return moment(isoDateStr).calendar();
     }

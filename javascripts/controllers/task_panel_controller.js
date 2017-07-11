@@ -9,6 +9,10 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         $scope.this_project_id = $routeParams.project_id;
     }
 
+    if($routeParams.user_id) {
+        $scope.this_user_id = $routeParams.user_id;
+    }
+
     $scope.prettyDate = function(isoDateStr) {
         return moment(isoDateStr).calendar();
     }
