@@ -20,7 +20,7 @@
       <nav ng-if="loggedin_user" id="site_nav">
         <ul class="links">
           <li class="item active"><a href="./home-panel">Home Panel</a></li>
-          <li class="item"><a href="./user-panel/{{loggedin_user.id}}">My Profile</a></li>
+          <li class="item"><a href="./users/{{loggedin_user.id}}">My Profile</a></li>
           <li class="item item--login" ng-if="!loggedin_user"><a href="./login">Log In</a></li>
           <li class="item item--logout" ng-if="loggedin_user"><a href="./logout">Log Out</a></li>
         </ul>

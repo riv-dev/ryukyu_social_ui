@@ -10,7 +10,7 @@
     </header>
     <ul id="tasks_list" class="section_information">
         <li class="item" ng-repeat="task in tasks">
-            <a href="./task-panel/{{task.id}}">
+            <a href="./tasks/{{task.id}}">
                 <h3 class="name">{{task.name}}</h3>
                 <p class="info">
                     {{task.description}}
@@ -48,7 +48,7 @@
     </header>
     <ul id="projects_list" class="section_information">
         <li class="item" ng-repeat="project in projects">
-            <a href="./project-panel/{{project.id}}">
+            <a href="./projects/{{project.id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
                     <dt class="key users">Users:</dt>
@@ -85,7 +85,7 @@
     </header>
     <ul id="users_list" class="section_information">
         <li class="item" ng-repeat="user in users">
-            <a href="./user-panel/{{user.id}}">
+            <a href="./users/{{user.id}}">
                 <h3 class="key user">{{user.title}}</h3>
                 <p class="value user">{{user.firstname}} {{user.lastname}}</p>
             </a>

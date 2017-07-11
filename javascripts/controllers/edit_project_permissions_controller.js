@@ -56,7 +56,7 @@ app.controller('editProjectPermissionsController', function($scope, $http, $loca
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully updated project permissions!";
                     $scope.$parent.flash_level = "success";
-                    $location.path('./project-panel/'+$routeParams.project_id);
+                    $location.path('./projects/'+$routeParams.project_id);
                 },
                 function errorCallback(response) {
                     $scope.$parent.flash_message = "Error editing project permissions.";

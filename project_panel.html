@@ -43,7 +43,7 @@
     </header>
     <ul id="tasks_list" class="section_information">
         <li class="item" ng-repeat="task in tasks">
-            <a href="./task-panel/{{task.id}}">
+            <a href="./projects/{{this_project.id}}/tasks/{{task.id}}">
                 <h3 class="name">{{task.name}}</h3>
                 <p class="info">
                     {{task.description}}
@@ -75,7 +75,7 @@
     </header>
     <ul id="users_list" class="section_information">
         <li class="item" ng-repeat="assigned_user in assigned_users">
-            <a href="./user-panel/{{assigned_user.user_id}}">
+            <a href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}">
                 <h3 class="key user" ng-if="assigned_user.role">{{assigned_user.role}}</h3>
                 <h3 class="key key--none user" ng-if="!assigned_user.role">Undefined Role</h2>
                 <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>

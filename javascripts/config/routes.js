@@ -67,15 +67,23 @@ app.config(function($routeProvider, $locationProvider) {
     templateUrl: "home_panel.html",
     controller: "homePanelController"
   })
-  .when("/user-panel/:user_id", {
+  .when("/users/:user_id", {
     templateUrl: "user_panel.html",
     controller: "userPanelController"
   })
-  .when("/project-panel/:project_id", {
+  .when("/projects/:project_id/users/:user_id", {
+    templateUrl: "user_panel.html",
+    controller: "userPanelController"
+  })
+  .when("/projects/:project_id", {
     templateUrl: "project_panel.html",
     controller: "projectPanelController"
   })
-  .when("/task-panel/:task_id", {
+  .when("/tasks/:task_id", {
+    templateUrl: "task_panel.html",
+    controller: "taskPanelController"
+  })
+  .when("/projects/:project_id/tasks/:task_id", { //viewing a task from context of a project
     templateUrl: "task_panel.html",
     controller: "taskPanelController"
   })

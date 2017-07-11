@@ -20,6 +20,7 @@
         <dd class="value bio">{{this_user.bio}}</dd>
     </dl>
     <ul class="links">
+        <li ng-if="this_project_id" class="item back"><a href="./projects/{{this_project_id}}">Go Back to Project</a></li>
         <li ng-if="loggedin_user.admin || loggedin_user.id == this_user.id" class="item edit"><a href="./users/{{this_user.id}}/edit">Edit User Account</a></li>
         <li ng-if="loggedin_user.admin" class="item delete"><a ng-click="delete_user()">Delete User</a></li>
     </ul>
@@ -35,7 +36,7 @@
     </header>
     <ul id="tasks_list" class="section_information">
         <li class="item" ng-repeat="task in tasks">
-            <a href="./task-panel/{{task.task_id}}">
+            <a href="./tasks/{{task.task_id}}">
                 <h3 class="name">{{task.name}}</h3>
                 <p class="info">
                     {{task.description}}
@@ -80,7 +81,7 @@
     </header>
     <ul id="projects_list" class="section_information">
         <li class="item" ng-repeat="project in projects">
-            <a href="./project-panel/{{project.project_id}}">
+            <a href="./projects/{{project.project_id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
                     <dt class="key users">Users:</dt>
