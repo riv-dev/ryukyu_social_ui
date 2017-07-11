@@ -26,7 +26,7 @@
         <dd class="value project_value" ng-if="this_project.value">{{this_project.value}}</dd>            
         <dd class="value value--none project_value" ng-if="!this_project.value">Not defined</dd> 
         <dt class="key description">Description:</dt>
-        <dd class="value description">{{this_project.description}}</dd>
+        <dd class="value description"><pre ng-bind-html="this_project.description | linky"></pre><dd>
     </dl>
     <ul class="links">
         <li class="item edit"><a href="./projects/{{this_project.id}}/edit">Edit Project</a></li>

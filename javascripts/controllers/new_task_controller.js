@@ -9,7 +9,7 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
             {label: "Very Important", level: 4},
             {label: "Fairly Important", level: 3},
             {label: "Important", level: 2},
-            {label: "Slighly Important", level: 1},
+            {label: "Slightly Important", level: 1},
             {label: "Not at all Important", level: 0}
         ];
 
