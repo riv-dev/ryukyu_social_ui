@@ -5,6 +5,10 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
+    $scope.prettyDate = function(isoDateStr) {
+        return moment(isoDateStr).calendar();
+    }
+
     $scope.getPriorityLabel = function(index) {
         var priorities = [
             "Not Important at All",
@@ -139,33 +143,46 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
     }
 
     $scope.remove_task = function() {
+        var answer = prompt('Are you sure you wish to delete this task?  Type "yes" to confirm');
         //(this) is equivalent to ($scope) inside the function
-        $http({
-            method: 'DELETE',
-            url: tasksApiBaseURL + '/tasks/' + $routeParams.task_id,
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            //Refresh assigned users
-            $localStorage.flash_message = "Deleted Task: " + $scope.this_task.name;
-            $scope.$parent.flash_level = "alert";
-            window.history.back();
-        });          
+        if(answer == "yes") {
+            $http({
+                method: 'DELETE',
+                url: tasksApiBaseURL + '/tasks/' + $routeParams.task_id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                $localStorage.flash_message = "Deleted Task: " + $scope.this_task.name;
+                $scope.$parent.flash_level = "alert";
+                window.history.back();
+            });          
+        } else {
+            $scope.$parent.flash_message = 'Did not type "yes".  Task not deleted';
+            $scope.$parent.flash_level = 'fail';
+        }
     }
 
     $scope.remove_user = function(user) {
         //(this) is equivalent to ($scope) inside the function
-        $http({
-            method: 'DELETE',
-            url: tasksApiBaseURL + '/users/' + user.user_id + '/tasks/' +  $routeParams.task_id,
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            //Refresh assigned users
-            get_users_assigned_to_task();
-        });      
+        var answer = prompt('Remove ' + user.firstname + " " + user.lastname + ' from this task?  Type "yes" to confirm');
+        if(answer == "yes") {
+           $http({
+               method: 'DELETE',
+               url: tasksApiBaseURL + '/users/' + user.user_id + '/tasks/' +  $routeParams.task_id,
+               headers: {
+                   'x-access-token': CommonFunctions.getToken()
+               }
+           }).then(function (response) {
+               //Refresh assigned users
+               $scope.$parent.flash_message = "Removed " + user.firstname + " " + user.lastname + " from this task";
+               $scope.$parent.flash_level = "alert";
+               get_users_assigned_to_task();
+           });      
+        } else {
+            $scope.$parent.flash_message = 'Did not type "yes". ' + user.firstname + " " + user.lastname + " not removed from the task.";
+            $scope.$parent.flash_level = "fail";
+        }
     }
 
     if($localStorage.loggedin_user) {

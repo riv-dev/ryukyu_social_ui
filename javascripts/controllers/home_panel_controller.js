@@ -5,6 +5,10 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
+    $scope.prettyDate = function(isoDateStr) {
+        return moment(isoDateStr).calendar();
+    }
+
     $scope.getPriorityLabel = function(index) {
         var priorities = [
             "Not Important at All",

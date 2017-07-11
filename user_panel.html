@@ -21,7 +21,7 @@
     </dl>
     <ul class="links">
         <li ng-if="loggedin_user.admin || loggedin_user.id == this_user.id" class="item edit"><a href="./users/{{this_user.id}}/edit">Edit User Account</a></li>
-        <li ng-if="loggedin_user.admin" class="item delete"><a ng-click="remove_user()">Delete User</a></li>
+        <li ng-if="loggedin_user.admin" class="item delete"><a ng-click="delete_user()">Delete User</a></li>
     </ul>
 </section>
 

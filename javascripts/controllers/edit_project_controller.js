@@ -26,56 +26,18 @@ app.controller('editProjectController', function($scope, $http, $location, $loca
             $scope.status = response.data.status;
             $scope.value = response.data.value;
             $scope.effort = response.data.effort;
+            $scope.start_date = moment(response.data.start_date).toDate();
+            $scope.deadline = moment(response.data.deadline).toDate();
         });
 
         $scope.put = function() {
-            //Validate the date
-            if($scope.project_form.deadline_input.$touched && !$scope.deadline) {
-                $scope.$parent.flash_message = "Error editing project.";
-                $scope.$parent.flash_level = "fail";
-                $scope.errors = {}; 
-                $scope.errors.deadline = ["Please select date and type in the time"];
-                return;
-            } else {
-                $scope.$parent.flash_message = null;
-                $scope.$parent.flash_level = null;
-                $scope.errors = {};
-                $scope.errors.deadline = [];
-            }
-
-            var deadlineMySQL = null;
-
-            if($scope.deadline) {
-                deadlineMySQL = CommonFunctions.formatDate($scope.deadline);
-            }
-
-            //Validate the date
-            if($scope.project_form.start_date_input.$touched && !$scope.start_date) {
-                $scope.$parent.flash_message = "Error editing project.";
-                $scope.$parent.flash_level = "fail";
-                $scope.errors = {}; 
-                $scope.errors.start_date = ["Please select date and type in the time"];
-                return;
-            } else {
-                $scope.$parent.flash_message = null;
-                $scope.$parent.flash_level = null;
-                $scope.errors = {};
-                $scope.errors.start_date = [];
-            }
-
-            var start_dateMySQL = null;
-
-            if($scope.start_date) {
-                start_dateMySQL = CommonFunctions.formatDate($scope.start_date);
-            }
-
             $http({
                 method: 'PUT',
                 url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
-                data: {name: $scope.name, description: $scope.description, status: $scope.status, effort: $scope.effort, value: $scope.value, start_date: start_dateMySQL, deadline: deadlineMySQL} 
+                data: {name: $scope.name, description: $scope.description, status: $scope.status, effort: $scope.effort, value: $scope.value, start_date: moment($scope.start_date).format(), deadline: moment($scope.deadline).format()} 
             }).then(
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully edited project!";

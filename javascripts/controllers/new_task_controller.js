@@ -51,33 +51,13 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
         });
 
         $scope.post = function() {
-            //Validate the date
-            if($scope.task_form.deadline_input.$touched && !$scope.deadline) {
-                $scope.$parent.flash_message = "Error adding task.";
-                $scope.$parent.flash_level = "fail";
-                $scope.errors = {}; 
-                $scope.errors.deadline = ["Please select date and type in the time"];
-                return;
-            } else {
-                $scope.$parent.flash_message = null;
-                $scope.$parent.flash_level = null;
-                $scope.errors = {};
-                $scope.errors.deadline = [];
-            }
-
-            var mysqlDate = null;
-
-            if($scope.deadline) {
-                mysqlDate = CommonFunctions.formatDate($scope.deadline);
-            }
-
             $http({
                 method: 'POST',
                 url: tasksApiBaseURL + '/tasks',
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
-                data: {name: $scope.name, description: $scope.description, priority: $scope.priority_level, status: $scope.status, deadline: mysqlDate, project_id: $scope.project_id} 
+                data: {name: $scope.name, description: $scope.description, priority: $scope.priority_level, status: $scope.status, deadline: moment($scope.deadline).format(), project_id: $scope.project_id} 
             }).then(
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully added task!";

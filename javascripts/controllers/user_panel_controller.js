@@ -1,4 +1,4 @@
-app.controller('userPanelController', function($scope, $http, $routeParams, $localStorage, CommonFunctions) {
+app.controller('userPanelController', function($scope, $http, $location, $routeParams, $localStorage, CommonFunctions) {
     $scope.$parent.hero = "User Panel";
     $scope.$parent.panel_class = "user_panel";
 
@@ -24,6 +24,31 @@ app.controller('userPanelController', function($scope, $http, $routeParams, $loc
     $scope.cssLast = function(isLast) {
         if(isLast) {
             return "last";
+        }
+    }
+
+    $scope.delete_user = function() {
+        var email = prompt("Type in user's email address to confirm delete.");
+        if (email == $scope.this_user.email) {
+            $http({
+                method: 'DELETE',
+                url: usersApiBaseURL + "/users/"+$routeParams.user_id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+            function successCallback(response) {
+                $localStorage.flash_message = "Deleted user: " + $scope.this_user.email;
+                $scope.$parent.flash_level = "alert";
+                $location.path("/");
+            },
+            function errorCallback(response) { 
+                $scope.$parent.flash_message = "Error deleting user.";
+                $scope.$parent.flash_level = "fail";
+            });     
+        } else {
+            $scope.$parent.flash_message = "Did not enter correct email address.  User not deleted.";
+            $scope.$parent.flash_level = "fail";           
         }
     }
 

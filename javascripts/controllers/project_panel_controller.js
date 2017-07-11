@@ -5,6 +5,10 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
+    $scope.prettyDate = function(isoDateStr) {
+        return moment(isoDateStr).calendar();
+    }
+
     $scope.getPriorityLabel = function(index) {
         var priorities = [
             "Not Important at All",
@@ -86,33 +90,48 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
     }
 
     $scope.remove_project = function() {
-        //(this) is equivalent to ($scope) inside the function
-        $http({
-            method: 'DELETE',
-            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            //Refresh assigned users
-            $localStorage.flash_message = "Deleted Project: " + $scope.this_project.name;
-            $scope.$parent.flash_level = "alert";
-            window.history.back();
-        });          
+        var answer = prompt('Type in project name "' + $scope.this_project.name + '" to confirm delete (case-sensitive).');         
+        
+        if(answer == $scope.this_project.name) {
+            //(this) is equivalent to ($scope) inside the function
+            $http({
+                method: 'DELETE',
+                url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                //Refresh assigned users
+                $localStorage.flash_message = "Deleted Project: " + $scope.this_project.name;
+                $scope.$parent.flash_level = "alert";
+                window.history.back();
+            });          
+        } else {
+            $scope.$parent.flash_message = 'Did not type "'+ $scope.this_project.name + '".  Project not deleted';
+            $scope.$parent.flash_level = 'fail';
+        }
     }
 
     $scope.remove_user = function(user) {
-        //(this) is equivalent to ($scope) inside the function
-        $http({
-            method: 'DELETE',
-            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id + '/users/' +  user.user_id,
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            //Refresh assigned users
-            get_project_users();
-        });      
+        var answer = prompt('Remove ' + user.firstname + " " + user.lastname + ' from this project?  Type "yes" to confirm');
+        if(answer == "yes") {
+            //(this) is equivalent to ($scope) inside the function
+            $http({
+                method: 'DELETE',
+                url: projectsApiBaseURL + '/projects/' + $routeParams.project_id + '/users/' +  user.user_id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                $scope.$parent.flash_message = "Removed " + user.firstname + " " + user.lastname + " from this project";
+                $scope.$parent.flash_level = "alert";
+                //Refresh assigned users
+                get_project_users();
+            });      
+        } else {
+            $scope.$parent.flash_message = 'Did not type "yes". ' + user.firstname + " " + user.lastname + " not removed from the project.";
+            $scope.$parent.flash_level = "fail";
+        }
     }
 
     if($localStorage.loggedin_user) {

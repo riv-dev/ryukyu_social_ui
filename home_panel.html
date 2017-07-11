@@ -28,7 +28,7 @@
                     <dd class="value priority" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
                     <dd class="value value--none priority" ng-if="!task.priority">Not defined</dd>     
                     <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline" ng-if="task.deadline">{{task.deadline}}</dd>
+                    <dd class="value deadline" ng-if="task.deadline">{{prettyDate(task.deadline)}}</dd>
                     <dd class="value value--none deadline" ng-if="!task.deadline">Not defined</dd>
                     <dt class="key project">Project:</dt>
                     <dd class="value project" ng-if="task.project_name">{{task.project_name}}</dd>
@@ -57,6 +57,12 @@
                         <em class="key key--none role" ng-if="!project_user.role">Undefined Role: </em>
                         <p class="value role">{{project_user.firstname}} {{project_user.lastname}}</p>
                     </dd>
+                    <dt class="key start_date">Start Date:</dt>
+                    <dd class="value start_date" ng-if="project.start_date">{{prettyDate(project.start_date)}}</dd>
+                    <dd class="value value--none start_date" ng-if="!project.start_date">Not defined</dd>
+                    <dt class="key deadline">Deadline:</dt>
+                    <dd class="value deadline" ng-if="project.deadline">{{prettyDate(project.deadline)}}</dd>
+                    <dd class="value value--none deadline" ng-if="!project.deadline">Not defined</dd>
                     <dd class="value value--none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
                     <dt class="key tasks_rank">Task Rank:</dt>
                     <dd class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">

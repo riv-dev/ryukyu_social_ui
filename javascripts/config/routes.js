@@ -12,12 +12,6 @@ app.service('CommonFunctions', function() {
       return JSON.parse(window.atob(base64));
     };
 
-    function twoDigits(d) {
-      if(0 <= d && d < 10) return "0" + d.toString();
-      if(-10 < d && d < 0) return "-0" + (-1*d).toString();
-      return d.toString();
-    }
-      
     this.setFlashMessage = function(scope, localStorage) {
         if(localStorage.flash_message) {
             scope.$parent.flash_message = localStorage.flash_message;
@@ -53,11 +47,6 @@ app.service('CommonFunctions', function() {
             delete localStorage.loggedin_user;
         }
     }
-
-    this.formatDate = function(dateString) {
-      var date = new Date(dateString);
-      return date.getUTCFullYear() + "-" + twoDigits(1 + date.getUTCMonth()) + "-" + twoDigits(date.getUTCDate()) + " " + twoDigits(date.getUTCHours()) + ":" + twoDigits(date.getUTCMinutes()) + ":" + twoDigits(date.getUTCSeconds());
-    };
 });
 
 app.config(function($routeProvider, $locationProvider) {
