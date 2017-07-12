@@ -73,7 +73,6 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
                                 $localStorage.flash_message = "Successfully added task for user!";
                                 $scope.flash_level = "success";
                                 $location.path('./users/'+$routeParams.user_id);
-                                return;
                             },
                             function errorCallback(response) {
                                 $scope.flash_message = "Error adding task for user.";
@@ -89,14 +88,13 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
                                         $scope.errors[responseError['param']].push(responseError['msg']);
                                     }
                                 }
-                                return;
                             }
                         );
+                    } else {
+                        $localStorage.flash_message = "Successfully added task!";
+                        $scope.$parent.flash_level = "success";
+                        window.history.back();
                     }
-
-                    $localStorage.flash_message = "Successfully added task!";
-                    $scope.$parent.flash_level = "success";
-                    window.history.back();
                 },
                 function errorCallback(response) {
                     $scope.$parent.flash_message = "Error adding task.";

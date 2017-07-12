@@ -25,14 +25,15 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }
 
-    $scope.task_statuses = [
+    $scope.statuses = [
         "all",
         "new",
         "doing",
         "finished"
     ]
 
-    $scope.status = $scope.task_statuses[0];
+    $scope.task_status = $scope.statuses[0];
+    $scope.project_status = $scope.statuses[0];
 
     $scope.cssLast = function(isLast) {
         if(isLast) {
@@ -115,22 +116,17 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }); 
     }
 
-    if($localStorage.loggedin_user) {
-        //Get users list
-        $http({
-            method: 'GET',
-            url: usersApiBaseURL + '/users',
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            $scope.users = response.data;
-        });
+    $scope.getProjects = function(status) {
+        var queryStr = "";
+
+        if(status && status != "all") {
+            queryStr = "?status="+status;
+        }
 
         //Get projects list
         $http({
             method: 'GET',
-            url: projectsApiBaseURL + '/projects',
+            url: projectsApiBaseURL + '/projects' + queryStr,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
@@ -187,8 +183,23 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
                 });                    
             }
         });
+    }
 
-        $scope.getTasks($scope.status);
+    if($localStorage.loggedin_user) {
+        //Get users list
+        $http({
+            method: 'GET',
+            url: usersApiBaseURL + '/users',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.users = response.data;
+        });
+
+        $scope.getProjects($scope.project_status);
+
+        $scope.getTasks($scope.task_status);
     } 
 
 });

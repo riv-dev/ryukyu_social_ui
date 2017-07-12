@@ -29,14 +29,15 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         }
     }
 
-    $scope.task_statuses = [
+    $scope.statuses = [
         "all",
         "new",
         "doing",
         "finished"
     ]
 
-    $scope.status = $scope.task_statuses[0];
+    $scope.task_status = $scope.statuses[0];
+    $scope.project_status = $scope.statuses[0];
 
     $scope.cssLast = function(isLast) {
         if(isLast) {
@@ -148,40 +149,17 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         });  
     }
 
-    if($localStorage.loggedin_user) {
-        //Get user information
-        $http({
-            method: 'GET',
-            url: usersApiBaseURL + '/users/' + $routeParams.user_id,
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            $scope.this_user = response.data;
+    $scope.getProjects = function(status) {
+        var queryStr = "";
 
-            $scope.this_user.status = "I'm feeling great today!";
-            $scope.this_user.bio = "Hello, this is my bio.  This is where I talk about myself and my history.  Anything I like actually.  I like this and this and this.  Yup, that's right."
-
-            $http({
-                method: 'GET',
-                url: userPhotosApiBaseURL + "/users/"+$routeParams.user_id+"/photo",
-                headers: {
-                    'x-access-token': CommonFunctions.getToken()
-                }
-            }).then(
-            function successCallback(response) {
-                $scope.this_user_photo = response.data;
-                $scope.this_user_photo.uri = userPhotosApiBaseURL+"/users/"+$routeParams.user_id+"/photo.image";
-            },
-            function errorCallback(response) { 
-                $scope.this_user_photo = {};
-            });
-        });
+        if(status && status != "all") {
+            queryStr = "?status="+status;
+        }
 
         //Get the user's projects
         $http({
             method: 'GET',
-            url: projectsApiBaseURL + '/users/' + $routeParams.user_id + '/projects',
+            url: projectsApiBaseURL + '/users/' + $routeParams.user_id + '/projects' + queryStr,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
@@ -241,9 +219,43 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
                 });                    
             }
         });
+    }
+
+    if($localStorage.loggedin_user) {
+        //Get user information
+        $http({
+            method: 'GET',
+            url: usersApiBaseURL + '/users/' + $routeParams.user_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.this_user = response.data;
+
+            $scope.this_user.status = "I'm feeling great today!";
+            $scope.this_user.bio = "Hello, this is my bio.  This is where I talk about myself and my history.  Anything I like actually.  I like this and this and this.  Yup, that's right."
+
+            $http({
+                method: 'GET',
+                url: userPhotosApiBaseURL + "/users/"+$routeParams.user_id+"/photo",
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+            function successCallback(response) {
+                $scope.this_user_photo = response.data;
+                $scope.this_user_photo.uri = userPhotosApiBaseURL+"/users/"+$routeParams.user_id+"/photo.image";
+            },
+            function errorCallback(response) { 
+                $scope.this_user_photo = {};
+            });
+        });
+
+        //Get the users projects
+        $scope.getProjects($scope.project_status);
 
         //Get the users tasks
-        $scope.getTasks($scope.status);
+        $scope.getTasks($scope.task_status);
     } 
 
 });

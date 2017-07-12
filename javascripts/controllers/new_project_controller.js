@@ -1,4 +1,4 @@
-app.controller('newProjectController', function($scope, $http, $location, $localStorage, CommonFunctions) {
+app.controller('newProjectController', function($scope, $http, $location, $routeParams, $localStorage, CommonFunctions) {
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
@@ -26,7 +26,7 @@ app.controller('newProjectController', function($scope, $http, $location, $local
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully added project!";
                     $scope.$parent.flash_level = "success";
-                    $location.path('/');
+                    window.history.back();
                 },
                 function errorCallback(response) {
                     $scope.$parent.flash_message = "Error adding project.";

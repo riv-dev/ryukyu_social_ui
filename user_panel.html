@@ -34,7 +34,7 @@
              Task Board
         </h2>
         <ul class="links">
-            <li class="item"><select class="input select" ng-options="status for status in task_statuses" ng-change="getTasks(status)" ng-model="status"></select></li>
+            <li class="item"><select class="input select" ng-options="task_status for task_status in statuses" ng-change="getTasks(task_status)" ng-model="task_status"></select></li>
             <li class="item"><a href="./users/{{this_user.id}}/tasks/new">Add Task</a></li>
         </ul>
     </header>
@@ -82,6 +82,10 @@
             <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em>
              Projects List
         </h2>
+        <ul class="links">
+            <li class="item"><select class="input select" ng-options="project_status for project_status in statuses" ng-change="getProjects(project_status)" ng-model="project_status"></select></li>
+            <li class="item"><a href="./users/{{this_user.id}}/projects/new">Add Project</a></li>
+        </ul>
     </header>
     <ul id="projects_list" class="section_information">
         <li class="item" ng-repeat="project in projects">
