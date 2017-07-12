@@ -39,6 +39,7 @@
     <header class="section_header">
         <h2 class="title">Project Task Board</h2>
         <ul class="links">
+            <li class="item"><select class="input select" ng-options="status for status in task_statuses" ng-change="getTasks(status)" ng-model="status"></select></li>
             <li class="item"><a href="./projects/{{this_project.id}}/tasks/new">Add Task</a></li>
         </ul>
     </header>
@@ -47,7 +48,7 @@
             <a href="./projects/{{this_project.id}}/tasks/{{task.id}}">
                 <h3 class="name">{{task.name}}</h3>
                 <p class="info">
-                    {{task.description}}
+                    <pre>{{task.description}}</pre>
                 </p>
                 <dl class="attributes">
                     <dt class="key assigned_to">Assigned to:</dt>

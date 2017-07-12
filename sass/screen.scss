@@ -284,14 +284,18 @@ pre {
 .section_header {
     position: relative;
     border-bottom: 1px solid black;
-    padding-bottom: 8px;
+    padding-bottom: 0px;
     .links {
-        position: absolute;
-        right: 0px;
-        bottom: 8px;
-        padding: 0px;
+        margin-top: 5px;
+        padding: 5px 0px;
+        background-color: #e2e2e2;
+
         .item {
             text-decoration: underline;
+
+            .input.select {
+                width: 100px;
+            }
         }
     }
     &:after {

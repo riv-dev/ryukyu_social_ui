@@ -60,6 +60,40 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
                 data: {name: $scope.name, description: $scope.description, priority: $scope.priority_level, status: $scope.status, deadline: moment($scope.deadline).format(), project_id: $scope.project_id} 
             }).then(
                 function successCallback(response) {
+                    //if a user_id exists, add user to the task
+                    if($routeParams.user_id) {
+                        $http({
+                        method: 'POST',
+                        url: tasksApiBaseURL + '/tasks/' + response.data.task_id + '/users/' + $routeParams.user_id,
+                        headers: {
+                            'x-access-token': CommonFunctions.getToken()
+                        }
+                        }).then(
+                            function successCallback(response) {
+                                $localStorage.flash_message = "Successfully added task for user!";
+                                $scope.flash_level = "success";
+                                $location.path('./users/'+$routeParams.user_id);
+                                return;
+                            },
+                            function errorCallback(response) {
+                                $scope.flash_message = "Error adding task for user.";
+                                $scope.flash_level = "fail";
+                                $scope.errors = {};
+                                var responseError;
+                                for (var i=0; i < response.data.errors.length; i++) {
+                                    responseError = response.data.errors[i];
+                                    if(responseError.hasOwnProperty('param')) {
+                                        if(!$scope.errors[responseError['param']]) {
+                                            $scope.errors[responseError['param']] = [];
+                                        }
+                                        $scope.errors[responseError['param']].push(responseError['msg']);
+                                    }
+                                }
+                                return;
+                            }
+                        );
+                    }
+
                     $localStorage.flash_message = "Successfully added task!";
                     $scope.$parent.flash_level = "success";
                     window.history.back();

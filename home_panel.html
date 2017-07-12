@@ -5,6 +5,7 @@
     <header class="section_header">
         <h2 class="title">Company Task Board</h2>
         <ul class="links">
+            <li class="item"><select class="input select" ng-options="status for status in task_statuses" ng-change="getTasks(status)" ng-model="status"></select></li>
             <li class="item"><a href="./tasks/new">Add Task</a></li>
         </ul>
     </header>

@@ -25,10 +25,94 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }
 
+    $scope.task_statuses = [
+        "all",
+        "new",
+        "doing",
+        "finished"
+    ]
+
+    $scope.status = $scope.task_statuses[0];
+
     $scope.cssLast = function(isLast) {
         if(isLast) {
             return "last";
         }
+    }
+
+    $scope.getTasks = function(status) {
+        var queryStr = "";
+
+        if(status && status != "all") {
+            queryStr = "?status="+status;
+        }
+
+        //Get tasks list        
+        $http({
+            method: 'GET',
+            url: tasksApiBaseURL + '/tasks' + queryStr, //'/ranked-tasks',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.tasks = response.data;
+
+            for(var i=0;i<$scope.tasks.length;i++) {
+                var current_task = $scope.tasks[i];
+                var current_project_id = current_task.project_id;
+
+                //Get the project name
+                if(current_project_id) {
+                    $http({
+                        method: 'GET',
+                        url: projectsApiBaseURL + '/projects/'+current_project_id,
+                        headers: {
+                            'x-access-token': CommonFunctions.getToken()
+                        },
+                        params: {
+                            'i': i
+                        }
+                    }).then(function (response) {
+                        var current_project = response.data;
+                        $scope.tasks[parseInt(response.config["params"]["i"])]["project_name"] = current_project.name;
+                    });                    
+                }
+
+                //Get all users on the current task
+                $http({
+                    method: 'GET',
+                    url: tasksApiBaseURL + '/tasks/'+current_task.id+'/users',
+                    headers: {
+                       'x-access-token': CommonFunctions.getToken()
+                    },
+                    params: {
+                       'i': i
+                    }
+                }).then(function (response) {
+                    $scope.tasks[parseInt(response.config["params"]["i"])]["users"] = response.data
+
+                    for(var j=0;j<response.data.length;j++) {
+                        $http({
+                            method: 'GET',
+                            url: usersApiBaseURL + '/users/'+response.data[j]["user_id"],
+                            headers: {
+                                'x-access-token': CommonFunctions.getToken()
+                            },
+                            params: {
+                                'i': response.config["params"]["i"],
+                                'j': j
+                            }
+                        }).then(function (response) {
+                            var i = parseInt(response.config["params"]["i"]);
+                            var j = parseInt(response.config["params"]["j"]);
+                            $scope.tasks[i]["users"][j].firstname = response.data.firstname; 
+                            $scope.tasks[i]["users"][j].lastname = response.data.lastname; 
+                        });                          
+                    }
+
+                });                   
+            }
+        }); 
     }
 
     if($localStorage.loggedin_user) {
@@ -104,72 +188,7 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
             }
         });
 
-        //Get tasks list        
-        $http({
-            method: 'GET',
-            url: tasksApiBaseURL + '/tasks', //'/ranked-tasks',
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            $scope.tasks = response.data;
-
-            for(var i=0;i<$scope.tasks.length;i++) {
-                var current_task = $scope.tasks[i];
-                var current_project_id = current_task.project_id;
-
-                //Get the project name
-                if(current_project_id) {
-                    $http({
-                        method: 'GET',
-                        url: projectsApiBaseURL + '/projects/'+current_project_id,
-                        headers: {
-                            'x-access-token': CommonFunctions.getToken()
-                        },
-                        params: {
-                            'i': i
-                        }
-                    }).then(function (response) {
-                        var current_project = response.data;
-                        $scope.tasks[parseInt(response.config["params"]["i"])]["project_name"] = current_project.name;
-                    });                    
-                }
-
-                //Get all users on the current task
-                $http({
-                    method: 'GET',
-                    url: tasksApiBaseURL + '/tasks/'+current_task.id+'/users',
-                    headers: {
-                       'x-access-token': CommonFunctions.getToken()
-                    },
-                    params: {
-                       'i': i
-                    }
-                }).then(function (response) {
-                    $scope.tasks[parseInt(response.config["params"]["i"])]["users"] = response.data
-
-                    for(var j=0;j<response.data.length;j++) {
-                        $http({
-                            method: 'GET',
-                            url: usersApiBaseURL + '/users/'+response.data[j]["user_id"],
-                            headers: {
-                                'x-access-token': CommonFunctions.getToken()
-                            },
-                            params: {
-                                'i': response.config["params"]["i"],
-                                'j': j
-                            }
-                        }).then(function (response) {
-                            var i = parseInt(response.config["params"]["i"]);
-                            var j = parseInt(response.config["params"]["j"]);
-                            $scope.tasks[i]["users"][j].firstname = response.data.firstname; 
-                            $scope.tasks[i]["users"][j].lastname = response.data.lastname; 
-                        });                          
-                    }
-
-                });                   
-            }
-        });        
+        $scope.getTasks($scope.status);
     } 
 
 });

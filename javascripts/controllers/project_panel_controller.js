@@ -29,6 +29,15 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         }
     }
 
+    $scope.task_statuses = [
+        "all",
+        "new",
+        "doing",
+        "finished"
+    ]
+
+    $scope.status = $scope.task_statuses[0];
+
     $scope.cssLast = function(isLast) {
         if(isLast) {
             return "last";
@@ -138,28 +147,17 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         }
     }
 
-    if($localStorage.loggedin_user) {
-        //Get project information
-        $http({
-            method: 'GET',
-            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            $scope.this_project = response.data;
-            $scope.this_project_photo = {};
-            $scope.this_project_photo.uri = "./images/default_project.png";
-            $scope.this_project_photo.caption = "Todo project photo microservice";
-        });
+    $scope.getTasks = function(status) {
+        var queryStr = "";
 
-
-        get_project_users();
+        if(status && status != "all") {
+            queryStr = "?status="+status;
+        }
 
         //Get the project's tasks
         $http({
             method: 'GET',
-            url: tasksApiBaseURL + '/projects/' + $routeParams.project_id + '/tasks', //'/ranked-tasks',
+            url: tasksApiBaseURL + '/projects/' + $routeParams.project_id + '/tasks' + queryStr, //'/ranked-tasks',
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
@@ -227,6 +225,29 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
             }
         });        
 
+
+    }
+
+    if($localStorage.loggedin_user) {
+        //Get project information
+        $http({
+            method: 'GET',
+            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.this_project = response.data;
+            $scope.this_project_photo = {};
+            $scope.this_project_photo.uri = "./images/default_project.png";
+            $scope.this_project_photo.caption = "Todo project photo microservice";
+        });
+
+
+        get_project_users();
+
+        //Get the project's tasks
+        $scope.getTasks($scope.status);
 
         //Get all users for assigning new users
         $http({

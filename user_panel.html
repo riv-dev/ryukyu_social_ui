@@ -33,6 +33,10 @@
             <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em> 
              Task Board
         </h2>
+        <ul class="links">
+            <li class="item"><select class="input select" ng-options="status for status in task_statuses" ng-change="getTasks(status)" ng-model="status"></select></li>
+            <li class="item"><a href="./users/{{this_user.id}}/tasks/new">Add Task</a></li>
+        </ul>
     </header>
     <ul id="tasks_list" class="section_information">
         <li class="item" ng-repeat="task in tasks">
