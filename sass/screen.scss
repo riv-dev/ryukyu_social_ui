@@ -126,11 +126,23 @@ pre {
 
 //For basic information, usually below a name or title
 .info {
+    pre {
+        font-size: 14px;
+    }
     font-size: 14px;
     margin-bottom: 5px;
     &--none {
         color: red;
     }
+}
+
+//For descriptions in list items.  Only display first line and hide with ellipsis
+.item .info.description pre {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
 
 //ATTRIBUTES
@@ -676,21 +688,6 @@ pre {
     .value {
         font-size: 16px;
         margin-bottom: 10px;
-    }
-}
-
-#tasks_section,
-#projects_section,
-#users_section {
-    .info {
-        padding-top: 10px;
-        font-size: 18px;
-    }
-
-    .info.assigned_user {
-        &:before {
-            content: "*";
-        }
     }
 }
 

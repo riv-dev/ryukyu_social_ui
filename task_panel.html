@@ -16,7 +16,7 @@
         <dd class="value project" ng-if="this_task.project_name"><a href="./projects/{{this_task.project_id}}">{{this_task.project_name}}</a></dd>
         <dd class="value value--none project" ng-if="!this_task.project_name">Not assigned</dd>              
         <dt class="key description">Description:</dt>
-        <dd class="value description">{{this_task.description}}</dd>
+        <dd class="value description"><pre>{{this_task.description}}</pre></dd>
     </dl>
     <ul class="links">
         <li ng-if="this_user_id" class="item back"><a href="./users/{{this_user_id}}">Go Back to User</a></li>

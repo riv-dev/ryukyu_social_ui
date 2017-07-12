@@ -47,9 +47,9 @@
         <li class="item" ng-repeat="task in tasks">
             <a href="./projects/{{this_project.id}}/tasks/{{task.id}}">
                 <h3 class="name">{{task.name}}</h3>
-                <p class="info">
+                <div class="info description">
                     <pre>{{task.description}}</pre>
-                </p>
+                </div>
                 <dl class="attributes">
                     <dt class="key assigned_to">Assigned to:</dt>
                     <dd class="value_item assigned_to {{cssLast($last)}}" ng-repeat="task_user in task.users">

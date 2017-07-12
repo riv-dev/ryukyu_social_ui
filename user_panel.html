@@ -42,9 +42,9 @@
         <li class="item" ng-repeat="task in tasks">
             <a href="./users/{{this_user.id}}/tasks/{{task.task_id}}">
                 <h3 class="name">{{task.name}}</h3>
-                <p class="info">
-                    {{task.description}}
-                </p>
+                <div class="info description">
+                    <pre>{{task.description}}</pre>
+                </div>
                 <dl class="attributes">
                     <dt class="key this_user_progress">
                         <em ng-if="loggedin_user.id==this_user.id">My</em>
