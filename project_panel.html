@@ -58,7 +58,7 @@
                         Need Assignee
                     </dd>
                     <dt class="key status">Status:</dt>
-                    <dd class="value status" ng-if="task.status">{{task.status}}</dd>
+                    <dd class="value status {{task.status}}" ng-if="task.status">{{task.status}}</dd>
                     <dt class="key priority">Priority:</dt>
                     <dd class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
                     <dd class="value value--none priority" ng-if="!task.priority">Not defined</dd>
