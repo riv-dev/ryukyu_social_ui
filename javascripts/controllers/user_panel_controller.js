@@ -39,6 +39,22 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
     $scope.task_status = $scope.statuses[0];
     $scope.project_status = $scope.statuses[0];
 
+    $scope.checkPriorityImportance = function(priority) {
+        if(priority > 2) {
+            return "important";
+        } else {
+            return null;
+        }
+    }    
+
+    $scope.checkDateImportance = function(date) {
+        if(/today/i.test(moment(date).calendar())) {
+            return "important";
+        } else {
+            return null;
+        }
+    }
+
     $scope.cssLast = function(isLast) {
         if(isLast) {
             return "last";

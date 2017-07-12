@@ -41,6 +41,22 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }
 
+    $scope.checkPriorityImportance = function(priority) {
+        if(priority > 2) {
+            return "important";
+        } else {
+            return null;
+        }
+    }    
+
+    $scope.checkDateImportance = function(date) {
+        if(/today/i.test(moment(date).calendar())) {
+            return "important";
+        } else {
+            return null;
+        }
+    }
+
     $scope.getTasks = function(status) {
         var queryStr = "";
 

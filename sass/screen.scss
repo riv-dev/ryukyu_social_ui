@@ -193,6 +193,23 @@ pre {
 
 //Modifier for values that don't have a value
 .value--none {
+    color: #939393;
+}
+
+.value.status.new {
+    color: #db7400;
+}
+
+.value.status.doing {
+    color: #0300b7;
+}
+
+.value.status.finished {
+    color: #00b73a;
+}
+
+.value.important {
+    font-weight: bold;
     color: red;
 }
 

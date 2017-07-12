@@ -17,6 +17,22 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         return moment(isoDateStr).calendar();
     }
 
+    $scope.checkPriorityImportance = function(priority) {
+        if(priority > 2) {
+            return "important";
+        } else {
+            return null;
+        }
+    }    
+
+    $scope.checkDateImportance = function(date) {
+        if(/today/i.test(moment(date).calendar())) {
+            return "important";
+        } else {
+            return null;
+        }
+    }
+
     $scope.getPriorityLabel = function(index) {
         var priorities = [
             "Not Important at All",

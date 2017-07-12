@@ -5,12 +5,12 @@
 
     <dl class="attributes">
         <dt class="key status">Status:</dt>
-        <dd class="value status">{{this_task.status}}</dd>
+        <dd class="value status {{this_task.status}}">{{this_task.status}}</dd>
         <dt class="key deadline">Deadline:</dt>
-        <dd class="value deadline" ng-if="this_task.deadline">{{prettyDate(this_task.deadline)}}</dd>            
+        <dd class="value deadline {{checkDateImportance(task.deadline)}}" ng-if="this_task.deadline">{{prettyDate(this_task.deadline)}}</dd>            
         <dd class="value value--none deadline" ng-if="!this_task.deadline">Not defined</dd>           
         <dt class="key priority">Priority:</dt>
-        <dd class="value priority" ng-if="this_task.priority">{{getPriorityLabel(this_task.priority)}}</dd>
+        <dd class="value priority {{checkPriorityImportance(this_task.priority)}}" ng-if="this_task.priority">{{getPriorityLabel(this_task.priority)}}</dd>
         <dd class="value value--none priority" ng-if="!this_task.priority">Not defined</dd>        
         <dt class="key project">Project:</dt>
         <dd class="value project" ng-if="this_task.project_name"><a href="./projects/{{this_task.project_id}}">{{this_task.project_name}}</a></dd>
