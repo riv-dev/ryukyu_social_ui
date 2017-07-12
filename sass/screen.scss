@@ -137,7 +137,7 @@ pre {
 }
 
 //For descriptions in list items.  Only display first line and hide with ellipsis
-.item .info.description pre {
+.item .info.description {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -179,7 +179,7 @@ pre {
 }
 
 /* line 140, ../sass/screen.scss */
-.item .info.description pre {
+.item .info.description {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
