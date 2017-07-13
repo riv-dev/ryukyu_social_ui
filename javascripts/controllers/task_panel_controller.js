@@ -13,8 +13,12 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         $scope.this_user_id = $routeParams.user_id;
     }
 
-    $scope.prettyDate = function(isoDateStr) {
-        return moment(isoDateStr).calendar();
+    $scope.prettyDate = function(isoDateStr, status) {
+        if(moment() > moment(isoDateStr) && (status == "new" || status == "doing")) {
+            return "Past Due";
+        } else {
+            return moment(isoDateStr).calendar();
+        }
     }
 
     $scope.checkPriorityImportance = function(priority) {
@@ -25,10 +29,14 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         }
     }    
 
-    $scope.checkDateImportance = function(date) {
+    $scope.checkDateImportance = function(date, status) {
         if(/today/i.test(moment(date).calendar())) {
             return "important";
-        } else {
+        }
+        else if(moment() > moment(date) && (status == "new" || status == "doing")) {
+            return "important";
+        } 
+        else {
             return null;
         }
     }
@@ -39,7 +47,7 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
             "Slightly Important",
             "Important",
             "Fairly Important",
-            "Verty Important"
+            "Very Important"
         ]
 
         if(index) {

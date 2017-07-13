@@ -9,8 +9,12 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         $scope.this_project_id = $routeParams.project_id;
     }
 
-    $scope.prettyDate = function(isoDateStr) {
-        return moment(isoDateStr).calendar();
+    $scope.prettyDate = function(isoDateStr, status) {
+        if(moment() > moment(isoDateStr) && (status == "new" || status == "doing")) {
+            return "Past Due";
+        } else {
+            return moment(isoDateStr).calendar();
+        }
     }
 
     $scope.getPriorityLabel = function(index) {
@@ -19,7 +23,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
             "Slightly Important",
             "Important",
             "Fairly Important",
-            "Verty Important"
+            "Very Important"
         ]
 
         if(index) {
@@ -47,10 +51,14 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         }
     }    
 
-    $scope.checkDateImportance = function(date) {
+    $scope.checkDateImportance = function(date, status) {
         if(/today/i.test(moment(date).calendar())) {
             return "important";
-        } else {
+        }
+        else if(moment() > moment(date) && (status == "new" || status == "doing")) {
+            return "important";
+        } 
+        else {
             return null;
         }
     }

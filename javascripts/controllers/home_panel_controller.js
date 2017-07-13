@@ -5,8 +5,12 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
-    $scope.prettyDate = function(isoDateStr) {
-        return moment(isoDateStr).calendar();
+    $scope.prettyDate = function(isoDateStr, status) {
+        if(moment() > moment(isoDateStr) && (status == "new" || status == "doing")) {
+            return "Past Due";
+        } else {
+            return moment(isoDateStr).calendar();
+        }
     }
 
     $scope.getPriorityLabel = function(index) {
@@ -15,7 +19,7 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
             "Slightly Important",
             "Important",
             "Fairly Important",
-            "Verty Important"
+            "Very Important"
         ]
 
         if(index) {
@@ -49,10 +53,14 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }    
 
-    $scope.checkDateImportance = function(date) {
+    $scope.checkDateImportance = function(date, status) {
         if(/today/i.test(moment(date).calendar())) {
             return "important";
-        } else {
+        }
+        else if(moment() > moment(date) && (status == "new" || status == "doing")) {
+            return "important";
+        } 
+        else {
             return null;
         }
     }
