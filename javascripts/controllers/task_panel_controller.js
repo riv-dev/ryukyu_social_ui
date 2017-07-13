@@ -21,6 +21,14 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         }
     }
 
+    $scope.archivedYesNo = function(archived) {
+        if(archived) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
     $scope.checkPriorityImportance = function(priority) {
         if(priority > 2) {
             return "important";

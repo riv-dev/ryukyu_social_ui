@@ -37,6 +37,14 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         }
     }
 
+    $scope.archivedClass = function(archived) {
+        if(archived) {
+            return "archived";
+        } else {
+            return null;
+        }
+    }
+
     $scope.getPriorityLabel = function(index) {
         var priorities = [
             "Not Important at All",

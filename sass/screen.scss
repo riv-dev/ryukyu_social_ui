@@ -262,6 +262,18 @@ pre {
     position: relative;
 }
 
+.item.finished {
+    background-color: #e8ffed;
+}
+
+.item.doing {
+    background-color: #fffce2;
+}
+
+.item.archived {
+    background-color: #e1e1e1;
+}
+
 //GENERIC LINK STYLING
 .links {
     padding: 15px;

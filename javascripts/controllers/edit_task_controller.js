@@ -7,6 +7,8 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
 
         $scope.this_task_id = $routeParams.task_id;
 
+        $scope.checkboxModel = {archived: 0};
+
         $scope.priorities = [
             {label: "Very Important", level: 4},
             {label: "Fairly Important", level: 3},
@@ -35,6 +37,7 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
             $scope.status = response.data.status;
             $scope.project_id = response.data.project_id;
             $scope.deadline = moment(response.data.deadline).toDate();
+            $scope.checkboxModel.archived = response.data.archived;
         });
 
         //Get all projects 
@@ -56,7 +59,7 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
-                data: {name: $scope.name, description: $scope.description, priority: $scope.priority_level, status: $scope.status, deadline: moment($scope.deadline).format(), project_id: $scope.project_id} 
+                data: {name: $scope.name, description: $scope.description, priority: $scope.priority_level, status: $scope.status, deadline: moment($scope.deadline).format(), project_id: $scope.project_id, archived: $scope.checkboxModel.archived} 
             }).then(
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully updated task!";

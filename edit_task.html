@@ -47,6 +47,8 @@
     <p class="field"><label class="label" for="project_id">Project: </label>
         <select class="input select" ng-options="project.id as project.name for project in projects" ng-model="project_id"></select>
     </p>
+    <p class="field"><label class="label" for="archived">Archive: </label><input class="checkbox" type="checkbox" ng-model="checkboxModel.archived"
+      ng-true-value="1" ng-false-value="0"></p>
     <p class="field">
         <input class="button submit" type="submit" value="Update Task" ng-click="put()">
     </p>

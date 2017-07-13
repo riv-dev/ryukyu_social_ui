@@ -10,7 +10,7 @@
         </ul>
     </header>
     <ul id="tasks_list" class="section_information">
-        <li class="item" ng-repeat="task in tasks">
+        <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
             <a href="./tasks/{{task.id}}">
                 <h3 class="name">{{task.name}}</h3>
                 <p class="info description">{{task.description}}</p>
@@ -49,7 +49,7 @@
         </ul>
     </header>
     <ul id="projects_list" class="section_information">
-        <li class="item" ng-repeat="project in projects">
+        <li class="item {{project.status}}" ng-repeat="project in projects">
             <a href="./projects/{{project.id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">

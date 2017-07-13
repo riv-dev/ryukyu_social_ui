@@ -39,7 +39,7 @@
         </ul>
     </header>
     <ul id="tasks_list" class="section_information">
-        <li class="item" ng-repeat="task in tasks">
+        <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
             <a href="./users/{{this_user.id}}/tasks/{{task.task_id}}">
                 <h3 class="name">{{task.name}}</h3>
                 <p class="info description">{{task.description}}</p>
@@ -49,8 +49,8 @@
                         <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em>                         
                          Progress:
                     </dt>
-                    <dd class="value this_user_progress">
-                        {{this_task_user.progress_description}}
+                    <dd class="value this_user_progress" ng-if="task_user.user_id == this_user.id" ng-repeat="task_user in task.users">
+                        {{task_user.progress_description}}
                     </dd>
                     <dt class="key assigned_to" ng-if="task.users.length > 1">Also assigned to this task:</dt>
                     <dd class="value_item assigned_to {{cssLast($last)}}" ng-if="task_user.user_id != this_user.id" ng-repeat="task_user in task.users">
@@ -88,7 +88,7 @@
         </ul>
     </header>
     <ul id="projects_list" class="section_information">
-        <li class="item" ng-repeat="project in projects">
+        <li class="item {{project.status}}" ng-repeat="project in projects">
             <a href="./users/{{this_user.id}}/projects/{{project.project_id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
