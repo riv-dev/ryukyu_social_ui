@@ -75,6 +75,14 @@ pre {
     }
 }
 
+//SECTION
+.section {
+    text-align: center; //to center pagination
+    * {
+        text-align: left;
+    }
+}
+
 //TITLE
 //Usually used for main section titles
 //E.g.
@@ -327,18 +335,38 @@ pre {
     position: relative;
     border-bottom: 1px solid black;
     padding-bottom: 0px;
-    .links {
-        padding: 5px 0px;
+
+    .control_and_status {
+        padding: 10px 10px 5px;
         background-color: #e2e2e2;
 
         .item {
+            display: block;
             text-decoration: underline;
+            font-size: 14px;
 
-            .input.select {
-                width: 100px;
+            .key {
+                margin-right: 5px;
+            }
+
+            * {
+                font-size: 14px;
+                height: 20px;
+                line-height: 20px;
+            }
+
+            .input {
+                width: 70px;
+            }
+
+            &:after {
+                content: '';
+                display: table;
+                clear: both;
             }
         }
     }
+
     &:after {
         content: "";
         display: table;
@@ -575,6 +603,42 @@ pre {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+
+//Pagination
+.pagination {
+    display: inline-block;
+    margin: auto;
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.pagination .pagination-link {
+    float: left;
+
+    a {
+        display: block;
+        color: black;
+        text-decoration: none;
+        padding: 8px 16px;
+    }
+
+    &.selected {
+        a {
+            background-color: #4CAF50;
+            color: white;
+        }
+    }
+
+    &:not(.selected) {
+        a:hover {
+           background-color: #ddd; 
+        }
+    }
 }
 
 //Main sections of the website

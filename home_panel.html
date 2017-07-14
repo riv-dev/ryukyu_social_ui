@@ -4,9 +4,22 @@
 <section ng-if="loggedin_user" id="tasks_section" class="section">
     <header class="section_header">
         <h2 class="title">Company Task Board</h2>
-        <ul class="links">
-            <li class="item"><select class="input select" ng-options="task_status for task_status in statuses" ng-change="getTasks(task_status)" ng-model="task_status"></select></li>
-            <li class="item"><a href="./tasks/new">Add Task</a></li>
+        <ul class="control_and_status">
+            <li class="item">
+                <label class="key status">Filter by status: </label>
+                <select class="input select status" ng-options="selected_tasks_status_filter for selected_tasks_status_filter in filter_statuses" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="selected_tasks_status_filter"></select>
+            </li>
+            <li class="item">
+                <label class="key total">Total Tasks: </label>
+                <em class="value total">{{tasks_count}}</em>
+            </li>
+            <li class="item">
+                <label class="key limit" for="tasks_limit">Limit Per Page: </label>
+                <select class="input select limit" ng-options="tasks_limit for tasks_limit in limits" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="tasks_limit"></select>
+            </li>
+            <li class="item">
+                <a href="./tasks/new">Add Task</a>
+            </li>
         </ul>
     </header>
     <ul id="tasks_list" class="section_information">
@@ -38,13 +51,35 @@
             </a>
         </li>
     </ul>
+    <ul id="tasks_pagination_links" class="pagination" ng-if="tasks_page_count_arr && tasks_page_count_arr.length > 1">
+        <li class="pagination-link previous" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page-1)"> 
+            <a href="#">&laquo;</a>
+        </li>
+        <li class="pagination-link {{currentTasksPageClass($index+1)}}" ng-repeat="i in tasks_page_count_arr track by $index">
+            <a href="#" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,$index+1)">{{$index+1}}</a>
+        </li>
+        <li class="pagination-link next" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page+1)">
+            <a href="#">&raquo;</a>
+        </li>
+    </ul>
 </section>
 
 <section ng-if="loggedin_user" id="projects_section" class="section">
     <header class="section_header">
         <h2 class="title">Projects List</h2>
-        <ul class="links">
-            <li class="item"><select class="input select" ng-options="project_status for project_status in statuses" ng-change="getProjects(project_status)" ng-model="project_status"></select></li>
+        <ul class="control_and_status">
+            <li class="item">
+                <label class="key status">Filter by status: </label>
+                <select class="input select status" ng-options="selected_projects_status_filter for selected_projects_status_filter in filter_statuses" ng-change="getProjects(selected_projects_status_filter,projects_limit,1)" ng-model="selected_projects_status_filter"></select>
+            </li>
+            <li class="item">
+                <label class="key total">Total Projects: </label>
+                <em class="value total">{{projects_count}}</em>
+            </li>
+            <li class="item">
+                <label class="key limit" for="projects_limit">Limit Per Page: </label>
+                <select class="input select limit" ng-options="projects_limit for projects_limit in limits" ng-change="getProjects(selected_projects_status_filter,projects_limit,1)" ng-model="projects_limit"></select>
+            </li>
             <li class="item"><a href="./projects/new">Add Project</a></li>
         </ul>
     </header>
@@ -78,12 +113,23 @@
             </a>
         </li>
     </ul>
+    <ul id="projects_pagination_links" class="pagination" ng-if="projects_page_count_arr && projects_page_count_arr.length > 1">
+        <li class="pagination-link previous" ng-click="getProjects(selected_projects_status_filter,projects_limit,projects_current_page-1)"> 
+            <a href="#">&laquo;</a>
+        </li>
+        <li class="pagination-link {{currentProjectsPageClass($index+1)}}" ng-repeat="i in projects_page_count_arr track by $index">
+            <a href="#" ng-click="getProjects(selected_projects_status_filter,projects_limit,$index+1)">{{$index+1}}</a>
+        </li>
+        <li class="pagination-link next" ng-click="getProjects(selected_projects_status_filter,projects_limit,projects_current_page+1)">
+            <a href="#">&raquo;</a>
+        </li>
+    </ul>
 </section>
 
 <section ng-if="loggedin_user" id="users_section" class="section">
     <header class="section_header">
         <h2 class="title">Users List</h2>
-        <ul class="links">
+        <ul class="control_and_status">
             <li ng-if="loggedin_user.admin" class="item"><a href="./users/new">Add User</a></li>
         </ul>
     </header>
