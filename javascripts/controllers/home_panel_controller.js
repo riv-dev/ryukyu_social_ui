@@ -65,15 +65,16 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         "finished"
     ]
 
+    $scope.selected_tasks_status_filter = $scope.filter_statuses[0];
+    $scope.selected_projects_status_filter = $scope.filter_statuses[0];
+
+    //Pagination variables and functions
     $scope.limits = ["5","10","15","20","all"];
     $scope.tasks_limit = $scope.limits[1];
     $scope.projects_limit = $scope.limits[1];
 
     $scope.tasks_current_page = 1;
     $scope.projects_current_page = 1;
-
-    $scope.selected_tasks_status_filter = $scope.filter_statuses[0];
-    $scope.selected_projects_status_filter = $scope.filter_statuses[0];
 
     $scope.currentTasksPageClass = function(page) {
         if(page == $scope.tasks_current_page) {
@@ -91,14 +92,15 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }
 
+    var createNumbersArray = function(num) {
+        return new Array(num);   
+    }
+    //End pagination variables and functions
+
     $scope.cssLast = function(isLast) {
         if(isLast) {
             return "last";
         }
-    }
-
-    var getNumber = function(num) {
-        return new Array(num);   
     }
 
     $scope.checkPriorityImportance = function(priority) {
@@ -133,7 +135,7 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         //Get total tasks count first in order to calculate pagination parameters
         $http({
             method: 'GET',
-            url: tasksApiBaseURL + '/tasks-count' + queryStr, //'/ranked-tasks',
+            url: tasksApiBaseURL + '/tasks-count' + queryStr,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
@@ -143,9 +145,9 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
             //For pagination
             if(limit != "all" && $scope.tasks_count && $scope.tasks_count > 0) {
                 var tasks_page_count = Math.ceil($scope.tasks_count / parseInt(limit));
-                $scope.tasks_page_count_arr = getNumber(tasks_page_count);
+                $scope.tasks_page_count_arr = createNumbersArray(tasks_page_count);
             } else {
-                $scope.tasks_page_count_arr = getNumber(1);
+                $scope.tasks_page_count_arr = createNumbersArray(1);
             }
 
             //Set the current page
@@ -256,25 +258,6 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         });
     }//End getTasks()
 
-    $scope.getProjectsCount = function(status) {
-        var queryStr = "";
-
-        if(status && status != "all") {
-            queryStr = "?status="+status;
-        }
-
-        //Get projects count
-        $http({
-            method: 'GET',
-            url: projectsApiBaseURL + '/projects-count' + queryStr, //'/ranked-projects',
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            $scope.projects_count = parseInt(response.data);
-        });
-    }
-
     $scope.getProjects = function(status,limit,page) {
         $scope.projects_current_page = page;
 
@@ -297,9 +280,9 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
             //For pagination
             if(limit != "all" && $scope.projects_count && $scope.projects_count > 0) {
                 var projects_page_count = Math.ceil($scope.projects_count / parseInt(limit));
-                $scope.projects_page_count_arr = getNumber(projects_page_count);
+                $scope.projects_page_count_arr = createNumbersArray(projects_page_count);
             } else {
-                $scope.projects_page_count_arr = getNumber(1);
+                $scope.projects_page_count_arr = createNumbersArray(1);
             }
 
             //Set the current page

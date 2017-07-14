@@ -52,6 +52,7 @@
             </a>
         </li>
     </ul>
+    <p ng-if="!tasks || tasks.length == 0" class="info info--none">No tasks</p>
     <ul id="tasks_pagination_links" class="pagination" ng-if="tasks_page_count_arr && tasks_page_count_arr.length > 1">
         <li class="pagination-link previous" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page-1)"> 
             <a href="#">&laquo;</a>
@@ -115,6 +116,7 @@
             </a>
         </li>
     </ul>
+    <p ng-if="!projects || projects.length == 0" class="info info--none">No projects</p>
     <ul id="projects_pagination_links" class="pagination" ng-if="projects_page_count_arr && projects_page_count_arr.length > 1">
         <li class="pagination-link previous" ng-click="getProjects(selected_projects_status_filter,projects_limit,projects_current_page-1)"> 
             <a href="#">&laquo;</a>

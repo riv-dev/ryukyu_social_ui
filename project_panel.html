@@ -38,10 +38,24 @@
 <section id="tasks_section" class="section">
     <header class="section_header">
         <h2 class="title">Project Task Board</h2>
-        <ul class="links">
-            <li class="item"><select class="input select" ng-options="status for status in task_statuses" ng-change="getTasks(status)" ng-model="status"></select></li>
-            <li class="item"><a href="./projects/{{this_project.id}}/tasks/new">Add Task</a></li>
+        <ul class="control_and_status {{showHideControlsClass('tasks')}}">
+            <li class="item">
+                <label class="key status">Filter by status: </label>
+                <select class="input select status" ng-options="selected_tasks_status_filter for selected_tasks_status_filter in filter_statuses" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="selected_tasks_status_filter"></select>
+            </li>
+            <li class="item">
+                <label class="key total">Total Tasks: </label>
+                <em class="value total">{{tasks_count}}</em>
+            </li>
+            <li class="item">
+                <label class="key limit" for="tasks_limit">Limit Per Page: </label>
+                <select class="input select limit" ng-options="tasks_limit for tasks_limit in limits" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="tasks_limit"></select>
+            </li>
+            <li class="item">
+                <a href="./tasks/new">Add Task</a>
+            </li>
         </ul>
+        <button class="button controls {{showHideControlsClass('tasks')}}" ng-click="toggleShowHideControls('tasks')">Show/Hide Controls</button>
     </header>
     <ul id="tasks_list" class="section_information">
         <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
@@ -67,6 +81,18 @@
                     <dd class="value value--none deadline" ng-if="!task.deadline">Not defined</dd>
                 </dl>
             </a>
+        </li>
+    </ul>
+    <p ng-if="!tasks || tasks.length == 0" class="info info--none">No tasks</p>
+    <ul id="tasks_pagination_links" class="pagination" ng-if="tasks_page_count_arr && tasks_page_count_arr.length > 1">
+        <li class="pagination-link previous" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page-1)"> 
+            <a href="#">&laquo;</a>
+        </li>
+        <li class="pagination-link {{currentTasksPageClass($index+1)}}" ng-repeat="i in tasks_page_count_arr track by $index">
+            <a href="#" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,$index+1)">{{$index+1}}</a>
+        </li>
+        <li class="pagination-link next" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page+1)">
+            <a href="#">&raquo;</a>
         </li>
     </ul>
 </section>
