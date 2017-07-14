@@ -13,6 +13,27 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }
 
+    $scope.showControlsFlags = {
+        tasks: false,
+        projects: false
+    }
+
+    $scope.showHideControlsClass = function(type) {
+        if($scope.showControlsFlags[type]) {
+            return "show";
+        } else {
+            return "hide";
+        }
+    }
+
+    $scope.toggleShowHideControls = function(type) {
+        if($scope.showControlsFlags[type]) {
+            $scope.showControlsFlags[type] = false;
+        } else {
+            $scope.showControlsFlags[type] = true;
+        }
+    }
+
     $scope.archivedClass = function(archived) {
         if(archived) {
             return "archived";
@@ -106,7 +127,7 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         var queryStr = "";
 
         if(status && status != "all") {
-            queryStr = "?status="+$status;
+            queryStr = "?status="+status;
         }
 
         //Get total tasks count first in order to calculate pagination parameters
@@ -260,7 +281,7 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         var queryStr = "";
 
         if(status && status != "all") {
-            queryStr = "?status="+$status;
+            queryStr = "?status="+status;
         }
 
         //Get total projects count first in order to calculate pagination parameters

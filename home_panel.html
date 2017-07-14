@@ -4,7 +4,7 @@
 <section ng-if="loggedin_user" id="tasks_section" class="section">
     <header class="section_header">
         <h2 class="title">Company Task Board</h2>
-        <ul class="control_and_status">
+        <ul class="control_and_status {{showHideControlsClass('tasks')}}">
             <li class="item">
                 <label class="key status">Filter by status: </label>
                 <select class="input select status" ng-options="selected_tasks_status_filter for selected_tasks_status_filter in filter_statuses" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="selected_tasks_status_filter"></select>
@@ -21,6 +21,7 @@
                 <a href="./tasks/new">Add Task</a>
             </li>
         </ul>
+        <button class="button controls {{showHideControlsClass('tasks')}}" ng-click="toggleShowHideControls('tasks')">Show/Hide Controls</button>
     </header>
     <ul id="tasks_list" class="section_information">
         <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
@@ -67,7 +68,7 @@
 <section ng-if="loggedin_user" id="projects_section" class="section">
     <header class="section_header">
         <h2 class="title">Projects List</h2>
-        <ul class="control_and_status">
+        <ul class="control_and_status {{showHideControlsClass('projects')}}">
             <li class="item">
                 <label class="key status">Filter by status: </label>
                 <select class="input select status" ng-options="selected_projects_status_filter for selected_projects_status_filter in filter_statuses" ng-change="getProjects(selected_projects_status_filter,projects_limit,1)" ng-model="selected_projects_status_filter"></select>
@@ -82,6 +83,7 @@
             </li>
             <li class="item"><a href="./projects/new">Add Project</a></li>
         </ul>
+        <button class="button controls {{showHideControlsClass('projects')}}" ng-click="toggleShowHideControls('projects')">Show/Hide Controls</button>
     </header>
     <ul id="projects_list" class="section_information">
         <li class="item {{project.status}}" ng-repeat="project in projects">

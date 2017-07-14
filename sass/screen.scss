@@ -374,6 +374,54 @@ pre {
     }
 }
 
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.button.controls {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    height: 20px;
+    width: 100%;
+    @include border-radius(0px);
+    border: none;
+    text-indent: 9999px;
+    overflow: hidden;
+    &:before {
+        position: absolute;
+        text-indent: 0px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        font-family: "FontAwesome";
+        content: "\f102";
+        display: block;
+        text-align: center;
+    }
+
+    &.show {
+        display: block;
+        &:before {
+            content: "\f1de";
+        }
+    }
+
+    &.hide {
+        display: block;
+        &:before {
+            content: "\f1de";
+        }
+    }
+}
+
+
+
 //SECTION_INFORMATION ITEM
 //Main list items, main information.  
 //E.g. 
