@@ -68,7 +68,7 @@
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDate(project.deadline, project.status)}}</dd>
                     <dd class="value value--none deadline" ng-if="!project.deadline">Not defined</dd>
-                    <dt class="key tasks_rank">Task Rank:</dt>
+                    <dt class="key tasks_rank">Top Tasks:</dt>
                     <dd class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
                         <span class="key rank">{{$index + 1}}</span>
                         <p class="value rank">{{project_task.name}}</p>

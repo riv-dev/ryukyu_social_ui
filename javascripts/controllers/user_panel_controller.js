@@ -237,9 +237,10 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
                     }
                 });                    
 
+                //Get the project's tasks, limit 3
                 $http({
                     method: 'GET',
-                    url: tasksApiBaseURL + '/projects/'+current_project_id+'/tasks',
+                    url: tasksApiBaseURL + '/projects/'+current_project_id+'/tasks?limit=3',
                     headers: {
                         'x-access-token': CommonFunctions.getToken()
                     },

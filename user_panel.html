@@ -88,7 +88,7 @@
         </ul>
     </header>
     <ul id="projects_list" class="section_information">
-        <li class="item {{project.status}}" ng-repeat="project in projects">
+        <li class="item {{project.project_status}}" ng-repeat="project in projects">
             <a href="./users/{{this_user.id}}/projects/{{project.project_id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
@@ -100,14 +100,14 @@
                     </dd>
                     <dd class="value value--none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
                     <dt class="key status">Status:</dt>
-                    <dd class="value status {{project.status}}" ng-if="project.status">{{project.status}}</dd>
+                    <dd class="value status {{project.project_status}}" ng-if="project.project_status">{{project.project_status}}</dd>
                     <dt class="key start_date">Start Date:</dt>
                     <dd class="value start_date" ng-if="project.start_date">{{prettyDate(project.start_date)}}</dd>
                     <dd class="value value--none start_date" ng-if="!project.start_date">Not defined</dd>
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDate(project.deadline, project.status)}}</dd>
                     <dd class="value value--none deadline" ng-if="!project.deadline">Not defined</dd>
-                    <dt class="key tasks_rank">Task Rank:</dt>
+                    <dt class="key tasks_rank">Top Tasks:</dt>
                     <dd class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
                         <span class="key rank">{{$index + 1}}</span>
                         <p class="value rank">{{project_task.name}}</p>
