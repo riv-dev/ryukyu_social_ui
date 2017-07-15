@@ -47,7 +47,7 @@
                 <select class="input select limit" ng-options="tasks_limit for tasks_limit in limits" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="tasks_limit"></select>
             </li>
             <li class="item">
-                <a href="./tasks/new">Add Task</a>
+                <a href="./users/{{this_user_id}}/tasks/new">Add Task</a>
             </li>
         </ul>
         <button class="button controls {{showHideControlsClass('tasks')}}" ng-click="toggleShowHideControls('tasks')">Show/Hide Controls</button>
@@ -120,7 +120,7 @@
                 <label class="key limit" for="projects_limit">Limit Per Page: </label>
                 <select class="input select limit" ng-options="projects_limit for projects_limit in limits" ng-change="getProjects(selected_projects_status_filter,projects_limit,1)" ng-model="projects_limit"></select>
             </li>
-            <li class="item"><a href="./projects/new">Add Project</a></li>
+            <li class="item"><a href="./users/{{this_user_id}}/projects/new">Add Project</a></li>
         </ul>
         <button class="button controls {{showHideControlsClass('projects')}}" ng-click="toggleShowHideControls('projects')">Show/Hide Controls</button>
     </header>

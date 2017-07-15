@@ -52,7 +52,7 @@
                 <select class="input select limit" ng-options="tasks_limit for tasks_limit in limits" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="tasks_limit"></select>
             </li>
             <li class="item">
-                <a href="./tasks/new">Add Task</a>
+                <a href="./projects/{{this_project_id}}/tasks/new">Add Task</a>
             </li>
         </ul>
         <button class="button controls {{showHideControlsClass('tasks')}}" ng-click="toggleShowHideControls('tasks')">Show/Hide Controls</button>

@@ -9,6 +9,8 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         $scope.this_project_id = $routeParams.project_id;
     }
 
+    $scope.this_user_id = $routeParams.user_id;
+
     $scope.prettyDate = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "doing")) {
             return "Past Due";
@@ -129,7 +131,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
     }
 
     $scope.delete_user = function() {
-        var email = prompt("Type in user's email address to confirm delete.");
+        var email = prompt("WARNING: This will completely delete the user from the system.  This is not the same as removing a user from a project.  Visit the project page and click the 'x' if you wish to only remove a user from a project. Type in user's email address to confirm delete.");
         if (email == $scope.this_user.email) {
             $http({
                 method: 'DELETE',

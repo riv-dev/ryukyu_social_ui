@@ -9,6 +9,8 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         $scope.this_user_id = $routeParams.user_id;
     }
 
+    $scope.this_project_id = $routeParams.project_id;
+
     $scope.prettyDate = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "doing")) {
             return "Past Due";
