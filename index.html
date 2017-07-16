@@ -4,29 +4,29 @@
     <meta charset="utf-8">
     <base href="/">
     <link rel="stylesheet" href="./libs/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./stylesheets/screen.css">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/common.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
   </head>
-  <body>
-      <header id="site_header">
+  <body class="site">
+      <header class="header">
         <h1 class="logo"><a href="/">Ryukyu Social</a></h1>
         <p class="message login_status" ng-if="login_status">{{login_status}}</p>
         <p class="message flash {{flash_level}}" ng-if="flash_message">{{flash_message}}</p>
       </header>
 
-      <nav ng-if="loggedin_user" id="site_nav">
+      <nav ng-if="loggedin_user" class="navigation">
         <ul class="links">
-          <li class="item active"><a href="./home-panel">Home Panel</a></li>
-          <li class="item"><a href="./users/{{loggedin_user.id}}">My Profile</a></li>
-          <li class="item item--login" ng-if="!loggedin_user"><a href="./login">Log In</a></li>
-          <li class="item item--logout" ng-if="loggedin_user"><a href="./logout">Log Out</a></li>
+          <li class="item active"><a class="link" href="./home-panel">Home Panel</a></li>
+          <li class="item"><a class="link" href="./users/{{loggedin_user.id}}">My Profile</a></li>
+          <li class="item login" ng-if="!loggedin_user"><a class="link" href="./login">Log In</a></li>
+          <li class="item logout" ng-if="loggedin_user"><a class="link" href="./logout">Log Out</a></li>
         </ul>
       </nav>
 
-      <main id="site_main" class="{{panel_class}}" ng-view>
+      <main class="main {{panel_class}}" ng-view>
 
       </main>
 
@@ -45,7 +45,7 @@
       <script src="javascripts/controllers/edit_user_controller.js"></script>
       <script src="javascripts/controllers/login_controller.js"></script>
       <script src="javascripts/controllers/logout_controller.js"></script>
-      <footer id="site_footer">
+      <footer class="footer">
           <small>Ryukyu Interactive Vietnam</small>
       </footer>
   </body>

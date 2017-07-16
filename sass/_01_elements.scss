@@ -1,0 +1,343 @@
+//Generic Text Elements
+.logo {
+    color: $light_black;
+    font-size: 36px;
+
+    a {
+        text-decoration: none;
+        @include link-colors($dark_grey,$dark_grey,$dark_grey,$dark_grey,$dark_grey);
+    }    
+}
+
+.title {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.info {
+    font-size: 14px;
+}
+
+.message {
+}
+
+.message.welcome {
+    text-align: center;
+    font-size: 30px;
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+.message.login_status {
+    color: $black;
+    font-size: 12px;
+}
+
+.message.flash {
+    font-size: 16px;
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
+    font-size: 20px;
+    border-style: solid;
+    border-width: 2px;
+    @include border-radius(5px);
+}
+
+.caption {
+    text-align: center;
+    font-size: 14px;
+    color: $dark_grey;
+}
+
+.key {
+    font-size: 12px;
+    font-weight: bold;
+    color: $light_black;
+}
+
+.value {
+    font-size: 12px;
+    color: $black;
+}
+
+.value_item {
+    font-size: 12px;
+    color: $black;
+}
+
+.link {
+    font-size: 16px;
+    text-decoration: none;
+    @include link-colors($blue,$blue,$blue,$blue,$blue);
+    @include transition(0.2s);
+    &:hover {
+        font-size: 1.4em;
+    }
+}
+
+.link_block {
+    display: block;
+    text-decoration: none;
+    @include link-colors($black,$black,$black,$black,$black);
+    @include transition(0.2s);
+    &:hover {
+        background-color: $light_blue;
+    }
+}
+
+//Generic Form Elements
+.label {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: $dark_grey;
+}
+
+.field {
+
+}
+
+.input {
+    border: 1px solid $grey;
+    font-size: 18px;
+    height: 24px;
+    width: 70%;
+    padding-left: 5px;
+}
+
+.input.name {
+    width: 100%;
+}
+
+.input.area {
+    height: 300px;
+    width: 100%;
+}
+
+//Generic Elements
+.button {
+    background-color: $grey;
+    text-align: center;    
+    @include transition(0.2s);
+    cursor: pointer;
+    &:hover {
+        background-color: $light_blue;
+    }
+}
+
+.button.submit {
+    border: 1px solid $dark_grey;
+    font-size: 18px;
+    padding: 10px 15px;
+    @include border-radius(3px);
+}
+
+.button.cancel {
+    font-size: 18px;
+    text-decoration: underline;
+    background-color: transparent;
+    @include link-colors($blue,$blue,$blue,$blue,$blue);
+}
+
+.button.delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 18px;
+    text-indent: 9999px;
+    color: $black;
+    margin: 0px;
+    padding: 0px;
+
+    &:hover {
+        background-color: none;
+        color: $red;
+    }
+
+    &:before {
+        position: absolute;
+        text-indent: 0px;
+        left: 3px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f00d";
+    }
+}
+
+.button.edit {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 18px;
+    text-indent: 9999px;
+    color: $black;
+    margin: 0px;
+    padding: 0px !important;
+
+    &:hover {
+        background-color: transparent !important;
+        color: $blue !important;
+    }
+
+    &:before {
+        position: absolute;
+        text-indent: 0px;
+        left: 3px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f023";
+    }
+}
+
+.button.settings {
+    position: relative;
+    padding: 0px;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+    @include border-radius(0px);
+    background-color: $grey;
+    border: none;
+    text-indent: 9999px;
+    overflow: hidden;
+
+    text-align: center;    
+    @include transition(0.2s);
+    cursor: pointer;
+    &:hover {
+        background-color: $light_blue;
+    }
+
+    &:before {
+        position: absolute;
+        text-indent: 0px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        font-family: "FontAwesome";
+        content: "\f102";
+        display: block;
+        text-align: center;
+    }
+
+    &.show {
+        display: block;
+        &:before {
+            content: "\f1de";
+        }
+    }
+
+    &.hide {
+        display: block;
+        &:before {
+            content: "\f1de";
+        }
+    }
+}
+
+//Images
+.image {
+
+}
+
+//Generic Behavior Properties
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.disabled {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.footer {
+    text-align: center;
+    font-size: 10px;
+    color: $dark_grey;
+}
+
+//Generic Text Colors
+.alert {
+    color: $dark_yellow;
+    background-color: $light_yellow;
+    border-color: $dark_yellow;
+}
+
+.fail {
+    color: $dark_red;
+    background-color: $light_red;
+    border-color: $dark_red;
+}
+
+.success {
+    color: $dark_green;
+    background-color: $light_green;
+    border-color: $dark_green;
+}
+
+.none {
+    color: #939393;
+}
+
+.important {
+    font-weight: bold;
+    color: $red;
+}
+
+.finished {
+    color: $green;
+    background-color: $light_green;
+}
+
+.doing {
+    color: $blue;
+    background-color: $light_orange;
+}
+
+.new {
+    color: $orange;
+}
+
+.archived {
+    color: $black;
+    background-color: $light_grey;
+}
+
+.active {
+    font-weight: bold;
+    text-decoration: underline;   
+}
+
+//Heighlight things that are mine
+.is_mine {
+    background-color: #f9f795;
+}

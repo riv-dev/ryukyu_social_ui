@@ -1,0 +1,148 @@
+//Layout Site
+.site {
+    .header {
+        padding: 15px;
+        .logo {
+            margin-bottom: 10px;
+        }
+
+        .message.login_status {
+            margin-left: 10px;
+        }
+
+        .message.flash {
+            margin-top: 10px;
+        }
+    }
+
+    .main {
+        padding: 15px;
+        @include clearfix();
+    }
+
+    .footer {
+        padding: 15px;
+    }
+}
+
+//Layouts for Main Element
+.main.home {
+    .section.tasks {
+        width: 30%;
+    }
+    .section.projects {
+        width: 40%;
+    }
+    .section.users {
+        width: 30%;
+    }
+}
+
+.main.user {
+    .section.details {
+        width: 33.33%;
+    }
+    .section.tasks {
+        width: 33.33%;
+    }
+    .section.details {
+        width: 33.33%;
+    }
+}
+
+.main.project {
+    .section.details {
+        width: 33.33%;
+    }
+    .section.tasks {
+        width: 33.33%;
+    }
+    .section.users {
+        width: 33.33%;
+    }
+}
+
+.main.task {
+    .section.details {
+        width: 67%;
+    }
+    .section.users {
+        width: 33%;
+    }    
+}
+
+
+//Sections
+.section {
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+    box-sizing: border-box;
+
+    text-align: center; //to center pagination
+    * {
+        text-align: left;
+    }
+
+    .header {
+        position: relative;
+        border-bottom: 1px solid $black;
+        padding: 0px;
+
+        .title {
+            margin-bottom: 0.2em;
+        }
+    }
+
+    .pagination {
+        margin-top: 15px;
+    }
+}
+
+//Customize inside
+.section.tasks {
+
+}
+
+//Customize inside
+.section.projects {
+
+}
+
+//Customize inside
+.section.users {
+    .form.assign_user {    
+        margin-top: 10px;
+    }
+}
+
+//Customize inside
+.section.details {
+    .header {
+        border-bottom: none;
+    }
+    .title {
+        font-size: 40px;
+        border-bottom: none;
+    }
+    .name {
+        font-size: 34px;
+        font-weight: normal;
+        color: #5e5e5e;
+        margin-bottom: 5px;
+    }
+    .figure {
+        border: 1px solid black;
+        width: 50%;
+        margin-bottom: 25px;
+    }
+    .key,
+    .value {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .value.bio, .value.description {
+        padding-left: 3px;
+    }
+}

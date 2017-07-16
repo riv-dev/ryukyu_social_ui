@@ -1,6 +1,6 @@
 app.controller('userPanelController', function($scope, $http, $location, $routeParams, $localStorage, CommonFunctions) {
     $scope.$parent.hero = "User Panel";
-    $scope.$parent.panel_class = "user_panel";
+    $scope.$parent.panel_class = "user";
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
@@ -19,24 +19,24 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         }
     }
 
-    $scope.showControlsFlags = {
+    $scope.showSettingsFlags = {
         tasks: false,
         projects: false
     }
 
-    $scope.showHideControlsClass = function(type) {
-        if($scope.showControlsFlags[type]) {
+    $scope.showHideSettingsClass = function(type) {
+        if($scope.showSettingsFlags[type]) {
             return "show";
         } else {
             return "hide";
         }
     }
 
-    $scope.toggleShowHideControls = function(type) {
-        if($scope.showControlsFlags[type]) {
-            $scope.showControlsFlags[type] = false;
+    $scope.toggleShowHideSettings = function(type) {
+        if($scope.showSettingsFlags[type]) {
+            $scope.showSettingsFlags[type] = false;
         } else {
-            $scope.showControlsFlags[type] = true;
+            $scope.showSettingsFlags[type] = true;
         }
     }
 

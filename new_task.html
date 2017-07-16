@@ -2,7 +2,7 @@
     <h2 class="title">New Task</h2>
     <p class="field">
         <label class="label" for="name">Name: </label>
-        <input class="input" type="text" ng-model="name">
+        <input class="input name" type="text" ng-model="name">
         <ul class="validation_errors" ng-if="errors.name">
             <li class="item" ng-repeat="x in errors.name">
                 {{x}}
@@ -55,5 +55,5 @@
     <p class="field">
         <input class="button submit" type="submit" value="Add Task" ng-click="post()">
     </p>
-    <p class="field"><a ng-click="back()" href="./">Cancel</a></p>
+    <p class="field"><a class="button cancel" ng-click="back()" href="./">Cancel</a></p>
 </form>

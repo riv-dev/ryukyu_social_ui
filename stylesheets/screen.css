@@ -335,32 +335,32 @@ pre {
   padding-bottom: 0px;
 }
 /* line 339, ../sass/screen.scss */
-.section_header .control_and_status {
+.section_header .settings {
   padding: 10px 10px 5px;
   background-color: #e2e2e2;
 }
 /* line 343, ../sass/screen.scss */
-.section_header .control_and_status .item {
+.section_header .settings .item {
   display: block;
   text-decoration: underline;
   font-size: 14px;
 }
 /* line 348, ../sass/screen.scss */
-.section_header .control_and_status .item .key {
+.section_header .settings .item .key {
   margin-right: 5px;
 }
 /* line 352, ../sass/screen.scss */
-.section_header .control_and_status .item * {
+.section_header .settings .item * {
   font-size: 14px;
   height: 20px;
   line-height: 20px;
 }
 /* line 358, ../sass/screen.scss */
-.section_header .control_and_status .item .input {
+.section_header .settings .item .input {
   width: 70px;
 }
 /* line 362, ../sass/screen.scss */
-.section_header .control_and_status .item:after {
+.section_header .settings .item:after {
   content: '';
   display: table;
   clear: both;
@@ -383,7 +383,7 @@ pre {
 }
 
 /* line 385, ../sass/screen.scss */
-.button.controls {
+.button.settings {
   position: relative;
   padding: 0px;
   margin: 0px;
@@ -397,7 +397,7 @@ pre {
   overflow: hidden;
 }
 /* line 395, ../sass/screen.scss */
-.button.controls:before {
+.button.settings:before {
   position: absolute;
   text-indent: 0px;
   left: 50%;
@@ -410,19 +410,19 @@ pre {
   text-align: center;
 }
 /* line 408, ../sass/screen.scss */
-.button.controls.show {
+.button.settings.show {
   display: block;
 }
 /* line 410, ../sass/screen.scss */
-.button.controls.show:before {
+.button.settings.show:before {
   content: "\f1de";
 }
 /* line 415, ../sass/screen.scss */
-.button.controls.hide {
+.button.settings.hide {
   display: block;
 }
 /* line 417, ../sass/screen.scss */
-.button.controls.hide:before {
+.button.settings.hide:before {
   content: "\f1de";
 }
 

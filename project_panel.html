@@ -1,5 +1,5 @@
-<section id="profile_section" class="section">
-    <header class="section_header">
+<section class="section details">
+    <header class="header">
         <h2 class="title">{{this_project.name}}</h2>
     </header>
     <figure class="figure">
@@ -15,30 +15,30 @@
         <dd class="value status {{this_project.status}}">{{this_project.status}}</dd>
         <dt class="key start_date">Start Date:</dt>
         <dd class="value start_date" ng-if="this_project.start_date">{{prettyDate(this_project.start_date)}}</dd>            
-        <dd class="value value--none start_date" ng-if="!this_project.start_date">Not defined</dd>         
+        <dd class="value none start_date" ng-if="!this_project.start_date">Not defined</dd>         
         <dt class="key deadline">Deadline:</dt>
         <dd class="value deadline {{checkDateImportance(this_project.deadline, this_project.status)}}" ng-if="this_project.deadline">{{prettyDate(this_project.deadline, this_project.status)}}</dd>            
-        <dd class="value value--none deadline" ng-if="!this_project.deadline">Not defined</dd>           
+        <dd class="value none deadline" ng-if="!this_project.deadline">Not defined</dd>           
         <dt class="key effort">Effort:</dt>
         <dd class="value effort" ng-if="this_project.effort">{{this_project.effort}}</dd>
-        <dd class="value value--none effort" ng-if="!this_project.effort">Not defined</dd>        
+        <dd class="value none effort" ng-if="!this_project.effort">Not defined</dd>        
         <dt class="key project_value">Value:</dt>
         <dd class="value project_value" ng-if="this_project.value">{{this_project.value}}</dd>            
-        <dd class="value value--none project_value" ng-if="!this_project.value">Not defined</dd> 
+        <dd class="value none project_value" ng-if="!this_project.value">Not defined</dd> 
         <dt class="key description">Description:</dt>
         <dd class="value description"><pre ng-bind-html="this_project.description | linky"></pre><dd>
     </dl>
     <ul class="links">
-        <li ng-if="this_user_id" class="item back"><a href="./users/{{this_user_id}}">Go Back to User</a></li>
-        <li class="item edit"><a href="./projects/{{this_project.id}}/edit">Edit Project</a></li>
-        <li class="item delete"><a ng-click="remove_project()">Delete Project</a></li>
+        <li class="item back" ng-if="this_user_id"><a class="link" href="./users/{{this_user_id}}">Go Back to User</a></li>
+        <li class="item edit"><a class="link" href="./projects/{{this_project.id}}/edit">Edit Project</a></li>
+        <li class="item delete"><a class="link" ng-click="remove_project()">Delete Project</a></li>
     </ul>
 </section>
 
-<section id="tasks_section" class="section">
-    <header class="section_header">
+<section class="section tasks">
+    <header class="header">
         <h2 class="title">Project Task Board</h2>
-        <ul class="control_and_status {{showHideControlsClass('tasks')}}">
+        <ul class="settings {{showHideSettingsClass('tasks')}}">
             <li class="item">
                 <label class="key status">Filter by status: </label>
                 <select class="input select status" ng-options="selected_tasks_status_filter for selected_tasks_status_filter in filter_statuses" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="selected_tasks_status_filter"></select>
@@ -52,14 +52,14 @@
                 <select class="input select limit" ng-options="tasks_limit for tasks_limit in limits" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="tasks_limit"></select>
             </li>
             <li class="item">
-                <a href="./projects/{{this_project_id}}/tasks/new">Add Task</a>
+                <a class="link" href="./projects/{{this_project_id}}/tasks/new">Add Task</a>
             </li>
         </ul>
-        <button class="button controls {{showHideControlsClass('tasks')}}" ng-click="toggleShowHideControls('tasks')">Show/Hide Controls</button>
+        <button class="button settings {{showHideSettingsClass('tasks')}}" ng-click="toggleShowHideSettings('tasks')">Show/Hide Settings</button>
     </header>
-    <ul id="tasks_list" class="section_information">
+    <ul class="preview tasks">
         <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
-            <a href="./projects/{{this_project.id}}/tasks/{{task.id}}">
+            <a class="link_block" href="./projects/{{this_project.id}}/tasks/{{task.id}}">
                 <h3 class="name">{{task.name}}</h3>
                 <p class="info description">{{task.description}}</p>
                 <dl class="attributes">
@@ -68,44 +68,44 @@
                         <em class="key user">{{task_user.firstname}} {{task_user.lastname}}: </em>
                         <p class="value user">{{task_user.progress_description}}</p>
                     </dd>
-                    <dd class="value value--none assigned_to" ng-if="!task.users || task.users.length == 0">
+                    <dd class="value none assigned_to" ng-if="!task.users || task.users.length == 0">
                         Need Assignee
                     </dd>
                     <dt class="key status">Status:</dt>
                     <dd class="value status {{task.status}}" ng-if="task.status">{{task.status}}</dd>
                     <dt class="key priority">Priority:</dt>
                     <dd class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
-                    <dd class="value value--none priority" ng-if="!task.priority">Not defined</dd>
+                    <dd class="value none priority" ng-if="!task.priority">Not defined</dd>
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline {{checkDateImportance(task.deadline, task.status)}}" ng-if="task.deadline">{{prettyDate(task.deadline, task.status)}}</dd>
-                    <dd class="value value--none deadline" ng-if="!task.deadline">Not defined</dd>
+                    <dd class="value none deadline" ng-if="!task.deadline">Not defined</dd>
                 </dl>
             </a>
         </li>
     </ul>
-    <p ng-if="!tasks || tasks.length == 0" class="info info--none">No tasks</p>
-    <ul id="tasks_pagination_links" class="pagination" ng-if="tasks_page_count_arr && tasks_page_count_arr.length > 1">
-        <li class="pagination-link previous" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page-1)"> 
+    <p ng-if="!tasks || tasks.length == 0" class="info none">No tasks</p>
+    <ul class="pagination" ng-if="tasks_page_count_arr && tasks_page_count_arr.length > 1">
+        <li class="item previous" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page-1)"> 
             <a href="#">&laquo;</a>
         </li>
-        <li class="pagination-link {{currentTasksPageClass($index+1)}}" ng-repeat="i in tasks_page_count_arr track by $index">
+        <li class="item {{currentTasksPageClass($index+1)}}" ng-repeat="i in tasks_page_count_arr track by $index">
             <a href="#" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,$index+1)">{{$index+1}}</a>
         </li>
-        <li class="pagination-link next" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page+1)">
+        <li class="item next" ng-click="getTasks(selected_tasks_status_filter,tasks_limit,tasks_current_page+1)">
             <a href="#">&raquo;</a>
         </li>
     </ul>
 </section>
 
-<section id="users_section" class="section">
-    <header class="section_header">
+<section class="section users">
+    <header class="header">
         <h2 class="title">Users Assigned to Project</h2>
     </header>
-    <ul id="users_list" class="section_information">
+    <ul class="preview users">
         <li class="item" ng-repeat="assigned_user in assigned_users">
-            <a href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}">
+            <a class="link_block" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}">
                 <h3 class="key user" ng-if="assigned_user.role">{{assigned_user.role}}</h3>
-                <h3 class="key key--none user" ng-if="!assigned_user.role">Undefined Role</h2>
+                <h3 class="key none user" ng-if="!assigned_user.role">Undefined Role</h2>
                 <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>
             </a>
             <a class="button edit" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}/edit" 
@@ -122,7 +122,7 @@
             <select class="input select" ng-options="user.id as getFullName(user) for user in users track by user.id" ng-model="selected_user_id"></select>
         </p>        
         <p class="field">
-            <input class="button" type="submit" value="Assign User" ng-click="assign_user()">
+            <input class="button submit" type="submit" value="Assign User" ng-click="assign_user()">
         </p>        
     </form>
 </section>

@@ -1,0 +1,230 @@
+//Components
+//List of Links Component
+.links {
+    padding: 15px;
+
+    .item {
+        display: inline-block;
+        border-right: 1px solid #c2c2c2;
+        padding: 0px 10px 0px;
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+}
+
+//Attributes and Item Component with Key Value Pairs
+.attributes,.item {
+    .key {
+        clear: left;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+
+    .value {
+        clear: right;
+        float: left;
+        margin-bottom: 3px;
+    }
+
+    .value_item {
+        display: block;
+        clear: left;
+        padding-left: 10px;
+
+        @include clearfix();
+    }
+
+    .value_item.last {
+        margin-bottom: 5px;
+    }
+
+    @include clearfix();
+}
+
+//Customize Settings Component
+.settings {
+    padding: 10px 10px 5px;
+    background-color: $light_grey;
+
+    .item {
+        display: block;
+        text-decoration: underline;
+        font-size: 14px;
+
+        * {
+            font-size: 14px;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .input {
+            width: 70px;
+        }
+
+        @include clearfix();
+    }
+}
+
+//Customize Preview List Component
+.preview {
+    .item {
+        display: block;
+        padding: 0px;
+        border-bottom: 1px solid #c2c2c2;
+
+        .link_block {
+            padding: 10px 5px 10px;
+        }
+
+        .name {
+            margin-bottom: 5px;
+        }
+
+        .info {
+            margin-bottom: 5px;
+
+        }
+
+        //For descriptions in list items.  Only display first line and hide with ellipsis
+        .info.description {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;            
+        }
+    }
+}
+
+//Customize Specific Preview List Components
+.preview.tasks {
+
+}
+
+.preview.projects {
+    .name {
+        font-size: 20px;
+    }
+}
+
+.preview.users {
+    .key.user {
+        float: none;
+        display: block;
+        font-size: 16px;
+    }
+    .value.user {
+        float: none;
+        display: block;
+        font-size: 14px;
+        padding-left: 3px;
+    }
+    .progress_description {
+        margin-top: 10px;
+    }
+}
+
+//Figure Component
+.figure {
+    .image {
+
+    }
+    .caption {
+        text-align: center;
+    }
+}
+
+//Form Component
+.form {
+    width: 50%;
+    margin: auto;
+    border: 1px solid #c2c2c2;
+    padding: 30px;
+
+    .title {
+        border-bottom: 1px solid black;
+        margin-bottom: 15px;
+    }
+
+    .field {
+        position: relative;
+        margin-bottom: 15px;        
+    }
+    //VALIDATION_ERRORS
+    .validation_errors {
+        position: relative;
+        top: -10px;
+            .item {
+                list-style-type: disc;
+                list-style-position: inside;
+                color: red;
+        }
+    }
+}
+
+//Customize Specific Forms
+.form.assign_user {
+    background-color: #e2edff;
+    margin-top: 10px;
+    width: 100%;
+    .input {
+        width: 100%;
+    }
+}
+
+.form.update_progress {
+    width: 100%;
+    border: none;
+    padding: 0px 5px 0px;
+    .title {
+        font-size: 14px;
+    }
+    .label {
+        color: black;
+        font-size: 12px;
+    }
+    .input {
+        width: 100%;
+        font-size: 12px;
+    }
+    .button {
+        padding: 5px;
+        font-size: 12px;
+        @include border-radius(2px);
+    }
+}
+
+//Pagination Links Component
+.pagination {
+    display: inline-block;
+    margin: auto;
+
+    @include clearfix();
+}
+
+.pagination .item {
+    float: left;
+
+    a {
+        display: block;
+        color: black;
+        text-decoration: none;
+        padding: 8px 16px;
+    }
+
+    &.selected {
+        a {
+            background-color: #4CAF50;
+            color: white;
+        }
+    }
+
+    &:not(.selected) {
+        a:hover {
+           background-color: #ddd; 
+        }
+    }    
+}

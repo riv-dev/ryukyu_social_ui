@@ -1,6 +1,6 @@
 app.controller('taskPanelController', function($scope, $http, $routeParams, $localStorage, CommonFunctions) {
     $scope.$parent.hero = "Task Panel";
-    $scope.$parent.panel_class = "task_panel";
+    $scope.$parent.panel_class = "task";
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
