@@ -90,11 +90,11 @@ pre {
   /* Opera 4-6 */
   white-space: -o-pre-wrap;
   /* Opera 7 */
-  word-wrap: break-word;
-  /* Internet Explorer 5.5+ */
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
-/* line 21, ../sass/_00_defaults.scss */
+/* line 22, ../sass/_00_defaults.scss */
 img {
   position: relative;
   width: 100%;
@@ -586,7 +586,7 @@ img {
   clear: left;
   padding-left: 10px;
 }
-/* line 28, ../sass/_00_defaults.scss */
+/* line 29, ../sass/_00_defaults.scss */
 .attributes .value_item:after, .item .value_item:after {
   content: '';
   display: table;
@@ -596,7 +596,7 @@ img {
 .attributes .value_item.last, .item .value_item.last {
   margin-bottom: 5px;
 }
-/* line 28, ../sass/_00_defaults.scss */
+/* line 29, ../sass/_00_defaults.scss */
 .attributes:after, .item:after {
   content: '';
   display: table;
@@ -624,7 +624,7 @@ img {
 .settings .item .input {
   width: 70px;
 }
-/* line 28, ../sass/_00_defaults.scss */
+/* line 29, ../sass/_00_defaults.scss */
 .settings .item:after {
   content: '';
   display: table;
@@ -760,7 +760,7 @@ img {
   display: inline-block;
   margin: auto;
 }
-/* line 28, ../sass/_00_defaults.scss */
+/* line 29, ../sass/_00_defaults.scss */
 .pagination:after {
   content: '';
   display: table;
@@ -808,7 +808,7 @@ img {
 .site .main {
   padding: 15px;
 }
-/* line 28, ../sass/_00_defaults.scss */
+/* line 29, ../sass/_00_defaults.scss */
 .site .main:after {
   content: '';
   display: table;
