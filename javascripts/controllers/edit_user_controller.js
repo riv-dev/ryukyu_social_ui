@@ -17,6 +17,10 @@ app.controller('editUserController', function($scope, $http, $location, $localSt
         $scope.checkboxModel = {admin : 0};
         $scope.this_user_id = $routeParams.user_id;
 
+        $scope.back = function() {
+            window.history.back();
+        }
+
         //Get the task details to fill in form defaults
         $http({
             method: 'GET',

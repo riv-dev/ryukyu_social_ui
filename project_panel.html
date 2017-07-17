@@ -29,6 +29,7 @@
         <dd class="value description"><pre ng-bind-html="this_project.description | linky"></pre><dd>
     </dl>
     <ul class="links">
+        <li class="item back" ng-if="!this_user_id"><a class="link" ng-click="back()">Go Back</a></li>
         <li class="item back" ng-if="this_user_id"><a class="link" href="./users/{{this_user_id}}">Go Back to User</a></li>
         <li class="item edit"><a class="link" href="./projects/{{this_project.id}}/edit">Edit Project</a></li>
         <li class="item delete"><a class="link" ng-click="remove_project()">Delete Project</a></li>

@@ -24,6 +24,10 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         projects: false
     }
 
+    $scope.back = function() {
+        window.history.back();
+    }
+
     $scope.showHideSettingsClass = function(type) {
         if($scope.showSettingsFlags[type]) {
             return "show";

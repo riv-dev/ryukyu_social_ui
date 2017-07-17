@@ -13,6 +13,10 @@ app.controller('editProjectController', function($scope, $http, $location, $loca
             "finished"
         ];
 
+        $scope.back = function() {
+            window.history.back();
+        }
+
         //Get the project details to fill in form defaults
         $http({
             method: 'GET',

@@ -21,6 +21,10 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         }
     }
 
+    $scope.back = function() {
+        window.history.back();
+    }
+
     $scope.archivedYesNo = function(archived) {
         if(archived) {
             return "Yes";

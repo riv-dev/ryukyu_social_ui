@@ -19,6 +19,10 @@ app.controller('editProjectPermissionsController', function($scope, $http, $loca
             "inactive"
         ]
 
+        $scope.back = function() {
+            window.history.back();
+        }
+
         //Get user name
         $http({
             method: 'GET',

@@ -14,6 +14,10 @@ app.controller('newProjectController', function($scope, $http, $location, $route
         $scope.status = $scope.statuses[0];
         $scope.user_id = null;
 
+        $scope.back = function() {
+            window.history.back();
+        }
+
         $scope.post = function() {
             $http({
                 method: 'POST',

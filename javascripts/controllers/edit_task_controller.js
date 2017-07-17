@@ -9,6 +9,10 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
 
         $scope.checkboxModel = {archived: 0};
 
+        $scope.back = function() {
+            window.history.back();
+        }
+
         $scope.priorities = [
             {label: "Very Important", level: 4},
             {label: "Fairly Important", level: 3},

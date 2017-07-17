@@ -6,6 +6,11 @@ app.controller('newUserController', function($scope, $http, $location, $localSto
         $scope.$parent.hero = "Add User";
         $scope.checkboxModel = {admin : 0};
 
+        $scope.back = function() {
+            window.history.back();
+        }
+
+
         $scope.post = function() {
             $http({
                 method: 'POST',

@@ -19,6 +19,10 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         }
     }
 
+    $scope.back = function() {
+        window.history.back();
+    }
+
     $scope.showSettingsFlags = {
         tasks: false,
         projects: false
