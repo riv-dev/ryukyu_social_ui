@@ -341,3 +341,22 @@
 .is_mine {
     background-color: #f9f795;
 }
+
+.markdown {
+    @include default_browser();
+
+    img.small {
+        width: 25%;
+        height: auto;
+    }
+
+    img.medium {
+        width: 50%;
+        height: auto;
+    }
+
+    img.large {
+        width: 100%;
+        height: auto;
+    }
+}

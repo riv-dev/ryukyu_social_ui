@@ -18,7 +18,7 @@
         <dt class="key archived">Archived:</dt>
         <dd class="value archived {{this_task.archived}}">{{archivedYesNo(this_task.archived)}}</dd>
         <dt class="key description">Description:</dt>
-        <dd class="value description"><pre>{{this_task.description}}</pre></dd>
+        <dd class="value description markdown" btf-markdown="this_task.description"></dd>
     </dl>
     <ul class="links">
         <li class="item back" ng-if="this_user_id"><a class="link" href="./users/{{this_user_id}}">Go Back to User</a></li>

@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute','ngStorage','ngSanitize']);
+var app = angular.module('myApp', ['ngRoute','ngStorage','ngSanitize','btford.markdown']);
 //var apiBaseURL = "http://localhost:5000"; //local development
 var usersApiBaseURL = "https://ryukyu-social.cleverword.com/users_service/api";
 var userPhotosApiBaseURL = "https://ryukyu-social.cleverword.com/user_photos_service/api";
