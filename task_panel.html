@@ -21,7 +21,7 @@
         <dd class="value description markdown" btf-markdown="this_task.description"></dd>
     </dl>
     <ul class="links">
-        <li class="item back" ng-if="!this_user_id"><a class="link" ng-click="back()" href="./">Go Back</a></li>
+        <li class="item back" ng-if="!this_user_id && !this_project_id"><a class="link" ng-click="back()" href="./">Go Back</a></li>
         <li class="item back" ng-if="this_user_id"><a class="link" href="./users/{{this_user_id}}">Go Back to User</a></li>
         <li class="item back" ng-if="this_project_id"><a class="link" href="./projects/{{this_project_id}}">Go Back to Project</a></li>
         <li class="item edit"><a class="link" href="./tasks/{{this_task.id}}/edit">Edit Task</a></li>
