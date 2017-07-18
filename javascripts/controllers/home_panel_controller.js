@@ -6,7 +6,7 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
     $scope.prettyDate = function(isoDateStr, status) {
-        if(moment() > moment(isoDateStr) && (status == "dump" || status=="waiting" || status == "doing")) {
+        if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";
         } else {
             return moment(isoDateStr).calendar();
