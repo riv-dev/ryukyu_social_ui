@@ -40,11 +40,30 @@ app.service('CommonFunctions', function() {
             scope.$parent.loggedin_user = decodedToken;
             scope.loggedin_user = decodedToken;
             localStorage.loggedin_user = decodedToken; //save for usage
+            console.log("Token: " + JSON.stringify(decodedToken));
+            console.log(moment(decodedToken.exp,"X").calendar());
+            if(moment() > moment(decodedToken.exp,"X")) {
+              //expired
+              scope.$parent.flash_message = "Log in expired.";
+              scope.$parent.flash_level = "fail";
+              delete scope.loggedin_user;
+              delete scope.$parent.loggedin_user;
+              delete scope.$parent.login_status;
+              delete localStorage.loggedin_user;              
+
+              if(window.location.pathname != '/' && window.location.pathname != '') {
+                window.location = '/';
+              } 
+            }
         } else {
             delete scope.loggedin_user;
             delete scope.$parent.loggedin_user;
             delete scope.$parent.login_status;
             delete localStorage.loggedin_user;
+
+            if(window.location.pathname != '/' && window.location.pathname != '') {
+              window.location = '/';
+            }
         }
     }
 
