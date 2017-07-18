@@ -229,7 +229,7 @@ img {
 }
 /* line 81, ../sass/_01_elements.scss */
 .link:hover {
-  font-size: 1.2em;
+  background-color: #e2edff;
 }
 
 /* line 86, ../sass/_01_elements.scss */
@@ -1200,4 +1200,9 @@ img {
 /* line 145, ../sass/_03_layout.scss */
 .section.details .value.bio, .section.details .value.description {
   padding-left: 3px;
+}
+/* line 149, ../sass/_03_layout.scss */
+.section.details .links {
+  padding: 15px 0px 15px;
+  border-top: 1px solid #c2c2c2;
 }

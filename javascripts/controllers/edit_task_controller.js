@@ -40,7 +40,10 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
             $scope.priority_level = response.data.priority;
             $scope.status = response.data.status;
             $scope.project_id = response.data.project_id;
-            $scope.deadline = moment(response.data.deadline).toDate();
+            if(response.data.deadline) {
+                $scope.deadline_date = moment(response.data.deadline).toDate();
+                $scope.deadline_time = moment(response.data.deadline).toDate();
+            }
             $scope.checkboxModel.archived = response.data.archived;
         });
 
@@ -63,7 +66,15 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
-                data: {name: $scope.name, description: $scope.description, priority: $scope.priority_level, status: $scope.status, deadline: moment($scope.deadline).format(), project_id: $scope.project_id, archived: $scope.checkboxModel.archived} 
+                data: {
+                    name: $scope.name, 
+                    description: $scope.description, 
+                    priority: $scope.priority_level, 
+                    status: $scope.status, 
+                    deadline: CommonFunctions.getDateTimeMoment($scope.deadline_date,$scope.deadline_time),
+                    project_id: $scope.project_id, 
+                    archived: $scope.checkboxModel.archived
+                } 
             }).then(
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully updated task!";

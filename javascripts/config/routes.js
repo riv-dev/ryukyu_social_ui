@@ -47,6 +47,56 @@ app.service('CommonFunctions', function() {
             delete localStorage.loggedin_user;
         }
     }
+
+    this.getDateTimeMoment = function(date,time) {
+        var dateStr = "";
+        if(!date) {
+          console.log("DateTimeStr: " + null);
+          return undefined;
+        } else {
+          var monthStr = "";
+
+          if((date.getMonth()+1) < 10) {
+            monthStr = "0" + (date.getMonth()+1); 
+          } else {
+            monthStr = date.getMonth()+1;
+          }
+
+          var dayStr = "";
+          if(date.getDate() < 10) {
+            dayStr = "0" + date.getDate(); 
+          } else {
+            dayStr = date.getDate();
+          }
+          dateStr = date.getFullYear() + "-" + monthStr + "-" + dayStr;
+        }
+
+        var timeStr = null;
+        if(!time) {
+          timeStr = "18:00"
+        } else {
+          var hoursStr = "";
+          if(time.getHours() < 10) {
+            hoursStr = "0" + time.getHours(); 
+          } else {
+            hoursStr = time.getHours();
+          }
+
+          var minutesStr = "";
+          if(time.getMinutes() < 10) {
+            minutesStr = "0" + time.getMinutes(); 
+          } else {
+            minutesStr = time.getMinutes();
+          }  
+          timeStr = hoursStr + ":" + minutesStr;
+        }
+
+        var dateTimeStr = dateStr + "T" + timeStr + ":00";
+
+        console.log("DateTimeStr: " + dateTimeStr);
+
+        return moment(dateTimeStr).format();
+    }
 });
 
 app.config(function($routeProvider, $locationProvider) {

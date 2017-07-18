@@ -36,13 +36,17 @@
         </ul>
     </p>
     <p class="field">
-        <label class="label" for="deadline">Deadline: </label>
-        <input name="deadline_input" class="input date" type="datetime-local" ng-model="deadline">
+        <label class="label" for="deadline_date">Deadline Date: </label>
+        <input id="date" name="deadline_date_input" class="input date" type="date" ng-model="deadline_date">
         <ul class="validation_errors" ng-if="errors.deadline">
             <li class="item" ng-repeat="x in errors.deadline">
                 {{x}}
             </li>
         </ul>
+    </p>
+    <p class="field">
+        <label class="label" for="deadline_time">Deadline Time: </label>
+        <input id="time" name="deadline_date_input" class="input time" type="time" ng-model="deadline_time">
     </p>
     <p class="field"><label class="label" for="project_id">Project: </label>
         <select class="input select" ng-options="project.id as project.name for project in projects" ng-model="project_id"></select>

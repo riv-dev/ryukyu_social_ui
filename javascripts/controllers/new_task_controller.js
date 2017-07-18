@@ -57,7 +57,14 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
-                data: {name: $scope.name, description: $scope.description, priority: $scope.priority_level, status: $scope.status, deadline: moment($scope.deadline).format(), project_id: $scope.project_id} 
+                data: {
+                    name: $scope.name, 
+                    description: $scope.description, 
+                    priority: $scope.priority_level, 
+                    status: $scope.status, 
+                    deadline: CommonFunctions.getDateTimeMoment($scope.deadline_date,$scope.deadline_time),
+                    project_id: $scope.project_id
+                } 
             }).then(
                 function successCallback(response) {
                     //if a user_id exists, add user to the task

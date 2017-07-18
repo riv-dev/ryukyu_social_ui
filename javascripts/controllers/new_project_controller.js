@@ -25,7 +25,14 @@ app.controller('newProjectController', function($scope, $http, $location, $route
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
-                data: {name: $scope.name, description: $scope.description, status: $scope.status, effort: $scope.effort, value: $scope.value, start_date: moment($scope.start_date).format(), deadline: moment($scope.deadline).format()} 
+                data: {name: $scope.name, 
+                       description: $scope.description,  
+                       status: $scope.status, 
+                       effort: $scope.effort, 
+                       value: $scope.value, 
+                       start_date: CommonFunctions.getDateTimeMoment($scope.start_date,$scope.start_time),
+                       deadline: CommonFunctions.getDateTimeMoment($scope.deadline_date,$scope.deadline_time)
+                } 
             }).then(
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully added project!";

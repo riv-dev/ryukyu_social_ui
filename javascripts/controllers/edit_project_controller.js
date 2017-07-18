@@ -30,8 +30,14 @@ app.controller('editProjectController', function($scope, $http, $location, $loca
             $scope.status = response.data.status;
             $scope.value = response.data.value;
             $scope.effort = response.data.effort;
-            $scope.start_date = moment(response.data.start_date).toDate();
-            $scope.deadline = moment(response.data.deadline).toDate();
+            if(response.data.start_date) {
+                $scope.start_date = moment(response.data.start_date).toDate();
+                $scope.start_time = moment(response.data.start_date).toDate(); 
+            }
+            if(response.data.deadline) {
+                $scope.deadline_date = moment(response.data.deadline).toDate();
+                $scope.deadline_time = moment(response.data.deadline).toDate();
+            }
         });
 
         $scope.put = function() {
@@ -41,7 +47,15 @@ app.controller('editProjectController', function($scope, $http, $location, $loca
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
-                data: {name: $scope.name, description: $scope.description, status: $scope.status, effort: $scope.effort, value: $scope.value, start_date: moment($scope.start_date).format(), deadline: moment($scope.deadline).format()} 
+                data: {
+                       name: $scope.name, 
+                       description: $scope.description, 
+                       status: $scope.status, 
+                       effort: $scope.effort, 
+                       value: $scope.value, 
+                       start_date: CommonFunctions.getDateTimeMoment($scope.start_date,$scope.start_time),
+                       deadline: CommonFunctions.getDateTimeMoment($scope.deadline_date,$scope.deadline_time)
+                    } 
             }).then(
                 function successCallback(response) {
                     $localStorage.flash_message = "Successfully edited project!";

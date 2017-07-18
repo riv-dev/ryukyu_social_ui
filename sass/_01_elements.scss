@@ -79,7 +79,7 @@
     @include link-colors($blue,$blue,$blue,$blue,$blue);
     @include transition(0.2s);
     &:hover {
-        font-size: 1.2em;
+        background-color: $light_blue;
     }
 }
 
