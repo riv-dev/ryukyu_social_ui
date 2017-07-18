@@ -42,7 +42,7 @@
         <ul class="settings {{showHideSettingsClass('tasks')}}">
             <li class="item">
                 <label class="key status">Filter by status: </label>
-                <select class="input select status" ng-options="selected_tasks_status_filter for selected_tasks_status_filter in filter_statuses" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="selected_tasks_status_filter"></select>
+                <select class="input select status" ng-options="selected_tasks_status_filter for selected_tasks_status_filter in tasks_filter_statuses" ng-change="getTasks(selected_tasks_status_filter,tasks_limit,1)" ng-model="selected_tasks_status_filter"></select>
             </li>
             <li class="item">
                 <label class="key total">Total Tasks: </label>

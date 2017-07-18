@@ -6,7 +6,7 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
     $scope.prettyDate = function(isoDateStr, status) {
-        if(moment() > moment(isoDateStr) && (status == "new" || status == "doing")) {
+        if(moment() > moment(isoDateStr) && (status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";
         } else {
             return moment(isoDateStr).calendar();
@@ -58,15 +58,23 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }
 
-    $scope.filter_statuses = [
+    $scope.tasks_filter_statuses = [
         "all",
-        "new",
+        "dump",
+        "waiting",
         "doing",
         "finished"
     ]
 
-    $scope.selected_tasks_status_filter = $scope.filter_statuses[0];
-    $scope.selected_projects_status_filter = $scope.filter_statuses[0];
+    $scope.projects_filter_statuses = [
+        "all",
+        "new",
+        "doing",
+        "finished"
+    ]    
+
+    $scope.selected_tasks_status_filter = $scope.tasks_filter_statuses[0];
+    $scope.selected_projects_status_filter = $scope.projects_filter_statuses[0];
 
     //Pagination variables and functions
     $scope.limits = ["5","10","15","20","all"];
