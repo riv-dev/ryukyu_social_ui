@@ -22,7 +22,8 @@ app.controller('editTaskController', function($scope, $http, $location, $localSt
         ];
 
         $scope.statuses = [
-            "new",
+            "dump",
+            "waiting",
             "doing",
             "finished"
         ]

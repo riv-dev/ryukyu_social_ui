@@ -14,7 +14,8 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
         ];
 
         $scope.statuses = [
-            "new",
+            "dump",
+            "waiting",
             "doing",
             "finished"
         ]

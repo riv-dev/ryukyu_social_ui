@@ -327,6 +327,16 @@
     color: $orange;
 }
 
+.waiting {
+    color: $dark_yellow;
+    background-color: $yellow;
+}
+
+.dump {
+    color: $black;
+    background-color: transparent;
+}
+
 .archived {
     color: $black;
     background-color: $light_grey;

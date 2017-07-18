@@ -536,23 +536,35 @@ img {
 }
 
 /* line 330, ../sass/_01_elements.scss */
+.waiting {
+  color: #424000;
+  background-color: #e6ea00;
+}
+
+/* line 335, ../sass/_01_elements.scss */
+.dump {
+  color: black;
+  background-color: transparent;
+}
+
+/* line 340, ../sass/_01_elements.scss */
 .archived {
   color: black;
   background-color: #e2e2e2;
 }
 
-/* line 335, ../sass/_01_elements.scss */
+/* line 345, ../sass/_01_elements.scss */
 .active {
   font-weight: bold;
   text-decoration: underline;
 }
 
-/* line 341, ../sass/_01_elements.scss */
+/* line 351, ../sass/_01_elements.scss */
 .is_mine {
   background-color: #f9f795;
 }
 
-/* line 345, ../sass/_01_elements.scss */
+/* line 355, ../sass/_01_elements.scss */
 .markdown {
   /* Begin bidirectionality settings (do not change) */
 }
@@ -806,17 +818,17 @@ img {
     page-break-before: avoid;
   }
 }
-/* line 348, ../sass/_01_elements.scss */
+/* line 358, ../sass/_01_elements.scss */
 .markdown img.small {
   width: 25%;
   height: auto;
 }
-/* line 353, ../sass/_01_elements.scss */
+/* line 363, ../sass/_01_elements.scss */
 .markdown img.medium {
   width: 50%;
   height: auto;
 }
-/* line 358, ../sass/_01_elements.scss */
+/* line 368, ../sass/_01_elements.scss */
 .markdown img.large {
   width: 100%;
   height: auto;
