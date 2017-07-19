@@ -11,12 +11,16 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
 
     $scope.this_project_id = $routeParams.project_id;
 
-    $scope.prettyDate = function(isoDateStr, status) {
+    $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";
         } else {
             return moment(isoDateStr).calendar();
         }
+    }
+
+    $scope.prettyDate = function(isoDateStr) {
+        return moment(isoDateStr).calendar();
     }
 
     $scope.showSettingsFlags = {

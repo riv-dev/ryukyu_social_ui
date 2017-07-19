@@ -43,7 +43,7 @@
                     <dd class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
                     <dd class="value none priority" ng-if="!task.priority">Not defined</dd>     
                     <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(task.deadline, task.status)}}" ng-if="task.deadline">{{prettyDate(task.deadline, task.status)}}</dd>
+                    <dd class="value deadline {{checkDateImportance(task.deadline, task.status)}}" ng-if="task.deadline">{{prettyDateDeadline(task.deadline, task.status)}}</dd>
                     <dd class="value none deadline" ng-if="!task.deadline">Not defined</dd>
                     <dt class="key project">Project:</dt>
                     <dd class="value project" ng-if="task.project_name">{{task.project_name}}</dd>
@@ -101,10 +101,10 @@
                     <dt class="key status">Status:</dt>
                     <dd class="value status {{project.status}}" ng-if="project.status">{{project.status}}</dd>
                     <dt class="key start_date">Start Date:</dt>
-                    <dd class="value start_date" ng-if="project.start_date">{{prettyDate(project.start_date)}}</dd>
+                    <dd class="value start_date" ng-if="project.start_date">{{prettyDateDeadline(project.start_date)}}</dd>
                     <dd class="value none start_date" ng-if="!project.start_date">Not defined</dd>
                     <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDate(project.deadline, project.status)}}</dd>
+                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
                     <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
                     <dt class="key tasks_rank">Top Tasks:</dt>
                     <dd class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">

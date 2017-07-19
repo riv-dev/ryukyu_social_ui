@@ -13,12 +13,16 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         $scope.this_user_id = $routeParams.user_id;
     }
 
-    $scope.prettyDate = function(isoDateStr, status) {
+    $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";
         } else {
             return moment(isoDateStr).calendar();
         }
+    }
+
+    $scope.prettyDate = function(isoDateStr) {
+        return moment(isoDateStr).calendar();
     }
 
     $scope.back = function() {
