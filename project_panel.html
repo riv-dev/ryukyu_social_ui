@@ -25,6 +25,8 @@
         <dt class="key project_value">Value:</dt>
         <dd class="value project_value" ng-if="this_project.value">{{this_project.value}}</dd>            
         <dd class="value none project_value" ng-if="!this_project.value">Not defined</dd> 
+        <dt class="key updated_at">Updated at:</dt>
+        <dd class="value updated_at">{{prettyDate(this_project.updated_at)}}</dd>    
         <dt class="key description">Description:</dt>
         <dd class="value description"><pre ng-bind-html="this_project.description | linky"></pre><dd>
     </dl>
