@@ -31,8 +31,8 @@
     <ul class="links">
         <li class="item back" ng-if="!this_user_id"><a class="link" ng-click="back()">Go Back</a></li>
         <li class="item back" ng-if="this_user_id"><a class="link" href="./users/{{this_user_id}}">Go Back to User</a></li>
-        <li class="item edit"><a class="link" href="./projects/{{this_project.id}}/edit">Edit Project</a></li>
-        <li class="item delete"><a class="link" ng-click="remove_project()">Delete Project</a></li>
+        <li class="item edit" ng-if="this_user_write_access > 0"><a class="link" href="./projects/{{this_project.id}}/edit">Edit Project</a></li>
+        <li class="item delete" ng-if="this_user_write_access > 1"><a class="link" ng-click="remove_project()">Delete Project</a></li>
     </ul>
 </section>
 
@@ -110,8 +110,8 @@
                 <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>
             </a>
             <a class="button edit" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}/edit" 
-               ng-if="loggedin_user.admin || has_write_access()">Permissions</a>
-            <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == assigned_user.user_id || has_write_access()"
+               ng-if="loggedin_user.admin || this_user_write_access > 1">Permissions</a>
+            <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == assigned_user.user_id || this_user_write_access > 1"
                 ng-click="remove_user(assigned_user)" title="Remove User"
                 >Remove User</button>
         </li>

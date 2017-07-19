@@ -16,29 +16,43 @@ app.controller('editProjectController', function($scope, $http, $location, $loca
         $scope.back = function() {
             window.history.back();
         }
-
-        //Get the project details to fill in form defaults
+        //First Find out if the user has write access
         $http({
             method: 'GET',
-            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
+            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id + '/users/' + $localStorage.loggedin_user.id,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
-        }).then(function (response) {
-            $scope.name = response.data.name;
-            $scope.description = response.data.description;
-            $scope.status = response.data.status;
-            $scope.value = response.data.value;
-            $scope.effort = response.data.effort;
-            if(response.data.start_date) {
-                $scope.start_date = moment(response.data.start_date).toDate();
-                $scope.start_time = moment(response.data.start_date).toDate(); 
-            }
-            if(response.data.deadline) {
-                $scope.deadline_date = moment(response.data.deadline).toDate();
-                $scope.deadline_time = moment(response.data.deadline).toDate();
-            }
-        });
+        }).then(function(response) {
+            if(response.data.write_access && response.data.write_access > 0) {
+                //Get the project details to fill in form defaults
+                $http({
+                    method: 'GET',
+                    url: projectsApiBaseURL + '/projects/' + $routeParams.project_id,
+                    headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+                }).then(function (response) {
+                  $scope.name = response.data.name;
+                  $scope.description = response.data.description;
+                  $scope.status = response.data.status;
+                  $scope.value = response.data.value;
+                  $scope.effort = response.data.effort;
+                  if(response.data.start_date) {
+                      $scope.start_date = moment(response.data.start_date).toDate();
+                      $scope.start_time = moment(response.data.start_date).toDate(); 
+                  }
+                  if(response.data.deadline) {
+                      $scope.deadline_date = moment(response.data.deadline).toDate();
+                      $scope.deadline_time = moment(response.data.deadline).toDate();
+                  }
+                });
+            } else {
+                $localStorage.flash_message = "You do not have write permissions for this project.";
+                $scope.$parent.flash_level = "fail";
+                window.history.back();
+            }  
+        });    
 
         $scope.put = function() {
             $http({

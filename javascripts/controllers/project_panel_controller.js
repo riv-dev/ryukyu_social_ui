@@ -375,6 +375,21 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
     } //End getTasks()
 
     if($localStorage.loggedin_user) {
+        //Get permissions information
+        $http({
+            method: 'GET',
+            url: projectsApiBaseURL + '/projects/' + $routeParams.project_id + '/users/' + $localStorage.loggedin_user.id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function(response) {
+            if(response.data.write_access) {
+                $scope.this_user_write_access = response.data.write_access;
+            } else {
+                $scope.this_user_write_access = 0;
+            }
+        });
+
         //Get project information
         $http({
             method: 'GET',
