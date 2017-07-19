@@ -192,6 +192,10 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
                     $scope.assigned_users[parseInt(response.config["params"]["i"])]["lastname"] = response.data.lastname;
                 });                    
             }
+
+            $scope.users_filter = [{firstname: "all", lastname: "", user_id: 0}];
+            $scope.users_filter = $scope.users_filter.concat($scope.assigned_users);
+            $scope.selected_user_id_filter = $scope.users_filter[0];
         });
     }
 
@@ -240,7 +244,8 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         }
     }
 
-    $scope.getTasks = function(status,limit,page) {
+    $scope.getTasks = function(status,user_id,limit,page) {
+        console.log("Selected User ID: " + user_id);
         $scope.tasks_current_page = page;
 
         var queryStr = "";
@@ -249,10 +254,19 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
             queryStr = "?status="+status;
         }
 
+        var userFilterBase = "";
+
+        if(user_id) {
+            userFilterBase = '/users/' + user_id;
+        }
+
+        var tasksCountURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/tasks-count' + queryStr;
+        var tasksURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/tasks' + queryStr;
+
         //Get total tasks count first in order to calculate pagination parameters
         $http({
             method: 'GET',
-            url: tasksApiBaseURL + '/projects/' + $routeParams.project_id + '/tasks-count' + queryStr,
+            url: tasksCountURL,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
@@ -309,7 +323,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
             //Get the project's tasks
             $http({
                 method: 'GET',
-                url: tasksApiBaseURL + '/projects/' + $routeParams.project_id + '/tasks' + queryStr, //'/ranked-tasks',
+                url: tasksURL,
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 }
@@ -412,7 +426,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         get_project_users();
 
         //Get the project's tasks
-        $scope.getTasks($scope.selected_tasks_status_filter, $scope.tasks_limit, $scope.tasks_current_page);
+        $scope.getTasks($scope.selected_tasks_status_filter, $scope.selected_user_id_filter, $scope.tasks_limit, $scope.tasks_current_page);
 
         //Get all users for assigning new users
         $http({
