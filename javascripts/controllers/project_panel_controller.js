@@ -266,12 +266,13 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
 
         var userFilterBase = "";
 
-        if(user_id) {
+        if(!isNaN(user_id) && user_id > 0) {
+            console.log("User ID: " + user_id);
+            console.log("Limit : " + limit);
             userFilterBase = '/users/' + user_id;
         }
 
         var tasksCountURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/tasks-count' + queryStr;
-        var tasksURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/tasks' + queryStr;
 
         //Get total tasks count first in order to calculate pagination parameters
         $http({
@@ -329,6 +330,8 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
             if(queryArr.length > 0) {
                 queryStr = "?" + queryArr.join("&");
             }
+
+            var tasksURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/tasks' + queryStr;
 
             //Get the project's tasks
             $http({
