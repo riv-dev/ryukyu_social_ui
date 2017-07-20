@@ -92,6 +92,16 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         }
     }
 
+    $scope.getTaskID = function(task) {
+        //For inner join searches use task.task_id
+        if(task.task_id) {
+            return task.task_id;
+        } else {
+        //For regular searches use task.id
+            return task.id;
+        }
+    }
+
     $scope.tasks_filter_statuses = [
         "all",
         "dump",
@@ -354,7 +364,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
                     //Get all users on the current task
                     $http({
                         method: 'GET',
-                        url: tasksApiBaseURL + '/tasks/'+current_task.id+'/users',
+                        url: tasksApiBaseURL + '/tasks/'+$scope.getTaskID(current_task)+'/users',
                         headers: {
                            'x-access-token': CommonFunctions.getToken()
                         },

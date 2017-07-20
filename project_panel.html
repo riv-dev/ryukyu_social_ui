@@ -66,7 +66,7 @@
     </header>
     <ul class="preview tasks">
         <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
-            <a class="link_block" href="./projects/{{this_project.id}}/tasks/{{task.id}}">
+            <a class="link_block" href="./projects/{{this_project.id}}/tasks/{{getTaskID(task)}}">
                 <h3 class="name">{{task.name}}</h3>
                 <p class="info description">{{task.description}}</p>
                 <dl class="attributes">
