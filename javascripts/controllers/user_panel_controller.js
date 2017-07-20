@@ -171,7 +171,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         }
     }
 
-    $scope.getTasks = function(status,limit,page) {
+    $scope.getTasks = function(status,project_id,limit,page) {
         $scope.tasks_current_page = page;
 
         var queryStr = "";
@@ -180,10 +180,20 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
             queryStr = "?status="+status;
         }
 
+        var projectFilterBase = "";
+
+        if(!isNaN(project_id) && project_id > 0) {
+            console.log("Project ID: " + project_id);
+            console.log("Limit : " + limit);
+            projectFilterBase = '/projects/' + project_id;
+        }
+
+        var tasksCountURL = tasksApiBaseURL + projectFilterBase + '/users/' + $routeParams.user_id + '/tasks-count' + queryStr;
+
         //Get total tasks count first in order to calculate pagination parameters
         $http({
             method: 'GET',
-            url: tasksApiBaseURL + '/users/' + $routeParams.user_id + '/tasks-count' + queryStr, 
+            url: tasksCountURL,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
@@ -237,10 +247,12 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
                 queryStr = "?" + queryArr.join("&");
             }
 
+            var tasksURL = tasksApiBaseURL + projectFilterBase + '/users/' + $routeParams.user_id + '/tasks' + queryStr;
+
             //Get the user's tasks
             $http({
                 method: 'GET',
-                url: tasksApiBaseURL + '/users/' + $routeParams.user_id + '/tasks' + queryStr, //'/ranked-tasks',
+                url: tasksURL,
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 }
@@ -439,6 +451,10 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
                         $scope.projects[parseInt(response.config["params"]["i"])]["tasks"] = response.data;
                     });                    
                 }
+
+                $scope.projects_filter = [{name: "all", project_id: 0}];
+                $scope.projects_filter = $scope.projects_filter.concat($scope.projects);
+                $scope.selected_project_id_filter = $scope.projects_filter[0];
             });
         });
     } //End getProjects()
@@ -477,7 +493,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         $scope.getProjects($scope.selected_projects_status_filter, $scope.projects_limit, $scope.projects_current_page);
 
         //Get the users tasks
-        $scope.getTasks($scope.selected_tasks_status_filter, $scope.tasks_limit, $scope.tasks_current_page);
+        $scope.getTasks($scope.selected_tasks_status_filter, $scope.selected_project_id_filter, $scope.tasks_limit, $scope.tasks_current_page);
     } 
 
 });
