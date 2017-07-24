@@ -60,7 +60,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         if(/today/i.test(moment(date).calendar())) {
             return "important";
         }
-        else if(moment() > moment(date) && (status == "new" || status == "doing")) {
+        else if(moment() > moment(date) && (status == "dump" || status == "new" || status == "waiting" || status == "doing")) {
             return "important";
         } 
         else {

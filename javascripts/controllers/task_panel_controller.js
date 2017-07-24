@@ -49,7 +49,7 @@ app.controller('taskPanelController', function($scope, $http, $routeParams, $loc
         if(/today/i.test(moment(date).calendar())) {
             return "important";
         }
-        else if(moment() > moment(date) && (status == "new" || status == "doing")) {
+        else if(moment() > moment(date) && (status == "new" || status == "dump" || status == "waiting" || status == "doing")) {
             return "important";
         } 
         else {
