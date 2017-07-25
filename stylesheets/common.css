@@ -968,148 +968,152 @@ img {
 .preview.users .item.alert {
   background-color: #ffb2b2;
 }
+/* line 118, ../sass/_02_components.scss */
+.preview.users .item.alert .avatar {
+  border: 2px solid #c40505;
+}
 /* line 29, ../sass/_00_defaults.scss */
 .preview.users .link_block:after {
   content: '';
   display: table;
   clear: both;
 }
-/* line 123, ../sass/_02_components.scss */
+/* line 126, ../sass/_02_components.scss */
 .preview.users .avatar {
   position: absolute;
   left: 5px;
   top: 50%;
   transform: translateY(-50%);
 }
-/* line 129, ../sass/_02_components.scss */
+/* line 132, ../sass/_02_components.scss */
 .preview.users .info {
   position: absolute;
   left: 50px;
   top: 50%;
   transform: translateY(-50%);
 }
-/* line 136, ../sass/_02_components.scss */
+/* line 139, ../sass/_02_components.scss */
 .preview.users .key.user {
   float: none;
   display: block;
   font-size: 16px;
 }
-/* line 141, ../sass/_02_components.scss */
+/* line 144, ../sass/_02_components.scss */
 .preview.users .value.user {
   float: none;
   display: block;
   font-size: 14px;
   padding-left: 3px;
 }
-/* line 147, ../sass/_02_components.scss */
+/* line 150, ../sass/_02_components.scss */
 .preview.users .progress_description {
   margin-top: 10px;
 }
-/* line 151, ../sass/_02_components.scss */
+/* line 154, ../sass/_02_components.scss */
 .preview.users .attributes {
   padding: 5px;
   float: right;
   background-color: black;
   color: white;
 }
-/* line 156, ../sass/_02_components.scss */
+/* line 159, ../sass/_02_components.scss */
 .preview.users .attributes .key {
   font-weight: normal;
   color: white;
 }
-/* line 160, ../sass/_02_components.scss */
+/* line 163, ../sass/_02_components.scss */
 .preview.users .attributes .key.alert {
   background-color: transparent;
   color: white;
 }
-/* line 164, ../sass/_02_components.scss */
+/* line 167, ../sass/_02_components.scss */
 .preview.users .attributes .key.success {
   background-color: transparent;
   color: white;
 }
-/* line 169, ../sass/_02_components.scss */
+/* line 172, ../sass/_02_components.scss */
 .preview.users .attributes .value {
   font-weight: normal;
   color: white;
 }
-/* line 173, ../sass/_02_components.scss */
+/* line 176, ../sass/_02_components.scss */
 .preview.users .attributes .value.alert {
   background-color: transparent;
   font-weight: bold;
   color: red;
 }
-/* line 178, ../sass/_02_components.scss */
+/* line 181, ../sass/_02_components.scss */
 .preview.users .attributes .value.success {
   background-color: transparent;
   color: lightgreen;
 }
 
-/* line 190, ../sass/_02_components.scss */
+/* line 193, ../sass/_02_components.scss */
 .figure .caption {
   text-align: center;
 }
 
-/* line 196, ../sass/_02_components.scss */
+/* line 199, ../sass/_02_components.scss */
 .form {
   width: 50%;
   margin: auto;
   border: 1px solid #c2c2c2;
   padding: 30px;
 }
-/* line 202, ../sass/_02_components.scss */
+/* line 205, ../sass/_02_components.scss */
 .form .title {
   border-bottom: 1px solid black;
   margin-bottom: 15px;
 }
-/* line 207, ../sass/_02_components.scss */
+/* line 210, ../sass/_02_components.scss */
 .form .field {
   position: relative;
   margin-bottom: 15px;
 }
-/* line 212, ../sass/_02_components.scss */
+/* line 215, ../sass/_02_components.scss */
 .form .validation_errors {
   position: relative;
   top: -10px;
 }
-/* line 215, ../sass/_02_components.scss */
+/* line 218, ../sass/_02_components.scss */
 .form .validation_errors .item {
   list-style-type: disc;
   list-style-position: inside;
   color: red;
 }
 
-/* line 224, ../sass/_02_components.scss */
+/* line 227, ../sass/_02_components.scss */
 .form.assign_user {
   background-color: #e2edff;
   margin-top: 10px;
   width: 100%;
 }
-/* line 228, ../sass/_02_components.scss */
+/* line 231, ../sass/_02_components.scss */
 .form.assign_user .input {
   width: 100%;
 }
 
-/* line 233, ../sass/_02_components.scss */
+/* line 236, ../sass/_02_components.scss */
 .form.update_progress {
   width: 100%;
   border: none;
   padding: 0px 5px 0px;
 }
-/* line 237, ../sass/_02_components.scss */
+/* line 240, ../sass/_02_components.scss */
 .form.update_progress .title {
   font-size: 14px;
 }
-/* line 240, ../sass/_02_components.scss */
+/* line 243, ../sass/_02_components.scss */
 .form.update_progress .label {
   color: black;
   font-size: 12px;
 }
-/* line 244, ../sass/_02_components.scss */
+/* line 247, ../sass/_02_components.scss */
 .form.update_progress .input {
   width: 100%;
   font-size: 12px;
 }
-/* line 248, ../sass/_02_components.scss */
+/* line 251, ../sass/_02_components.scss */
 .form.update_progress .button {
   padding: 5px;
   font-size: 12px;
@@ -1118,7 +1122,7 @@ img {
   border-radius: 2px;
 }
 
-/* line 256, ../sass/_02_components.scss */
+/* line 259, ../sass/_02_components.scss */
 .pagination {
   display: inline-block;
   margin: auto;
@@ -1130,23 +1134,23 @@ img {
   clear: both;
 }
 
-/* line 263, ../sass/_02_components.scss */
+/* line 266, ../sass/_02_components.scss */
 .pagination .item {
   float: left;
 }
-/* line 266, ../sass/_02_components.scss */
+/* line 269, ../sass/_02_components.scss */
 .pagination .item a {
   display: block;
   color: black;
   text-decoration: none;
   padding: 8px 16px;
 }
-/* line 274, ../sass/_02_components.scss */
+/* line 277, ../sass/_02_components.scss */
 .pagination .item.selected a {
   background-color: #4CAF50;
   color: white;
 }
-/* line 281, ../sass/_02_components.scss */
+/* line 284, ../sass/_02_components.scss */
 .pagination .item:not(.selected) a:hover {
   background-color: #ddd;
 }

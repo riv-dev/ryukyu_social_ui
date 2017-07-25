@@ -115,6 +115,9 @@
 
     .item.alert {
         background-color: $light_red;
+        .avatar {
+            border: 2px solid $red;
+        }
     }
 
     .link_block {
