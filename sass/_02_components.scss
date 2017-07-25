@@ -114,10 +114,7 @@
     position: relative;
 
     .item.alert {
-        background-color: $light_red;
-        .avatar {
-            border: 2px solid $red;
-        }
+
     }
 
     .link_block {
@@ -149,6 +146,12 @@
     }
     .progress_description {
         margin-top: 10px;
+    }
+
+    .message.free {
+        font-weight: bold;
+        color: $green;
+        padding-left: 5px;
     }
 
     .attributes {
