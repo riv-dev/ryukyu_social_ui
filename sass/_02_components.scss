@@ -111,6 +111,28 @@
 }
 
 .preview.users {
+    position: relative;
+
+    .item.alert {
+        background-color: $light_red;
+    }
+
+    .link_block {
+        @include clearfix();
+    }
+    .avatar {
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .info {
+        position: absolute;
+        left: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
     .key.user {
         float: none;
         display: block;
@@ -124,6 +146,39 @@
     }
     .progress_description {
         margin-top: 10px;
+    }
+
+    .attributes {
+        padding: 5px;
+        float: right;
+        background-color: black;
+        color: white;
+        .key {
+            font-weight: normal;
+            color: white;
+        }
+        .key.alert {
+            background-color: transparent;
+            color: white;
+        }
+        .key.success {
+            background-color: transparent;
+            color: white;
+        }
+
+        .value {
+            font-weight: normal;
+            color: white;
+        }
+        .value.alert {
+            background-color: transparent;
+            font-weight: bold;
+            color: red;
+        }
+        .value.success {
+            background-color: transparent;
+            color: lightgreen;
+        }
     }
 }
 
