@@ -1008,40 +1008,40 @@ img {
   padding-left: 5px;
 }
 /* line 157, ../sass/_02_components.scss */
-.preview.users .attributes {
+.preview.users .attributes.task-metrics {
   padding: 5px;
   float: right;
   background-color: black;
   color: white;
 }
 /* line 162, ../sass/_02_components.scss */
-.preview.users .attributes .key {
+.preview.users .attributes.task-metrics .key {
   font-weight: normal;
   color: white;
 }
 /* line 166, ../sass/_02_components.scss */
-.preview.users .attributes .key.alert {
+.preview.users .attributes.task-metrics .key.alert {
   background-color: transparent;
   color: white;
 }
 /* line 170, ../sass/_02_components.scss */
-.preview.users .attributes .key.success {
+.preview.users .attributes.task-metrics .key.success {
   background-color: transparent;
   color: white;
 }
 /* line 175, ../sass/_02_components.scss */
-.preview.users .attributes .value {
+.preview.users .attributes.task-metrics .value {
   font-weight: normal;
   color: white;
 }
 /* line 179, ../sass/_02_components.scss */
-.preview.users .attributes .value.alert {
+.preview.users .attributes.task-metrics .value.alert {
   background-color: transparent;
   font-weight: bold;
   color: red;
 }
 /* line 184, ../sass/_02_components.scss */
-.preview.users .attributes .value.success {
+.preview.users .attributes.task-metrics .value.success {
   background-color: transparent;
   color: lightgreen;
 }

@@ -151,7 +151,7 @@
                     <p class="value user">{{user.firstname}} {{user.lastname}}</p>
                     <p ng-if="user.doing_count==0" class="message free">I'm free! Not doing any tasks</p>
                 </div>
-                <dl class="attributes">
+                <dl class="attributes task-metrics">
                     <dt class="key tasks-count {{tasksCountCSS(user.tasks_count)}}">Tasks: </dt>
                     <dd class="value tasks-count {{tasksCountCSS(user.tasks_count)}}">{{user.tasks_count}}</dd>
                     <dt class="key doing-count {{tasksCountCSS(user.doing_count)}}">Doing: </dt>
