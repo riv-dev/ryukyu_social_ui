@@ -1,10 +1,18 @@
 var app = angular.module('myApp', ['ngRoute','ngStorage','ngSanitize','btford.markdown']);
 
-//var apiBaseURL = "http://localhost:5000"; //local development
+var local_development_mode = false;
+
 var usersApiBaseURL = "https://ryukyu-social.cleverword.com/users_service/api";
 var userPhotosApiBaseURL = "https://ryukyu-social.cleverword.com/user_photos_service/api";
 var projectsApiBaseURL = "https://ryukyu-social.cleverword.com/projects_service/api";
 var tasksApiBaseURL = "https://ryukyu-social.cleverword.com/tasks_service/api";
+
+if(local_development_mode) {
+  usersApiBaseURL = "http://localhost:5000";
+  userPhotosApiBaseURL = "http://localhost:5001";
+  projectsApiBaseURL = "http://localhost:5002";
+  tasksApiBaseURL = "http://localhost:5003";
+}
 
 app.service('CommonFunctions', function() {
     function parseJwt (token) {
