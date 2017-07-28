@@ -9,10 +9,10 @@ var tasksApiBaseURL = null;
 
 switch (development_mode) {
   case 'local_development':
-    usersApiBaseURL = "http://localhost:7000";
-    userPhotosApiBaseURL = "http://localhost:7001";
-    projectsApiBaseURL = "http://localhost:7002";
-    tasksApiBaseURL = "http://localhost:7003";
+    usersApiBaseURL = "http://localhost:8000";
+    userPhotosApiBaseURL = "http://localhost:8001";
+    projectsApiBaseURL = "http://localhost:8002";
+    tasksApiBaseURL = "http://localhost:8003";
     break;
   case 'remote_development':
     usersApiBaseURL = "https://ryukyu-social-dev.cleverword.com/users_service/api";
