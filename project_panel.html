@@ -80,8 +80,6 @@
                     <dd class="value none assigned_to" ng-if="!task.users || task.users.length == 0">
                         Need Assignee
                     </dd>
-                    <dt class="key status">Status:</dt>
-                    <dd class="value status {{task.status}}" ng-if="task.status">{{task.status}}</dd>
                     <dt class="key priority">Priority:</dt>
                     <dd class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
                     <dd class="value none priority" ng-if="!task.priority">Not defined</dd>
