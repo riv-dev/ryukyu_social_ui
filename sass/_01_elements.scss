@@ -211,12 +211,12 @@
 
 .button.settings {
     position: relative;
-    padding: 0px;
+    padding: 15px 0px;
     height: 20px;
+    color: $black;
     line-height: 20px;
     width: 100%;
     @include border-radius(0px);
-    background-color: $grey;
     border: none;
     text-indent: 9999px;
     overflow: hidden;
@@ -313,28 +313,29 @@
     color: $red;
 }
 
-.finished {
+.finished, button.finished {
     color: $green;
     background-color: $light_green;
 }
 
-.doing {
+.doing, button.doing {
     color: $blue;
     background-color: $light_orange;
 }
 
-.new {
+.new, button.new {
     color: $orange;
+    background-color: white;
 }
 
-.waiting {
-    color: $dark_yellow;
-    background-color: $yellow;
-}
-
-.dump {
+.waiting, button.waiting {
     color: $black;
-    background-color: transparent;
+    background-color: $pink;
+}
+
+.dump, button.dump {
+    color: $black;
+    background-color: white;
 }
 
 .archived {

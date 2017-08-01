@@ -102,15 +102,13 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         }
     }
 
-    $scope.tasks_filter_statuses = [
-        "all",
-        "dump",
-        "waiting",
-        "doing",
-        "finished"
-    ]
-
-    $scope.selected_tasks_status_filter = $scope.tasks_filter_statuses[0];
+    $scope.selectedClass = function(selected_name, check_name) {
+        if(selected_name == check_name) {
+            return "selected";
+        } else {
+            return "";
+        }
+    }
 
     //Pagination variables and functions
     $scope.limits = ["5","10","15","20","all"];
@@ -255,6 +253,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
     }
 
     $scope.getTasks = function(status,user_id,limit,page) {
+        $scope.selected_tasks_tab = status;
         console.log("Selected User ID: " + user_id);
         $scope.tasks_current_page = page;
 
@@ -439,7 +438,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         get_project_users();
 
         //Get the project's tasks
-        $scope.getTasks($scope.selected_tasks_status_filter, $scope.selected_user_id_filter, $scope.tasks_limit, $scope.tasks_current_page);
+        $scope.getTasks("doing", $scope.selected_user_id_filter, $scope.tasks_limit, $scope.tasks_current_page);
 
         //Get all users for assigning new users
         $http({

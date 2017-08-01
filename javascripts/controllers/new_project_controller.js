@@ -11,7 +11,7 @@ app.controller('newProjectController', function($scope, $http, $location, $route
             "finished"
         ];
 
-        $scope.status = $scope.statuses[0];
+        $scope.status = $location.search().status;
         $scope.user_id = null;
 
         $scope.back = function() {

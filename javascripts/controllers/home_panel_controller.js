@@ -78,23 +78,6 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }
 
-    $scope.tasks_filter_statuses = [
-        "all",
-        "dump",
-        "waiting",
-        "doing",
-        "finished"
-    ]
-
-    $scope.projects_filter_statuses = [
-        "all",
-        "new",
-        "doing",
-        "finished"
-    ]    
-
-    $scope.selected_tasks_status_filter = $scope.tasks_filter_statuses[0];
-    $scope.selected_projects_status_filter = $scope.projects_filter_statuses[0];
 
     //Pagination variables and functions
     $scope.limits = ["5","10","15","20","all"];
@@ -151,7 +134,16 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         }
     }
 
+    $scope.selectedClass = function(selected_name, check_name) {
+        if(selected_name == check_name) {
+            return "selected";
+        } else {
+            return "";
+        }
+    }
+
     $scope.getTasks = function(status,limit,page) {
+        $scope.selected_tasks_tab = status;
         $scope.tasks_current_page = page;
 
         var queryStr = "";
@@ -287,6 +279,7 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
     }//End getTasks()
 
     $scope.getProjects = function(status,limit,page) {
+        $scope.selected_projects_tab = status;
         $scope.projects_current_page = page;
 
         var queryStr = "";
@@ -494,9 +487,9 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
             }
         });
 
-        $scope.getProjects($scope.selected_projects_status_filter, $scope.projects_limit, $scope.projects_current_page);
+        $scope.getProjects("doing", $scope.projects_limit, $scope.projects_current_page);
 
-        $scope.getTasks($scope.selected_tasks_status_filter, $scope.tasks_limit, $scope.tasks_current_page);
+        $scope.getTasks("doing", $scope.tasks_limit, $scope.tasks_current_page);
     } 
 
 });

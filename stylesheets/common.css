@@ -71,6 +71,16 @@ body * {
 }
 
 /* line 7, ../sass/_00_defaults.scss */
+button:focus {
+  outline: 0;
+}
+
+/* line 9, ../sass/_00_defaults.scss */
+button:hover {
+  cursor: pointer;
+}
+
+/* line 11, ../sass/_00_defaults.scss */
 a {
   cursor: pointer;
   -moz-transition: 0.2s;
@@ -80,7 +90,7 @@ a {
   text-decoration: none;
 }
 
-/* line 13, ../sass/_00_defaults.scss */
+/* line 17, ../sass/_00_defaults.scss */
 pre {
   white-space: pre-wrap;
   /* Since CSS 2.1 */
@@ -94,7 +104,7 @@ pre {
   word-break: break-all;
 }
 
-/* line 22, ../sass/_00_defaults.scss */
+/* line 26, ../sass/_00_defaults.scss */
 img {
   position: relative;
   width: 100%;
@@ -407,14 +417,14 @@ img {
 /* line 212, ../sass/_01_elements.scss */
 .button.settings {
   position: relative;
-  padding: 0px;
+  padding: 15px 0px;
   height: 20px;
+  color: black;
   line-height: 20px;
   width: 100%;
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   border-radius: 0px;
-  background-color: #c2c2c2;
   border: none;
   text-indent: 9999px;
   overflow: hidden;
@@ -519,61 +529,62 @@ img {
 }
 
 /* line 316, ../sass/_01_elements.scss */
-.finished {
+.finished, button.finished {
   color: #1f7c20;
   background-color: #e8ffed;
 }
 
 /* line 321, ../sass/_01_elements.scss */
-.doing {
+.doing, button.doing {
   color: #081ed1;
   background-color: #fffce2;
 }
 
 /* line 326, ../sass/_01_elements.scss */
-.new {
+.new, button.new {
   color: #db7400;
+  background-color: white;
 }
 
-/* line 330, ../sass/_01_elements.scss */
-.waiting {
-  color: #424000;
-  background-color: #e6ea00;
-}
-
-/* line 335, ../sass/_01_elements.scss */
-.dump {
+/* line 331, ../sass/_01_elements.scss */
+.waiting, button.waiting {
   color: black;
-  background-color: transparent;
+  background-color: #ffe5fc;
 }
 
-/* line 340, ../sass/_01_elements.scss */
+/* line 336, ../sass/_01_elements.scss */
+.dump, button.dump {
+  color: black;
+  background-color: white;
+}
+
+/* line 341, ../sass/_01_elements.scss */
 .archived {
   color: black;
   background-color: #e2e2e2;
 }
 
-/* line 345, ../sass/_01_elements.scss */
+/* line 346, ../sass/_01_elements.scss */
 .active {
   font-weight: bold;
   text-decoration: underline;
 }
 
-/* line 351, ../sass/_01_elements.scss */
+/* line 352, ../sass/_01_elements.scss */
 .is_mine {
   background-color: #f9f795;
 }
 
-/* line 355, ../sass/_01_elements.scss */
+/* line 356, ../sass/_01_elements.scss */
 .markdown {
   /* Begin bidirectionality settings (do not change) */
 }
-/* line 37, ../sass/_00_defaults.scss */
+/* line 41, ../sass/_00_defaults.scss */
 .markdown img {
   width: auto;
   height: auto;
 }
-/* line 41, ../sass/_00_defaults.scss */
+/* line 45, ../sass/_00_defaults.scss */
 .markdown html, .markdown address,
 .markdown blockquote,
 .markdown body, .markdown dd, .markdown div,
@@ -586,79 +597,79 @@ img {
   display: block;
   unicode-bidi: embed;
 }
-/* line 50, ../sass/_00_defaults.scss */
+/* line 54, ../sass/_00_defaults.scss */
 .markdown li {
   display: list-item;
 }
-/* line 51, ../sass/_00_defaults.scss */
+/* line 55, ../sass/_00_defaults.scss */
 .markdown head {
   display: none;
 }
-/* line 52, ../sass/_00_defaults.scss */
+/* line 56, ../sass/_00_defaults.scss */
 .markdown table {
   display: table;
 }
-/* line 53, ../sass/_00_defaults.scss */
+/* line 57, ../sass/_00_defaults.scss */
 .markdown tr {
   display: table-row;
 }
-/* line 54, ../sass/_00_defaults.scss */
+/* line 58, ../sass/_00_defaults.scss */
 .markdown thead {
   display: table-header-group;
 }
-/* line 55, ../sass/_00_defaults.scss */
+/* line 59, ../sass/_00_defaults.scss */
 .markdown tbody {
   display: table-row-group;
 }
-/* line 56, ../sass/_00_defaults.scss */
+/* line 60, ../sass/_00_defaults.scss */
 .markdown tfoot {
   display: table-footer-group;
 }
-/* line 57, ../sass/_00_defaults.scss */
+/* line 61, ../sass/_00_defaults.scss */
 .markdown col {
   display: table-column;
 }
-/* line 58, ../sass/_00_defaults.scss */
+/* line 62, ../sass/_00_defaults.scss */
 .markdown colgroup {
   display: table-column-group;
 }
-/* line 59, ../sass/_00_defaults.scss */
+/* line 63, ../sass/_00_defaults.scss */
 .markdown td, .markdown th {
   display: table-cell;
 }
-/* line 60, ../sass/_00_defaults.scss */
+/* line 64, ../sass/_00_defaults.scss */
 .markdown caption {
   display: table-caption;
 }
-/* line 61, ../sass/_00_defaults.scss */
+/* line 65, ../sass/_00_defaults.scss */
 .markdown th {
   font-weight: bolder;
   text-align: center;
 }
-/* line 62, ../sass/_00_defaults.scss */
+/* line 66, ../sass/_00_defaults.scss */
 .markdown caption {
   text-align: center;
 }
-/* line 63, ../sass/_00_defaults.scss */
+/* line 67, ../sass/_00_defaults.scss */
 .markdown body {
   margin: 8px;
 }
-/* line 64, ../sass/_00_defaults.scss */
+/* line 68, ../sass/_00_defaults.scss */
 .markdown h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
-/* line 65, ../sass/_00_defaults.scss */
+/* line 69, ../sass/_00_defaults.scss */
 .markdown h2 {
   font-size: 1.5em;
   margin: 0.75em 0;
 }
-/* line 66, ../sass/_00_defaults.scss */
+/* line 70, ../sass/_00_defaults.scss */
 .markdown h3 {
   font-size: 1.17em;
   margin: 0.83em 0;
 }
-/* line 67, ../sass/_00_defaults.scss */
+/* line 71, ../sass/_00_defaults.scss */
 .markdown h4, .markdown p,
 .markdown blockquote, .markdown ul,
 .markdown fieldset, .markdown form,
@@ -666,175 +677,175 @@ img {
 .markdown menu {
   margin: 1.12em 0;
 }
-/* line 72, ../sass/_00_defaults.scss */
+/* line 76, ../sass/_00_defaults.scss */
 .markdown h5 {
   font-size: .83em;
   margin: 1.5em 0;
 }
-/* line 73, ../sass/_00_defaults.scss */
+/* line 77, ../sass/_00_defaults.scss */
 .markdown h6 {
   font-size: .75em;
   margin: 1.67em 0;
 }
-/* line 74, ../sass/_00_defaults.scss */
+/* line 78, ../sass/_00_defaults.scss */
 .markdown h1, .markdown h2, .markdown h3, .markdown h4,
 .markdown h5, .markdown h6, .markdown b,
 .markdown strong {
   font-weight: bolder;
 }
-/* line 77, ../sass/_00_defaults.scss */
+/* line 81, ../sass/_00_defaults.scss */
 .markdown blockquote {
   margin-left: 40px;
   margin-right: 40px;
 }
-/* line 78, ../sass/_00_defaults.scss */
+/* line 82, ../sass/_00_defaults.scss */
 .markdown i, .markdown cite, .markdown em,
 .markdown var, .markdown address {
   font-style: italic;
 }
-/* line 80, ../sass/_00_defaults.scss */
+/* line 84, ../sass/_00_defaults.scss */
 .markdown pre, .markdown tt, .markdown code,
 .markdown kbd, .markdown samp {
   font-family: monospace;
 }
-/* line 82, ../sass/_00_defaults.scss */
+/* line 86, ../sass/_00_defaults.scss */
 .markdown pre {
   white-space: pre;
 }
-/* line 83, ../sass/_00_defaults.scss */
+/* line 87, ../sass/_00_defaults.scss */
 .markdown button, .markdown textarea,
 .markdown input, .markdown select {
   display: inline-block;
 }
-/* line 85, ../sass/_00_defaults.scss */
+/* line 89, ../sass/_00_defaults.scss */
 .markdown big {
   font-size: 1.17em;
 }
-/* line 86, ../sass/_00_defaults.scss */
+/* line 90, ../sass/_00_defaults.scss */
 .markdown small, .markdown sub, .markdown sup {
   font-size: 0.83em;
 }
-/* line 87, ../sass/_00_defaults.scss */
+/* line 91, ../sass/_00_defaults.scss */
 .markdown sub {
   vertical-align: sub;
 }
-/* line 88, ../sass/_00_defaults.scss */
+/* line 92, ../sass/_00_defaults.scss */
 .markdown sup {
   vertical-align: super;
 }
-/* line 89, ../sass/_00_defaults.scss */
+/* line 93, ../sass/_00_defaults.scss */
 .markdown table {
   border-spacing: 2px;
 }
-/* line 90, ../sass/_00_defaults.scss */
+/* line 94, ../sass/_00_defaults.scss */
 .markdown thead, .markdown tbody,
 .markdown tfoot {
   vertical-align: middle;
 }
-/* line 92, ../sass/_00_defaults.scss */
+/* line 96, ../sass/_00_defaults.scss */
 .markdown td, .markdown th, .markdown tr {
   vertical-align: inherit;
 }
-/* line 93, ../sass/_00_defaults.scss */
+/* line 97, ../sass/_00_defaults.scss */
 .markdown s, .markdown strike, .markdown del {
   text-decoration: line-through;
 }
-/* line 94, ../sass/_00_defaults.scss */
+/* line 98, ../sass/_00_defaults.scss */
 .markdown hr {
   border: 1px inset;
 }
-/* line 95, ../sass/_00_defaults.scss */
+/* line 99, ../sass/_00_defaults.scss */
 .markdown ol, .markdown ul, .markdown dir,
 .markdown menu, .markdown dd {
   margin-left: 40px;
 }
-/* line 97, ../sass/_00_defaults.scss */
+/* line 101, ../sass/_00_defaults.scss */
 .markdown ol {
   list-style-type: decimal;
 }
-/* line 98, ../sass/_00_defaults.scss */
+/* line 102, ../sass/_00_defaults.scss */
 .markdown ol ul, .markdown ul ol,
 .markdown ul ul, .markdown ol ol {
   margin-top: 0;
   margin-bottom: 0;
 }
-/* line 100, ../sass/_00_defaults.scss */
+/* line 104, ../sass/_00_defaults.scss */
 .markdown u, .markdown ins {
   text-decoration: underline;
 }
-/* line 101, ../sass/_00_defaults.scss */
+/* line 105, ../sass/_00_defaults.scss */
 .markdown br:before {
   content: "\A";
   white-space: pre-line;
 }
-/* line 102, ../sass/_00_defaults.scss */
+/* line 106, ../sass/_00_defaults.scss */
 .markdown center {
   text-align: center;
 }
-/* line 103, ../sass/_00_defaults.scss */
+/* line 107, ../sass/_00_defaults.scss */
 .markdown :link, .markdown :visited {
   text-decoration: underline;
 }
-/* line 104, ../sass/_00_defaults.scss */
+/* line 108, ../sass/_00_defaults.scss */
 .markdown :focus {
   outline: thin dotted invert;
 }
-/* line 105, ../sass/_00_defaults.scss */
+/* line 109, ../sass/_00_defaults.scss */
 .markdown ul {
   list-style-type: disc;
 }
-/* line 108, ../sass/_00_defaults.scss */
+/* line 112, ../sass/_00_defaults.scss */
 .markdown BDO[DIR="ltr"] {
   direction: ltr;
   unicode-bidi: bidi-override;
 }
-/* line 109, ../sass/_00_defaults.scss */
+/* line 113, ../sass/_00_defaults.scss */
 .markdown BDO[DIR="rtl"] {
   direction: rtl;
   unicode-bidi: bidi-override;
 }
-/* line 111, ../sass/_00_defaults.scss */
+/* line 115, ../sass/_00_defaults.scss */
 .markdown *[DIR="ltr"] {
   direction: ltr;
   unicode-bidi: embed;
 }
-/* line 112, ../sass/_00_defaults.scss */
+/* line 116, ../sass/_00_defaults.scss */
 .markdown *[DIR="rtl"] {
   direction: rtl;
   unicode-bidi: embed;
 }
 @media print {
-  /* line 115, ../sass/_00_defaults.scss */
+  /* line 119, ../sass/_00_defaults.scss */
   .markdown h1 {
     page-break-before: always;
   }
-  /* line 116, ../sass/_00_defaults.scss */
+  /* line 120, ../sass/_00_defaults.scss */
   .markdown h1, .markdown h2, .markdown h3,
   .markdown h4, .markdown h5, .markdown h6 {
     page-break-after: avoid;
   }
-  /* line 118, ../sass/_00_defaults.scss */
+  /* line 122, ../sass/_00_defaults.scss */
   .markdown ul, .markdown ol, .markdown dl {
     page-break-before: avoid;
   }
 }
-/* line 358, ../sass/_01_elements.scss */
+/* line 359, ../sass/_01_elements.scss */
 .markdown img.small {
   width: 25%;
   height: auto;
 }
-/* line 363, ../sass/_01_elements.scss */
+/* line 364, ../sass/_01_elements.scss */
 .markdown img.medium {
   width: 50%;
   height: auto;
 }
-/* line 368, ../sass/_01_elements.scss */
+/* line 369, ../sass/_01_elements.scss */
 .markdown img.large {
   width: 100%;
   height: auto;
 }
 
-/* line 374, ../sass/_01_elements.scss */
+/* line 375, ../sass/_01_elements.scss */
 .avatar {
   height: 40px;
   width: 40px;
@@ -883,7 +894,7 @@ img {
   clear: left;
   padding-left: 10px;
 }
-/* line 29, ../sass/_00_defaults.scss */
+/* line 33, ../sass/_00_defaults.scss */
 .attributes .value_item:after, .item .value_item:after {
   content: '';
   display: table;
@@ -893,7 +904,7 @@ img {
 .attributes .value_item.last, .item .value_item.last {
   margin-bottom: 5px;
 }
-/* line 29, ../sass/_00_defaults.scss */
+/* line 33, ../sass/_00_defaults.scss */
 .attributes:after, .item:after {
   content: '';
   display: table;
@@ -921,7 +932,7 @@ img {
 .settings .item .input {
   width: 70px;
 }
-/* line 29, ../sass/_00_defaults.scss */
+/* line 33, ../sass/_00_defaults.scss */
 .settings .item:after {
   content: '';
   display: table;
@@ -964,7 +975,7 @@ img {
 .preview.users {
   position: relative;
 }
-/* line 29, ../sass/_00_defaults.scss */
+/* line 33, ../sass/_00_defaults.scss */
 .preview.users .link_block:after {
   content: '';
   display: table;
@@ -1125,7 +1136,7 @@ img {
   display: inline-block;
   margin: auto;
 }
-/* line 29, ../sass/_00_defaults.scss */
+/* line 33, ../sass/_00_defaults.scss */
 .pagination:after {
   content: '';
   display: table;
@@ -1153,6 +1164,44 @@ img {
   background-color: #ddd;
 }
 
+/* line 293, ../sass/_02_components.scss */
+.tabs {
+  position: relative;
+}
+/* line 295, ../sass/_02_components.scss */
+.tabs:after {
+  position: relative;
+  display: block;
+  content: '';
+  border-top: 1px solid black;
+  z-index: 2;
+}
+/* line 302, ../sass/_02_components.scss */
+.tabs .item {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  margin-right: 5px;
+  z-index: 1;
+}
+/* line 309, ../sass/_02_components.scss */
+.tabs .item.selected {
+  z-index: 3;
+}
+/* line 311, ../sass/_02_components.scss */
+.tabs .item.selected .tab {
+  border-color: black;
+  color: black;
+  font-weight: bold;
+}
+/* line 318, ../sass/_02_components.scss */
+.tabs .item .tab {
+  border: 1px solid #c2c2c2;
+  border-bottom: none;
+  border-radius: 3px 3px 0px 0px;
+  color: #c2c2c2;
+}
+
 /* line 3, ../sass/_03_layout.scss */
 .site .header {
   padding: 15px;
@@ -1173,7 +1222,7 @@ img {
 .site .main {
   padding: 15px;
 }
-/* line 29, ../sass/_00_defaults.scss */
+/* line 33, ../sass/_00_defaults.scss */
 .site .main:after {
   content: '';
   display: table;
@@ -1254,49 +1303,49 @@ img {
 .section .header .title {
   margin-bottom: 0.2em;
 }
-/* line 97, ../sass/_03_layout.scss */
+/* line 101, ../sass/_03_layout.scss */
 .section .pagination {
   margin-top: 15px;
 }
 
-/* line 114, ../sass/_03_layout.scss */
+/* line 118, ../sass/_03_layout.scss */
 .section.users .form.assign_user {
   margin-top: 10px;
 }
 
-/* line 121, ../sass/_03_layout.scss */
+/* line 125, ../sass/_03_layout.scss */
 .section.details .header {
   border-bottom: none;
 }
-/* line 124, ../sass/_03_layout.scss */
+/* line 128, ../sass/_03_layout.scss */
 .section.details .title {
   font-size: 40px;
   border-bottom: none;
 }
-/* line 128, ../sass/_03_layout.scss */
+/* line 132, ../sass/_03_layout.scss */
 .section.details .name {
   font-size: 34px;
   font-weight: normal;
   color: #5e5e5e;
   margin-bottom: 5px;
 }
-/* line 134, ../sass/_03_layout.scss */
+/* line 138, ../sass/_03_layout.scss */
 .section.details .figure {
   border: 1px solid black;
   width: 50%;
   margin-bottom: 25px;
 }
-/* line 139, ../sass/_03_layout.scss */
+/* line 143, ../sass/_03_layout.scss */
 .section.details .key,
 .section.details .value {
   font-size: 16px;
   margin-bottom: 10px;
 }
-/* line 145, ../sass/_03_layout.scss */
+/* line 149, ../sass/_03_layout.scss */
 .section.details .value.bio, .section.details .value.description {
   padding-left: 3px;
 }
-/* line 149, ../sass/_03_layout.scss */
+/* line 153, ../sass/_03_layout.scss */
 .section.details .links {
   padding: 15px 0px 15px;
   border-top: 1px solid #c2c2c2;

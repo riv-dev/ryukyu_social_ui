@@ -41,14 +41,16 @@
 <section class="section tasks">
     <header class="header">
         <h2 class="title">Project Task Board</h2>
-        <ul class="settings {{showHideSettingsClass('tasks')}}">
-            <li class="item">
-                <label class="key status">Filter by status: </label>
-                <select class="input select status" ng-options="selected_tasks_status_filter for selected_tasks_status_filter in tasks_filter_statuses" ng-change="getTasks(selected_tasks_status_filter,selected_user_id_filter,tasks_limit,1)" ng-model="selected_tasks_status_filter"></select>
-            </li>
+        <ul class="tabs">
+            <li class="item {{selectedClass(selected_tasks_tab,'dump')}}"><button class="tab dump" ng-click="getTasks('dump',selected_user_id_filter,tasks_limit,1)">dump</button></li><!--
+            --><li class="item {{selectedClass(selected_tasks_tab,'waiting')}}"><button class="tab waiting" ng-click="getTasks('waiting',selected_user_id_filter,tasks_limit,1)">waiting</button></li><!--
+            --><li class="item {{selectedClass(selected_tasks_tab,'doing')}}"><button class="tab doing" ng-click="getTasks('doing',selected_user_id_filter,tasks_limit,1)">doing</button></li><!--
+            --><li class="item {{selectedClass(selected_tasks_tab,'finished')}}"><button class="tab finished" ng-click="getTasks('finished',selected_user_id_filter,tasks_limit,1)">finished</button></li>
+        </ul>
+        <ul class="settings {{showHideSettingsClass('tasks')}}  {{selected_tasks_tab}}">
             <li class="item">
                 <label class="key user">Filter by user: </label>
-                <select class="input select user" ng-options="user.user_id as getFullName(user) for user in users_filter" ng-change="getTasks(selected_tasks_status_filter,selected_user_id_filter,tasks_limit,1)" ng-model="selected_user_id_filter"></select>
+                <select class="input select user" ng-options="user.user_id as getFullName(user) for user in users_filter" ng-change="getTasks(selected_tasks_tab,selected_user_id_filter,tasks_limit,1)" ng-model="selected_user_id_filter"></select>
             </li>
             <li class="item">
                 <label class="key total">Total Tasks: </label>
@@ -56,13 +58,13 @@
             </li>
             <li class="item">
                 <label class="key limit" for="tasks_limit">Limit Per Page: </label>
-                <select class="input select limit" ng-options="tasks_limit for tasks_limit in limits" ng-change="getTasks(selected_tasks_status_filter,selected_user_id_filter,tasks_limit,1)" ng-model="tasks_limit"></select>
+                <select class="input select limit" ng-options="tasks_limit for tasks_limit in limits" ng-change="getTasks(selected_tasks_tab,selected_user_id_filter,tasks_limit,1)" ng-model="tasks_limit"></select>
             </li>
             <li class="item">
-                <a class="link" href="./projects/{{this_project_id}}/tasks/new">Add Task</a>
+                <a class="link" href="./projects/{{this_project_id}}/tasks/new?status={{selected_tasks_tab}}">Add Task</a>
             </li>
         </ul>
-        <button class="button settings {{showHideSettingsClass('tasks')}}" ng-click="toggleShowHideSettings('tasks')">Show/Hide Settings</button>
+        <button class="button settings {{showHideSettingsClass('tasks')}} {{selected_tasks_tab}}" ng-click="toggleShowHideSettings('tasks')">Show/Hide Settings</button>
     </header>
     <ul class="preview tasks">
         <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
@@ -92,13 +94,13 @@
     </ul>
     <p ng-if="!tasks || tasks.length == 0" class="info none">No tasks</p>
     <ul class="pagination" ng-if="tasks_page_count_arr && tasks_page_count_arr.length > 1">
-        <li class="item previous" ng-click="getTasks(selected_tasks_status_filter,selected_user_id_filter,tasks_limit,tasks_current_page-1)"> 
+        <li class="item previous" ng-click="getTasks(selected_tasks_tab,selected_user_id_filter,tasks_limit,tasks_current_page-1)"> 
             <a href="#">&laquo;</a>
         </li>
         <li class="item {{currentTasksPageClass($index+1)}}" ng-repeat="i in tasks_page_count_arr track by $index">
-            <a href="#" ng-click="getTasks(selected_tasks_status_filter,selected_user_id_filter,tasks_limit,$index+1)">{{$index+1}}</a>
+            <a href="#" ng-click="getTasks(selected_tasks_tab,selected_user_id_filter,tasks_limit,$index+1)">{{$index+1}}</a>
         </li>
-        <li class="item next" ng-click="getTasks(selected_tasks_status_filter,selected_user_id_filter,tasks_limit,tasks_current_page+1)">
+        <li class="item next" ng-click="getTasks(selected_tasks_tab,selected_user_id_filter,tasks_limit,tasks_current_page+1)">
             <a href="#">&raquo;</a>
         </li>
     </ul>
