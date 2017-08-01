@@ -20,7 +20,7 @@ app.controller('newTaskController', function($scope, $http, $location, $localSto
             "finished"
         ]
 
-        $scope.status = $scope.statuses[0];
+        $scope.status = $location.search().status;
         $scope.user_id = null;
 
         $scope.project_defined = function() {

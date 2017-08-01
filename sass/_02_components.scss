@@ -289,3 +289,37 @@
         }
     }    
 }
+
+.tabs {
+    position: relative;
+    &:after {
+        position: relative;
+        display: block;
+        content: '';
+        border-top: 1px solid $black;
+        z-index: 2;
+    }
+    .item {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        margin-right: 5px;
+        z-index: 1;
+
+        &.selected {
+            z-index: 3;
+            .tab {
+                border-color: $black;
+                color: $black;
+                font-weight: bold;
+            }
+        }
+
+        .tab {
+            border: 1px solid $grey;
+            border-bottom: none;
+            border-radius: 3px 3px 0px 0px;
+            color: $grey;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 var app = angular.module('myApp', ['ngRoute','ngStorage','ngSanitize','btford.markdown']);
 
-var development_mode = 'production';
+var development_mode = 'remote_development';
 
 var usersApiBaseURL = null;
 var userPhotosApiBaseURL = null;
