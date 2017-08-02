@@ -2,6 +2,17 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
     $scope.$parent.hero = "Project Panel";
     $scope.$parent.panel_class = "project";
 
+    if($localStorage.last_visited_project_id == null || $localStorage.last_visited_project_id != $routeParams.project_id) {
+        //clear all settings
+        $localStorage.project_panel_selected_projects_tab = null; 
+        $localStorage.project_panel_projects_limit = null;
+        $localStorage.project_panel_projects_current_page = null;
+        $localStorage.project_panel_selected_tasks_tab = null;
+        $localStorage.project_panel_selected_project_id_filter = null; 
+        $localStorage.project_panel_tasks_limit = null;
+        $localStorage.project_panel_tasks_current_page = null;
+    } 
+
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
@@ -10,6 +21,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
     }
 
     $scope.this_project_id = $routeParams.project_id;
+    $localStorage.last_visited_project_id = $routeParams.project_id;
 
     $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
@@ -253,15 +265,43 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
     }
 
     $scope.getTasks = function(status,user_id,limit,page) {
-        $scope.selected_tasks_tab = status;
-        console.log("Selected User ID: " + user_id);
-        $scope.tasks_current_page = page;
-
-        var queryStr = "";
-
-        if(status && status != "all") {
-            queryStr = "?status="+status;
+        //Save/Default setting
+        if(!status || status == null || status == undefined) {
+            $scope.selected_tasks_tab = "doing";
+            $localStorage.project_panel_selected_tasks_tab = $scope.selected_tasks_tab;
+            status = $scope.selected_tasks_tab;
+        } else {
+            $localStorage.project_panel_selected_tasks_tab = status;
+            $scope.selected_tasks_tab = status;
         }
+
+        if(!limit || limit == null || limit == undefined) {
+            $scope.tasks_limit = $scope.limits[1];
+            $localStorage.project_panel_tasks_limit = $scope.tasks_limit;
+            limit = $scope.tasks_limit;
+        } else {
+            $localStorage.project_panel_tasks_limit = limit;
+            $scope.tasks_limit = limit;
+        }
+
+        if(!page || page == null || page == undefined) {
+            $scope.tasks_current_page = 1;
+            $localStorage.project_panel_tasks_current_page = $scope.tasks_current_page;
+            page = $scope.tasks_current_page;
+        } else {
+            $localStorage.project_panel_tasks_current_page = page;
+            $scope.tasks_current_page = page;
+        }
+
+        if(!user_id || user_id == null || user_id == undefined) {
+            $localStorage.project_panel_selected_user_id_filter = $scope.selected_user_id_filter;
+            user_id = $scope.selected_user_id_filter;
+        } else {
+            $scope.selected_user_id_filter = user_id;
+            $localStorage.project_panel_selected_user_id_filter = user_id;
+        }
+
+        var queryStr = "?status="+status;
 
         var userFilterBase = "";
 
@@ -438,7 +478,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         get_project_users();
 
         //Get the project's tasks
-        $scope.getTasks("doing", $scope.selected_user_id_filter, $scope.tasks_limit, $scope.tasks_current_page);
+        $scope.getTasks($localStorage.project_panel_selected_tasks_tab, $localStorage.project_panel_selected_user_id_filter, $localStorage.project_panel_tasks_limit, $localStorage.project_panel_tasks_current_page);
 
         //Get all users for assigning new users
         $http({
