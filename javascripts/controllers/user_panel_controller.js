@@ -2,6 +2,17 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
     $scope.$parent.hero = "User Panel";
     $scope.$parent.panel_class = "user";
 
+    if($localStorage.last_visited_user_id == null || $localStorage.last_visited_user_id != $routeParams.user_id) {
+        //clear all settings
+        $localStorage.user_panel_selected_projects_tab = null; 
+        $localStorage.user_panel_projects_limit = null;
+        $localStorage.user_panel_projects_current_page = null;
+        $localStorage.user_panel_selected_tasks_tab = null;
+        $localStorage.user_panel_selected_project_id_filter = null; 
+        $localStorage.user_panel_tasks_limit = null;
+        $localStorage.user_panel_tasks_current_page = null;
+    } 
+
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
 
@@ -10,6 +21,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
     }
 
     $scope.this_user_id = $routeParams.user_id;
+    $localStorage.last_visited_user_id = $routeParams.user_id;
 
     $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
@@ -75,11 +87,6 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
 
     //Pagination variables and functions
     $scope.limits = ["5","10","15","20","all"];
-    $scope.tasks_limit = $scope.limits[1];
-    $scope.projects_limit = $scope.limits[1];
-
-    $scope.tasks_current_page = 1;
-    $scope.projects_current_page = 1;
 
     $scope.currentTasksPageClass = function(page) {
         if(page == $scope.tasks_current_page) {
@@ -162,14 +169,43 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
     }
 
     $scope.getTasks = function(status,project_id,limit,page) {
-        $scope.selected_tasks_tab = status;
-        $scope.tasks_current_page = page;
-
-        var queryStr = "";
-
-        if(status && status != "all") {
-            queryStr = "?status="+status;
+        //Save/Default setting
+        if(!status || status == null || status == undefined) {
+            $scope.selected_tasks_tab = "doing";
+            $localStorage.user_panel_selected_tasks_tab = $scope.selected_tasks_tab;
+            status = $scope.selected_tasks_tab;
+        } else {
+            $localStorage.user_panel_selected_tasks_tab = status;
+            $scope.selected_tasks_tab = status;
         }
+
+        if(!limit || limit == null || limit == undefined) {
+            $scope.tasks_limit = $scope.limits[1];
+            $localStorage.user_panel_tasks_limit = $scope.tasks_limit;
+            limit = $scope.tasks_limit;
+        } else {
+            $localStorage.user_panel_tasks_limit = limit;
+            $scope.tasks_limit = limit;
+        }
+
+        if(!page || page == null || page == undefined) {
+            $scope.tasks_current_page = 1;
+            $localStorage.user_panel_tasks_current_page = $scope.tasks_current_page;
+            page = $scope.tasks_current_page;
+        } else {
+            $localStorage.user_panel_tasks_current_page = page;
+            $scope.tasks_current_page = page;
+        }
+
+        if(!project_id || project_id == null || project_id == undefined) {
+            $localStorage.user_panel_selected_project_id_filter = $scope.selected_project_id_filter;
+            project_id = $scope.selected_project_id_filter;
+        } else {
+            $scope.selected_project_id_filter = project_id;
+            $localStorage.user_panel_selected_project_id_filter = project_id;
+        }
+
+        var queryStr = "?status="+status;
 
         var projectFilterBase = "";
 
@@ -314,14 +350,34 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
     } //End getTasks()
 
     $scope.getProjects = function(status,limit,page) {
-        $scope.selected_projects_tab = status;
-        $scope.projects_current_page = page;
-
-        var queryStr = "";
-
-        if(status && status != "all") {
-            queryStr = "?status="+status;
+        if(!status || status == null || status == undefined) {
+            $scope.selected_projects_tab = "doing";
+            $localStorage.user_panel_selected_projects_tab = $scope.selected_projects_tab;
+            status = $scope.selected_projects_tab;
+        } else {
+            $localStorage.user_panel_selected_projects_tab = status;
+            $scope.selected_projects_tab = status;
         }
+
+        if(!limit || limit == null || limit == undefined) {
+            $scope.projects_limit = $scope.limits[1];
+            $localStorage.user_panel_projects_limit = $scope.projects_limit;
+            limit = $scope.projects_limit;
+        } else {
+            $localStorage.user_panel_projects_limit = limit;
+            $scope.projects_limit = limit;
+        }
+
+        if(!page || page == null || page == undefined) {
+            $scope.projects_current_page = 1;
+            $localStorage.user_panel_projects_current_page = $scope.projects_current_page;
+            page = $scope.projects_current_page;
+        } else {
+            $localStorage.user_panel_projects_current_page = page;
+            $scope.projects_current_page = page;
+        }
+
+        var queryStr = "?status="+status;
 
         //Get total projects count first in order to calculate pagination parameters
         $http({
@@ -482,10 +538,10 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         });
 
         //Get the users projects
-        $scope.getProjects("doing", $scope.projects_limit, $scope.projects_current_page);
+        $scope.getProjects($localStorage.user_panel_selected_projects_tab, $localStorage.user_panel_projects_limit, $localStorage.user_panel_projects_current_page);
 
         //Get the users tasks
-        $scope.getTasks("doing", $scope.selected_project_id_filter, $scope.tasks_limit, $scope.tasks_current_page);
+        $scope.getTasks($localStorage.user_panel_selected_tasks_tab, $localStorage.user_panel_selected_project_id_filter, $localStorage.user_panel_tasks_limit, $localStorage.user_panel_tasks_current_page);
     } 
 
 });

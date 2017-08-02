@@ -60,7 +60,7 @@ app.service('CommonFunctions', function() {
     this.deleteToken = function() {
         window.localStorage.removeItem("token");
     }
-
+    
     this.checkLoggedInUser = function(scope, localStorage) {
         if(this.getToken()) {
             var decodedToken = parseJwt(this.getToken());
