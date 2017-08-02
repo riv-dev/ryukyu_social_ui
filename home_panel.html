@@ -1,6 +1,69 @@
 <p ng-if="!loggedin_user" class="message welcome">Welcome to Ryukyu Social</p>
 <p ng-if="!loggedin_user" class="message welcome">Please <a href="./login">log in</a></p>
 
+<section ng-if="loggedin_user" class="section projects">
+    <header class="header">
+        <h2 class="title">Projects List</h2>
+        <ul class="tabs">
+            <li class="item {{selectedClass(selected_projects_tab,'new')}}"><button class="tab new" ng-click="getProjects('new',projects_limit,1)">new</button></li><!--
+            --><li class="item {{selectedClass(selected_projects_tab,'doing')}}"><button class="tab doing" ng-click="getProjects('doing',projects_limit,1)">doing</button></li><!--
+            --><li class="item {{selectedClass(selected_projects_tab,'finished')}}"><button class="tab finished" ng-click="getProjects('finished',projects_limit,1)">finished</button></li>
+        </ul>
+        <ul class="settings {{showHideSettingsClass('projects')}} {{selected_projects_tab}}">
+            <li class="item">
+                <label class="key total">Total Projects: </label>
+                <em class="value total">{{projects_count}}</em>
+            </li>
+            <li class="item">
+                <label class="key limit" for="projects_limit">Limit Per Page: </label>
+                <select class="input select limit" ng-options="projects_limit for projects_limit in limits" ng-change="getProjects(selected_projects_tab,projects_limit,1)" ng-model="projects_limit"></select>
+            </li>
+            <li class="item"><a class="link" href="./projects/new?status={{selected_projects_tab}}">Add Project</a></li>
+        </ul>
+        <button class="button settings {{showHideSettingsClass('projects')}} {{selected_projects_tab}}" ng-click="toggleShowHideSettings('projects')">Show/Hide Settings</button>
+    </header>
+    <ul class="preview projects">
+        <li class="item {{project.status}}" ng-repeat="project in projects">
+            <a class="link_block" href="./projects/{{project.id}}">
+                <h3 class="name">{{project.name}}</h3>
+                <dl class="attributes">
+                    <dt class="key users">Users:</dt>
+                    <dd class="value_item users  {{cssLast($last)}}" ng-repeat="project_user in project.users">
+                        <em class="key role" ng-if="project_user.role">{{project_user.role}}: </em>
+                        <em class="key none role" ng-if="!project_user.role">Undefined Role: </em>
+                        <p class="value role">{{project_user.firstname}} {{project_user.lastname}}</p>
+                    </dd>
+                    <dd class="value none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
+                    <dt class="key start_date">Start Date:</dt>
+                    <dd class="value start_date" ng-if="project.start_date">{{prettyDateDeadline(project.start_date)}}</dd>
+                    <dd class="value none start_date" ng-if="!project.start_date">Not defined</dd>
+                    <dt class="key deadline">Deadline:</dt>
+                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
+                    <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
+                    <dt class="key tasks_rank">Top Tasks:</dt>
+                    <dd class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
+                        <span class="key rank">{{$index + 1}}</span>
+                        <p class="value rank">{{project_task.name}}</p>
+                    </dd>
+                    <dd class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
+                </dl>
+            </a>
+        </li>
+    </ul>
+    <p ng-if="!projects || projects.length == 0" class="info none">No projects</p>
+    <ul class="pagination" ng-if="projects_page_count_arr && projects_page_count_arr.length > 1">
+        <li class="item previous" ng-click="getProjects(selected_projects_tab,projects_limit,projects_current_page-1)"> 
+            <a href="#">&laquo;</a>
+        </li>
+        <li class="item {{currentProjectsPageClass($index+1)}}" ng-repeat="i in projects_page_count_arr track by $index">
+            <a href="#" ng-click="getProjects(selected_projects_tab,projects_limit,$index+1)">{{$index+1}}</a>
+        </li>
+        <li class="item next" ng-click="getProjects(selected_projects_tab,projects_limit,projects_current_page+1)">
+            <a href="#">&raquo;</a>
+        </li>
+    </ul>
+</section>
+
 <section ng-if="loggedin_user" class="section tasks">
     <header class="header">
         <h2 class="title">Company Task Board</h2>
@@ -62,69 +125,6 @@
             <a href="#" ng-click="getTasks(selected_tasks_tab,tasks_limit,$index+1)">{{$index+1}}</a>
         </li>
         <li class="item next" ng-click="getTasks(selected_tasks_tab,tasks_limit,tasks_current_page+1)">
-            <a href="#">&raquo;</a>
-        </li>
-    </ul>
-</section>
-
-<section ng-if="loggedin_user" class="section projects">
-    <header class="header">
-        <h2 class="title">Projects List</h2>
-        <ul class="tabs">
-            <li class="item {{selectedClass(selected_projects_tab,'new')}}"><button class="tab new" ng-click="getProjects('new',projects_limit,1)">new</button></li><!--
-            --><li class="item {{selectedClass(selected_projects_tab,'doing')}}"><button class="tab doing" ng-click="getProjects('doing',projects_limit,1)">doing</button></li><!--
-            --><li class="item {{selectedClass(selected_projects_tab,'finished')}}"><button class="tab finished" ng-click="getProjects('finished',projects_limit,1)">finished</button></li>
-        </ul>
-        <ul class="settings {{showHideSettingsClass('projects')}} {{selected_projects_tab}}">
-            <li class="item">
-                <label class="key total">Total Projects: </label>
-                <em class="value total">{{projects_count}}</em>
-            </li>
-            <li class="item">
-                <label class="key limit" for="projects_limit">Limit Per Page: </label>
-                <select class="input select limit" ng-options="projects_limit for projects_limit in limits" ng-change="getProjects(selected_projects_tab,projects_limit,1)" ng-model="projects_limit"></select>
-            </li>
-            <li class="item"><a class="link" href="./projects/new?status={{selected_projects_tab}}">Add Project</a></li>
-        </ul>
-        <button class="button settings {{showHideSettingsClass('projects')}} {{selected_projects_tab}}" ng-click="toggleShowHideSettings('projects')">Show/Hide Settings</button>
-    </header>
-    <ul class="preview projects">
-        <li class="item {{project.status}}" ng-repeat="project in projects">
-            <a class="link_block" href="./projects/{{project.id}}">
-                <h3 class="name">{{project.name}}</h3>
-                <dl class="attributes">
-                    <dt class="key users">Users:</dt>
-                    <dd class="value_item users  {{cssLast($last)}}" ng-repeat="project_user in project.users">
-                        <em class="key role" ng-if="project_user.role">{{project_user.role}}: </em>
-                        <em class="key none role" ng-if="!project_user.role">Undefined Role: </em>
-                        <p class="value role">{{project_user.firstname}} {{project_user.lastname}}</p>
-                    </dd>
-                    <dd class="value none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
-                    <dt class="key start_date">Start Date:</dt>
-                    <dd class="value start_date" ng-if="project.start_date">{{prettyDateDeadline(project.start_date)}}</dd>
-                    <dd class="value none start_date" ng-if="!project.start_date">Not defined</dd>
-                    <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
-                    <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
-                    <dt class="key tasks_rank">Top Tasks:</dt>
-                    <dd class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
-                        <span class="key rank">{{$index + 1}}</span>
-                        <p class="value rank">{{project_task.name}}</p>
-                    </dd>
-                    <dd class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
-                </dl>
-            </a>
-        </li>
-    </ul>
-    <p ng-if="!projects || projects.length == 0" class="info none">No projects</p>
-    <ul class="pagination" ng-if="projects_page_count_arr && projects_page_count_arr.length > 1">
-        <li class="item previous" ng-click="getProjects(selected_projects_tab,projects_limit,projects_current_page-1)"> 
-            <a href="#">&laquo;</a>
-        </li>
-        <li class="item {{currentProjectsPageClass($index+1)}}" ng-repeat="i in projects_page_count_arr track by $index">
-            <a href="#" ng-click="getProjects(selected_projects_tab,projects_limit,$index+1)">{{$index+1}}</a>
-        </li>
-        <li class="item next" ng-click="getProjects(selected_projects_tab,projects_limit,projects_current_page+1)">
             <a href="#">&raquo;</a>
         </li>
     </ul>
