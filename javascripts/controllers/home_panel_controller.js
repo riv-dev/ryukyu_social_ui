@@ -10,10 +10,47 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         $localStorage.selected_tasks_tab = null;
         $localStorage.tasks_limit = null;
         $localStorage.tasks_current_page = null;
+        delete $localStorage.tasks_maximized;
     } 
 
     CommonFunctions.checkLoggedInUser($scope, $localStorage);
     CommonFunctions.setFlashMessage($scope, $localStorage);
+
+    if(!$localStorage.hasOwnProperty('tasks_maximized')) {
+        $localStorage.tasks_maximized = true;
+    }
+
+    $scope.tasksMinMaxButtonClass = function() {
+        if($localStorage.tasks_maximized) {
+            return "minimize";
+        } else {
+            return "maximize";
+        }
+    }
+
+    $scope.tasksMinMaxSectionClass = function() {
+        if($localStorage.tasks_maximized) {
+            return "maximized";
+        } else {
+            return "minimized";
+        }
+    }
+
+    $scope.projectsMinMaxSectionClass = function() {
+        if($localStorage.tasks_maximized) {
+            return "compact";
+        } else {
+            return "full";
+        }
+    }
+
+    $scope.minMaxTasksSection = function() {
+        if($localStorage.tasks_maximized) {
+            $localStorage.tasks_maximized = false;
+        } else {
+            $localStorage.tasks_maximized = true;
+        }
+    }
 
     $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
