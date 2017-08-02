@@ -1,7 +1,7 @@
 <p ng-if="!loggedin_user" class="message welcome">Welcome to Ryukyu Social</p>
 <p ng-if="!loggedin_user" class="message welcome">Please <a href="./login">log in</a></p>
 
-<section ng-if="loggedin_user" class="section projects">
+<section ng-if="loggedin_user" class="section projects {{projectsMinMaxSectionClass()}}">
     <header class="header">
         <h2 class="title">Projects List</h2>
         <ul class="tabs">
@@ -64,9 +64,10 @@
     </ul>
 </section>
 
-<section ng-if="loggedin_user" class="section tasks">
+<section ng-if="loggedin_user" class="section tasks {{tasksMinMaxSectionClass()}}">
     <header class="header">
         <h2 class="title">Company Task Board</h2>
+        <button ng-click="minMaxTasksSection()" class="button {{tasksMinMaxButtonClass()}}">Minimize/Maximize</button>
         <ul class="tabs">
             <li class="item {{selectedClass(selected_tasks_tab,'dump')}}"><button class="tab dump" ng-click="getTasks('dump',tasks_limit,1)">dump</button></li><!--
             --><li class="item {{selectedClass(selected_tasks_tab,'waiting')}}"><button class="tab waiting" ng-click="getTasks('waiting',tasks_limit,1)">waiting</button></li><!--
