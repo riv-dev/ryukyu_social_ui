@@ -27,11 +27,38 @@
 
 //Layouts for Main Element
 .main.home {
-    .section.tasks {
-        width: 30%;
-    }
     .section.projects {
         width: 40%;
+        &.full {
+            width: 70%;
+        }
+    }
+    .section.tasks {
+        width: 30%;
+        &.minimized {
+            width: 0%;
+            * {
+                display: none;
+            }
+
+            .header {
+                display: block;
+                height: 20px;
+                width: 80px;
+                border: none;
+                .title {
+                    background-color: $light_orange;
+                    position: absolute;
+                    right: 15px;
+                    top: 0px;
+                    font-size: 10px;
+                    display: block;
+                }
+                .button.minimize,.button.maximize {
+                    display: block;
+                }
+            }
+        }
     }
     .section.users {
         width: 30%;
