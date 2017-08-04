@@ -1,34 +1,94 @@
 <section class="section details">
     <header class="header">
-        <h2 class="title">{{this_task.name}}</h2>
+        <h2 class="title task">{{this_task.name}}</h2>
+        <button class="button edit name" ng-click="show_name_form()">Edit Name</button>
+        <form class="form name" name="name_form">
+            <p class="field">
+                <input class="input name" type="text" ng-model="this_task.name"></input>
+            </p>
+            <div class="buttons">
+                <input class="button submit" type="submit" value="Update Name" ng-click="update_name()">
+                <a class="button cancel" ng-click="cancel_name()">Cancel</a>
+            </div>
+        </form>
     </header>
+    <div class="info description markdown" btf-markdown="this_task.description"></div>
+    <div class="info description edit">
+        <form class="form description" name="description_form">
+            <p class="field">
+                <textarea class="input area" type="text" ng-model="this_task.description"></textarea>
+            </p>
+            <div class="buttons">
+                <input class="button submit" type="submit" value="Update Description" ng-click="update_description()">
+                <a class="button cancel" ng-click="cancel_description()">Cancel</a>
+            </div>
+        </form>
+        <button class="button edit description" ng-click="show_description_form()">Edit Description</button>
+    </div>
 
-    <dl class="attributes">
+    <dl class="attributes metrics">
         <dt class="key status">Status:</dt>
-        <dd class="value status {{this_task.status}}">{{this_task.status}}</dd>
-        <dt class="key created_at">Created at:</dt>
-        <dd class="value created_at">{{prettyDate(this_task.created_at)}}</dd>  
-        <dt class="key updated_at">Updated at:</dt>
-        <dd class="value updated_at">{{prettyDate(this_task.updated_at)}}</dd>          
+        <dd class="value status">
+            <input type="radio" ng-model="this_task.status" value="dump" ng-change="put('status','dump')">dump
+            <input type="radio" ng-model="this_task.status" value="waiting" ng-change="put('status','waiting')">waiting
+            <input type="radio" ng-model="this_task.status" value="doing" ng-change="put('status','doing')">doing
+            <input type="radio" ng-model="this_task.status" value="finished" ng-change="put('status','finished')">finished
+        </dd>
         <dt class="key deadline">Deadline:</dt>
-        <dd class="value deadline {{checkDateImportance(this_task.deadline, this_task.status)}}" ng-if="this_task.deadline">{{prettyDateDeadline(this_task.deadline, this_task.status)}}</dd>            
-        <dd class="value none deadline" ng-if="!this_task.deadline">Not defined</dd>           
+        <dd class="value deadline">
+            <span class="date {{checkDateImportance(this_task.deadline, this_task.status)}}">{{prettyDateDeadline(this_task.deadline, this_task.status)}}</span>
+            <button class="button calendar" ng-click="show_deadline_calendar()">Calendar</button>
+            <form class="form deadline" name="deadline_form">
+                <input type="text" id="deadline_input" value="">
+                <div class="buttons">
+                    <input class="button submit" type="submit" value="Update Deadline" ng-click="update_deadline()">
+                    <a class="button cancel" ng-click="cancel_deadline()">Cancel</a>
+                </div>
+            </form>
+        </dd>
+        <dd class="value none deadline" ng-if="!this_task.deadline">Not defined</dd>
         <dt class="key priority">Priority:</dt>
-        <dd class="value priority {{checkPriorityImportance(this_task.priority)}}" ng-if="this_task.priority">{{getPriorityLabel(this_task.priority)}}</dd>
-        <dd class="value none priority" ng-if="!this_task.priority">Not defined</dd>        
+        <dd class="value priority">
+            <input type="radio" ng-model="this_task.priority" ng-value=0 ng-change="put('priority',0)">Not Important
+            <input type="radio" ng-model="this_task.priority" ng-value=1 ng-change="put('priority',1)">Slightly Important
+            <input type="radio" ng-model="this_task.priority" ng-value=2 ng-change="put('priority',2)">Important
+            <input type="radio" ng-model="this_task.priority" ng-value=3 ng-change="put('priority',3)">Fairly Important
+            <input type="radio" ng-model="this_task.priority" ng-value=4 ng-change="put('priority',4)">Very Important
+        </dd>
         <dt class="key project">Project:</dt>
-        <dd class="value project" ng-if="this_task.project_name"><a href="./projects/{{this_task.project_id}}">{{this_task.project_name}}</a></dd>
-        <dd class="value none project" ng-if="!this_task.project_name">Not assigned</dd>              
-        <dt class="key archived">Archived:</dt>
-        <dd class="value archived {{this_task.archived}}">{{archivedYesNo(this_task.archived)}}</dd>
-        <dt class="key description">Description:</dt>
-        <dd class="value description markdown" btf-markdown="this_task.description"></dd>
+        <dd class="value project" ng-show="this_task.project_name">
+            <a class="link" href="./projects/{{this_task.project_id}}">{{this_task.project_name}}</a>
+            <button class="button edit project" ng-click="show_project_form()">Edit</button>        
+            <form class="form project" name="project_form">
+                <p class="field">
+                    <select class="input select" ng-options="project.id as project.name for project in projects" ng-model="this_task.project_id"></select>
+                </p>
+                <div class="buttons">
+                    <input class="button submit" type="submit" value="Update Project" ng-click="update_project()">
+                    <a class="button cancel" ng-click="cancel_project()">Cancel</a>
+                </div>
+            </form>
+        </dd>
+        <dd class="value none project" ng-show="!this_task.project_name">Not assigned
+            <button class="button edit project" ng-click="show_projects_form()">Edit</button>
+        </dd>
+    </dl>
+
+    <dl class="attributes extra">
+        <dt class="key created_at">Created at:</dt>
+        <dd class="value created_at">{{prettyDate(this_task.created_at)}}</dd>
+        <dt class="key updated_at">Updated at:</dt>
+        <dd class="value updated_at">{{prettyDate(this_task.updated_at)}}</dd>
+        <dt class="key archived">Send to Archive:</dt>
+        <dd class="value archived {{this_task.archived}}">
+            <input class="checkbox" type="checkbox" ng-model="this_task.archived" ng-true-value="1" ng-false-value="0" ng-change="put('archived',this_task.archived)">
+        </dd>
     </dl>
     <ul class="links">
         <li class="item back" ng-if="!this_user_id && !this_project_id"><a class="link" ng-click="back()" href="./">Go Back</a></li>
         <li class="item back" ng-if="this_user_id"><a class="link" href="./users/{{this_user_id}}">Go Back to User</a></li>
         <li class="item back" ng-if="this_project_id"><a class="link" href="./projects/{{this_project_id}}">Go Back to Project</a></li>
-        <li class="item edit"><a class="link" href="./tasks/{{this_task.id}}/edit">Edit Task</a></li>
+        <!--<li class="item edit"><a class="link" href="./tasks/{{this_task.id}}/edit">Edit Task</a></li>-->
         <li class="item delete"><a class="link" ng-click="remove_task()">Delete Task</a></li>
     </ul>
 </section>
@@ -43,18 +103,16 @@
             <a class="link_block" href="./users/{{assigned_user.user_id}}">
                 <h3 class="key user" ng-if="assigned_user.title">{{assigned_user.title}}</h3>
                 <h3 class="key none user" ng-if="!assigned_user.title">Undefined Title</h2>
-                <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>
-                <dl class="attributes">
-                    <dt class="key progress_description">
-                        <em ng-if="loggedin_user.id == assigned_user.user_id">My </em>
-                        Progress Description:
-                    </dt>
-                    <dd class="value progress_description">{{assigned_user.progress_description}}</dd>
-                </dl>
+                    <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>
+                    <dl class="attributes">
+                        <dt class="key progress_description">
+                            <em ng-if="loggedin_user.id == assigned_user.user_id">My </em> Progress Description:
+                        </dt>
+                        <dd class="value progress_description">{{assigned_user.progress_description}}</dd>
+                    </dl>
             </a>
             <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == assigned_user.user_id || loggedin_user.id == this_task.creator_user_id"
-                ng-click="remove_user(assigned_user)" title="Remove User"
-                >Remove User</button>
+                ng-click="remove_user(assigned_user)" title="Remove User">Remove User</button>
 
             <form ng-if="loggedin_user.id == assigned_user.user_id" class="form update_progress">
                 <p class="field">
@@ -62,8 +120,8 @@
                 </p>
                 <p class="field">
                     <input class="button submit" type="submit" value="Update My Progress" ng-click="update_progress()">
-                </p>        
-            </form>            
+                </p>
+            </form>
         </li>
     </ul>
     <p class="info none" ng-if="!assigned_users || assigned_users.length == 0">Needs Assignee</p>
@@ -71,9 +129,9 @@
         <p class="title">Assign User to Task: </p>
         <p class="field"><label class="label" for="selected_user_id">User Name: </label>
             <select class="input select" ng-options="user.id as getFullName(user) for user in users track by user.id" ng-model="selected_user_id"></select>
-        </p>        
+        </p>
         <p class="field">
             <input class="button submit" type="submit" value="Assign User" ng-click="assign_user()">
-        </p>        
+        </p>
     </form>
 </section>

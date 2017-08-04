@@ -11,6 +11,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
     <script src="libs/showdown/src/showdown.js"></script>
     <script src="libs/angular-markdown-directive/markdown.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	  <link type="text/css" href="./libs/dtpicker/jquery.simple-dtpicker.css" rel="stylesheet" />
   </head>
   <body class="site">
       <header class="header">
@@ -18,7 +20,6 @@
         <p class="message login_status" ng-if="login_status">{{login_status}}</p>
         <p class="message flash {{flash_level}}" ng-if="flash_message">{{flash_message}}</p>
       </header>
-
       <nav ng-if="loggedin_user" class="navigation">
         <ul class="links">
           <li class="item active"><a class="link" href="./home-panel">Home Panel</a></li>
@@ -31,7 +32,7 @@
       <main class="main {{panel_class}}" ng-view>
 
       </main>
-
+	    <script type="text/javascript" src="./libs/dtpicker/jquery.simple-dtpicker.js"></script>
       <script src="libs/moment/moment.min.js"></script>
       <script src="javascripts/config/server_settings.js"></script>
       <script src="javascripts/config/routes.js"></script>
