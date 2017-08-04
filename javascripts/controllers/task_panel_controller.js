@@ -4,7 +4,7 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
 
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
-    CommonFunctions.checkLoggedInUser($scope, $localStorage);
+    CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
 
     if ($routeParams.project_id) {

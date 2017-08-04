@@ -61,7 +61,7 @@ app.service('CommonFunctions', function() {
         window.localStorage.removeItem("token");
     }
     
-    this.checkLoggedInUser = function(scope, localStorage) {
+    this.checkLoggedInUser = function(scope, localStorage, location) {
         if(this.getToken()) {
             var decodedToken = parseJwt(this.getToken());
             scope.$parent.login_status = "Logged in as: " + decodedToken.email;
@@ -80,7 +80,8 @@ app.service('CommonFunctions', function() {
               delete localStorage.loggedin_user;              
 
               if(window.location.pathname != '/' && window.location.pathname != '') {
-                window.location = '/';
+                localStorage.url_attempted = location.path();
+                location.path('/');
               } 
             }
         } else {
@@ -88,9 +89,12 @@ app.service('CommonFunctions', function() {
             delete scope.$parent.loggedin_user;
             delete scope.$parent.login_status;
             delete localStorage.loggedin_user;
+            scope.$parent.flash_message = "Please log in.";
+            scope.$parent.flash_level = "fail";
 
             if(window.location.pathname != '/' && window.location.pathname != '') {
-              window.location = '/';
+              localStorage.url_attempted = location.path();
+              location.path('/');
             }
         }
     }

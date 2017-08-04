@@ -1,6 +1,6 @@
 app.controller('editProjectPermissionsController', function($scope, $http, $location, $localStorage, $routeParams, CommonFunctions) {
     CommonFunctions.setFlashMessage($scope, $localStorage);
-    CommonFunctions.checkLoggedInUser($scope, $localStorage);
+    CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
 
     if($localStorage.loggedin_user) {

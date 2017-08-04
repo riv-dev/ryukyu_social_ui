@@ -1,6 +1,6 @@
 app.controller('newProjectController', function($scope, $http, $location, $routeParams, $localStorage, CommonFunctions) {
     CommonFunctions.setFlashMessage($scope, $localStorage);
-    CommonFunctions.checkLoggedInUser($scope, $localStorage);
+    CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
     if($localStorage.loggedin_user) {
         $scope.$parent.hero = "Add Project";
