@@ -36,7 +36,8 @@
         </dd>
         <dt class="key deadline">Deadline:</dt>
         <dd class="value deadline">
-            <span class="date {{checkDateImportance(this_task.deadline, this_task.status)}}">{{prettyDateDeadline(this_task.deadline, this_task.status)}}</span>
+            <span class="date {{checkDateImportance(this_task.deadline, this_task.status)}}" ng-show="this_task.deadline">{{prettyDateDeadline(this_task.deadline, this_task.status)}}</span>
+            <span class="date none" ng-show="!this_task.deadline">Not defined</span>
             <button class="button calendar" ng-click="show_deadline_calendar()">Calendar</button>
             <form class="form deadline" name="deadline_form">
                 <input type="text" id="deadline_input" value="">
@@ -46,7 +47,6 @@
                 </div>
             </form>
         </dd>
-        <dd class="value none deadline" ng-if="!this_task.deadline">Not defined</dd>
         <dt class="key priority">Priority:</dt>
         <dd class="value priority">
             <input type="radio" ng-model="this_task.priority" ng-value=0 ng-change="put('priority',0)">Not Important
@@ -56,8 +56,9 @@
             <input type="radio" ng-model="this_task.priority" ng-value=4 ng-change="put('priority',4)">Very Important
         </dd>
         <dt class="key project">Project:</dt>
-        <dd class="value project" ng-show="this_task.project_name">
-            <a class="link" href="./projects/{{this_task.project_id}}">{{this_task.project_name}}</a>
+        <dd class="value project">
+            <span ng-show="this_task.project_name"><a class="link" href="./projects/{{this_task.project_id}}">{{this_task.project_name}}</a></span>
+            <span class="none" ng-show="!this_task.project_name">Not Assigned</span>
             <button class="button edit project" ng-click="show_project_form()">Edit</button>        
             <form class="form project" name="project_form">
                 <p class="field">
@@ -68,9 +69,6 @@
                     <a class="button cancel" ng-click="cancel_project()">Cancel</a>
                 </div>
             </form>
-        </dd>
-        <dd class="value none project" ng-show="!this_task.project_name">Not assigned
-            <button class="button edit project" ng-click="show_projects_form()">Edit</button>
         </dd>
     </dl>
 

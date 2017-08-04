@@ -38,7 +38,9 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
         $('.form.deadline').css('display', 'none');
         $('.button.calendar').css('display', 'inline-block');
 
-        $('#deadline_input').handleDtpicker('setDate', new Date($scope.this_task.deadline));
+        if($scope.this_task.deadline) {
+            $('#deadline_input').handleDtpicker('setDate', new Date($scope.this_task.deadline));
+        }
     }
 
     $scope.show_project_form = function () {
@@ -247,7 +249,9 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
                 $('#deadline_input').appendDtpicker({
                     "inline": true
                 });
-                $('#deadline_input').handleDtpicker('setDate', new Date($scope.this_task.deadline));
+                if($scope.this_task.deadline) {
+                    $('#deadline_input').handleDtpicker('setDate', new Date($scope.this_task.deadline));
+                }
                 $('.form.deadline').css('display', 'none');
                 $('.form.project').css('display', 'none');
                 $('.form.name').css('display', 'none');
