@@ -5,7 +5,8 @@
     <header class="header">
         <h2 class="title">Projects List</h2>
         <ul class="tabs">
-            <li class="item {{selectedClass(selected_projects_tab,'new')}}"><button class="tab new" ng-click="getProjects('new',projects_limit,1)">new</button></li><!--
+            <li class="item {{selectedClass(selected_projects_tab,'dump')}}"><button class="tab dump" ng-click="getProjects('dump',projects_limit,1)">dump</button></li><!--
+            --><li class="item {{selectedClass(selected_projects_tab,'waiting')}}"><button class="tab waiting" ng-click="getProjects('waiting',projects_limit,1)">waiting</button></li><!--
             --><li class="item {{selectedClass(selected_projects_tab,'doing')}}"><button class="tab doing" ng-click="getProjects('doing',projects_limit,1)">doing</button></li><!--
             --><li class="item {{selectedClass(selected_projects_tab,'finished')}}"><button class="tab finished" ng-click="getProjects('finished',projects_limit,1)">finished</button></li>
         </ul>

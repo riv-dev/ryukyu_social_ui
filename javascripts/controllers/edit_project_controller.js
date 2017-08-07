@@ -8,7 +8,8 @@ app.controller('editProjectController', function($scope, $http, $location, $loca
         $scope.this_project_id = $routeParams.project_id;
 
         $scope.statuses = [
-            "new",
+            "dump",
+            "waiting",
             "doing",
             "finished"
         ];
