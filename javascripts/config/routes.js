@@ -72,30 +72,26 @@ app.service('CommonFunctions', function() {
             console.log(moment(decodedToken.exp,"X").calendar());
             if(moment() > moment(decodedToken.exp,"X")) {
               //expired
-              scope.$parent.flash_message = "Log in expired.";
+              localStorage.flash_message = "Log in expired.";
               scope.$parent.flash_level = "fail";
               delete scope.loggedin_user;
               delete scope.$parent.loggedin_user;
               delete scope.$parent.login_status;
               delete localStorage.loggedin_user;              
 
-              if(window.location.pathname != '/' && window.location.pathname != '') {
-                localStorage.url_attempted = location.path();
-                location.path('/');
-              } 
+              localStorage.url_attempted = location.path();
+              location.path('/login');
             }
         } else {
             delete scope.loggedin_user;
             delete scope.$parent.loggedin_user;
             delete scope.$parent.login_status;
             delete localStorage.loggedin_user;
-            scope.$parent.flash_message = "Please log in.";
+            localStorage.flash_message = "Please log in.";
             scope.$parent.flash_level = "fail";
 
-            if(window.location.pathname != '/' && window.location.pathname != '') {
-              localStorage.url_attempted = location.path();
-              location.path('/');
-            }
+            localStorage.url_attempted = location.path();
+            location.path('/login');
         }
     }
 

@@ -13,8 +13,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         delete $localStorage.tasks_maximized;
     } 
 
-    CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
     CommonFunctions.setFlashMessage($scope, $localStorage);
+    CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
     if(!$localStorage.hasOwnProperty('tasks_maximized')) {
         $localStorage.tasks_maximized = true;
