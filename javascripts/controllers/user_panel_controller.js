@@ -14,7 +14,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
     } 
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
-    CommonFunctions.checkLoggedInUser($scope, $localStorage);
+    CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
     if($routeParams.project_id) {
         $scope.this_project_id = $routeParams.project_id;

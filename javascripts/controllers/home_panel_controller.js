@@ -1,4 +1,4 @@
-app.controller('homePanelController', function($scope, $http, $localStorage, CommonFunctions) {
+app.controller('homePanelController', function($scope, $http, $location, $localStorage, CommonFunctions) {
     $scope.$parent.hero = "Home Panel";
     $scope.$parent.panel_class = "home";
 
@@ -13,8 +13,8 @@ app.controller('homePanelController', function($scope, $http, $localStorage, Com
         delete $localStorage.tasks_maximized;
     } 
 
-    CommonFunctions.checkLoggedInUser($scope, $localStorage);
     CommonFunctions.setFlashMessage($scope, $localStorage);
+    CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
     if(!$localStorage.hasOwnProperty('tasks_maximized')) {
         $localStorage.tasks_maximized = true;

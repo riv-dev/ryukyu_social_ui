@@ -4,6 +4,7 @@ app.controller('logoutController', function($scope, $http, $route, $location, $l
     delete $localStorage.loggedin_user; //decoded token
     delete $localStorage.last_visited_user_id;
     delete $localStorage.last_visited_project_id;
+    delete $localStorage.url_attempted;
     $localStorage.flash_message = "Logged out";
     $scope.$parent.flash_level = "alert";
     $location.path('/');
