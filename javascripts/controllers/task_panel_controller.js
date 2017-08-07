@@ -1,4 +1,4 @@
-app.controller('taskPanelController', function ($scope, $http, $routeParams, $localStorage, CommonFunctions) {
+app.controller('taskPanelController', function ($scope, $http, $routeParams, $location, $localStorage, CommonFunctions) {
     $scope.$parent.hero = "Task Panel";
     $scope.$parent.panel_class = "task";
 

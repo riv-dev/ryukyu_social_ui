@@ -1,4 +1,4 @@
-app.controller('projectPanelController', function($scope, $http, $routeParams, $localStorage, CommonFunctions) {
+app.controller('projectPanelController', function($scope, $http, $routeParams, $location, $localStorage, CommonFunctions) {
     $scope.$parent.hero = "Project Panel";
     $scope.$parent.panel_class = "project";
 
