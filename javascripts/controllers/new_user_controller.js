@@ -1,6 +1,6 @@
 app.controller('newUserController', function($scope, $http, $location, $localStorage, CommonFunctions) {
     CommonFunctions.setFlashMessage($scope, $localStorage);
-    CommonFunctions.checkLoggedInUser($scope, $localStorage);
+    CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
     if($localStorage.loggedin_user && $localStorage.loggedin_user.admin) {
         $scope.$parent.hero = "Add User";
