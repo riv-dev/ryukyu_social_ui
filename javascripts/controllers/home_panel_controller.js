@@ -53,7 +53,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     }
 
     $scope.prettyDateDeadline = function(isoDateStr, status) {
-        if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
+        if(moment() > moment(isoDateStr) && (status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";
         } else {
             return moment(isoDateStr).calendar();
@@ -168,7 +168,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         if(/today/i.test(moment(date).calendar())) {
             return "important";
         }
-        else if(moment() > moment(date) && (status == "dump" || status == "new" || status == "waiting" || status == "doing")) {
+        else if(moment() > moment(date) && (status == "dump" || status == "waiting" || status == "doing")) {
             return "important";
         } 
         else {
