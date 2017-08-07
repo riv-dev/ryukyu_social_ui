@@ -6,7 +6,8 @@ app.controller('newProjectController', function($scope, $http, $location, $route
         $scope.$parent.hero = "Add Project";
 
         $scope.statuses = [
-            "new",
+            "dump",
+            "waiting",
             "doing",
             "finished"
         ];
