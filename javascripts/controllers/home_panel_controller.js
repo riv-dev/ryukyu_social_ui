@@ -497,7 +497,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         });
     } //End getProjects()
 
-    $scope.pinnedClass = function(project) {
+    $scope.projectPinnedClass = function(project) {
         if(project.pinned) {
             return "pinned";
         } else {
@@ -505,7 +505,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }    
     }
 
-    $scope.togglePin = function (project) {
+    $scope.projectTogglePin = function (project) {
         var pinned = false;
         if (project.pinned) {
             pinned = false;
@@ -525,6 +525,40 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }).then(
             function successCallback(response) {
                 $scope.getProjects($localStorage.selected_projects_tab, $localStorage.projects_limit, $localStorage.projects_current_page);
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
+
+    $scope.taskPinnedClass = function(task) {
+        if(task.pinned) {
+            return "pinned";
+        } else {
+            return "";
+        }    
+    }
+
+    $scope.taskTogglePin = function (task) {
+        var pinned = false;
+        if (task.pinned) {
+            pinned = false;
+        } else {
+            pinned = true;
+        }
+
+        $http({
+            method: 'PUT',
+            url: tasksApiBaseURL + '/tasks/' + task.id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                pinned: pinned
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.getTasks($localStorage.selected_tasks_tab, $localStorage.tasks_limit, $localStorage.tasks_current_page);    
             },
             function errorCallback(response) {
             }

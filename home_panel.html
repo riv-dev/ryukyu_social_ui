@@ -49,7 +49,7 @@
                     <dd class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
                 </dl>
             </a>
-            <button class="button pin {{pinnedClass(project)}}" title="pin" ng-click="togglePin(project)">Pin</button>
+            <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
         </li>
     </ul>
     <p ng-if="!projects || projects.length == 0" class="info none">No projects</p>
@@ -117,6 +117,7 @@
                     <dd class="value none project" ng-if="!task.project_name">Not Assigned</dd>
                 </dl>
             </a>
+            <button class="button pin {{taskPinnedClass(task)}}" title="pin" ng-click="taskTogglePin(task)">Pin</button>
         </li>
     </ul>
     <p ng-if="!tasks || tasks.length == 0" class="info none">No tasks</p>

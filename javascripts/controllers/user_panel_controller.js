@@ -508,7 +508,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
     } //End getProjects()
 
     //Use user_pinned, not pinned (pinned is global, user_pinned is per user)
-    $scope.pinnedClass = function(project) {
+    $scope.projectPinnedClass = function(project) {
         if(project.user_pinned) {
             return "pinned";
         } else {
@@ -516,7 +516,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         }    
     }
 
-    $scope.togglePin = function (project) {
+    $scope.projectTogglePin = function (project) {
         var pinned = false;
         if (project.user_pinned) {
             pinned = false;
@@ -536,6 +536,40 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         }).then(
             function successCallback(response) {
                 $scope.getProjects($localStorage.user_panel_selected_projects_tab, $localStorage.user_panel_projects_limit, $localStorage.user_panel_projects_current_page);    
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
+
+    $scope.taskPinnedClass = function(task) {
+        if(task.user_pinned) {
+            return "pinned";
+        } else {
+            return "";
+        }    
+    }
+
+    $scope.taskTogglePin = function (task) {
+        var pinned = false;
+        if (task.user_pinned) {
+            pinned = false;
+        } else {
+            pinned = true;
+        }
+
+        $http({
+            method: 'PUT',
+            url: tasksApiBaseURL + '/users/' + task.user_id + '/tasks/' + task.task_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                user_pinned: pinned
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.getTasks($localStorage.user_panel_selected_tasks_tab, $localStorage.user_panel_selected_project_id_filter, $localStorage.user_panel_tasks_limit, $localStorage.user_panel_tasks_current_page);    
             },
             function errorCallback(response) {
             }
