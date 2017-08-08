@@ -52,6 +52,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }
     }
 
+
+
     $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";
@@ -494,6 +496,40 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             });
         });
     } //End getProjects()
+
+    $scope.pinnedClass = function(project) {
+        if(project.pinned) {
+            return "pinned";
+        } else {
+            return "";
+        }    
+    }
+
+    $scope.togglePin = function (project) {
+        var pinned = false;
+        if (project.pinned) {
+            pinned = false;
+        } else {
+            pinned = true;
+        }
+
+        $http({
+            method: 'PUT',
+            url: projectsApiBaseURL + '/projects/' + project.id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                pinned: pinned
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.getProjects($localStorage.selected_projects_tab, $localStorage.projects_limit, $localStorage.projects_current_page);
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
 
     if($localStorage.loggedin_user) {
         //Get users list

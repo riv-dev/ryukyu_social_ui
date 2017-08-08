@@ -116,7 +116,7 @@
                 <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>
             </a>
             <a class="button permissions" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}/edit" 
-               ng-if="loggedin_user.admin || this_user_write_access > 1">Permissions</a>
+               ng-if="loggedin_user.admin || this_user_write_access > 1" title="Permissions">Permissions</a>
             <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == assigned_user.user_id || this_user_write_access > 1"
                 ng-click="remove_user(assigned_user)" title="Remove User"
                 >Remove User</button>

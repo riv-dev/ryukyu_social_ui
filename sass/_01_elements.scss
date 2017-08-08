@@ -2,11 +2,10 @@
 .logo {
     color: $light_black;
     font-size: 36px;
-
     a {
         text-decoration: none;
-        @include link-colors($dark_grey,$dark_grey,$dark_grey,$dark_grey,$dark_grey);
-    }    
+        @include link-colors($dark_grey, $dark_grey, $dark_grey, $dark_grey, $dark_grey);
+    }
 }
 
 .title {
@@ -23,13 +22,11 @@
     font-size: 14px;
 }
 
-.message {
-}
+.message {}
 
 .message.welcome {
     text-align: center;
     font-size: 30px;
-
     a {
         text-decoration: underline;
     }
@@ -76,7 +73,7 @@
 .link {
     font-size: 16px;
     text-decoration: none;
-    @include link-colors($blue,$blue,$blue,$blue,$blue);
+    @include link-colors($blue, $blue, $blue, $blue, $blue);
     @include transition(0.2s);
     &:hover {
         background-color: $light_blue;
@@ -86,7 +83,7 @@
 .link_block {
     display: block;
     text-decoration: none;
-    @include link-colors($black,$black,$black,$black,$black);
+    @include link-colors($black, $black, $black, $black, $black);
     @include transition(0.2s);
     &:hover {
         background-color: $light_blue;
@@ -101,9 +98,7 @@
     color: $dark_grey;
 }
 
-.field {
-
-}
+.field {}
 
 .input {
     border: 1px solid $grey;
@@ -125,7 +120,7 @@
 //Generic Elements
 .button {
     background-color: $grey;
-    text-align: center;    
+    text-align: center;
     @include transition(0.2s);
     cursor: pointer;
     &:hover {
@@ -144,7 +139,7 @@
     font-size: 18px;
     text-decoration: underline;
     background-color: transparent;
-    @include link-colors($blue,$blue,$blue,$blue,$blue);
+    @include link-colors($blue, $blue, $blue, $blue, $blue);
 }
 
 .button.delete {
@@ -161,12 +156,10 @@
     color: $black;
     margin: 0px;
     padding: 0px;
-
     &:hover {
         background-color: none;
         color: $red;
     }
-
     &:before {
         position: absolute;
         text-indent: 0px;
@@ -178,9 +171,48 @@
     }
 }
 
+.button.pin {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 18px;
+    text-indent: 9999px;
+    color: $grey;
+    margin: 0px;
+    padding: 0px;
+    &:hover {
+        background-color: none;
+        color: $red;
+    }
+    &:before {
+        position: absolute;
+        text-indent: 0px;
+        left: 3px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f08d";
+    }
+}
+
+.pinned {
+    color: $red !important;
+    &:before {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+}
+
 .button.calendar {
-    position: relative;
-    //top: 5px;
+    position: relative; //top: 5px;
     //right: 5px;
     overflow: hidden;
     background-color: transparent;
@@ -192,12 +224,10 @@
     color: $black;
     margin: 0px;
     padding: 0px;
-
     &:hover {
         background-color: none;
         color: $blue;
     }
-
     &:before {
         position: absolute;
         text-indent: 0px;
@@ -223,12 +253,10 @@
     color: $black;
     margin: 0px;
     padding: 0px;
-
     &:hover {
         background-color: $light_blue;
         color: $blue;
     }
-
     &:before {
         position: absolute;
         text-indent: 0px;
@@ -254,12 +282,10 @@
     color: $black;
     margin: 0px;
     padding: 0px;
-
     &:hover {
         background-color: none;
         color: $blue;
     }
-
     &:before {
         position: absolute;
         text-indent: 0px;
@@ -285,12 +311,10 @@
     color: $black;
     margin: 0px;
     padding: 0px !important;
-
     &:hover {
         background-color: transparent !important;
         color: $blue !important;
     }
-
     &:before {
         position: absolute;
         text-indent: 0px;
@@ -302,7 +326,7 @@
     }
 }
 
-.button.edit{
+.button.edit {
     position: relative;
     top: 0px;
     right: 0px;
@@ -316,12 +340,10 @@
     color: $black;
     margin: 0px;
     padding: 0px !important;
-
     &:hover {
         background-color: transparent !important;
         color: $blue !important;
     }
-
     &:before {
         position: absolute;
         text-indent: 0px;
@@ -344,14 +366,12 @@
     border: none;
     text-indent: 9999px;
     overflow: hidden;
-
-    text-align: center;    
+    text-align: center;
     @include transition(0.2s);
     cursor: pointer;
     &:hover {
         background-color: $light_blue;
     }
-
     &:before {
         position: absolute;
         text-indent: 0px;
@@ -364,14 +384,12 @@
         display: block;
         text-align: center;
     }
-
     &.show {
         display: block;
         &:before {
             content: "\f1de";
         }
     }
-
     &.hide {
         display: block;
         &:before {
@@ -381,9 +399,7 @@
 }
 
 //Images
-.image {
-
-}
+.image {}
 
 //Generic Behavior Properties
 .show {
@@ -437,27 +453,32 @@
     color: $red;
 }
 
-.finished, button.finished {
+.finished,
+button.finished {
     color: $green;
     background-color: $light_green;
 }
 
-.doing, button.doing {
+.doing,
+button.doing {
     color: $blue;
     background-color: $light_orange;
 }
 
-.new, button.new {
+.new,
+button.new {
     color: $orange;
     background-color: white;
 }
 
-.waiting, button.waiting {
+.waiting,
+button.waiting {
     color: $black;
     background-color: $pink;
 }
 
-.dump, button.dump {
+.dump,
+button.dump {
     color: $black;
     background-color: white;
 }
@@ -469,7 +490,7 @@
 
 .active {
     font-weight: bold;
-    text-decoration: underline;   
+    text-decoration: underline;
 }
 
 //Heighlight things that are mine
@@ -479,17 +500,14 @@
 
 .markdown {
     @include default_browser();
-
     img.small {
         width: 25%;
         height: auto;
     }
-
     img.medium {
         width: 50%;
         height: auto;
     }
-
     img.large {
         width: 100%;
         height: auto;
