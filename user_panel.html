@@ -157,6 +157,7 @@
                     <dd class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
                 </dl>
             </a>
+            <button class="button pin {{pinnedClass(project)}}" title="pin" ng-click="togglePin(project)">Pin</button>
         </li>
     </ul>
     <p ng-if="!projects || projects.length == 0" class="info none">No projects</p>
