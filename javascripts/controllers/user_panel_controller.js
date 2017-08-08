@@ -507,6 +507,41 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         });
     } //End getProjects()
 
+    //Use user_pinned, not pinned (pinned is global, user_pinned is per user)
+    $scope.pinnedClass = function(project) {
+        if(project.user_pinned) {
+            return "pinned";
+        } else {
+            return "";
+        }    
+    }
+
+    $scope.togglePin = function (project) {
+        var pinned = false;
+        if (project.user_pinned) {
+            pinned = false;
+        } else {
+            pinned = true;
+        }
+
+        $http({
+            method: 'PUT',
+            url: projectsApiBaseURL + '/users/' + project.user_id + '/projects/' + project.project_id,
+            headers:{
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                user_pinned: pinned
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.getProjects($localStorage.user_panel_selected_projects_tab, $localStorage.user_panel_projects_limit, $localStorage.user_panel_projects_current_page);    
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
+
     if($localStorage.loggedin_user) {
         //Get user information
         $http({
