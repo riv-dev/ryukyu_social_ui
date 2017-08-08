@@ -88,6 +88,7 @@
                     <dd class="value none deadline" ng-if="!task.deadline">Not defined</dd>
                 </dl>
             </a>
+            <button class="button pin {{taskPinnedClass(task)}}" title="pin" ng-click="taskTogglePin(task)">Pin</button>
         </li>
     </ul>
     <p ng-if="!tasks || tasks.length == 0" class="info none">No tasks</p>
