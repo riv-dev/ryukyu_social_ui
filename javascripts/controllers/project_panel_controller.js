@@ -444,6 +444,40 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         });
     } //End getTasks()
 
+    $scope.taskPinnedClass = function(task) {
+        if(task.project_pinned) {
+            return "pinned";
+        } else {
+            return "";
+        }    
+    }
+
+    $scope.taskTogglePin = function (task) {
+        var pinned = false;
+        if (task.project_pinned) {
+            pinned = false;
+        } else {
+            pinned = true;
+        }
+
+        $http({
+            method: 'PUT',
+            url: tasksApiBaseURL + '/projects/' + task.project_id + '/tasks/' + task.id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                project_pinned: pinned
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.getTasks($localStorage.project_panel_selected_tasks_tab, $localStorage.project_panel_selected_user_id_filter, $localStorage.project_panel_tasks_limit, $localStorage.project_panel_tasks_current_page);
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
+
     if($localStorage.loggedin_user) {
         //Get permissions information
         $http({
