@@ -346,7 +346,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     $scope.getProjects = function(status,limit,page) {
         //Save/default settings
         if(!status || status == null || status == undefined) {
-            $scope.selected_projects_tab = "dump";
+            $scope.selected_projects_tab = "doing";
             $localStorage.selected_projects_tab = $scope.selected_projects_tab;
             status = $scope.selected_projects_tab;
         } else {
