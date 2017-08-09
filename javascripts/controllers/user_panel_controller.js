@@ -4,10 +4,10 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
 
     if($localStorage.last_visited_user_id == null || $localStorage.last_visited_user_id != $routeParams.user_id) {
         //clear all settings
-        $localStorage.user_panel_selected_projects_tab = null; 
+        //$localStorage.user_panel_selected_projects_tab = null; 
         $localStorage.user_panel_projects_limit = null;
         $localStorage.user_panel_projects_current_page = null;
-        $localStorage.user_panel_selected_tasks_tab = null;
+        //$localStorage.user_panel_selected_tasks_tab = null;
         $localStorage.user_panel_selected_project_id_filter = null; 
         $localStorage.user_panel_tasks_limit = null;
         $localStorage.user_panel_tasks_current_page = null;
