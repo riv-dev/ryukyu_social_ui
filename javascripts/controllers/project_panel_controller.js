@@ -4,10 +4,10 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
 
     if($localStorage.last_visited_project_id == null || $localStorage.last_visited_project_id != $routeParams.project_id) {
         //clear all settings
-        $localStorage.project_panel_selected_projects_tab = null; 
+        //$localStorage.project_panel_selected_projects_tab = null; 
         $localStorage.project_panel_projects_limit = null;
         $localStorage.project_panel_projects_current_page = null;
-        $localStorage.project_panel_selected_tasks_tab = null;
+        //$localStorage.project_panel_selected_tasks_tab = null;
         $localStorage.project_panel_selected_project_id_filter = null; 
         $localStorage.project_panel_tasks_limit = null;
         $localStorage.project_panel_tasks_current_page = null;
