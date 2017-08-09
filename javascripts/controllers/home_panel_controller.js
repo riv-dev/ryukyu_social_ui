@@ -4,13 +4,13 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
     if($localStorage.flash_message == "Successful Login!") { 
         //clear all settings
-        $localStorage.selected_projects_tab = null; 
+        //$localStorage.selected_projects_tab = null; //Save between sessions
         $localStorage.projects_limit = null;
         $localStorage.projects_current_page = null;
-        $localStorage.selected_tasks_tab = null;
+        //$localStorage.selected_tasks_tab = null; //Save between sessions
         $localStorage.tasks_limit = null;
         $localStorage.tasks_current_page = null;
-        delete $localStorage.tasks_maximized;
+        //delete $localStorage.tasks_maximized; //Save between sessions
     } 
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
