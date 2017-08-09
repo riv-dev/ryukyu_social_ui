@@ -1287,26 +1287,64 @@ button.dump {
 }
 
 /* line 243, ../sass/_02_components.scss */
+.form.task_quick_add {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  padding: 5px 0px 10px;
+  margin: 0px;
+  margin-top: 0px;
+  position: relative;
+}
+/* line 252, ../sass/_02_components.scss */
+.form.task_quick_add .field {
+  display: block;
+  width: 100%;
+  padding-right: 75px;
+  margin-bottom: 0px;
+}
+/* line 258, ../sass/_02_components.scss */
+.form.task_quick_add .input {
+  font-size: 12px;
+  line-height: 20px;
+  height: 20px;
+  width: 100%;
+  font-weight: normal;
+}
+/* line 266, ../sass/_02_components.scss */
+.form.task_quick_add .button {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  width: 70px;
+  text-align: center;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0px;
+}
+
+/* line 279, ../sass/_02_components.scss */
 .form.update_progress {
   width: 100%;
   border: none;
   padding: 0px 5px 0px;
 }
-/* line 247, ../sass/_02_components.scss */
+/* line 283, ../sass/_02_components.scss */
 .form.update_progress .title {
   font-size: 14px;
 }
-/* line 250, ../sass/_02_components.scss */
+/* line 286, ../sass/_02_components.scss */
 .form.update_progress .label {
   color: black;
   font-size: 12px;
 }
-/* line 254, ../sass/_02_components.scss */
+/* line 290, ../sass/_02_components.scss */
 .form.update_progress .input {
   width: 100%;
   font-size: 12px;
 }
-/* line 258, ../sass/_02_components.scss */
+/* line 294, ../sass/_02_components.scss */
 .form.update_progress .button {
   padding: 5px;
   font-size: 12px;
@@ -1315,7 +1353,7 @@ button.dump {
   border-radius: 2px;
 }
 
-/* line 266, ../sass/_02_components.scss */
+/* line 302, ../sass/_02_components.scss */
 .pagination {
   display: inline-block;
   margin: auto;
@@ -1327,32 +1365,32 @@ button.dump {
   clear: both;
 }
 
-/* line 273, ../sass/_02_components.scss */
+/* line 309, ../sass/_02_components.scss */
 .pagination .item {
   float: left;
 }
-/* line 276, ../sass/_02_components.scss */
+/* line 312, ../sass/_02_components.scss */
 .pagination .item a {
   display: block;
   color: black;
   text-decoration: none;
   padding: 8px 16px;
 }
-/* line 284, ../sass/_02_components.scss */
+/* line 320, ../sass/_02_components.scss */
 .pagination .item.selected a {
   background-color: #4CAF50;
   color: white;
 }
-/* line 291, ../sass/_02_components.scss */
+/* line 327, ../sass/_02_components.scss */
 .pagination .item:not(.selected) a:hover {
   background-color: #ddd;
 }
 
-/* line 297, ../sass/_02_components.scss */
+/* line 333, ../sass/_02_components.scss */
 .tabs {
   position: relative;
 }
-/* line 299, ../sass/_02_components.scss */
+/* line 335, ../sass/_02_components.scss */
 .tabs:after {
   position: relative;
   display: block;
@@ -1360,7 +1398,7 @@ button.dump {
   border-top: 1px solid black;
   z-index: 2;
 }
-/* line 306, ../sass/_02_components.scss */
+/* line 342, ../sass/_02_components.scss */
 .tabs .item {
   position: relative;
   top: 1px;
@@ -1368,17 +1406,17 @@ button.dump {
   margin-right: 5px;
   z-index: 1;
 }
-/* line 313, ../sass/_02_components.scss */
+/* line 349, ../sass/_02_components.scss */
 .tabs .item.selected {
   z-index: 3;
 }
-/* line 315, ../sass/_02_components.scss */
+/* line 351, ../sass/_02_components.scss */
 .tabs .item.selected .tab {
   border-color: black;
   color: black;
   font-weight: bold;
 }
-/* line 322, ../sass/_02_components.scss */
+/* line 358, ../sass/_02_components.scss */
 .tabs .item .tab {
   border: 1px solid #c2c2c2;
   border-bottom: none;
