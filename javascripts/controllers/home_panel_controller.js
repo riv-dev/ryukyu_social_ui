@@ -565,6 +565,30 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         );
     }
 
+    $scope.quick_task_form_data = {};
+
+    $scope.quick_post_task = function() {
+        if ($scope.quick_task_form_data.name && $scope.quick_task_form_data.name.length > 0) {
+            $http({
+                method: 'POST',
+                url: tasksApiBaseURL + '/tasks',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                },
+                data: {
+                    name: $scope.quick_task_form_data.name
+                }
+            }).then(
+                function successCallback(response) {
+                    $scope.quick_task_form_data.name = "";
+                    $scope.getTasks($localStorage.selected_tasks_tab, $localStorage.tasks_limit, $localStorage.tasks_current_page);
+                },
+                function errorCallback(response) {
+                }
+            );
+        }
+    }
+
     if($localStorage.loggedin_user) {
         //Get users list
         $http({

@@ -240,6 +240,42 @@
     }
 }
 
+.form.task_quick_add {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    padding: 5px 0px 10px;
+    margin: 0px;
+    margin-top: 0px;
+    position: relative;
+
+    .field {
+        display: block;
+        width: 100%;
+        padding-right: 75px;
+        margin-bottom: 0px;
+    }
+    .input {
+        font-size: 12px;        
+        line-height: 20px;
+        height: 20px;
+        width: 100%;
+        font-weight: normal;
+    }
+
+    .button {
+        position: absolute;
+        top: 5px;
+        right: 0px;
+        width: 70px;
+        text-align: center;
+        font-size: 12px;
+        height: 20px;
+        line-height: 20px;
+        padding: 0px;
+    }
+}
+
 .form.update_progress {
     width: 100%;
     border: none;
