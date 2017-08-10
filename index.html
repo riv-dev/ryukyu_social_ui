@@ -12,7 +12,8 @@
     <script src="libs/showdown/src/showdown.js"></script>
     <script src="libs/angular-markdown-directive/markdown.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	  <link type="text/css" href="./libs/dtpicker/jquery.simple-dtpicker.css" rel="stylesheet" />
+    <link type="text/css" href="./libs/dtpicker/jquery.simple-dtpicker.css" rel="stylesheet" />
+    <!--<link type="text/css" href="./libs/angular-ui-notification/angular-ui-notification.min.css" rel="stylesheet" />-->
   </head>
   <body class="site">
       <header class="header">
@@ -32,10 +33,15 @@
       <main class="main {{panel_class}}" ng-view>
 
       </main>
+      <script src="libs/socket.io/socket.io.js"></script>
 	    <script type="text/javascript" src="./libs/dtpicker/jquery.simple-dtpicker.js"></script>
       <script src="libs/moment/moment.min.js"></script>
+      <!---<script src="libs/angular-ui-notification/angular-ui-notification.min.js"></script>-->
       <script src="javascripts/config/server_settings.js"></script>
+      <script src="javascripts/config/init.js"></script> 
       <script src="javascripts/config/routes.js"></script>
+      <script src="javascripts/services/site_notifications.js"></script>
+      <script src="javascripts/services/common_functions.js"></script>
       <script src="javascripts/controllers/home_panel_controller.js"></script>
       <script src="javascripts/controllers/user_panel_controller.js"></script>
       <script src="javascripts/controllers/project_panel_controller.js"></script>
