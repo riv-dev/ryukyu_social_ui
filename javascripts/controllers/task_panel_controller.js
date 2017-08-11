@@ -154,6 +154,9 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
                 if(callback) {
                     callback(response);
                 }
+
+                $scope.$parent.flash_message = "You are not assigned to this task. Cannot edit.";
+                $scope.$parent.flash_level = "fail";
             }
         );
     };
@@ -243,6 +246,10 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
         }).then(function (response) {
             $scope.this_task = response.data;
 
+            if($scope.this_task.creator_user_id == $scope.loggedin_user.id) {
+                $scope.im_assigned_to_this_task = true;
+            }
+
             //Form fields
             //JQuery Libs
             $(function () {
@@ -270,6 +277,21 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
                     $scope.this_task.project_name = response.data.name;
                 });
             }
+
+            //Get the name of the user that created this task
+            if ($scope.this_task.creator_user_id == $scope.loggedin_user.id) {
+                $scope.this_task.creator_name = "Me";
+            } else {
+                $http({
+                    method: 'GET',
+                    url: usersApiBaseURL + '/users/' + $scope.this_task.creator_user_id,
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    }
+                }).then(function (response) {
+                    $scope.this_task.creator_name = $scope.getFullName(response.data);
+                });
+            }
         });
     }
 
@@ -293,6 +315,7 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
 
                 if ($localStorage.loggedin_user.id == current_user_id) {
                     $scope.my_progress_description = current_user.progress_description;
+                    $scope.im_assigned_to_this_task = true;
                 }
 
                 $http({
