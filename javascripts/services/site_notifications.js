@@ -68,9 +68,11 @@ app.service('SiteNotifications', ['$http', function($http)  {
             }
 
             getTaskName(data.task_id, token, function(task_name) {
-                var n = new Notification(loggedin_username + ': ' + message, {
-                    body: task_name
-                    //icon: '/path/to/icon.png' // optional
+                getUserName(data.user_id, token, function(user_name) {
+                    var n = new Notification(user_name + ': ' + message, {
+                        body: task_name
+                        //icon: '/path/to/icon.png' // optional
+                    });
                 });
             });
         });
