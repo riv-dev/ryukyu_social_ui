@@ -1,7 +1,7 @@
 <section class="section details">
     <header class="header">
         <h2 class="title task">{{this_task.name}}</h2>
-        <button class="button edit name" ng-click="show_name_form()">Edit Name</button>
+        <button class="button edit name" ng-click="show_name_form()" ng-show="im_assigned_to_this_task">Edit Name</button>
         <form class="form name" name="name_form">
             <p class="field">
                 <input class="input name" type="text" ng-model="this_task.name"></input>
@@ -23,22 +23,25 @@
                 <a class="button cancel" ng-click="cancel_description()">Cancel</a>
             </div>
         </form>
-        <button class="button edit description" ng-click="show_description_form()">Edit Description</button>
+        <button class="button edit description" ng-click="show_description_form()" ng-show="im_assigned_to_this_task">Edit Description</button>
     </div>
 
     <dl class="attributes metrics">
         <dt class="key status">Status:</dt>
-        <dd class="value status">
+        <dd class="value status" ng-show="im_assigned_to_this_task">
             <input type="radio" ng-model="this_task.status" value="dump" ng-change="put('status','dump')">dump
             <input type="radio" ng-model="this_task.status" value="waiting" ng-change="put('status','waiting')">waiting
             <input type="radio" ng-model="this_task.status" value="doing" ng-change="put('status','doing')">doing
             <input type="radio" ng-model="this_task.status" value="finished" ng-change="put('status','finished')">finished
         </dd>
+        <dd class="value status {{this_task.status}}" ng-show="!im_assigned_to_this_task">
+            {{this_task.status}}
+        </dd>
         <dt class="key deadline">Deadline:</dt>
         <dd class="value deadline">
             <span class="date {{checkDateImportance(this_task.deadline, this_task.status)}}" ng-show="this_task.deadline">{{prettyDateDeadline(this_task.deadline, this_task.status)}}</span>
             <span class="date none" ng-show="!this_task.deadline">Not defined</span>
-            <button class="button calendar" ng-click="show_deadline_calendar()">Calendar</button>
+            <button class="button calendar" ng-click="show_deadline_calendar()" ng-show="im_assigned_to_this_task">Calendar</button>
             <form class="form deadline" name="deadline_form">
                 <input type="text" id="deadline_input" value="">
                 <div class="buttons">
@@ -48,18 +51,21 @@
             </form>
         </dd>
         <dt class="key priority">Priority:</dt>
-        <dd class="value priority">
+        <dd class="value priority" ng-show="im_assigned_to_this_task">
             <input type="radio" ng-model="this_task.priority" ng-value=0 ng-change="put('priority',0)">Not Important
             <input type="radio" ng-model="this_task.priority" ng-value=1 ng-change="put('priority',1)">Slightly Important
             <input type="radio" ng-model="this_task.priority" ng-value=2 ng-change="put('priority',2)">Important
             <input type="radio" ng-model="this_task.priority" ng-value=3 ng-change="put('priority',3)">Fairly Important
             <input type="radio" ng-model="this_task.priority" ng-value=4 ng-change="put('priority',4)">Very Important
         </dd>
+        <dd class="value status {{getPriorityLabel(this_task.priority)}}" ng-show="!im_assigned_to_this_task">
+            {{getPriorityLabel(this_task.priority)}}
+        </dd>
         <dt class="key project">Project:</dt>
         <dd class="value project">
             <span ng-show="this_task.project_name"><a class="link" href="./projects/{{this_task.project_id}}">{{this_task.project_name}}</a></span>
             <span class="none" ng-show="!this_task.project_name">Not Assigned</span>
-            <button class="button edit project" ng-click="show_project_form()">Edit</button>        
+            <button class="button edit project" ng-click="show_project_form()" ng-show="im_assigned_to_this_project">Edit</button>        
             <form class="form project" name="project_form">
                 <p class="field">
                     <select class="input select" ng-options="project.id as project.name for project in projects" ng-model="this_task.project_id"></select>
@@ -73,12 +79,14 @@
     </dl>
 
     <dl class="attributes extra">
+        <dt class="key created_by">Created by:</dt>
+        <dd class="value created_by">{{this_task.creator_name}}</dd>
         <dt class="key created_at">Created at:</dt>
         <dd class="value created_at">{{prettyDate(this_task.created_at)}}</dd>
         <dt class="key updated_at">Updated at:</dt>
         <dd class="value updated_at">{{prettyDate(this_task.updated_at)}}</dd>
-        <dt class="key archived">Send to Archive:</dt>
-        <dd class="value archived {{this_task.archived}}">
+        <dt class="key archived" ng-show="im_assigned_to_this_task">Send to Archive:</dt>
+        <dd class="value archived {{this_task.archived}}" ng-show="im_assigned_to_this_task">
             <input class="checkbox" type="checkbox" ng-model="this_task.archived" ng-true-value="1" ng-false-value="0" ng-change="put('archived',this_task.archived)">
         </dd>
     </dl>
