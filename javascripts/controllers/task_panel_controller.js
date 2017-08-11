@@ -246,7 +246,7 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
         }).then(function (response) {
             $scope.this_task = response.data;
 
-            if($scope.this_task.creator_user_id == $scope.loggedin_user.id) {
+            if($scope.loggedin_user.admin || $scope.this_task.creator_user_id == $scope.loggedin_user.id) {
                 $scope.im_assigned_to_this_task = true;
             }
 
