@@ -14,6 +14,7 @@ app.controller('loginController', function($scope, $http, $location, $localStora
                     $localStorage.flash_message = "Successful Login!";
                     $scope.$parent.flash_level = "success";
                     CommonFunctions.setToken(response.data.token);
+
                     if($localStorage.url_attempted) {
                         $location.path($localStorage.url_attempted);
                     } else {

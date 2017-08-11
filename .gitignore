@@ -3,3 +3,5 @@ server_settings.js
 .sass-cache
 cgi-bin
 *.bak*
+node_modules
+bower_components
