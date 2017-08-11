@@ -32,7 +32,28 @@ app.service('SiteNotifications', ['$http', function($http)  {
         	});
         }
 
-        tasks_socket = io(tasksApiBaseURL + "/subscribe-notifications");
+        //This part has to be done for NGINX reverse proxying redirects to work correctly
+        //Not needed for local development with base root URL.
+        var getLocation = function (href) {
+            var l = document.createElement("a");
+            l.href = href;
+            return l;
+        };
+
+        var l = getLocation(tasksApiBaseURL);
+        var protocol = l.protocol;
+        var baseURL = l.hostname;
+        var relativePath = l.pathname;
+
+        var connectionOptions = {
+            "transports": ["websocket"],
+        }
+
+        if(relativePath && relativePath.length > 1) {
+            connectionOptions["path"] = relativePath + "/socket.io"
+        }
+
+        tasks_socket = io.connect(protocol + "//" + baseURL, connectionOptions);
 
         tasks_socket.on('task_status', function (data) {
             console.log(data);
