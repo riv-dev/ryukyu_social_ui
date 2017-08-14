@@ -83,6 +83,10 @@ app.config(function($routeProvider, $locationProvider) {
   .when("/projects/:project_id/tasks/:task_id", { //viewing a task from context of a project
     templateUrl: "task_panel.html",
     controller: "taskPanelController"
+  })
+  .when("/users/:user_id/profile/edit", {
+    templateUrl: "edit_user_profile.html",
+    controller: "editUserProfileController"
   });
 
   // use the HTML5 History API
