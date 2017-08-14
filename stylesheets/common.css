@@ -1463,26 +1463,30 @@ button.dump {
 .main.home .section.projects.full {
   width: 70%;
 }
-/* line 36, ../sass/_03_layout.scss */
+/* line 37, ../sass/_03_layout.scss */
+.main.home .section.projects_two {
+  width: 100%;
+}
+/* line 40, ../sass/_03_layout.scss */
 .main.home .section.tasks {
   width: 30%;
 }
-/* line 38, ../sass/_03_layout.scss */
+/* line 42, ../sass/_03_layout.scss */
 .main.home .section.tasks.minimized {
   width: 0%;
 }
-/* line 40, ../sass/_03_layout.scss */
+/* line 44, ../sass/_03_layout.scss */
 .main.home .section.tasks.minimized * {
   display: none;
 }
-/* line 44, ../sass/_03_layout.scss */
+/* line 48, ../sass/_03_layout.scss */
 .main.home .section.tasks.minimized .header {
   display: block;
   height: 20px;
   width: 80px;
   border: none;
 }
-/* line 49, ../sass/_03_layout.scss */
+/* line 53, ../sass/_03_layout.scss */
 .main.home .section.tasks.minimized .header .title {
   background-color: #fffce2;
   position: absolute;
@@ -1491,51 +1495,51 @@ button.dump {
   font-size: 10px;
   display: block;
 }
-/* line 57, ../sass/_03_layout.scss */
+/* line 61, ../sass/_03_layout.scss */
 .main.home .section.tasks.minimized .header .button.minimize, .main.home .section.tasks.minimized .header .button.maximize {
   display: block;
 }
-/* line 63, ../sass/_03_layout.scss */
+/* line 67, ../sass/_03_layout.scss */
 .main.home .section.users {
   width: 30%;
 }
 
-/* line 69, ../sass/_03_layout.scss */
+/* line 73, ../sass/_03_layout.scss */
 .main.user .section.details {
   width: 33.33%;
 }
-/* line 72, ../sass/_03_layout.scss */
+/* line 76, ../sass/_03_layout.scss */
 .main.user .section.tasks {
   width: 33.33%;
 }
-/* line 75, ../sass/_03_layout.scss */
+/* line 79, ../sass/_03_layout.scss */
 .main.user .section.details {
   width: 33.33%;
 }
 
-/* line 81, ../sass/_03_layout.scss */
+/* line 85, ../sass/_03_layout.scss */
 .main.project .section.details {
   width: 33.33%;
 }
-/* line 84, ../sass/_03_layout.scss */
+/* line 88, ../sass/_03_layout.scss */
 .main.project .section.tasks {
   width: 33.33%;
 }
-/* line 87, ../sass/_03_layout.scss */
+/* line 91, ../sass/_03_layout.scss */
 .main.project .section.users {
   width: 33.33%;
 }
 
-/* line 93, ../sass/_03_layout.scss */
+/* line 97, ../sass/_03_layout.scss */
 .main.task .section.details {
   width: 67%;
 }
-/* line 96, ../sass/_03_layout.scss */
+/* line 100, ../sass/_03_layout.scss */
 .main.task .section.users {
   width: 33%;
 }
 
-/* line 103, ../sass/_03_layout.scss */
+/* line 107, ../sass/_03_layout.scss */
 .section {
   float: left;
   width: 33.33%;
@@ -1543,70 +1547,70 @@ button.dump {
   box-sizing: border-box;
   text-align: center;
 }
-/* line 110, ../sass/_03_layout.scss */
+/* line 114, ../sass/_03_layout.scss */
 .section * {
   text-align: left;
 }
-/* line 114, ../sass/_03_layout.scss */
+/* line 118, ../sass/_03_layout.scss */
 .section .header {
   position: relative;
   border-bottom: 1px solid black;
   padding: 0px;
 }
-/* line 119, ../sass/_03_layout.scss */
+/* line 123, ../sass/_03_layout.scss */
 .section .header .title {
   margin-bottom: 0.2em;
 }
-/* line 128, ../sass/_03_layout.scss */
+/* line 132, ../sass/_03_layout.scss */
 .section .pagination {
   margin-top: 15px;
 }
 
-/* line 145, ../sass/_03_layout.scss */
+/* line 149, ../sass/_03_layout.scss */
 .section.users .form.assign_user {
   margin-top: 10px;
 }
 
-/* line 152, ../sass/_03_layout.scss */
+/* line 156, ../sass/_03_layout.scss */
 .section.details .header {
   border-bottom: none;
 }
-/* line 155, ../sass/_03_layout.scss */
+/* line 159, ../sass/_03_layout.scss */
 .section.details .title {
   font-size: 40px;
   border-bottom: none;
   display: inline-block;
   padding-right: 20px;
 }
-/* line 161, ../sass/_03_layout.scss */
+/* line 165, ../sass/_03_layout.scss */
 .section.details .name {
   font-size: 34px;
   font-weight: normal;
   color: #5e5e5e;
   margin-bottom: 5px;
 }
-/* line 167, ../sass/_03_layout.scss */
+/* line 171, ../sass/_03_layout.scss */
 .section.details .figure {
   border: 1px solid black;
   width: 50%;
   margin-bottom: 25px;
 }
-/* line 173, ../sass/_03_layout.scss */
+/* line 177, ../sass/_03_layout.scss */
 .section.details .key,
 .section.details .value {
   font-size: 16px;
   margin-bottom: 10px;
 }
-/* line 179, ../sass/_03_layout.scss */
+/* line 183, ../sass/_03_layout.scss */
 .section.details .info {
   position: relative;
   font-size: 16px;
 }
-/* line 184, ../sass/_03_layout.scss */
+/* line 188, ../sass/_03_layout.scss */
 .section.details .info.description.edit {
   text-align: right;
 }
-/* line 188, ../sass/_03_layout.scss */
+/* line 192, ../sass/_03_layout.scss */
 .section.details .button.edit.description {
   position: relative;
   text-indent: 0px;
@@ -1614,7 +1618,7 @@ button.dump {
   height: auto;
   overflow: initial;
 }
-/* line 194, ../sass/_03_layout.scss */
+/* line 198, ../sass/_03_layout.scss */
 .section.details .button.edit.description:before {
   position: relative;
   display: inline-block;
@@ -1622,71 +1626,71 @@ button.dump {
   top: 0px;
   left: 5px;
 }
-/* line 202, ../sass/_03_layout.scss */
+/* line 206, ../sass/_03_layout.scss */
 .section.details .button.edit.name {
   font-size: 16px;
   position: absolute;
   top: 0px;
   right: 0px;
 }
-/* line 209, ../sass/_03_layout.scss */
+/* line 213, ../sass/_03_layout.scss */
 .section.details .attributes.metrics {
   background-color: #e2e2e2;
   padding: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
-/* line 211, ../sass/_03_layout.scss */
+/* line 215, ../sass/_03_layout.scss */
 .section.details .attributes.metrics .key, .section.details .attributes.metrics .value, .section.details .attributes.metrics .link {
   font-size: 12px;
 }
-/* line 219, ../sass/_03_layout.scss */
+/* line 223, ../sass/_03_layout.scss */
 .section.details .attributes.extra {
   background-color: #e2e2e2;
   padding: 10px;
 }
-/* line 221, ../sass/_03_layout.scss */
+/* line 225, ../sass/_03_layout.scss */
 .section.details .attributes.extra .key, .section.details .attributes.extra .value, .section.details .attributes.extra .link {
   font-size: 10px;
 }
-/* line 227, ../sass/_03_layout.scss */
+/* line 231, ../sass/_03_layout.scss */
 .section.details .form {
   width: 100%;
   padding: 0px;
   border: none;
   padding-bottom: 15px;
 }
-/* line 232, ../sass/_03_layout.scss */
+/* line 236, ../sass/_03_layout.scss */
 .section.details .form .input.name {
   font-size: 30px;
   height: 40px;
 }
-/* line 236, ../sass/_03_layout.scss */
+/* line 240, ../sass/_03_layout.scss */
 .section.details .form .buttons {
   text-align: right;
 }
-/* line 240, ../sass/_03_layout.scss */
+/* line 244, ../sass/_03_layout.scss */
 .section.details .form .button.submit {
   display: inline-block;
   font-size: 14px;
   padding: 5px 10px;
   margin-right: 10px;
 }
-/* line 247, ../sass/_03_layout.scss */
+/* line 251, ../sass/_03_layout.scss */
 .section.details .form .button.cancel {
   display: inline-block;
   font-size: 14px;
 }
-/* line 253, ../sass/_03_layout.scss */
+/* line 257, ../sass/_03_layout.scss */
 .section.details .form, .section.details .input, .section.details .area {
   font-size: 16px;
   width: 100%;
 }
-/* line 258, ../sass/_03_layout.scss */
+/* line 262, ../sass/_03_layout.scss */
 .section.details .value.bio, .section.details .value.description {
   padding-left: 3px;
 }
-/* line 262, ../sass/_03_layout.scss */
+/* line 266, ../sass/_03_layout.scss */
 .section.details .links {
   padding: 15px 0px 15px;
   border-top: 1px solid #c2c2c2;
