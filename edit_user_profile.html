@@ -1,0 +1,14 @@
+<form class="form" name="user_profile_form">
+  <h2 class="title">Edit User Profile</h2>
+  <p class="field">
+    <label class="label" for="status">My Status: </label><input class="input" type="text" ng-model="status" required ng-disabled="not_admin()">
+
+  </p>
+  <p class="field">
+    <label class="label" for="bio">My Bio: </label><textarea class="input" rows="4" cols="10" ng-model="bio" required ng-disabled="not_admin()"></textarea>
+  </p>
+  <p class="field">
+    <input class="button submit" type="submit" value="Submit" ng-click="">
+  </p>
+  <p class="field"><a class="button cancel" ng-click="" href="./users/{{this_user_id}}">Cancel</a></p>
+</form>
