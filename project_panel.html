@@ -2,14 +2,42 @@
     <header class="header">
         <h2 class="title">{{this_project.name}}</h2>
     </header>
-    <figure class="figure">
-        <p class="image">
-            <img src = "{{this_project_photo.uri}}" />
-        </p>
+    <figure ng-show="this_project_photo.uri" class="figure">
+        <div class="image">
+            <div ng-show="loggedin_user.admin || this_user_write_access > 0" 
+                ngf-select ngf-drop ng-model="files" 
+                ngf-pattern="'image/*'" ngf-accept="'image/*'" 
+                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
+                ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', pattern:'image/*'}"  
+                ngf-resize="resizeObj" ngf-fix-orientation="orientation" 
+                ngf-max-size="20MB" ngf-min-height="100"
+                ngf-resize="{width: 400, height: 400}"
+                ngf-drop-available="dropAvailable">
+                <img ngf-thumbnail="this_project_photo.uri" />
+            </div>
+            <button class="button delete submit" ng-if="loggedin_user.admin || this_user_write_access > 0" ng-click="delete_photo()">Delete</button>
+            <img ng-if="this_user_write_access == 0" ngf-thumbnail="this_project_photo.uri" />
+        </div>
         <figcaption class="caption">
             {{this_project_photo.caption}}
         </figcaption>
+        <form class="form caption" name="caption_form" style="display: none;">
+            <p class="field">
+                <input class="input caption" type="text" ng-model="this_project_photo.caption"></input>
+            </p>
+            <div class="buttons">
+                <input class="button submit" type="submit" value="Update Caption" ng-click="update_caption()">
+                <a class="button cancel" ng-click="cancel_caption()">Cancel</a>
+            </div>
+        </form>
+        <button class="button edit caption" ng-click="show_caption_form()" ng-if="loggedin_user.admin || this_user_write_access > 0">Edit caption</button>
     </figure>
+    <ul ng-if="errors.photo">
+        <li ng-repeat="err in errors.photo">
+            {{err}}
+        </li>
+    </ul>
+    <br/><br/>
     <dl class="attributes">
         <dt class="key status">Status:</dt>
         <dd class="value status {{this_project.status}}">{{this_project.status}}</dd>
@@ -62,6 +90,14 @@
             </li>
             <li class="item">
                 <a class="link" href="./projects/{{this_project_id}}/tasks/new?status={{selected_tasks_tab}}">Add Task</a>
+            </li>
+            <li ng-show="selected_tasks_tab == 'dump'">
+                <form class="form task_quick_add">
+                    <p class="field">
+                        <input class="input name" type="text" ng-model="quick_task_form_data.name" placeholder="Quick Task Name">
+                    </p>
+                    <input class="button submit" type="submit" value="Quick Add" ng-click="quick_post_task()">
+                </form>
             </li>
         </ul>
         <button class="button settings {{showHideSettingsClass('tasks')}} {{selected_tasks_tab}}" ng-click="toggleShowHideSettings('tasks')">Show/Hide Settings</button>

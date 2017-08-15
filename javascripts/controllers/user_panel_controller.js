@@ -1,4 +1,4 @@
-app.controller('userPanelController', function($scope, $http, $location, $routeParams, $localStorage, CommonFunctions) {
+app.controller('userPanelController', function($scope, $http, $timeout, $location, $routeParams, $localStorage, Upload, CommonFunctions) {
     $scope.$parent.hero = "User Panel";
     $scope.$parent.panel_class = "user";
 
@@ -318,7 +318,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
                            'i': i
                         }
                     }).then(function (response) {
-                        $scope.tasks[parseInt(response.config["params"]["i"])]["users"] = response.data
+                        $scope.tasks[parseInt(response.config["params"]["i"])]["users"] = response.data;
 
                         for(var j=0;j<response.data.length;j++) {
                             if($routeParams.user_id == response.data[j]["user_id"]) {
@@ -576,6 +576,149 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         );
     }
 
+    $scope.show_caption_form = function () {
+        $('figcaption.caption').css('display', 'none');
+        $('.form.caption').css('display', 'block');
+        $('.button.edit.caption').css('display', 'none');
+
+        $scope.name_backup = $scope.this_user_photo.caption;
+    }
+
+    $scope.cancel_caption = function () {
+        $('figcaption.caption').css('display', 'block');
+        $('.form.caption').css('display', 'none');
+        $('.button.edit.caption').css('display', 'inline-block');
+
+        $scope.this_user_photo.caption = $scope.name_backup;
+    }
+
+    $scope.update_caption = function () {
+        $('figcaption.caption').css('display', 'block');
+        $('.form.caption').css('display', 'none');
+        $('.button.edit.caption').css('display', 'inline-block');
+
+        $http({
+            method: 'PUT',
+            url: userPhotosApiBaseURL + "/users/" + $routeParams.user_id + "/photo",
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                caption: $scope.this_user_photo.caption
+            }
+        }).then(
+            function successCallback(response) {
+                
+            },
+            function errorCallback(response) {
+                $scope.this_user_photo.caption = $scope.name_backup;
+            }
+        );
+    }
+
+    $scope.$watch('files', function (files) {
+        $scope.formUpload = false;
+        if (files != null) {
+            // make files array for not multiple to be able to be used in ng-repeat in the ui
+            if (!angular.isArray(files)) {
+                $timeout(function () {
+                    $scope.files = files = [files];
+                });
+                return;
+            }
+            for (var i = 0; i < files.length; i++) {
+                (function (f) {
+                    $scope.upload(f);
+                })(files[i]);
+            }
+        }
+    });
+
+    $scope.upload = function(file) {
+        Upload.upload({
+            url: userPhotosApiBaseURL + "/users/" + $routeParams.user_id + "/photo",
+            method: 'POST',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },                
+            data: {          
+                lastname: $localStorage.loggedin_user.lastname, 
+                firstname: $localStorage.loggedin_user.firstname, 
+                photo: file
+            }
+        }).then(function (response) {
+            $localStorage.flash_message = "Successfully added photo!";
+            $scope.this_user_photo.caption = "";
+            $scope.this_user_photo.uri = userPhotosApiBaseURL + "/users/" + $routeParams.user_id + "/photo.image";
+        }, function (response) {
+            $scope.$parent.flash_message = "Error adding photo.";
+            $scope.errors = {};
+            var responseError;
+            for (var i=0; i < response.data.errors.length; i++) {
+                responseError = response.data.errors[i];
+                if(responseError.hasOwnProperty('param')) {
+                    if(!$scope.errors[responseError['param']]) {
+                        $scope.errors[responseError['param']] = [];
+                    }
+                    $scope.errors[responseError['param']].push(responseError['msg']);
+                }
+            }
+        });
+    } //End upload()
+
+    $scope.delete_photo = function() {
+        $http({
+            method: 'DELETE',
+            url: userPhotosApiBaseURL + '/users/' + $routeParams.user_id + "/photo",
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                $localStorage.flash_message = "Deleted photo!";
+                $scope.this_user_photo = {};
+                $scope.this_user_photo.uri = "./images/default_user.png";
+                $scope.this_user_photo.caption = "Todo user photo microservice";
+            },
+            function errorCallback(response) {
+                $localStorage.flash_message = "Error deleting photo.";
+            }
+        );
+    }
+
+    $scope.quick_task_form_data = {};
+
+    $scope.quick_post_task = function() {
+        if ($scope.quick_task_form_data.name && $scope.quick_task_form_data.name.length > 0) {
+            $http({
+                method: 'POST',
+                url: tasksApiBaseURL + '/tasks',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                },
+                data: {
+                    name: $scope.quick_task_form_data.name
+                }
+            }).then(
+                function successCallback(response) {
+                    $scope.quick_task_form_data.name = "";
+                    $http({
+                        method: 'POST',
+                        url: tasksApiBaseURL + '/tasks/' + response.data.task_id + '/users/' + $routeParams.user_id,
+                        headers: {
+                            'x-access-token': CommonFunctions.getToken()
+                        }
+                    }).then(function() {
+                        $scope.getTasks($localStorage.user_panel_selected_tasks_tab, $localStorage.user_panel_selected_project_id_filter, $localStorage.user_panel_tasks_limit, $localStorage.user_panel_tasks_current_page);
+                    });
+                },
+                function errorCallback(response) {
+
+                }
+            );
+        }
+    }
+
     if($localStorage.loggedin_user) {
         //Get user information
         $http({
@@ -620,6 +763,8 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
             },
             function errorCallback(response) { 
                 $scope.this_user_photo = {};
+                $scope.this_user_photo.uri = "./images/default_user.png";
+                $scope.this_user_photo.caption = "Todo user photo microservice";
             });
         });
 
