@@ -6,7 +6,7 @@
     
     <figure ng-show="this_user_photo.uri" class="figure">
         <div class="image">
-            <div ng-hide="!loggedin_user.admin || loggedin_user.id != this_user.id" 
+            <div ng-show="loggedin_user.admin || loggedin_user.id == this_user.id" 
                 ngf-select ngf-drop ng-model="files" 
                 ngf-pattern="'image/*'" ngf-accept="'image/*'" 
                 ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
@@ -17,8 +17,8 @@
                 ngf-drop-available="dropAvailable">
                 <img ngf-thumbnail="this_user_photo.uri" />
             </div>
-            <button class="button delete submit" ng-hide="!loggedin_user.admin || loggedin_user.id != this_user.id" ng-click="delete_photo()">Delete</button>
-            <img ng-if="!loggedin_user.admin || loggedin_user.id != this_user.id" ngf-thumbnail="this_user_photo.uri" />
+            <button class="button delete submit" ng-show="loggedin_user.admin || loggedin_user.id == this_user.id" ng-click="delete_photo()">Delete</button>
+            <img ng-if="!loggedin_user.admin && loggedin_user.id != this_user.id" ngf-thumbnail="this_user_photo.uri" />
         </div>
         <figcaption class="caption">
             {{this_user_photo.caption}}
@@ -32,7 +32,7 @@
                 <a class="button cancel" ng-click="cancel_caption()">Cancel</a>
             </div>
         </form>
-        <button class="button edit caption" ng-click="show_caption_form()" ng-hide="!loggedin_user.admin || loggedin_user.id != this_user.id">Edit caption</button>
+        <button class="button edit caption" ng-click="show_caption_form()" ng-show="loggedin_user.admin || loggedin_user.id == this_user.id">Edit caption</button>
     </figure>
     <ul ng-if="errors.photo">
         <li ng-repeat="err in errors.photo">
