@@ -43,6 +43,12 @@
     <dl class="attributes">
         <dt class="key email"><em ng-if="loggedin_user.id==this_user.id">My </em>Email:</dt>
         <dd class="value email">{{this_user.email}}</dd>
+        <dt class="key nickname"><em ng-if="loggedin_user.id==this_user.id">My </em>Nickname:</dt>
+        <dd class="value nickname">{{this_user.nickname}}</dd>
+        <dt class="key phone_number"><em ng-if="loggedin_user.id==this_user.id">My </em>Phone number:</dt>
+        <dd class="value phone_number">{{this_user.phone_number}}</dd>
+        <dt class="key email"><em ng-if="loggedin_user.id==this_user.id">My </em>Birthday:</dt>
+        <dd class="value email">{{this_user.birthday}}</dd>
         <dt class="key status"><em ng-if="loggedin_user.id==this_user.id">My </em>Status:</dt>
         <dd class="value status">{{this_user.status}}</dd>
         <dt class="key bio"><em ng-if="loggedin_user.id==this_user.id">My </em>Bio:</dt>
@@ -52,6 +58,7 @@
         <li class="item back" ng-if="!this_project_id" ><a class="link" ng-click="back()" href="./">Go Back</a></li>
         <li class="item back" ng-if="this_project_id" ><a class="link" href="./projects/{{this_project_id}}">Go Back to Project</a></li>
         <li class="item edit" ng-if="loggedin_user.admin || loggedin_user.id == this_user.id"><a class="link" href="./users/{{this_user.id}}/edit">Edit User Account</a></li>
+        <li class="item edit" ng-if="loggedin_user.admin || loggedin_user.id == this_user.id"><a class="link" href="./users/{{this_user.id}}/profile/edit">Edit User Profile</a></li>
         <li class="item delete" ng-if="loggedin_user.admin"><a class="link" ng-click="delete_user()">Delete User</a></li>
     </ul>
 </section>

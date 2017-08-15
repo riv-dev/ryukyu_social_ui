@@ -1,0 +1,27 @@
+<form class="form" name="user_profile_form">
+  <h2 class="title">Edit User Profile</h2>
+  <p class="field">
+    <label class="label" for="nickname">My Nickname: </label>
+    <input class="input" type="text" ng-model="nickname">
+  </p>
+  <p class="field">
+    <label class="label" for="phone_number">My Phone number: </label>
+    <input class="input" type="text" ng-model="phone_number">
+  </p>
+  <p class="field">
+    <label class="label" for="birthday">My Birthday: </label>
+    <input class="input" type="date" ng-model="birthday">
+  </p>
+  <p class="field">
+    <label class="label" for="status">My Status: </label>
+    <input class="input" type="text" ng-model="status" required>
+  </p>
+  <p class="field">
+    <label class="label" for="bio">My Bio: </label>
+    <textarea class="input" rows="4" cols="10" ng-model="bio" required></textarea>
+  </p>
+  <p class="field">
+    <input class="button submit" type="submit" value="Submit" ng-click="submit()">
+  </p>
+  <p class="field"><a class="button cancel" ng-click="back()" href="./users/{{this_user_id}}">Cancel</a></p>
+</form>
