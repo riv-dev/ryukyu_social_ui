@@ -48,7 +48,7 @@
         <dt class="key phone_number"><em ng-if="loggedin_user.id==this_user.id">My </em>Phone number:</dt>
         <dd class="value phone_number">{{this_user.phone_number}}</dd>
         <dt class="key email"><em ng-if="loggedin_user.id==this_user.id">My </em>Birthday:</dt>
-        <dd class="value email">{{this_user.birthday}}</dd>
+        <dd class="value email">{{prettyDate(this_user.birthday)}}</dd>
         <dt class="key status"><em ng-if="loggedin_user.id==this_user.id">My </em>Status:</dt>
         <dd class="value status">{{this_user.status}}</dd>
         <dt class="key bio"><em ng-if="loggedin_user.id==this_user.id">My </em>Bio:</dt>

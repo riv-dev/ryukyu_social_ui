@@ -24,9 +24,12 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
             //Get the profile details to fill in form
             $scope.nickname = response.data.nickname;
             $scope.phone_number = response.data.phone_number;
-            $scope.birthday = response.data.birthday;
             $scope.status = response.data.status;
             $scope.bio = response.data.bio;
+
+            if(response.data.birthday) {
+                      $scope.birthday = moment(response.data.birthday).toDate();
+            }
 
             $scope.submit = function() {
                 $http({
@@ -38,7 +41,7 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
                     data: {
                         nickname: $scope.nickname, 
                         phone_number: $scope.phone_number, 
-                        birthday: $scope.birthday, 
+                        birthday: CommonFunctions.getDateTimeMoment($scope.birthday, null),
                         status: $scope.status, 
                         bio: $scope.bio
                     } 
@@ -67,11 +70,6 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
             };
         },
         function errorCallback(response) {
-            $scope.nickname = null;
-            $scope.phone_number = null;
-            $scope.birthday = null;
-            $scope.status = null;
-            $scope.bio = null;
 
             $scope.submit = function() {
                 $http({
@@ -83,7 +81,7 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
                     data: {
                         nickname: $scope.nickname, 
                         phone_number: $scope.phone_number, 
-                        birthday: $scope.birthday, 
+                        birthday: CommonFunctions.getDateTimeMoment($scope.birthday, null),
                         status: $scope.status, 
                         bio: $scope.bio
                     } 
