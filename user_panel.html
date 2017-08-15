@@ -12,6 +12,8 @@
         </figcaption>
     </figure>
     <dl class="attributes">
+        <dt class="key email"><em ng-if="loggedin_user.id==this_user.id">My </em>Email:</dt>
+        <dd class="value email">{{this_user.email}}</dd>
         <dt class="key nickname"><em ng-if="loggedin_user.id==this_user.id">My </em>Nickname:</dt>
         <dd class="value nickname">{{this_user.nickname}}</dd>
         <dt class="key phone_number"><em ng-if="loggedin_user.id==this_user.id">My </em>Phone number:</dt>

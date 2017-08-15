@@ -3,7 +3,7 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
     CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
 
-    if($localStorage.loggedin_user){
+    if($localStorage.loggedin_user && ($localStorage.loggedin_user.admin || $localStorage.loggedin_user.id == $routeParams.user_id)){
         $scope.$parent.hero = "Edit User Profile";
         $scope.this_user_id = $routeParams.user_id;
 
@@ -15,12 +15,12 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
     //Get current user_profile
     $http({
         method: 'GET',
-        url: userProfileApiBaseURL + '/users/' + $routeParams.user_id,
+        url: userProfileApiBaseURL + '/users/' + $routeParams.user_id + '/profile',
         headers: {
             'x-access-token': CommonFunctions.getToken()
         },
-    }).then(function (response) {
-        if(response.data.user_id) {
+    }).then(
+        function successCallback(response) {
             //Get the profile details to fill in form
             $scope.nickname = response.data.nickname;
             $scope.phone_number = response.data.phone_number;
@@ -31,7 +31,7 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
             $scope.submit = function() {
                 $http({
                     method: 'PUT',
-                    url: userProfileApiBaseURL + '/users/' + $routeParams.user_id,
+                    url: userProfileApiBaseURL + '/users/' + $routeParams.user_id + '/profile',
                     headers: {
                         'x-access-token': CommonFunctions.getToken()
                     },
@@ -65,7 +65,8 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
                     }
                 );
             };
-        }else{
+        },
+        function errorCallback(response) {
             $scope.nickname = null;
             $scope.phone_number = null;
             $scope.birthday = null;
@@ -75,7 +76,7 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
             $scope.submit = function() {
                 $http({
                     method: 'POST',
-                    url: userProfileApiBaseURL + '/users/' + $routeParams.user_id,
+                    url: userProfileApiBaseURL + '/users/' + $routeParams.user_id + '/profile',
                     headers: {
                         'x-access-token': CommonFunctions.getToken()
                     },
@@ -110,9 +111,7 @@ app.controller('editUserProfileController', function($scope, $http, $location, $
                 );
             };
         }
-    });
-
-        
+    )
     }else {
         $localStorage.flash_message = "Invalid Credentials";
         $scope.$parent.flash_level = "fail";
