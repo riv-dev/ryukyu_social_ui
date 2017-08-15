@@ -478,6 +478,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         );
     }
 
+
     $scope.show_caption_form = function () {
         $('figcaption.caption').css('display', 'none');
         $('.form.caption').css('display', 'block');
@@ -585,6 +586,30 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                 $localStorage.flash_message = "Error deleting photo.";
             }
         );
+
+    $scope.quick_task_form_data = {};
+
+    $scope.quick_post_task = function() {
+        if ($scope.quick_task_form_data.name && $scope.quick_task_form_data.name.length > 0) {
+            $http({
+                method: 'POST',
+                url: tasksApiBaseURL + '/projects/' + $routeParams.project_id + '/tasks',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                },
+                data: {
+                    name: $scope.quick_task_form_data.name
+                }
+            }).then(
+                function successCallback(response) {
+                    $scope.quick_task_form_data.name = "";
+                    $scope.getTasks($localStorage.project_panel_selected_tasks_tab, $localStorage.project_panel_selected_user_id_filter, $localStorage.project_panel_tasks_limit, $localStorage.project_panel_tasks_current_page);
+                },
+                function errorCallback(response) {
+                }
+            );
+        }
+
     }
 
     if($localStorage.loggedin_user) {

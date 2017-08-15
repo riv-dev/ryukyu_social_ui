@@ -85,6 +85,14 @@
             <li class="item">
                 <a class="link" href="./users/{{this_user_id}}/tasks/new?status={{selected_tasks_tab}}">Add Task</a>
             </li>
+            <li ng-show="selected_tasks_tab == 'dump'">
+                <form class="form task_quick_add">
+                    <p class="field">
+                        <input class="input name" type="text" ng-model="quick_task_form_data.name" placeholder="Quick Task Name">
+                    </p>
+                    <input class="button submit" type="submit" value="Quick Add" ng-click="quick_post_task()">
+                </form>
+            </li>
         </ul>
         <button class="button settings {{showHideSettingsClass('tasks')}} {{selected_tasks_tab}}" ng-click="toggleShowHideSettings('tasks')">Show/Hide Settings</button>
     </header>
