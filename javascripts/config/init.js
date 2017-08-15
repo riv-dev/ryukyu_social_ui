@@ -1,1 +1,1 @@
-var app = angular.module('myApp', ['ngRoute','ngStorage','ngSanitize','btford.markdown']);
+var app = angular.module('myApp', ['ngRoute','ngStorage','ngSanitize','btford.markdown','ngFileUpload']);

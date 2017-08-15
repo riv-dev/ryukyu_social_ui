@@ -3,14 +3,43 @@
         <h2 class="title">{{this_user.title}}</h2>
         <p class="name">{{this_user.firstname}} {{this_user.lastname}}</p>
     </header>
-    <figure ng-if="this_user_photo.uri" class="figure">
-        <p class="image">
-            <img src = "{{this_user_photo.uri}}" />
-        </p>
+    
+    <figure ng-show="this_user_photo.uri" class="figure">
+        <div class="image">
+            <div ng-show="loggedin_user.admin || loggedin_user.id == this_user.id" 
+                ngf-select ngf-drop ng-model="files" 
+                ngf-pattern="'image/*'" ngf-accept="'image/*'" 
+                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
+                ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', pattern:'image/*'}"  
+                ngf-resize="resizeObj" ngf-fix-orientation="orientation" 
+                ngf-max-size="20MB" ngf-min-height="100"
+                ngf-resize="{width: 400, height: 400}"
+                ngf-drop-available="dropAvailable">
+                <img ngf-thumbnail="this_user_photo.uri" />
+            </div>
+            <button class="button delete submit" ng-show="loggedin_user.admin || loggedin_user.id == this_user.id" ng-click="delete_photo()">Delete</button>
+            <img ng-if="!loggedin_user.admin && loggedin_user.id != this_user.id" ngf-thumbnail="this_user_photo.uri" />
+        </div>
         <figcaption class="caption">
             {{this_user_photo.caption}}
         </figcaption>
+        <form class="form caption" name="caption_form" style="display: none;">
+            <p class="field">
+                <input class="input caption" type="text" ng-model="this_user_photo.caption"></input>
+            </p>
+            <div class="buttons">
+                <input class="button submit" type="submit" value="Update Caption" ng-click="update_caption()">
+                <a class="button cancel" ng-click="cancel_caption()">Cancel</a>
+            </div>
+        </form>
+        <button class="button edit caption" ng-click="show_caption_form()" ng-show="loggedin_user.admin || loggedin_user.id == this_user.id">Edit caption</button>
     </figure>
+    <ul ng-if="errors.photo">
+        <li ng-repeat="err in errors.photo">
+            {{err}}
+        </li>
+    </ul>
+    <br/><br/>
     <dl class="attributes">
         <dt class="key email"><em ng-if="loggedin_user.id==this_user.id">My </em>Email:</dt>
         <dd class="value email">{{this_user.email}}</dd>
