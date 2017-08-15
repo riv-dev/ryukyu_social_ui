@@ -1,4 +1,4 @@
-app.controller('projectPanelController', function($scope, $http, $routeParams, $location, $localStorage, CommonFunctions) {
+app.controller('projectPanelController', function($scope, $http, $timeout, $routeParams, $location, $localStorage, Upload, CommonFunctions) {
     $scope.$parent.hero = "Project Panel";
     $scope.$parent.panel_class = "project";
 
@@ -478,6 +478,116 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
         );
     }
 
+
+    $scope.show_caption_form = function () {
+        $('figcaption.caption').css('display', 'none');
+        $('.form.caption').css('display', 'block');
+        $('.button.edit.caption').css('display', 'none');
+
+        $scope.name_backup = $scope.this_project_photo.caption;
+    }
+
+    $scope.cancel_caption = function () {
+        $('figcaption.caption').css('display', 'block');
+        $('.form.caption').css('display', 'none');
+        $('.button.edit.caption').css('display', 'inline-block');
+
+        $scope.this_project_photo.caption = $scope.name_backup;
+    }
+
+    $scope.update_caption = function () {
+        $('figcaption.caption').css('display', 'block');
+        $('.form.caption').css('display', 'none');
+        $('.button.edit.caption').css('display', 'inline-block');
+
+        $http({
+            method: 'PUT',
+            url: projectPhotosApiBaseURL + "/projects/" + $routeParams.project_id + "/photo",
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                caption: $scope.this_project_photo.caption
+            }
+        }).then(
+            function successCallback(response) {
+                
+            },
+            function errorCallback(response) {
+                $scope.this_project_photo.caption = $scope.name_backup;
+            }
+        );
+    }
+
+    $scope.$watch('files', function (files) {
+        $scope.formUpload = false;
+        if (files != null) {
+            // make files array for not multiple to be able to be used in ng-repeat in the ui
+            if (!angular.isArray(files)) {
+                $timeout(function () {
+                    $scope.files = files = [files];
+                });
+                return;
+            }
+            for (var i = 0; i < files.length; i++) {
+                (function (f) {
+                    $scope.upload(f);
+                })(files[i]);
+            }
+        }
+    });
+
+    $scope.upload = function(file) {
+        Upload.upload({
+            url: projectPhotosApiBaseURL + "/projects/" + $routeParams.project_id + "/photo",
+            method: 'POST',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },                
+            data: {          
+                name: $scope.this_project.name, 
+                photo: file
+            }
+        }).then(function (response) {
+            $localStorage.flash_message = "Successfully added photo!";
+            $scope.this_project_photo.caption = "";
+            $scope.this_project_photo.uri = projectPhotosApiBaseURL + "/projects/" + $routeParams.project_id + "/photo.image";
+        }, function (response) {
+            $scope.$parent.flash_message = "Error adding photo.";
+            $scope.errors = {};
+            var responseError;
+            for (var i=0; i < response.data.errors.length; i++) {
+                responseError = response.data.errors[i];
+                if(responseError.hasOwnProperty('param')) {
+                    if(!$scope.errors[responseError['param']]) {
+                        $scope.errors[responseError['param']] = [];
+                    }
+                    $scope.errors[responseError['param']].push(responseError['msg']);
+                }
+            }
+        });
+    } //End upload()
+
+    $scope.delete_photo = function() {
+        $http({
+            method: 'DELETE',
+            url: projectPhotosApiBaseURL + '/projects/' + $routeParams.project_id + "/photo",
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                $localStorage.flash_message = "Deleted photo!";
+                $scope.this_project_photo = {};
+                $scope.this_project_photo.uri = "./images/default_project.png";
+                $scope.this_project_photo.caption = "Todo project photo microservice";
+            },
+            function errorCallback(response) {
+                $localStorage.flash_message = "Error deleting photo.";
+            }
+        );
+    }
+
     $scope.quick_task_form_data = {};
 
     $scope.quick_post_task = function() {
@@ -500,6 +610,7 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
                 }
             );
         }
+
     }
 
     if($localStorage.loggedin_user) {
@@ -527,9 +638,23 @@ app.controller('projectPanelController', function($scope, $http, $routeParams, $
             }
         }).then(function (response) {
             $scope.this_project = response.data;
-            $scope.this_project_photo = {};
-            $scope.this_project_photo.uri = "./images/default_project.png";
-            $scope.this_project_photo.caption = "Todo project photo microservice";
+
+            $http({
+                method: 'GET',
+                url: projectPhotosApiBaseURL + "/projects/" + $routeParams.project_id + "/photo",
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+            function successCallback(response) {
+                $scope.this_project_photo = response.data;
+                $scope.this_project_photo.uri = projectPhotosApiBaseURL + "/projects/" + $routeParams.project_id + "/photo.image";
+            },
+            function errorCallback(response) { 
+                $scope.this_project_photo = {};
+                $scope.this_project_photo.uri = "./images/default_project.png";
+                $scope.this_project_photo.caption = "Todo project photo microservice";
+            });
         });
 
 
