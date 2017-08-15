@@ -730,8 +730,25 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
         }).then(function (response) {
             $scope.this_user = response.data;
 
-            $scope.this_user.status = "I'm feeling great today!";
-            $scope.this_user.bio = "Hello, this is my bio.  This is where I talk about myself and my history.  Anything I like actually.  I like this and this and this.  Yup, that's right."
+            // $scope.this_user.status = response.data.status;
+            // $scope.this_user.bio = "Hello, this is my bio.  This is where I talk about myself and my history.  Anything I like actually.  I like this and this and this.  Yup, that's right."
+            $http({
+                method: 'GET',
+                url: userProfileApiBaseURL + "/users/"+$routeParams.user_id+"/profile",
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+            function successCallback(response) {
+                $scope.this_user.nickname = response.data.nickname;
+                $scope.this_user.phone_number = response.data.phone_number;
+                $scope.this_user.birthday = response.data.birthday;
+                $scope.this_user.status = response.data.status;
+                $scope.this_user.bio = response.data.bio;
+            },
+            function errorCallback(response) { 
+                
+            });
 
             $http({
                 method: 'GET',
