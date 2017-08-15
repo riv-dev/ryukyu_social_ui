@@ -579,7 +579,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             function successCallback(response) {
                 $localStorage.flash_message = "Deleted photo!";
                 $scope.this_project_photo = {};
-                $scope.this_project_photo.uri = "./images/default_user.png";
+                $scope.this_project_photo.uri = "./images/default_project.png";
                 $scope.this_project_photo.caption = "Todo project photo microservice";
             },
             function errorCallback(response) {
