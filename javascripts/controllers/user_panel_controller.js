@@ -684,6 +684,7 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
                 $localStorage.flash_message = "Error deleting photo.";
             }
         );
+    }
 
     $scope.quick_task_form_data = {};
 

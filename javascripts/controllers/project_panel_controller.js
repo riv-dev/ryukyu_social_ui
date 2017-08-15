@@ -586,6 +586,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                 $localStorage.flash_message = "Error deleting photo.";
             }
         );
+    }
 
     $scope.quick_task_form_data = {};
 
