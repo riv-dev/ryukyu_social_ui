@@ -17,7 +17,7 @@
                 <div class="add-photo"></div>
             </div>
             <button class="button delete submit" ng-if="loggedin_user.admin || this_user_write_access > 0" ng-click="delete_photo()">Delete</button>
-            <img ng-if="this_user_write_access == 0" ngf-thumbnail="this_project_photo.uri" />
+            <img ng-if="!loggedin_user.admin || this_user_write_access == 0" ngf-thumbnail="this_project_photo.uri" />
         </div>
         <figcaption class="caption">
             {{this_project_photo.caption}}
