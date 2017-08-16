@@ -1,4 +1,4 @@
-app.service('SiteNotifications', ['$http', function($http)  {
+app.service('SiteNotifications', ['$http', function ($http) {
 
     var tasks_socket;
 
@@ -13,7 +13,7 @@ app.service('SiteNotifications', ['$http', function($http)  {
             callback(response.data.name);
         });
     }
-    
+
     var getUserName = function (user_id, token, callback) {
         $http({
             method: 'GET',
@@ -27,9 +27,9 @@ app.service('SiteNotifications', ['$http', function($http)  {
     }
 
     this.subscribeToNotifications = function (loggedin_username, token) {
-        if(window.Notification && Notification.permission !== "denied") {
-            Notification.requestPermission(function(status) {  // status is "granted", if accepted by user
-        	});
+        if (window.Notification && Notification.permission !== "denied") {
+            Notification.requestPermission(function (status) { // status is "granted", if accepted by user
+            });
         }
 
         //This part has to be done for NGINX reverse proxying redirects to work correctly
@@ -49,52 +49,55 @@ app.service('SiteNotifications', ['$http', function($http)  {
             "transports": ["websocket"],
         }
 
-        if(relativePath && relativePath.length > 1) {
+        if (relativePath && relativePath.length > 1) {
             connectionOptions["path"] = relativePath + "/socket.io"
         }
 
-        tasks_socket = io.connect(protocol + "//" + baseURL, connectionOptions);
+        if (!tasks_socket) {
+            tasks_socket = io(protocol + "//" + baseURL, connectionOptions);
 
-        tasks_socket.on('task_status', function (data) {
-            console.log(data);
-            //Create a notification
-            var message;
-            if (data.status == 'finished') {
-                message = 'Finished Task';
-            } else if (data.status == 'doing') {
-                message = 'Doing Task';
-            } else if (data.status == 'waiting') {
-                message = 'Task Waiting';
-            }
+            console.log("Socket ID: " + tasks_socket.id);
+            tasks_socket.on('task_status', function (data) {
+                console.log(data);
+                //Create a notification
+                var message;
+                if (data.status == 'finished') {
+                    message = 'Finished Task';
+                } else if (data.status == 'doing') {
+                    message = 'Doing Task';
+                } else if (data.status == 'waiting') {
+                    message = 'Task Waiting';
+                }
 
-            getTaskName(data.task_id, token, function(task_name) {
-                getUserName(data.user_id, token, function(user_name) {
-                    var n = new Notification(user_name + ': ' + message, {
-                        body: task_name
-                        //icon: '/path/to/icon.png' // optional
+                getTaskName(data.task_id, token, function (task_name) {
+                    getUserName(data.user_id, token, function (user_name) {
+                        var n = new Notification(user_name + ': ' + message, {
+                            body: task_name
+                            //icon: '/path/to/icon.png' // optional
+                        });
                     });
                 });
             });
-        });
 
-        tasks_socket.on('task_assigned', function (data) {
-            console.log(data);
-            var username;
-            var taskname;
+            tasks_socket.on('task_assigned', function (data) {
+                console.log(data);
+                var username;
+                var taskname;
 
-            getTaskName(data.task_id, token, function(task_name) {
-                getUserName(data.user_id, token, function(user_name) {
-                    var n = new Notification(user_name + ': Assigned to Task', {
-                        body: task_name
-                        //icon: '/path/to/icon.png' // optional
+                getTaskName(data.task_id, token, function (task_name) {
+                    getUserName(data.user_id, token, function (user_name) {
+                        var n = new Notification(user_name + ': Assigned to Task', {
+                            body: task_name
+                            //icon: '/path/to/icon.png' // optional
+                        });
                     });
                 });
             });
-        });
+        }
     }
 
     this.unSubscribeToNotifications = function () {
-        if(tasks_socket) {
+        if (tasks_socket) {
             tasks_socket.disconnect();
         }
     }
