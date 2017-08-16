@@ -1,4 +1,4 @@
-app.controller('userPanelController', function($scope, $http, $location, $routeParams, $localStorage, CommonFunctions) {
+app.controller('userPanelController', function($scope, $http, $timeout, $location, $routeParams, $localStorage, Upload, CommonFunctions) {
     $scope.$parent.hero = "User Panel";
     $scope.$parent.panel_class = "user";
 
@@ -318,7 +318,7 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
                            'i': i
                         }
                     }).then(function (response) {
-                        $scope.tasks[parseInt(response.config["params"]["i"])]["users"] = response.data
+                        $scope.tasks[parseInt(response.config["params"]["i"])]["users"] = response.data;
 
                         for(var j=0;j<response.data.length;j++) {
                             if($routeParams.user_id == response.data[j]["user_id"]) {
@@ -576,6 +576,142 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         );
     }
 
+    $scope.show_caption_form = function () {
+        $('figcaption.caption').css('display', 'none');
+        $('.form.caption').css('display', 'block');
+        $('.button.edit.caption').css('display', 'none');
+
+        $scope.name_backup = $scope.this_user_photo.caption;
+    }
+
+    $scope.cancel_caption = function () {
+        $('figcaption.caption').css('display', 'block');
+        $('.form.caption').css('display', 'none');
+        $('.button.edit.caption').css('display', 'inline-block');
+
+        $scope.this_user_photo.caption = $scope.name_backup;
+    }
+
+    $scope.update_caption = function () {
+        $('figcaption.caption').css('display', 'block');
+        $('.form.caption').css('display', 'none');
+        $('.button.edit.caption').css('display', 'inline-block');
+
+        $http({
+            method: 'PUT',
+            url: userPhotosApiBaseURL + "/users/" + $routeParams.user_id + "/photo",
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                caption: $scope.this_user_photo.caption
+            }
+        }).then(
+            function successCallback(response) {
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Successfully updated caption!'
+                });
+            },
+            function errorCallback(response) {
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Error updated caption!'
+                });
+                $scope.this_user_photo.caption = $scope.name_backup;
+            }
+        );
+    }
+
+    $scope.$watch('files', function (files) {
+        $scope.formUpload = false;
+        if (files != null) {
+            // make files array for not multiple to be able to be used in ng-repeat in the ui
+            if (!angular.isArray(files)) {
+                $timeout(function () {
+                    $scope.files = files = [files];
+                });
+                return;
+            }
+            for (var i = 0; i < files.length; i++) {
+                (function (f) {
+                    $scope.upload(f);
+                })(files[i]);
+            }
+        }
+    });
+
+    $scope.upload = function(file) {
+        Upload.upload({
+            url: userPhotosApiBaseURL + "/users/" + $routeParams.user_id + "/photo",
+            method: 'POST',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },                
+            data: {          
+                lastname: $localStorage.loggedin_user.lastname, 
+                firstname: $localStorage.loggedin_user.firstname, 
+                caption: '',
+                photo: file
+            }
+        }).then(function (response) {
+            Lobibox.notify('success', {
+                position: 'top right',
+                size: 'mini',
+                msg: 'Successfully added photo!'
+            });
+            $scope.this_user_photo.caption = response.data.caption;
+            $scope.this_user_photo.uri = userPhotosApiBaseURL + response.data.photo_uri;
+        }, function (response) {
+            Lobibox.notify('error', {
+                position: 'top right',
+                size: 'mini',
+                msg: 'Error adding photo.'
+            });
+            $scope.errors = {};
+            var responseError;
+            for (var i=0; i < response.data.errors.length; i++) {
+                responseError = response.data.errors[i];
+                if(responseError.hasOwnProperty('param')) {
+                    if(!$scope.errors[responseError['param']]) {
+                        $scope.errors[responseError['param']] = [];
+                    }
+                    $scope.errors[responseError['param']].push(responseError['msg']);
+                }
+            }
+        });
+    } //End upload()
+
+    $scope.delete_photo = function() {
+        $http({
+            method: 'DELETE',
+            url: userPhotosApiBaseURL + '/users/' + $routeParams.user_id + "/photo",
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Deleted photo!'
+                });
+                $scope.this_user_photo = {};
+                $scope.this_user_photo.uri = "./images/default_user.png";
+                $scope.this_user_photo.caption = "Todo user photo microservice";
+            },
+            function errorCallback(response) {
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Error deleting photo.'
+                });
+            }
+        );
+    }
+
     $scope.quick_task_form_data = {};
 
     $scope.quick_post_task = function() {
@@ -620,22 +756,41 @@ app.controller('userPanelController', function($scope, $http, $location, $routeP
         }).then(function (response) {
             $scope.this_user = response.data;
 
-            $scope.this_user.status = "I'm feeling great today!";
-            $scope.this_user.bio = "Hello, this is my bio.  This is where I talk about myself and my history.  Anything I like actually.  I like this and this and this.  Yup, that's right."
+            // $scope.this_user.status = response.data.status;
+            // $scope.this_user.bio = "Hello, this is my bio.  This is where I talk about myself and my history.  Anything I like actually.  I like this and this and this.  Yup, that's right."
+            $http({
+                method: 'GET',
+                url: userProfileApiBaseURL + "/users/"+$routeParams.user_id+"/profile",
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+            function successCallback(response) {
+                $scope.this_user.nickname = response.data.nickname;
+                $scope.this_user.phone_number = response.data.phone_number;
+                $scope.this_user.birthday = response.data.birthday;
+                $scope.this_user.status = response.data.status;
+                $scope.this_user.bio = response.data.bio;
+            },
+            function errorCallback(response) { 
+                
+            });
 
             $http({
                 method: 'GET',
-                url: userPhotosApiBaseURL + "/users/"+$routeParams.user_id+"/photo",
+                url: userPhotosApiBaseURL + "/users/" + $routeParams.user_id + "/photo",
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 }
             }).then(
             function successCallback(response) {
                 $scope.this_user_photo = response.data;
-                $scope.this_user_photo.uri = userPhotosApiBaseURL+"/users/"+$routeParams.user_id+"/photo.image";
+                $scope.this_user_photo.uri = userPhotosApiBaseURL + response.data.photo_uri;
             },
             function errorCallback(response) { 
                 $scope.this_user_photo = {};
+                $scope.this_user_photo.uri = "./images/default_user.png";
+                $scope.this_user_photo.caption = "Todo user photo microservice";
             });
         });
 

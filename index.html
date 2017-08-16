@@ -12,6 +12,20 @@
     <script src="libs/showdown/src/showdown.js"></script>
     <script src="libs/angular-markdown-directive/markdown.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="libs/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="libs/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="libs/lobibox/js/lobibox.min.js"></script>
+    <script>
+      $(function () {
+        Lobibox.base.DEFAULTS = $.extend({}, Lobibox.base.DEFAULTS, {
+            iconSource: 'fontAwesome'
+        });
+        Lobibox.notify.DEFAULTS = $.extend({}, Lobibox.notify.DEFAULTS, {
+            iconSource: 'fontAwesome'
+        });
+      });
+    </script>
+    <link type="text/css" href="libs/lobibox/css/lobibox.min.css" rel="stylesheet" />
     <link type="text/css" href="./libs/dtpicker/jquery.simple-dtpicker.css" rel="stylesheet" />
     <!--<link type="text/css" href="./libs/angular-ui-notification/angular-ui-notification.min.css" rel="stylesheet" />-->
   </head>
@@ -57,6 +71,7 @@
       <script src="javascripts/controllers/edit_user_controller.js"></script>
       <script src="javascripts/controllers/login_controller.js"></script>
       <script src="javascripts/controllers/logout_controller.js"></script>
+      <script src="javascripts/controllers/edit_user_profile_controller.js"></script>
       <footer class="footer">
           <small>Ryukyu Interactive Vietnam</small>
       </footer>
