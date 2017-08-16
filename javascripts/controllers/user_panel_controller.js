@@ -608,9 +608,18 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
             }
         }).then(
             function successCallback(response) {
-                
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Successfully updated caption!'
+                });
             },
             function errorCallback(response) {
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Error updated caption!'
+                });
                 $scope.this_user_photo.caption = $scope.name_backup;
             }
         );

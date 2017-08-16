@@ -511,9 +511,18 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             }
         }).then(
             function successCallback(response) {
-                
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Successfully updated caption!'
+                });
             },
             function errorCallback(response) {
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Error updated caption!'
+                });
                 $scope.this_project_photo.caption = $scope.name_backup;
             }
         );
@@ -563,7 +572,6 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                 size: 'mini',
                 msg: 'Error adding photo.'
             });
-            $scope.$parent.flash_message = "Error adding photo.";
             $scope.errors = {};
             var responseError;
             for (var i=0; i < response.data.errors.length; i++) {
@@ -592,7 +600,6 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                     size: 'mini',
                     msg: 'Deleted photo!'
                 });
-                $localStorage.flash_message = "Deleted photo!";
                 $scope.this_project_photo = {};
                 $scope.this_project_photo.uri = "./images/default_project.png";
                 $scope.this_project_photo.caption = "Todo project photo microservice";
