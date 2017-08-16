@@ -644,12 +644,13 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
             data: {          
                 lastname: $localStorage.loggedin_user.lastname, 
                 firstname: $localStorage.loggedin_user.firstname, 
+                caption: '',
                 photo: file
             }
         }).then(function (response) {
             $localStorage.flash_message = "Successfully added photo!";
-            $scope.this_user_photo.caption = "";
-            $scope.this_user_photo.uri = userPhotosApiBaseURL + "/users/" + $routeParams.user_id + "/photo.image";
+            $scope.this_user_photo.caption = response.data.caption;
+            $scope.this_user_photo.uri = userPhotosApiBaseURL + response.data.photo_uri;
         }, function (response) {
             $scope.$parent.flash_message = "Error adding photo.";
             $scope.errors = {};
@@ -752,14 +753,14 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
 
             $http({
                 method: 'GET',
-                url: userPhotosApiBaseURL + "/users/"+$routeParams.user_id+"/photo",
+                url: userPhotosApiBaseURL + "/users/" + $routeParams.user_id + "/photo",
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 }
             }).then(
             function successCallback(response) {
                 $scope.this_user_photo = response.data;
-                $scope.this_user_photo.uri = userPhotosApiBaseURL+"/users/"+$routeParams.user_id+"/photo.image";
+                $scope.this_user_photo.uri = userPhotosApiBaseURL + response.data.photo_uri;
             },
             function errorCallback(response) { 
                 $scope.this_user_photo = {};

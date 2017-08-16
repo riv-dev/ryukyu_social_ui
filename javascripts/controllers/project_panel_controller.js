@@ -546,12 +546,13 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             },                
             data: {          
                 name: $scope.this_project.name, 
+                caption: '',
                 photo: file
             }
         }).then(function (response) {
             $localStorage.flash_message = "Successfully added photo!";
-            $scope.this_project_photo.caption = "";
-            $scope.this_project_photo.uri = projectPhotosApiBaseURL + "/projects/" + $routeParams.project_id + "/photo.image";
+            $scope.this_project_photo.caption = response.data.caption;
+            $scope.this_project_photo.uri = projectPhotosApiBaseURL + response.data.photo_uri;
         }, function (response) {
             $scope.$parent.flash_message = "Error adding photo.";
             $scope.errors = {};
@@ -648,7 +649,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             }).then(
             function successCallback(response) {
                 $scope.this_project_photo = response.data;
-                $scope.this_project_photo.uri = projectPhotosApiBaseURL + "/projects/" + $routeParams.project_id + "/photo.image";
+                $scope.this_project_photo.uri = projectPhotosApiBaseURL + response.data.photo_uri;
             },
             function errorCallback(response) { 
                 $scope.this_project_photo = {};
