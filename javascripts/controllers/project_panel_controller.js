@@ -550,10 +550,19 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                 photo: file
             }
         }).then(function (response) {
-            $localStorage.flash_message = "Successfully added photo!";
+            Lobibox.notify('success', {
+                position: 'top right',
+                size: 'mini',
+                msg: 'Successfully added photo!'
+            });
             $scope.this_project_photo.caption = response.data.caption;
             $scope.this_project_photo.uri = projectPhotosApiBaseURL + response.data.photo_uri;
         }, function (response) {
+            Lobibox.notify('error', {
+                position: 'top right',
+                size: 'mini',
+                msg: 'Error adding photo.'
+            });
             $scope.$parent.flash_message = "Error adding photo.";
             $scope.errors = {};
             var responseError;
@@ -578,13 +587,22 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             }
         }).then(
             function successCallback(response) {
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Deleted photo!'
+                });
                 $localStorage.flash_message = "Deleted photo!";
                 $scope.this_project_photo = {};
                 $scope.this_project_photo.uri = "./images/default_project.png";
                 $scope.this_project_photo.caption = "Todo project photo microservice";
             },
             function errorCallback(response) {
-                $localStorage.flash_message = "Error deleting photo.";
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Error deleting photo.'
+                });
             }
         );
     }

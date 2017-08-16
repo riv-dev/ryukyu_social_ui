@@ -648,11 +648,19 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
                 photo: file
             }
         }).then(function (response) {
-            $localStorage.flash_message = "Successfully added photo!";
+            Lobibox.notify('success', {
+                position: 'top right',
+                size: 'mini',
+                msg: 'Successfully added photo!'
+            });
             $scope.this_user_photo.caption = response.data.caption;
             $scope.this_user_photo.uri = userPhotosApiBaseURL + response.data.photo_uri;
         }, function (response) {
-            $scope.$parent.flash_message = "Error adding photo.";
+            Lobibox.notify('error', {
+                position: 'top right',
+                size: 'mini',
+                msg: 'Error adding photo.'
+            });
             $scope.errors = {};
             var responseError;
             for (var i=0; i < response.data.errors.length; i++) {
@@ -676,13 +684,21 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
             }
         }).then(
             function successCallback(response) {
-                $localStorage.flash_message = "Deleted photo!";
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Deleted photo!'
+                });
                 $scope.this_user_photo = {};
                 $scope.this_user_photo.uri = "./images/default_user.png";
                 $scope.this_user_photo.caption = "Todo user photo microservice";
             },
             function errorCallback(response) {
-                $localStorage.flash_message = "Error deleting photo.";
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    size: 'mini',
+                    msg: 'Error deleting photo.'
+                });
             }
         );
     }
