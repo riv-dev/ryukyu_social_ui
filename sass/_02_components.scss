@@ -2,12 +2,10 @@
 //List of Links Component
 .links {
     padding: 15px;
-
     .item {
         display: inline-block;
         border-right: 1px solid #c2c2c2;
         padding: 0px 10px 0px;
-
         &:last-child {
             border-right: none;
         }
@@ -15,36 +13,31 @@
 }
 
 //Attributes and Item Component with Key Value Pairs
-.attributes,.item {
+.attributes,
+.item {
     .key {
         clear: left;
         float: left;
         margin-right: 3px;
         margin-bottom: 3px;
     }
-
     .value {
         clear: right;
         float: left;
         margin-bottom: 3px;
     }
-
     .value.description {
         width: 100%;
     }
-
     .value_item {
         display: block;
         clear: left;
         padding-left: 10px;
-
         @include clearfix();
     }
-
     .value_item.last {
         margin-bottom: 5px;
     }
-
     @include clearfix();
 }
 
@@ -52,22 +45,18 @@
 .settings {
     padding: 10px 10px 5px;
     background-color: $light_grey;
-
     .item {
         display: block;
         text-decoration: underline;
         font-size: 14px;
-
         * {
             font-size: 14px;
             height: 20px;
             line-height: 20px;
         }
-
         .input {
             width: 70px;
         }
-
         @include clearfix();
     }
 }
@@ -78,35 +67,27 @@
         display: block;
         padding: 0px;
         border-bottom: 1px solid #c2c2c2;
-
         .link_block {
             padding: 10px 5px 10px;
         }
-
         .name {
             margin-bottom: 5px;
         }
-
         .info {
             margin-bottom: 5px;
-
-        }
-
-        //For descriptions in list items.  Only display first line and hide with ellipsis
+        } //For descriptions in list items.  Only display first line and hide with ellipsis
         .info.description {
             display: block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            width: 100%;            
+            width: 100%;
         }
     }
 }
 
 //Customize Specific Preview List Components
-.preview.tasks {
-
-}
+.preview.tasks {}
 
 .preview.projects {
     .name {
@@ -116,11 +97,7 @@
 
 .preview.users {
     position: relative;
-
-    .item.alert {
-
-    }
-
+    .item.alert {}
     .link_block {
         @include clearfix();
     }
@@ -136,7 +113,6 @@
         top: 50%;
         transform: translateY(-50%);
     }
-
     .key.user {
         float: none;
         display: block;
@@ -151,13 +127,11 @@
     .progress_description {
         margin-top: 10px;
     }
-
     .message.free {
         font-weight: bold;
         color: $green;
         padding-left: 5px;
     }
-
     .attributes.task-metrics {
         padding: 5px;
         float: right;
@@ -175,7 +149,6 @@
             background-color: transparent;
             color: white;
         }
-
         .value {
             font-weight: normal;
             color: white;
@@ -194,9 +167,7 @@
 
 //Figure Component
 .figure {
-    .image {
-
-    }
+    .image {}
     .caption {
         text-align: center;
     }
@@ -208,24 +179,21 @@
     margin: auto;
     border: 1px solid #c2c2c2;
     padding: 30px;
-
     .title {
         border-bottom: 1px solid black;
         margin-bottom: 15px;
     }
-
     .field {
         position: relative;
-        margin-bottom: 15px;        
-    }
-    //VALIDATION_ERRORS
+        margin-bottom: 15px;
+    } //VALIDATION_ERRORS
     .validation_errors {
         position: relative;
         top: -10px;
-            .item {
-                list-style-type: disc;
-                list-style-position: inside;
-                color: red;
+        .item {
+            list-style-type: disc;
+            list-style-position: inside;
+            color: red;
         }
     }
 }
@@ -248,7 +216,6 @@
     margin: 0px;
     margin-top: 0px;
     position: relative;
-
     .field {
         display: block;
         width: 100%;
@@ -256,13 +223,12 @@
         margin-bottom: 0px;
     }
     .input {
-        font-size: 12px;        
+        font-size: 12px;
         line-height: 20px;
         height: 20px;
         width: 100%;
         font-weight: normal;
     }
-
     .button {
         position: absolute;
         top: 5px;
@@ -302,32 +268,28 @@
 .pagination {
     display: inline-block;
     margin: auto;
-
     @include clearfix();
 }
 
 .pagination .item {
     float: left;
-
     a {
         display: block;
         color: black;
         text-decoration: none;
         padding: 8px 16px;
     }
-
     &.selected {
         a {
             background-color: #4CAF50;
             color: white;
         }
     }
-
     &:not(.selected) {
         a:hover {
-           background-color: #ddd; 
+            background-color: #ddd;
         }
-    }    
+    }
 }
 
 .tabs {
@@ -345,7 +307,6 @@
         display: inline-block;
         margin-right: 5px;
         z-index: 1;
-
         &.selected {
             z-index: 3;
             .tab {
@@ -354,12 +315,45 @@
                 font-weight: bold;
             }
         }
-
         .tab {
             border: 1px solid $grey;
             border-bottom: none;
             border-radius: 3px 3px 0px 0px;
             color: $grey;
+        }
+    }
+}
+
+//Component layout for expand/collapse button in a header
+.header {
+    position: relative;
+    .button.expand {
+        position: absolute;
+        right: 10px;
+        top: 0px;
+    }
+    .button.collapse {
+        position: absolute;
+        right: 10px;
+        top: 0px;
+    }
+}
+
+.section.projects_two {
+    .header {
+        position: relative;
+        min-height: 70px;
+        .avatar {
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .info {
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
         }
     }
 }

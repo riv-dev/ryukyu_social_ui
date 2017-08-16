@@ -1,4 +1,4 @@
-/* line 5, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,45 +20,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
@@ -120,19 +120,19 @@ img {
   text-decoration: none;
   color: #5e5e5e;
 }
-/* line 18, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .logo a:visited {
   color: #5e5e5e;
 }
-/* line 21, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .logo a:focus {
   color: #5e5e5e;
 }
-/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .logo a:hover {
   color: #5e5e5e;
 }
-/* line 27, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .logo a:active {
   color: #5e5e5e;
 }
@@ -220,19 +220,19 @@ img {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-/* line 18, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link:visited {
   color: #081ed1;
 }
-/* line 21, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link:focus {
   color: #081ed1;
 }
-/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link:hover {
   color: #081ed1;
 }
-/* line 27, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link:active {
   color: #081ed1;
 }
@@ -251,19 +251,19 @@ img {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-/* line 18, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link_block:visited {
   color: black;
 }
-/* line 21, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link_block:focus {
   color: black;
 }
-/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link_block:hover {
   color: black;
 }
-/* line 27, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link_block:active {
   color: black;
 }
@@ -332,19 +332,19 @@ img {
   background-color: transparent;
   color: #081ed1;
 }
-/* line 18, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .button.cancel:visited {
   color: #081ed1;
 }
-/* line 21, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .button.cancel:focus {
   color: #081ed1;
 }
-/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .button.cancel:hover {
   color: #081ed1;
 }
-/* line 27, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .button.cancel:active {
   color: #081ed1;
 }
@@ -462,6 +462,66 @@ img {
 }
 
 /* line 248, ../sass/_01_elements.scss */
+.button.expand {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  height: 18px;
+  line-height: 18px;
+  width: 18px;
+  text-indent: 9999px;
+  color: black;
+  margin: 0px;
+  padding: 0px;
+}
+/* line 261, ../sass/_01_elements.scss */
+.button.expand:hover {
+  background-color: none;
+  color: #081ed1;
+}
+/* line 265, ../sass/_01_elements.scss */
+.button.expand:before {
+  position: absolute;
+  text-indent: 0px;
+  left: 3px;
+  display: block;
+  font-size: 14px;
+  font-family: "FontAwesome";
+  content: "\f196";
+}
+
+/* line 276, ../sass/_01_elements.scss */
+.button.collapse {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  height: 18px;
+  line-height: 18px;
+  width: 18px;
+  text-indent: 9999px;
+  color: black;
+  margin: 0px;
+  padding: 0px;
+}
+/* line 289, ../sass/_01_elements.scss */
+.button.collapse:hover {
+  background-color: none;
+  color: #081ed1;
+}
+/* line 293, ../sass/_01_elements.scss */
+.button.collapse:before {
+  position: absolute;
+  text-indent: 0px;
+  left: 3px;
+  display: block;
+  font-size: 14px;
+  font-family: "FontAwesome";
+  content: "\f147";
+}
+
+/* line 304, ../sass/_01_elements.scss */
 .button.minimize {
   position: absolute;
   top: 5px;
@@ -477,12 +537,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 262, ../sass/_01_elements.scss */
+/* line 318, ../sass/_01_elements.scss */
 .button.minimize:hover {
   background-color: #e2edff;
   color: #081ed1;
 }
-/* line 266, ../sass/_01_elements.scss */
+/* line 322, ../sass/_01_elements.scss */
 .button.minimize:before {
   position: absolute;
   text-indent: 0px;
@@ -493,7 +553,7 @@ img {
   content: "\f2d1";
 }
 
-/* line 277, ../sass/_01_elements.scss */
+/* line 333, ../sass/_01_elements.scss */
 .button.maximize {
   position: absolute;
   top: 5px;
@@ -509,12 +569,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 291, ../sass/_01_elements.scss */
+/* line 347, ../sass/_01_elements.scss */
 .button.maximize:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 295, ../sass/_01_elements.scss */
+/* line 351, ../sass/_01_elements.scss */
 .button.maximize:before {
   position: absolute;
   text-indent: 0px;
@@ -525,7 +585,7 @@ img {
   content: "\f2d2";
 }
 
-/* line 306, ../sass/_01_elements.scss */
+/* line 362, ../sass/_01_elements.scss */
 .button.permissions {
   position: absolute;
   top: 5px;
@@ -541,12 +601,12 @@ img {
   margin: 0px;
   padding: 0px !important;
 }
-/* line 320, ../sass/_01_elements.scss */
+/* line 376, ../sass/_01_elements.scss */
 .button.permissions:hover {
   background-color: transparent !important;
   color: #081ed1 !important;
 }
-/* line 324, ../sass/_01_elements.scss */
+/* line 380, ../sass/_01_elements.scss */
 .button.permissions:before {
   position: absolute;
   text-indent: 0px;
@@ -557,7 +617,7 @@ img {
   content: "\f023";
 }
 
-/* line 335, ../sass/_01_elements.scss */
+/* line 391, ../sass/_01_elements.scss */
 .button.edit {
   position: relative;
   top: 0px;
@@ -573,12 +633,12 @@ img {
   margin: 0px;
   padding: 0px !important;
 }
-/* line 349, ../sass/_01_elements.scss */
+/* line 405, ../sass/_01_elements.scss */
 .button.edit:hover {
   background-color: transparent !important;
   color: #081ed1 !important;
 }
-/* line 353, ../sass/_01_elements.scss */
+/* line 409, ../sass/_01_elements.scss */
 .button.edit:before {
   position: absolute;
   text-indent: 0px;
@@ -589,7 +649,7 @@ img {
   content: "\f040";
 }
 
-/* line 364, ../sass/_01_elements.scss */
+/* line 420, ../sass/_01_elements.scss */
 .button.settings {
   position: relative;
   padding: 15px 0px;
@@ -610,11 +670,11 @@ img {
   transition: 0.2s;
   cursor: pointer;
 }
-/* line 378, ../sass/_01_elements.scss */
+/* line 434, ../sass/_01_elements.scss */
 .button.settings:hover {
   background-color: #e2edff;
 }
-/* line 381, ../sass/_01_elements.scss */
+/* line 437, ../sass/_01_elements.scss */
 .button.settings:before {
   position: absolute;
   text-indent: 0px;
@@ -627,34 +687,34 @@ img {
   display: block;
   text-align: center;
 }
-/* line 393, ../sass/_01_elements.scss */
+/* line 449, ../sass/_01_elements.scss */
 .button.settings.show {
   display: block;
 }
-/* line 395, ../sass/_01_elements.scss */
+/* line 451, ../sass/_01_elements.scss */
 .button.settings.show:before {
   content: "\f1de";
 }
-/* line 399, ../sass/_01_elements.scss */
+/* line 455, ../sass/_01_elements.scss */
 .button.settings.hide {
   display: block;
 }
-/* line 401, ../sass/_01_elements.scss */
+/* line 457, ../sass/_01_elements.scss */
 .button.settings.hide:before {
   content: "\f1de";
 }
 
-/* line 411, ../sass/_01_elements.scss */
+/* line 467, ../sass/_01_elements.scss */
 .show {
   display: block;
 }
 
-/* line 415, ../sass/_01_elements.scss */
+/* line 471, ../sass/_01_elements.scss */
 .hide {
   display: none;
 }
 
-/* line 419, ../sass/_01_elements.scss */
+/* line 475, ../sass/_01_elements.scss */
 .disabled {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -664,98 +724,98 @@ img {
   user-select: none;
 }
 
-/* line 428, ../sass/_01_elements.scss */
+/* line 484, ../sass/_01_elements.scss */
 .footer {
   text-align: center;
   font-size: 10px;
   color: #5e5e5e;
 }
 
-/* line 435, ../sass/_01_elements.scss */
+/* line 491, ../sass/_01_elements.scss */
 .alert {
   color: #424000;
   background-color: #f9f795;
   border-color: #424000;
 }
 
-/* line 441, ../sass/_01_elements.scss */
+/* line 497, ../sass/_01_elements.scss */
 .fail {
   color: #8c0000;
   background-color: #ffb2b2;
   border-color: #8c0000;
 }
 
-/* line 447, ../sass/_01_elements.scss */
+/* line 503, ../sass/_01_elements.scss */
 .success {
   color: #104c11;
   background-color: #e8ffed;
   border-color: #104c11;
 }
 
-/* line 453, ../sass/_01_elements.scss */
+/* line 509, ../sass/_01_elements.scss */
 .none {
   color: #939393;
 }
 
-/* line 457, ../sass/_01_elements.scss */
+/* line 513, ../sass/_01_elements.scss */
 .important {
   font-weight: bold;
   color: #c40505;
 }
 
-/* line 462, ../sass/_01_elements.scss */
+/* line 518, ../sass/_01_elements.scss */
 .finished,
 button.finished {
   color: #1f7c20;
   background-color: #e8ffed;
 }
 
-/* line 468, ../sass/_01_elements.scss */
+/* line 524, ../sass/_01_elements.scss */
 .doing,
 button.doing {
   color: #081ed1;
   background-color: #fffce2;
 }
 
-/* line 474, ../sass/_01_elements.scss */
+/* line 530, ../sass/_01_elements.scss */
 .new,
 button.new {
   color: #db7400;
   background-color: white;
 }
 
-/* line 480, ../sass/_01_elements.scss */
+/* line 536, ../sass/_01_elements.scss */
 .waiting,
 button.waiting {
   color: black;
   background-color: #ffe5fc;
 }
 
-/* line 486, ../sass/_01_elements.scss */
+/* line 542, ../sass/_01_elements.scss */
 .dump,
 button.dump {
   color: black;
   background-color: white;
 }
 
-/* line 492, ../sass/_01_elements.scss */
+/* line 548, ../sass/_01_elements.scss */
 .archived {
   color: black;
   background-color: #e2e2e2;
 }
 
-/* line 497, ../sass/_01_elements.scss */
+/* line 553, ../sass/_01_elements.scss */
 .active {
   font-weight: bold;
   text-decoration: underline;
 }
 
-/* line 503, ../sass/_01_elements.scss */
+/* line 559, ../sass/_01_elements.scss */
 .is_mine {
   background-color: #f9f795;
 }
 
-/* line 507, ../sass/_01_elements.scss */
+/* line 563, ../sass/_01_elements.scss */
 .markdown {
   /* Begin bidirectionality settings (do not change) */
 }
@@ -1009,28 +1069,28 @@ button.dump {
     page-break-before: avoid;
   }
 }
-/* line 509, ../sass/_01_elements.scss */
+/* line 565, ../sass/_01_elements.scss */
 .markdown img.small {
   width: 25%;
   height: auto;
 }
-/* line 513, ../sass/_01_elements.scss */
+/* line 569, ../sass/_01_elements.scss */
 .markdown img.medium {
   width: 50%;
   height: auto;
 }
-/* line 517, ../sass/_01_elements.scss */
+/* line 573, ../sass/_01_elements.scss */
 .markdown img.large {
   width: 100%;
   height: auto;
 }
 
-/* line 523, ../sass/_01_elements.scss */
+/* line 579, ../sass/_01_elements.scss */
 .image.profile {
   cursor: pointer;
   position: relative;
 }
-/* line 527, ../sass/_01_elements.scss */
+/* line 583, ../sass/_01_elements.scss */
 .image.profile .add-photo {
   position: absolute;
   top: 0;
@@ -1043,7 +1103,7 @@ button.dump {
   transition: all .3s;
   font: normal normal normal 14px/1 FontAwesome;
 }
-/* line 539, ../sass/_01_elements.scss */
+/* line 595, ../sass/_01_elements.scss */
 .image.profile .add-photo:after {
   content: "\f067";
   color: #fff;
@@ -1053,12 +1113,12 @@ button.dump {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* line 550, ../sass/_01_elements.scss */
+/* line 606, ../sass/_01_elements.scss */
 .image.profile:hover .add-photo {
   opacity: 1;
 }
 
-/* line 555, ../sass/_01_elements.scss */
+/* line 611, ../sass/_01_elements.scss */
 .avatar {
   height: 40px;
   width: 40px;
@@ -1077,75 +1137,82 @@ button.dump {
 .links {
   padding: 15px;
 }
-/* line 6, ../sass/_02_components.scss */
+/* line 5, ../sass/_02_components.scss */
 .links .item {
   display: inline-block;
   border-right: 1px solid #c2c2c2;
   padding: 0px 10px 0px;
 }
-/* line 11, ../sass/_02_components.scss */
+/* line 9, ../sass/_02_components.scss */
 .links .item:last-child {
   border-right: none;
 }
 
-/* line 19, ../sass/_02_components.scss */
-.attributes .key, .item .key {
+/* line 18, ../sass/_02_components.scss */
+.attributes .key,
+.item .key {
   clear: left;
   float: left;
   margin-right: 3px;
   margin-bottom: 3px;
 }
-/* line 26, ../sass/_02_components.scss */
-.attributes .value, .item .value {
+/* line 24, ../sass/_02_components.scss */
+.attributes .value,
+.item .value {
   clear: right;
   float: left;
   margin-bottom: 3px;
 }
-/* line 32, ../sass/_02_components.scss */
-.attributes .value.description, .item .value.description {
+/* line 29, ../sass/_02_components.scss */
+.attributes .value.description,
+.item .value.description {
   width: 100%;
 }
-/* line 36, ../sass/_02_components.scss */
-.attributes .value_item, .item .value_item {
+/* line 32, ../sass/_02_components.scss */
+.attributes .value_item,
+.item .value_item {
   display: block;
   clear: left;
   padding-left: 10px;
 }
 /* line 33, ../sass/_00_defaults.scss */
-.attributes .value_item:after, .item .value_item:after {
+.attributes .value_item:after,
+.item .value_item:after {
   content: '';
   display: table;
   clear: both;
 }
-/* line 44, ../sass/_02_components.scss */
-.attributes .value_item.last, .item .value_item.last {
+/* line 38, ../sass/_02_components.scss */
+.attributes .value_item.last,
+.item .value_item.last {
   margin-bottom: 5px;
 }
 /* line 33, ../sass/_00_defaults.scss */
-.attributes:after, .item:after {
+.attributes:after,
+.item:after {
   content: '';
   display: table;
   clear: both;
 }
 
-/* line 52, ../sass/_02_components.scss */
+/* line 45, ../sass/_02_components.scss */
 .settings {
   padding: 10px 10px 5px;
   background-color: #e2e2e2;
 }
-/* line 56, ../sass/_02_components.scss */
+/* line 48, ../sass/_02_components.scss */
 .settings .item {
   display: block;
   text-decoration: underline;
   font-size: 14px;
 }
-/* line 61, ../sass/_02_components.scss */
+/* line 52, ../sass/_02_components.scss */
 .settings .item * {
   font-size: 14px;
   height: 20px;
   line-height: 20px;
 }
-/* line 67, ../sass/_02_components.scss */
+/* line 57, ../sass/_02_components.scss */
 .settings .item .input {
   width: 70px;
 }
@@ -1156,25 +1223,25 @@ button.dump {
   clear: both;
 }
 
-/* line 77, ../sass/_02_components.scss */
+/* line 66, ../sass/_02_components.scss */
 .preview .item {
   display: block;
   padding: 0px;
   border-bottom: 1px solid #c2c2c2;
 }
-/* line 82, ../sass/_02_components.scss */
+/* line 70, ../sass/_02_components.scss */
 .preview .item .link_block {
   padding: 10px 5px 10px;
 }
-/* line 86, ../sass/_02_components.scss */
+/* line 73, ../sass/_02_components.scss */
 .preview .item .name {
   margin-bottom: 5px;
 }
-/* line 90, ../sass/_02_components.scss */
+/* line 76, ../sass/_02_components.scss */
 .preview .item .info {
   margin-bottom: 5px;
 }
-/* line 96, ../sass/_02_components.scss */
+/* line 79, ../sass/_02_components.scss */
 .preview .item .info.description {
   display: block;
   overflow: hidden;
@@ -1183,12 +1250,12 @@ button.dump {
   width: 100%;
 }
 
-/* line 112, ../sass/_02_components.scss */
+/* line 93, ../sass/_02_components.scss */
 .preview.projects .name {
   font-size: 20px;
 }
 
-/* line 117, ../sass/_02_components.scss */
+/* line 98, ../sass/_02_components.scss */
 .preview.users {
   position: relative;
 }
@@ -1198,128 +1265,128 @@ button.dump {
   display: table;
   clear: both;
 }
-/* line 127, ../sass/_02_components.scss */
+/* line 104, ../sass/_02_components.scss */
 .preview.users .avatar {
   position: absolute;
   left: 5px;
   top: 50%;
   transform: translateY(-50%);
 }
-/* line 133, ../sass/_02_components.scss */
+/* line 110, ../sass/_02_components.scss */
 .preview.users .info {
   position: absolute;
   left: 50px;
   top: 50%;
   transform: translateY(-50%);
 }
-/* line 140, ../sass/_02_components.scss */
+/* line 116, ../sass/_02_components.scss */
 .preview.users .key.user {
   float: none;
   display: block;
   font-size: 16px;
 }
-/* line 145, ../sass/_02_components.scss */
+/* line 121, ../sass/_02_components.scss */
 .preview.users .value.user {
   float: none;
   display: block;
   font-size: 14px;
   padding-left: 3px;
 }
-/* line 151, ../sass/_02_components.scss */
+/* line 127, ../sass/_02_components.scss */
 .preview.users .progress_description {
   margin-top: 10px;
 }
-/* line 155, ../sass/_02_components.scss */
+/* line 130, ../sass/_02_components.scss */
 .preview.users .message.free {
   font-weight: bold;
   color: #1f7c20;
   padding-left: 5px;
 }
-/* line 161, ../sass/_02_components.scss */
+/* line 135, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics {
   padding: 5px;
   float: right;
   background-color: black;
   color: white;
 }
-/* line 166, ../sass/_02_components.scss */
+/* line 140, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .key {
   font-weight: normal;
   color: white;
 }
-/* line 170, ../sass/_02_components.scss */
+/* line 144, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .key.alert {
   background-color: transparent;
   color: white;
 }
-/* line 174, ../sass/_02_components.scss */
+/* line 148, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .key.success {
   background-color: transparent;
   color: white;
 }
-/* line 179, ../sass/_02_components.scss */
+/* line 152, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .value {
   font-weight: normal;
   color: white;
 }
-/* line 183, ../sass/_02_components.scss */
+/* line 156, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .value.alert {
   background-color: transparent;
   font-weight: bold;
   color: red;
 }
-/* line 188, ../sass/_02_components.scss */
+/* line 161, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .value.success {
   background-color: transparent;
   color: lightgreen;
 }
 
-/* line 200, ../sass/_02_components.scss */
+/* line 171, ../sass/_02_components.scss */
 .figure .caption {
   text-align: center;
 }
 
-/* line 206, ../sass/_02_components.scss */
+/* line 177, ../sass/_02_components.scss */
 .form {
   width: 50%;
   margin: auto;
   border: 1px solid #c2c2c2;
   padding: 30px;
 }
-/* line 212, ../sass/_02_components.scss */
+/* line 182, ../sass/_02_components.scss */
 .form .title {
   border-bottom: 1px solid black;
   margin-bottom: 15px;
 }
-/* line 217, ../sass/_02_components.scss */
+/* line 186, ../sass/_02_components.scss */
 .form .field {
   position: relative;
   margin-bottom: 15px;
 }
-/* line 222, ../sass/_02_components.scss */
+/* line 190, ../sass/_02_components.scss */
 .form .validation_errors {
   position: relative;
   top: -10px;
 }
-/* line 225, ../sass/_02_components.scss */
+/* line 193, ../sass/_02_components.scss */
 .form .validation_errors .item {
   list-style-type: disc;
   list-style-position: inside;
   color: red;
 }
 
-/* line 234, ../sass/_02_components.scss */
+/* line 202, ../sass/_02_components.scss */
 .form.assign_user {
   background-color: #e2edff;
   margin-top: 10px;
   width: 100%;
 }
-/* line 238, ../sass/_02_components.scss */
+/* line 206, ../sass/_02_components.scss */
 .form.assign_user .input {
   width: 100%;
 }
 
-/* line 243, ../sass/_02_components.scss */
+/* line 211, ../sass/_02_components.scss */
 .form.task_quick_add {
   background-color: transparent;
   border: none;
@@ -1329,14 +1396,14 @@ button.dump {
   margin-top: 0px;
   position: relative;
 }
-/* line 252, ../sass/_02_components.scss */
+/* line 219, ../sass/_02_components.scss */
 .form.task_quick_add .field {
   display: block;
   width: 100%;
   padding-right: 75px;
   margin-bottom: 0px;
 }
-/* line 258, ../sass/_02_components.scss */
+/* line 225, ../sass/_02_components.scss */
 .form.task_quick_add .input {
   font-size: 12px;
   line-height: 20px;
@@ -1344,7 +1411,7 @@ button.dump {
   width: 100%;
   font-weight: normal;
 }
-/* line 266, ../sass/_02_components.scss */
+/* line 232, ../sass/_02_components.scss */
 .form.task_quick_add .button {
   position: absolute;
   top: 5px;
@@ -1357,27 +1424,27 @@ button.dump {
   padding: 0px;
 }
 
-/* line 279, ../sass/_02_components.scss */
+/* line 245, ../sass/_02_components.scss */
 .form.update_progress {
   width: 100%;
   border: none;
   padding: 0px 5px 0px;
 }
-/* line 283, ../sass/_02_components.scss */
+/* line 249, ../sass/_02_components.scss */
 .form.update_progress .title {
   font-size: 14px;
 }
-/* line 286, ../sass/_02_components.scss */
+/* line 252, ../sass/_02_components.scss */
 .form.update_progress .label {
   color: black;
   font-size: 12px;
 }
-/* line 290, ../sass/_02_components.scss */
+/* line 256, ../sass/_02_components.scss */
 .form.update_progress .input {
   width: 100%;
   font-size: 12px;
 }
-/* line 294, ../sass/_02_components.scss */
+/* line 260, ../sass/_02_components.scss */
 .form.update_progress .button {
   padding: 5px;
   font-size: 12px;
@@ -1386,7 +1453,7 @@ button.dump {
   border-radius: 2px;
 }
 
-/* line 302, ../sass/_02_components.scss */
+/* line 268, ../sass/_02_components.scss */
 .pagination {
   display: inline-block;
   margin: auto;
@@ -1398,32 +1465,32 @@ button.dump {
   clear: both;
 }
 
-/* line 309, ../sass/_02_components.scss */
+/* line 274, ../sass/_02_components.scss */
 .pagination .item {
   float: left;
 }
-/* line 312, ../sass/_02_components.scss */
+/* line 276, ../sass/_02_components.scss */
 .pagination .item a {
   display: block;
   color: black;
   text-decoration: none;
   padding: 8px 16px;
 }
-/* line 320, ../sass/_02_components.scss */
+/* line 283, ../sass/_02_components.scss */
 .pagination .item.selected a {
   background-color: #4CAF50;
   color: white;
 }
-/* line 327, ../sass/_02_components.scss */
+/* line 289, ../sass/_02_components.scss */
 .pagination .item:not(.selected) a:hover {
   background-color: #ddd;
 }
 
-/* line 333, ../sass/_02_components.scss */
+/* line 295, ../sass/_02_components.scss */
 .tabs {
   position: relative;
 }
-/* line 335, ../sass/_02_components.scss */
+/* line 297, ../sass/_02_components.scss */
 .tabs:after {
   position: relative;
   display: block;
@@ -1431,7 +1498,7 @@ button.dump {
   border-top: 1px solid black;
   z-index: 2;
 }
-/* line 342, ../sass/_02_components.scss */
+/* line 304, ../sass/_02_components.scss */
 .tabs .item {
   position: relative;
   top: 1px;
@@ -1439,22 +1506,59 @@ button.dump {
   margin-right: 5px;
   z-index: 1;
 }
-/* line 349, ../sass/_02_components.scss */
+/* line 310, ../sass/_02_components.scss */
 .tabs .item.selected {
   z-index: 3;
 }
-/* line 351, ../sass/_02_components.scss */
+/* line 312, ../sass/_02_components.scss */
 .tabs .item.selected .tab {
   border-color: black;
   color: black;
   font-weight: bold;
 }
-/* line 358, ../sass/_02_components.scss */
+/* line 318, ../sass/_02_components.scss */
 .tabs .item .tab {
   border: 1px solid #c2c2c2;
   border-bottom: none;
   border-radius: 3px 3px 0px 0px;
   color: #c2c2c2;
+}
+
+/* line 328, ../sass/_02_components.scss */
+.header {
+  position: relative;
+}
+/* line 330, ../sass/_02_components.scss */
+.header .button.expand {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+/* line 335, ../sass/_02_components.scss */
+.header .button.collapse {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+
+/* line 343, ../sass/_02_components.scss */
+.section.projects_two .header {
+  position: relative;
+  min-height: 70px;
+}
+/* line 346, ../sass/_02_components.scss */
+.section.projects_two .header .avatar {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 352, ../sass/_02_components.scss */
+.section.projects_two .header .info {
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* line 3, ../sass/_03_layout.scss */

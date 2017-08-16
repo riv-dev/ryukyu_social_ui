@@ -1,19 +1,23 @@
-<p ng-if="!loggedin_user" class="message welcome">Welcome to Ryukyu Social</p>
-<p ng-if="!loggedin_user" class="message welcome">Please <a href="./login">log in</a></p>
+<p ng-show="!loggedin_user" class="message welcome">Welcome to Ryukyu Social</p>
+<p ng-show="!loggedin_user" class="message welcome">Please <a href="./login">log in</a></p>
 
-<section ng-if="loggedin_user" class="section projects_two">
+<button class="button by-person">By Person</button>
+<button class="button by-status">By Status</button>
+
+<section ng-show="loggedin_user" class="section projects_two">
     <header class="header">
         <h2 class="title">Dump</h2>
+        <button class="button expandcollapse {{collapseSettingCSS('dump')}}" ng-click="expandCollapse($event,'dump')">Expand/Collapse</button>
     </header>
 
-    <ul class="preview projects">
+    <ul class="preview projects dump">
         <li class="item {{project.status}}" ng-repeat="project in projects['dump'].data">
             <a class="link_block" href="./projects/{{project.id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
                     <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
-                    <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
+                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-show="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
+                    <dd class="value none deadline" ng-show="!project.deadline">Not defined</dd>
                 </dl>
             </a>
             <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
@@ -21,19 +25,20 @@
     </ul>
 </section>
 
-<section ng-if="loggedin_user" class="section projects_two">
+<section ng-show="loggedin_user" class="section projects_two">
     <header class="header">
         <h2 class="title">Waiting</h2>
+        <button class="button expandcollapse {{collapseSettingCSS('waiting')}}" ng-click="expandCollapse($event,'waiting')">Expand/Collapse</button>
     </header>
 
-    <ul class="preview projects">
+    <ul class="preview projects waiting">
         <li class="item {{project.status}}" ng-repeat="project in projects['waiting'].data">
             <a class="link_block" href="./projects/{{project.id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
                     <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
-                    <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
+                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-show="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
+                    <dd class="value none deadline" ng-show="!project.deadline">Not defined</dd>
                 </dl>
             </a>
             <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
@@ -41,19 +46,20 @@
     </ul>
 </section>
 
-<section ng-if="loggedin_user" class="section projects_two">
+<section ng-show="loggedin_user" class="section projects_two">
     <header class="header">
         <h2 class="title">Doing</h2>
+        <button class="button expandcollapse {{collapseSettingCSS('doing')}}" ng-click="expandCollapse($event,'doing')">Expand/Collapse</button>
     </header>
 
-    <ul class="preview projects">
+    <ul class="preview projects doing">
         <li class="item {{project.status}}" ng-repeat="project in projects['doing'].data">
             <a class="link_block" href="./projects/{{project.id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
                     <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
-                    <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
+                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-show="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
+                    <dd class="value none deadline" ng-show="!project.deadline">Not defined</dd>
                 </dl>
             </a>
             <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
@@ -61,19 +67,50 @@
     </ul>
 </section>
 
-<section ng-if="loggedin_user" class="section projects_two">
+<section ng-show="loggedin_user" class="section projects_two">
     <header class="header">
         <h2 class="title">Finished</h2>
+        <button class="button expandcollapse {{collapseSettingCSS('finished')}}" ng-click="expandCollapse($event,'finished')">Expand/Collapse</button>
     </header>
 
-    <ul class="preview projects">
+    <ul class="preview projects finished">
         <li class="item {{project.status}}" ng-repeat="project in projects['finished'].data">
             <a class="link_block" href="./projects/{{project.id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
                     <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
-                    <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
+                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-show="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
+                    <dd class="value none deadline" ng-show="!project.deadline">Not defined</dd>
+                </dl>
+            </a>
+            <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
+        </li>
+    </ul>
+</section>
+
+<section ng-repeat="user in users" ng-show="loggedin_user" class="section projects_two">
+    <header class="header">
+        <div ng-if="user.photo" class="avatar">
+            <img src="{{user.photo.uri}}" />
+        </div>
+        <div ng-if="!user.photo" class="avatar none">
+            {{userInitials(user)}}
+        </div>
+        <div class="info">
+            <h3 class="key user">{{user.title}}</h3>
+            <p class="value user">{{user.firstname}} {{user.lastname}}</p>
+        </div>
+        <button class="button expandcollapse {{collapseSettingCSS(user.id)}}" ng-click="expandCollapse($event, user.id)">Expand/Collapse</button>
+    </header>
+
+    <ul class="preview projects user">
+        <li class="item {{project.project_status}}" ng-repeat="project in projects[user.id].data">
+            <a class="link_block" href="./projects/{{project.id}}">
+                <h3 class="name">{{project.name}}</h3>
+                <dl class="attributes">
+                    <dt class="key deadline">Deadline:</dt>
+                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-show="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
+                    <dd class="value none deadline" ng-show="!project.deadline">Not defined</dd>
                 </dl>
             </a>
             <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>

@@ -20,6 +20,41 @@ app.controller('homePanelTwoController', function($scope, $http, $location, $loc
         $localStorage.tasks_maximized = true;
     }
 
+    $scope.expandCollapse = function($event, status) {
+        if($($event.target).hasClass("collapse")) {
+            $($event.target).removeClass("collapse");
+            $($event.target).addClass("expand");
+            $localStorage.collapseSettings[status] = "expand";
+        } else {
+            $($event.target).removeClass("expand");
+            $($event.target).addClass("collapse");            
+            $localStorage.collapseSettings[status] = "collapse";
+        }
+    }
+
+    $scope.collapseSettingCSS = function(status) {
+        if(!$localStorage.collapseSettings) {
+            $localStorage.collapseSettings = {}
+        }
+
+        if($localStorage.collapseSettings && $localStorage.collapseSettings[status]) {
+            //Do nothing
+        } else {
+            //Set default value
+            $localStorage.collapseSettings[status] = "collapse";
+        }
+
+        if($localStorage.collapseSettings[status] == "expand") {
+            $(".preview.projects."+status).css("display","none");
+        } else {
+            $(".preview.projects."+status).css("display","block");
+        }
+
+       return $localStorage.collapseSettings[status];
+
+       return "collapse";
+    }
+
     $scope.tasksMinMaxButtonClass = function() {
         if($localStorage.tasks_maximized) {
             return "minimize";
@@ -198,6 +233,9 @@ app.controller('homePanelTwoController', function($scope, $http, $location, $loc
             $scope.users = response.data;
 
             for (var i = 0; i < $scope.users.length; i++) {
+                //Get projects
+                $scope.getProjectsByUser($scope.users[i].id);
+
                 //Get task metrics
                 $http({
                     method: 'GET',
@@ -271,6 +309,21 @@ app.controller('homePanelTwoController', function($scope, $http, $location, $loc
             data: []
         }
     };
+
+    $scope.getProjectsByUser = function (user_id) {
+        $scope.projects[user_id] = {};
+
+        //Get projects list
+        $http({
+            method: 'GET',
+            url: projectsApiBaseURL + '/users/' + user_id + '/projects',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.projects[user_id].data = response.data;
+        });
+    }
 
     //Get Projects
     $scope.getProjects = function(status,limit,page) {
@@ -470,12 +523,11 @@ app.controller('homePanelTwoController', function($scope, $http, $location, $loc
     }
 
     if($localStorage.loggedin_user) {
-
-
         $scope.getProjects("dump", $localStorage.projects_limit, $localStorage.projects_current_page);
         $scope.getProjects("waiting", $localStorage.projects_limit, $localStorage.projects_current_page);
         $scope.getProjects("doing", $localStorage.projects_limit, $localStorage.projects_current_page);
         $scope.getProjects("finished", $localStorage.projects_limit, $localStorage.projects_current_page);
+        $scope.getUsers();
     } 
 
 });
