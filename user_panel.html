@@ -5,17 +5,18 @@
     </header>
     
     <figure ng-show="this_user_photo.uri" class="figure">
-        <div class="image">
+        <div class="image profile">
             <div ng-show="loggedin_user.admin || loggedin_user.id == this_user.id" 
                 ngf-select ngf-drop ng-model="files" 
                 ngf-pattern="'image/*'" ngf-accept="'image/*'" 
                 ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
                 ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', pattern:'image/*'}"  
                 ngf-resize="resizeObj" ngf-fix-orientation="orientation" 
-                ngf-max-size="20MB" ngf-min-height="100"
+                ngf-max-size="20MB"
                 ngf-resize="{width: 400, height: 400}"
                 ngf-drop-available="dropAvailable">
                 <img ngf-thumbnail="this_user_photo.uri" />
+                <div class="add-photo"></div>
             </div>
             <button class="button delete submit" ng-show="loggedin_user.admin || loggedin_user.id == this_user.id" ng-click="delete_photo()">Delete</button>
             <img ng-if="!loggedin_user.admin && loggedin_user.id != this_user.id" ngf-thumbnail="this_user_photo.uri" />
