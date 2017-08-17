@@ -51,7 +51,7 @@ app.controller('homePanelTwoController', function($scope, $http, $location, $loc
     }
 
     if($localStorage.expandAllSetting != undefined) {
-        $scope.expandAllSetting = $localStorage.expandAll;
+        $scope.expandAllSetting = $localStorage.expandAllSetting;
     } else {
         $localStorage.expandAllSetting = {
             'status': true,
