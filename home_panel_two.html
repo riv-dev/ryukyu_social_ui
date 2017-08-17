@@ -16,6 +16,7 @@
         <h2 class="title">{{capitalize(status)}}</h2>
         <button class="button collapse" ng-show="expand_projects[status]" ng-click="collapse($event, status)">Collapse</button>
         <button class="button expand" ng-show="!expand_projects[status]" ng-click="expand($event, status)">Expand</button>
+        <a class="link" href="./projects/new?status={{status}}">(Add Project)</a>
     </header>
 
     <ul class="preview projects {{status}}" ng-show="expand_projects[status]">
