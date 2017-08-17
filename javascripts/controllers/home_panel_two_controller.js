@@ -459,34 +459,63 @@ app.controller('homePanelTwoController', function($scope, $http, $location, $loc
         });
     } //End getProjects()
 
-    $scope.projectPinnedClass = function(project) {
-        if(project.pinned) {
-            return "pinned";
+    $scope.projectPinnedClass = function(project,user) {
+        if(user) {
+            if(project.user_pinned) {
+                return "pinned";
+            } else {
+                return "";
+            }
         } else {
-            return "";
-        }    
+            if(project.pinned) {
+                return "pinned";
+            } else {
+                return "";
+            }    
+        }
     }
 
-    $scope.projectTogglePin = function (project) {
+    $scope.projectTogglePin = function (project,user) {
         var pinned = false;
-        if (project.pinned) {
-            pinned = false;
+        var project_id;
+        var body = {};
+        var putURL;
+        if(user) {
+            project_id = project.project_id;
+            if(project.user_pinned) {
+                pinned = false;
+            } else {
+                pinned = true;
+            }
+
+            body['user_pinned'] = pinned;
+            putURL =  projectsApiBaseURL + '/users/' + project.user_id + '/projects/' + project_id;
         } else {
-            pinned = true;
+            project_id = project.id;
+            if (project.pinned) {
+                pinned = false;
+            } else {
+                pinned = true;
+            }
+
+            body['pinned'] = pinned;
+            putURL = projectsApiBaseURL + '/projects/' + project_id;
         }
 
         $http({
             method: 'PUT',
-            url: projectsApiBaseURL + '/projects/' + project.id,
+            url: putURL,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             },
-            data: {
-                pinned: pinned
-            }
+            data: body
         }).then(
             function successCallback(response) {
-                $scope.getProjects($localStorage.selected_projects_tab, $localStorage.projects_limit, $localStorage.projects_current_page);
+                if(user) {
+                    $scope.getProjectsByUser(project.user_id);
+                } else {
+                    $scope.getProjects(project.status, $localStorage.projects_limit, $localStorage.projects_current_page);
+                }
             },
             function errorCallback(response) {
             }

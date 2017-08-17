@@ -21,7 +21,7 @@
                     <dd class="value none deadline" ng-show="!project.deadline">Not defined</dd>
                 </dl>
             </a>
-            <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
+            <button class="button pin {{projectPinnedClass(project,false)}}" title="pin" ng-click="projectTogglePin(project,false)">Pin</button>
         </li>
     </ul>
 </section>
@@ -54,7 +54,7 @@
                     <dd class="value none deadline" ng-show="!project.deadline">Not defined</dd>
                 </dl>
             </a>
-            <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
+            <button class="button pin {{projectPinnedClass(project,true)}}" title="pin" ng-click="projectTogglePin(project,true)">Pin</button>
         </li>
     </ul>
 </section>
