@@ -4,6 +4,13 @@
 <button class="button by-status" ng-show="showBy == 'person'" ng-click="showByStatus($event)">By Status</button>
 <button class="button by-person" ng-show="showBy == 'status'" ng-click="showByPerson($event)">By Person</button>
 
+<button class="button expand all status" ng-show="showBy == 'status' && !expandAllSetting['status']" ng-click="expandAll('status')">Expand All Status</button>
+<button class="button collapse all status" ng-show="showBy == 'status' && expandAllSetting['status']" ng-click="collapseAll('status')">Collapse All Status</button>
+
+<button class="button expand all person" ng-show="showBy == 'person' && !expandAllSetting['person']" ng-click="expandAll('person')">Expand All Status</button>
+<button class="button collapse all person" ng-show="showBy == 'person' && expandAllSetting['person']" ng-click="collapseAll('person')">Collapse All Status</button>
+
+
 <section ng-repeat = "status in statuses" ng-show="loggedin_user && showBy=='status'" class="section projects_two status">
     <header class="header">
         <h2 class="title">{{capitalize(status)}}</h2>
