@@ -323,37 +323,3 @@
         }
     }
 }
-
-//Component layout for expand/collapse button in a header
-.header {
-    position: relative;
-    .button.expand {
-        position: absolute;
-        right: 10px;
-        top: 0px;
-    }
-    .button.collapse {
-        position: absolute;
-        right: 10px;
-        top: 0px;
-    }
-}
-
-.section.projects_two {
-    .header {
-        position: relative;
-        min-height: 70px;
-        .avatar {
-            position: absolute;
-            left: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .info {
-            position: absolute;
-            left: 50px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-    }
-}

@@ -1524,43 +1524,6 @@ button.dump {
   color: #c2c2c2;
 }
 
-/* line 328, ../sass/_02_components.scss */
-.header {
-  position: relative;
-}
-/* line 330, ../sass/_02_components.scss */
-.header .button.expand {
-  position: absolute;
-  right: 10px;
-  top: 0px;
-}
-/* line 335, ../sass/_02_components.scss */
-.header .button.collapse {
-  position: absolute;
-  right: 10px;
-  top: 0px;
-}
-
-/* line 343, ../sass/_02_components.scss */
-.section.projects_two .header {
-  position: relative;
-  min-height: 70px;
-}
-/* line 346, ../sass/_02_components.scss */
-.section.projects_two .header .avatar {
-  position: absolute;
-  left: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-/* line 352, ../sass/_02_components.scss */
-.section.projects_two .header .info {
-  position: absolute;
-  left: 50px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 /* line 3, ../sass/_03_layout.scss */
 .site .header {
   padding: 15px;
@@ -1831,4 +1794,57 @@ button.dump {
 .section.details .links {
   padding: 15px 0px 15px;
   border-top: 1px solid #c2c2c2;
+}
+
+/* line 274, ../sass/_03_layout.scss */
+.section.projects_two .header {
+  position: relative;
+  min-height: 64px;
+  background-color: #e2e2e2;
+}
+/* line 278, ../sass/_03_layout.scss */
+.section.projects_two .header .link_block {
+  min-height: 64px;
+}
+/* line 282, ../sass/_03_layout.scss */
+.section.projects_two .header .avatar {
+  position: absolute;
+  background-color: white;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 289, ../sass/_03_layout.scss */
+.section.projects_two .header .info {
+  position: absolute;
+  left: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 295, ../sass/_03_layout.scss */
+.section.projects_two .header .info .value {
+  font-size: 16px;
+}
+/* line 299, ../sass/_03_layout.scss */
+.section.projects_two .header .title {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 306, ../sass/_03_layout.scss */
+.section.projects_two .header .button.expand, .section.projects_two .header button.collapse {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 315, ../sass/_03_layout.scss */
+.section.projects_two.status .header {
+  min-height: 40px;
+}
+/* line 320, ../sass/_03_layout.scss */
+.section.projects_two .preview {
+  padding-left: 25px;
+  background-color: transparent;
 }

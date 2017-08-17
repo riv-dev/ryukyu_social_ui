@@ -268,3 +268,57 @@
         border-top: 1px solid #c2c2c2;
     }
 }
+
+
+.section.projects_two {
+    .header {
+        position: relative;
+        min-height: 64px;
+        background-color: $light_grey;
+        .link_block {
+            min-height: 64px;
+        }
+
+        .avatar {
+            position: absolute;
+            background-color: $white;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .info {
+            position: absolute;
+            left: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            .value {
+                font-size: 16px;
+            }
+        }
+        .title {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .button.expand, button.collapse {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);            
+        }
+    }
+
+    &.status {
+        .header {
+            min-height: 40px;
+        }
+    }
+
+    .preview {
+        padding-left: 25px;
+        background-color: transparent;
+    }
+}
