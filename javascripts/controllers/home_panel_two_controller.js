@@ -50,9 +50,52 @@ app.controller('homePanelTwoController', function($scope, $http, $location, $loc
         $scope.showBy = "status";
     }
 
+    if($localStorage.expandAllSetting != undefined) {
+        $scope.expandAllSetting = $localStorage.expandAll;
+    } else {
+        $localStorage.expandAllSetting = {
+            'status': true,
+            'person': true
+        }
+
+        $scope.expandAllSetting = $localStorage.expandAllSetting;
+    }
+
     $scope.expand = function($event, category) {
         $localStorage.expand_projects[category] = true;
         $scope.expand_projects[category] = true;
+    }
+
+    $scope.expandAll = function(showBy) {
+        for (var category in $localStorage.expand_projects) {
+            if (showBy == 'person' && !isNaN(category)) { //category is an int for person
+                $localStorage.expand_projects[category] = true;
+                $scope.expand_projects[category] = true;
+                $localStorage.expandAllSetting['person'] = true;
+                $scope.expandAllSetting['person'] = true;
+            } else if(showBy == 'status' && isNaN(category)) {//category is a string
+                $localStorage.expand_projects[category] = true;
+                $scope.expand_projects[category] = true;
+                $localStorage.expandAllSetting['status'] = true;
+                $scope.expandAllSetting['status'] = true;
+            }
+        }
+    }
+
+    $scope.collapseAll = function(showBy) {
+        for (var category in $localStorage.expand_projects) {
+            if (showBy == 'person' && !isNaN(category)) { //category is an int for person
+                $localStorage.expand_projects[category] = false;
+                $scope.expand_projects[category] = false;
+                $localStorage.expandAll['person'] = false;
+                $scope.expandAll['person'] = false;
+            } else if(showBy == 'status' && isNaN(category)) {//category is a string
+                $localStorage.expand_projects[category] = false;
+                $scope.expand_projects[category] = false;
+                $localStorage.expandAll['status'] = false;
+                $scope.expandAll['status'] = false;
+            }
+        }
     }
 
     $scope.collapse = function($event, category) {
