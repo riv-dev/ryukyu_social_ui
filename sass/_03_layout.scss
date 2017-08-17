@@ -273,10 +273,10 @@
 .section.projects_two {
     .header {
         position: relative;
-        min-height: 64px;
+        height: 64px;
         background-color: $light_grey;
         .link_block {
-            min-height: 64px;
+            height: 64px;
         }
 
         .avatar {
@@ -297,10 +297,17 @@
             }
         }
         .title {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+            position: relative;
+            line-height: 40px;
+            margin-left: 15px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+        .link {
+            display: inline-block;
+            text-decoration: underline;
+            font-size: 16px;
+            line-height: 40px;
         }
 
         .button.expand, button.collapse {
@@ -309,11 +316,18 @@
             top: 50%;
             transform: translateY(-50%);            
         }
+
+        .button.add {
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);                 
+        }
     }
 
     &.status {
         .header {
-            min-height: 40px;
+            height: 40px;
         }
     }
 
