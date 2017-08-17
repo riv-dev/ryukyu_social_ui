@@ -87,13 +87,13 @@ app.controller('homePanelTwoController', function($scope, $http, $location, $loc
             if (showBy == 'person' && !isNaN(category)) { //category is an int for person
                 $localStorage.expand_projects[category] = false;
                 $scope.expand_projects[category] = false;
-                $localStorage.expandAll['person'] = false;
-                $scope.expandAll['person'] = false;
+                $localStorage.expandAllSetting['person'] = false;
+                $scope.expandAllSetting['person'] = false;
             } else if(showBy == 'status' && isNaN(category)) {//category is a string
                 $localStorage.expand_projects[category] = false;
                 $scope.expand_projects[category] = false;
-                $localStorage.expandAll['status'] = false;
-                $scope.expandAll['status'] = false;
+                $localStorage.expandAllSetting['status'] = false;
+                $scope.expandAllSetting['status'] = false;
             }
         }
     }
