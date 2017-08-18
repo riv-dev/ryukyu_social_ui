@@ -54,7 +54,7 @@
 
     <ul ng-show="expand_projects[user.id]" class="preview projects user">
         <li class="item {{project.project_status}}" ng-repeat="project in projects[user.id].data">
-            <a class="link_block" href="./projects/{{project.id}}">
+            <a class="link_block" href="./projects/{{project.project_id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
                     <dt class="key deadline">Deadline:</dt>
