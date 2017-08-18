@@ -440,10 +440,68 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 }
             }).then(function (response) {
                 $scope.projects = response.data;
+                $scope.example_tasks = {
+                    data: []
+                };
+        /*$scope.example_tasks = {
+            data: [
+                {
+                    id: 1, text: "Project #2", start_date: "01-04-2013", duration: 18, order: 10,
+                    progress: 0.4, open: true
+                },
+                {
+                    id: 2, text: "Task #1", start_date: "02-04-2013", duration: 8, order: 10,
+                    progress: 0.6, parent: 1
+                },
+                {
+                    id: 3, text: "Task #2", start_date: "11-04-2013", duration: 8, order: 20,
+                    progress: 0.6, parent: 1
+                },
+                {
+                    id: 4, text: "Project #3", start_date: "01-04-2013", duration: 18, order: 30,
+                    progress: 0.4, open: true
+                }
+            ],
+            links: [
+                { id: 1, source: 1, target: 2, type: "1" },
+                { id: 2, source: 2, target: 3, type: "0" },
+                { id: 3, source: 3, target: 4, type: "0" },
+                { id: 4, source: 2, target: 5, type: "2" },
+            ]
+        };*/
 
                 for(var i=0;i<response.data.length;i++) {
                     var current_project = $scope.projects[i];
                     var current_project_id = current_project.id;
+
+                    var start;
+                    var end;
+                    var duration;
+                    if(current_project.start_date) {
+                        start = moment(current_project.start_date);
+                        console.log("Format: " + start.format('MM-DD-YYYY'));
+                    } else {
+                        start = moment();
+                    }
+
+                    if(current_project.deadline) {
+                        end = moment(current_project.deadline);
+                    } else {
+                        end = start.add('3','months');
+                    }
+
+                    duration = moment.duration(end.diff(start)).asDays();
+
+                    $scope.example_tasks.data.push(
+                        {
+                            id: current_project.id,
+                            text: current_project.name,
+                            start_date: start.format('MM-DD-YYYY'),
+                            duration: duration,
+                            order: i,
+                            open: true
+                        }
+                    );
 
                     $http({
                         method: 'GET',
@@ -668,6 +726,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         $scope.getProjects($localStorage.selected_projects_tab, $localStorage.projects_limit, $localStorage.projects_current_page);
 
         $scope.getTasks($localStorage.selected_tasks_tab, $localStorage.tasks_limit, $localStorage.tasks_current_page);
+
+
     } 
 
 });

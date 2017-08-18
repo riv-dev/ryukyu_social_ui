@@ -5,6 +5,8 @@
     <base href="/">
     <link rel="stylesheet" href="./libs/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./stylesheets/common.css">
+    <link rel="stylesheet" href="libs/gantt/dhtmlxgantt.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
@@ -15,6 +17,7 @@
     <script src="libs/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
     <script src="libs/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="libs/lobibox/js/lobibox.min.js"></script>
+    <script src="libs/gantt/dhtmlxgantt.js"></script>
     <script>
       $(function () {
         Lobibox.base.DEFAULTS = $.extend({}, Lobibox.base.DEFAULTS, {
@@ -57,6 +60,7 @@
       <script src="javascripts/config/routes.js"></script>
       <script src="javascripts/services/site_notifications.js"></script>
       <script src="javascripts/services/common_functions.js"></script>
+      <script src="javascripts/services/gantt_charts.js"></script>
       <script src="javascripts/controllers/home_panel_controller.js"></script>
       <script src="javascripts/controllers/home_panel_two_controller.js"></script>
       <script src="javascripts/controllers/user_panel_controller.js"></script>
