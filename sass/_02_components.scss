@@ -188,11 +188,11 @@
         .value.alert {
             background-color: transparent;
             font-weight: bold;
-            color: red;
+            color: $red;
         }
         .value.success {
             background-color: transparent;
-            color: lightgreen;
+            color: $green;
         }
     }
 }

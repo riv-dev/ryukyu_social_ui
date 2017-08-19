@@ -1462,12 +1462,12 @@ button.dump {
 .preview.users .attributes.task-metrics .value.alert {
   background-color: transparent;
   font-weight: bold;
-  color: red;
+  color: #c40505;
 }
 /* line 193, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .value.success {
   background-color: transparent;
-  color: lightgreen;
+  color: #1f7c20;
 }
 
 /* line 203, ../sass/_02_components.scss */
