@@ -23,6 +23,19 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
     $scope.this_user_id = $routeParams.user_id;
     $localStorage.last_visited_user_id = $routeParams.user_id;
 
+    $scope.$parent.isViewAdvanced = function() {
+        if(!("view_advanced" in $localStorage)) {
+            $localStorage.view_advanced = false;
+        } else {
+            return $localStorage.view_advanced;
+        }
+    }
+
+    $scope.$parent.viewAdvanced = function(flag) {
+        $localStorage.view_advanced = flag;
+    }
+
+
     $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";

@@ -16,6 +16,18 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
+    $scope.$parent.isViewAdvanced = function() {
+        if(!("view_advanced" in $localStorage)) {
+            $localStorage.view_advanced = false;
+        } else {
+            return $localStorage.view_advanced;
+        }
+    }
+
+    $scope.$parent.viewAdvanced = function(flag) {
+        $localStorage.view_advanced = flag;
+    }
+
     if(!$localStorage.hasOwnProperty('tasks_maximized')) {
         $localStorage.tasks_maximized = true;
     }

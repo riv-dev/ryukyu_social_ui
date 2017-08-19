@@ -462,6 +462,66 @@ img {
 }
 
 /* line 248, ../sass/_01_elements.scss */
+.button.view_advanced {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  height: 18px;
+  line-height: 18px;
+  width: 18px;
+  text-indent: 9999px;
+  color: black;
+  margin: 0px;
+  padding: 0px;
+}
+/* line 261, ../sass/_01_elements.scss */
+.button.view_advanced:hover {
+  background-color: none;
+  color: #081ed1;
+}
+/* line 265, ../sass/_01_elements.scss */
+.button.view_advanced:before {
+  position: absolute;
+  text-indent: 0px;
+  left: 3px;
+  display: block;
+  font-size: 14px;
+  font-family: "FontAwesome";
+  content: "\f06e";
+}
+
+/* line 276, ../sass/_01_elements.scss */
+.button.view_simple {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  height: 18px;
+  line-height: 18px;
+  width: 18px;
+  text-indent: 9999px;
+  color: black;
+  margin: 0px;
+  padding: 0px;
+}
+/* line 289, ../sass/_01_elements.scss */
+.button.view_simple:hover {
+  background-color: none;
+  color: #081ed1;
+}
+/* line 293, ../sass/_01_elements.scss */
+.button.view_simple:before {
+  position: absolute;
+  text-indent: 0px;
+  left: 3px;
+  display: block;
+  font-size: 14px;
+  font-family: "FontAwesome";
+  content: "\f070";
+}
+
+/* line 304, ../sass/_01_elements.scss */
 .button.add {
   position: relative;
   overflow: hidden;
@@ -475,12 +535,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 261, ../sass/_01_elements.scss */
+/* line 317, ../sass/_01_elements.scss */
 .button.add:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 265, ../sass/_01_elements.scss */
+/* line 321, ../sass/_01_elements.scss */
 .button.add:before {
   position: absolute;
   text-indent: 0px;
@@ -492,7 +552,7 @@ img {
   content: "\f055";
 }
 
-/* line 277, ../sass/_01_elements.scss */
+/* line 333, ../sass/_01_elements.scss */
 .button.expand {
   position: relative;
   overflow: hidden;
@@ -506,12 +566,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 290, ../sass/_01_elements.scss */
+/* line 346, ../sass/_01_elements.scss */
 .button.expand:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 294, ../sass/_01_elements.scss */
+/* line 350, ../sass/_01_elements.scss */
 .button.expand:before {
   position: absolute;
   text-indent: 0px;
@@ -522,7 +582,7 @@ img {
   content: "\f196";
 }
 
-/* line 305, ../sass/_01_elements.scss */
+/* line 361, ../sass/_01_elements.scss */
 .button.collapse {
   position: relative;
   overflow: hidden;
@@ -536,12 +596,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 318, ../sass/_01_elements.scss */
+/* line 374, ../sass/_01_elements.scss */
 .button.collapse:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 322, ../sass/_01_elements.scss */
+/* line 378, ../sass/_01_elements.scss */
 .button.collapse:before {
   position: absolute;
   text-indent: 0px;
@@ -552,7 +612,7 @@ img {
   content: "\f147";
 }
 
-/* line 333, ../sass/_01_elements.scss */
+/* line 389, ../sass/_01_elements.scss */
 .button.minimize {
   position: absolute;
   top: 5px;
@@ -568,12 +628,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 347, ../sass/_01_elements.scss */
+/* line 403, ../sass/_01_elements.scss */
 .button.minimize:hover {
   background-color: #e2edff;
   color: #081ed1;
 }
-/* line 351, ../sass/_01_elements.scss */
+/* line 407, ../sass/_01_elements.scss */
 .button.minimize:before {
   position: absolute;
   text-indent: 0px;
@@ -584,7 +644,7 @@ img {
   content: "\f2d1";
 }
 
-/* line 362, ../sass/_01_elements.scss */
+/* line 418, ../sass/_01_elements.scss */
 .button.maximize {
   position: absolute;
   top: 5px;
@@ -600,12 +660,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 376, ../sass/_01_elements.scss */
+/* line 432, ../sass/_01_elements.scss */
 .button.maximize:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 380, ../sass/_01_elements.scss */
+/* line 436, ../sass/_01_elements.scss */
 .button.maximize:before {
   position: absolute;
   text-indent: 0px;
@@ -616,7 +676,7 @@ img {
   content: "\f2d2";
 }
 
-/* line 391, ../sass/_01_elements.scss */
+/* line 447, ../sass/_01_elements.scss */
 .button.permissions {
   position: absolute;
   top: 5px;
@@ -632,12 +692,12 @@ img {
   margin: 0px;
   padding: 0px !important;
 }
-/* line 405, ../sass/_01_elements.scss */
+/* line 461, ../sass/_01_elements.scss */
 .button.permissions:hover {
   background-color: transparent !important;
   color: #081ed1 !important;
 }
-/* line 409, ../sass/_01_elements.scss */
+/* line 465, ../sass/_01_elements.scss */
 .button.permissions:before {
   position: absolute;
   text-indent: 0px;
@@ -648,7 +708,7 @@ img {
   content: "\f023";
 }
 
-/* line 420, ../sass/_01_elements.scss */
+/* line 476, ../sass/_01_elements.scss */
 .button.edit {
   position: relative;
   top: 0px;
@@ -664,12 +724,12 @@ img {
   margin: 0px;
   padding: 0px !important;
 }
-/* line 434, ../sass/_01_elements.scss */
+/* line 490, ../sass/_01_elements.scss */
 .button.edit:hover {
   background-color: transparent !important;
   color: #081ed1 !important;
 }
-/* line 438, ../sass/_01_elements.scss */
+/* line 494, ../sass/_01_elements.scss */
 .button.edit:before {
   position: absolute;
   text-indent: 0px;
@@ -680,7 +740,7 @@ img {
   content: "\f040";
 }
 
-/* line 449, ../sass/_01_elements.scss */
+/* line 505, ../sass/_01_elements.scss */
 .button.settings {
   position: relative;
   padding: 15px 0px;
@@ -701,11 +761,11 @@ img {
   transition: 0.2s;
   cursor: pointer;
 }
-/* line 463, ../sass/_01_elements.scss */
+/* line 519, ../sass/_01_elements.scss */
 .button.settings:hover {
   background-color: #e2edff;
 }
-/* line 466, ../sass/_01_elements.scss */
+/* line 522, ../sass/_01_elements.scss */
 .button.settings:before {
   position: absolute;
   text-indent: 0px;
@@ -718,34 +778,34 @@ img {
   display: block;
   text-align: center;
 }
-/* line 478, ../sass/_01_elements.scss */
+/* line 534, ../sass/_01_elements.scss */
 .button.settings.show {
   display: block;
 }
-/* line 480, ../sass/_01_elements.scss */
+/* line 536, ../sass/_01_elements.scss */
 .button.settings.show:before {
   content: "\f1de";
 }
-/* line 484, ../sass/_01_elements.scss */
+/* line 540, ../sass/_01_elements.scss */
 .button.settings.hide {
   display: block;
 }
-/* line 486, ../sass/_01_elements.scss */
+/* line 542, ../sass/_01_elements.scss */
 .button.settings.hide:before {
   content: "\f1de";
 }
 
-/* line 496, ../sass/_01_elements.scss */
+/* line 552, ../sass/_01_elements.scss */
 .show {
   display: block;
 }
 
-/* line 500, ../sass/_01_elements.scss */
+/* line 556, ../sass/_01_elements.scss */
 .hide {
   display: none;
 }
 
-/* line 504, ../sass/_01_elements.scss */
+/* line 560, ../sass/_01_elements.scss */
 .disabled {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -755,98 +815,98 @@ img {
   user-select: none;
 }
 
-/* line 513, ../sass/_01_elements.scss */
+/* line 569, ../sass/_01_elements.scss */
 .footer {
   text-align: center;
   font-size: 10px;
   color: #5e5e5e;
 }
 
-/* line 520, ../sass/_01_elements.scss */
+/* line 576, ../sass/_01_elements.scss */
 .alert {
   color: #424000;
   background-color: #f9f795;
   border-color: #424000;
 }
 
-/* line 526, ../sass/_01_elements.scss */
+/* line 582, ../sass/_01_elements.scss */
 .fail {
   color: #8c0000;
   background-color: #ffb2b2;
   border-color: #8c0000;
 }
 
-/* line 532, ../sass/_01_elements.scss */
+/* line 588, ../sass/_01_elements.scss */
 .success {
   color: #104c11;
   background-color: #e8ffed;
   border-color: #104c11;
 }
 
-/* line 538, ../sass/_01_elements.scss */
+/* line 594, ../sass/_01_elements.scss */
 .none {
   color: #939393;
 }
 
-/* line 542, ../sass/_01_elements.scss */
+/* line 598, ../sass/_01_elements.scss */
 .important {
   font-weight: bold;
   color: #c40505;
 }
 
-/* line 547, ../sass/_01_elements.scss */
+/* line 603, ../sass/_01_elements.scss */
 .finished,
 button.finished {
   color: #1f7c20;
   background-color: #e8ffed;
 }
 
-/* line 553, ../sass/_01_elements.scss */
+/* line 609, ../sass/_01_elements.scss */
 .doing,
 button.doing {
   color: #081ed1;
   background-color: #fffce2;
 }
 
-/* line 559, ../sass/_01_elements.scss */
+/* line 615, ../sass/_01_elements.scss */
 .new,
 button.new {
   color: #db7400;
   background-color: white;
 }
 
-/* line 565, ../sass/_01_elements.scss */
+/* line 621, ../sass/_01_elements.scss */
 .waiting,
 button.waiting {
   color: black;
   background-color: #ffe5fc;
 }
 
-/* line 571, ../sass/_01_elements.scss */
+/* line 627, ../sass/_01_elements.scss */
 .dump,
 button.dump {
   color: black;
   background-color: white;
 }
 
-/* line 577, ../sass/_01_elements.scss */
+/* line 633, ../sass/_01_elements.scss */
 .archived {
   color: black;
   background-color: #e2e2e2;
 }
 
-/* line 582, ../sass/_01_elements.scss */
+/* line 638, ../sass/_01_elements.scss */
 .active {
   font-weight: bold;
   text-decoration: underline;
 }
 
-/* line 588, ../sass/_01_elements.scss */
+/* line 644, ../sass/_01_elements.scss */
 .is_mine {
   background-color: #f9f795;
 }
 
-/* line 592, ../sass/_01_elements.scss */
+/* line 648, ../sass/_01_elements.scss */
 .markdown {
   /* Begin bidirectionality settings (do not change) */
 }
@@ -1100,28 +1160,28 @@ button.dump {
     page-break-before: avoid;
   }
 }
-/* line 594, ../sass/_01_elements.scss */
+/* line 650, ../sass/_01_elements.scss */
 .markdown img.small {
   width: 25%;
   height: auto;
 }
-/* line 598, ../sass/_01_elements.scss */
+/* line 654, ../sass/_01_elements.scss */
 .markdown img.medium {
   width: 50%;
   height: auto;
 }
-/* line 602, ../sass/_01_elements.scss */
+/* line 658, ../sass/_01_elements.scss */
 .markdown img.large {
   width: 100%;
   height: auto;
 }
 
-/* line 608, ../sass/_01_elements.scss */
+/* line 664, ../sass/_01_elements.scss */
 .image.profile {
   cursor: pointer;
   position: relative;
 }
-/* line 612, ../sass/_01_elements.scss */
+/* line 668, ../sass/_01_elements.scss */
 .image.profile .add-photo {
   position: absolute;
   top: 0;
@@ -1134,7 +1194,7 @@ button.dump {
   transition: all .3s;
   font: normal normal normal 14px/1 FontAwesome;
 }
-/* line 624, ../sass/_01_elements.scss */
+/* line 680, ../sass/_01_elements.scss */
 .image.profile .add-photo:after {
   content: "\f067";
   color: #fff;
@@ -1144,12 +1204,12 @@ button.dump {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* line 635, ../sass/_01_elements.scss */
+/* line 691, ../sass/_01_elements.scss */
 .image.profile:hover .add-photo {
   opacity: 1;
 }
 
-/* line 640, ../sass/_01_elements.scss */
+/* line 696, ../sass/_01_elements.scss */
 .avatar {
   height: 40px;
   width: 40px;
