@@ -1,7 +1,7 @@
 <p ng-if="!loggedin_user" class="message welcome">Welcome to Ryukyu Social</p>
 <p ng-if="!loggedin_user" class="message welcome">Please <a href="./login">log in</a></p>
 
-<section ng-if="loggedin_user" class="section projects {{projectsMinMaxSectionClass()}}">
+<section ng-if="loggedin_user" class="section projects {{isMaximizedClass('projects')}}">
     <header class="header">
         <h2 class="title">Projects List</h2>
         <ul class="tabs">
@@ -22,6 +22,8 @@
             <li class="item"><a class="link" href="./projects/new?status={{selected_projects_tab}}">Add Project</a></li>
         </ul>
         <button class="button settings {{showHideSettingsClass('projects')}} {{selected_projects_tab}}" ng-click="toggleShowHideSettings('projects')">Show/Hide Settings</button>
+        <button ng-show="!isMaximized('projects')" class="button maximize" ng-click="maximize('projects')">Maximize</button>
+        <button ng-show="isMaximized('projects')" class="button minimize" ng-click="minimize('projects')">Minimize</button>
     </header>
     <ul class="preview projects">
         <li class="item {{project.status}}" ng-repeat="project in projects">
@@ -66,10 +68,9 @@
     </ul>
 </section>
 
-<section ng-if="loggedin_user" class="section tasks {{tasksMinMaxSectionClass()}}">
+<section ng-if="loggedin_user" class="section tasks {{isMaximizedClass('tasks')}}">
     <header class="header">
         <h2 class="title">Company Task Board</h2>
-        <button ng-click="minMaxTasksSection()" class="button {{tasksMinMaxButtonClass()}}">Minimize/Maximize</button>
         <ul class="tabs">
             <li class="item {{selectedClass(selected_tasks_tab,'dump')}}"><button class="tab dump" ng-click="getTasks('dump',tasks_limit,1)">dump</button></li><!--
             --><li class="item {{selectedClass(selected_tasks_tab,'waiting')}}"><button class="tab waiting" ng-click="getTasks('waiting',tasks_limit,1)">waiting</button></li><!--
@@ -98,6 +99,8 @@
             </li>
         </ul>
         <button class="button settings {{showHideSettingsClass('tasks')}} {{selected_tasks_tab}}" ng-click="toggleShowHideSettings('tasks')">Show/Hide Settings</button>
+        <button ng-show="!isMaximized('tasks')" class="button maximize" ng-click="maximize('tasks')">Maximize</button>
+        <button ng-show="isMaximized('tasks')" class="button minimize" ng-click="minimize('tasks')">Minimize</button>
     </header>
 
     <ul class="preview tasks">
@@ -142,12 +145,14 @@
     </ul>
 </section>
 
-<section ng-if="loggedin_user" class="section users">
+<section ng-if="loggedin_user" class="section users {{isMaximizedClass('users')}}">
     <header class="header">
         <h2 class="title">Users List</h2>
         <ul class="settings">
             <li ng-if="loggedin_user.admin" class="item"><a class="link" href="./users/new">Add User</a></li>
         </ul>
+        <button ng-show="!isMaximized('users')" class="button maximize" ng-click="maximize('users')">Maximize</button>
+        <button ng-show="isMaximized('users')" class="button minimize" ng-click="minimize('users')">Minimize</button>
     </header>
     <ul class="preview users">
         <li ng-show="user.firstname!='Root'" class="item {{tasksCountCSS(user.doing_count)}}" ng-repeat="user in users">
