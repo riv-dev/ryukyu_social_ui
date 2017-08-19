@@ -28,6 +28,54 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         $localStorage.view_advanced = flag;
     }
 
+    $scope.maximize = function (this_section_name) {
+        for (var section_name in $localStorage.maximized) {
+            if ($localStorage.maximized.hasOwnProperty(section_name)) {
+                $localStorage.maximized[section_name] = false;
+            }
+        }
+
+        $localStorage.maximized[this_section_name] = true;
+    }
+
+    $scope.minimize = function(this_section_name) {
+        for (var section_name in $localStorage.maximized) {
+            if ($localStorage.maximized.hasOwnProperty(section_name)) {
+                $localStorage.maximized[section_name] = false;
+            }
+        }
+    }
+
+    $scope.isMaximized = function(this_section_name) {
+        if(!("maximized" in $localStorage)) {
+            $localStorage.maximized = {
+                "projects": false,
+                "tasks": false,
+                "users": false
+            }
+        }
+
+        return $localStorage.maximized[this_section_name];    
+    }
+
+    $scope.isMaximizedClass = function(this_section_name) {
+        if($localStorage.maximized && $localStorage.maximized[this_section_name]) {
+            return "maximized";
+        } else {
+            //If at least one key is maximized, make this a minimized class to hide
+            for (var section_name in $localStorage.maximized) {
+                if ($localStorage.maximized.hasOwnProperty(section_name)) {
+                    if($localStorage.maximized[section_name]) {
+                        return "minimized";
+                    }
+                }
+            }
+
+            return "";
+        }
+    }
+
+
     if(!$localStorage.hasOwnProperty('tasks_maximized')) {
         $localStorage.tasks_maximized = true;
     }
