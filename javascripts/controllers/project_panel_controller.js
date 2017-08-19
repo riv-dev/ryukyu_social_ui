@@ -23,6 +23,18 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
     $scope.this_project_id = $routeParams.project_id;
     $localStorage.last_visited_project_id = $routeParams.project_id;
 
+    $scope.$parent.isViewAdvanced = function() {
+        if(!("view_advanced" in $localStorage)) {
+            $localStorage.view_advanced = false;
+        } else {
+            return $localStorage.view_advanced;
+        }
+    }
+
+    $scope.$parent.viewAdvanced = function(flag) {
+        $localStorage.view_advanced = flag;
+    }
+
     $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "new" || status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";
