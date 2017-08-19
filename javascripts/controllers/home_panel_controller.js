@@ -440,7 +440,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 }
             }).then(function (response) {
                 $scope.projects = response.data;
-                $scope.example_tasks = {
+                var gantt_projects = {
                     data: []
                 };
         /*$scope.example_tasks = {
@@ -479,7 +479,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     var duration;
                     if(current_project.start_date) {
                         start = moment(current_project.start_date);
-                        console.log("Format: " + start.format('MM-DD-YYYY'));
                     } else {
                         start = moment();
                     }
@@ -492,11 +491,11 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
                     duration = moment.duration(end.diff(start)).asDays();
 
-                    $scope.example_tasks.data.push(
+                    gantt_projects.data.push(
                         {
                             id: current_project.id,
                             text: current_project.name,
-                            start_date: start.format('MM-DD-YYYY'),
+                            start_date: start.format('DD-MM-YYYY'),
                             duration: duration,
                             order: i,
                             open: true
@@ -551,6 +550,10 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                         $scope.projects[parseInt(response.config["params"]["i"])]["tasks"] = response.data;
                     });                    
                 }
+
+                gantt.config.sort = true;
+                gantt.init("gantt_here");
+                gantt.parse(gantt_projects);
             });
         });
     } //End getProjects()
