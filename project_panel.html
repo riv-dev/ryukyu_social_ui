@@ -107,19 +107,19 @@
         <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
             <a class="link_block" href="./projects/{{this_project.id}}/tasks/{{getTaskID(task)}}">
                 <h3 class="name">{{task.name}}</h3>
-                <p class="info description">{{task.description}}</p>
+                <p ng-show="isViewAdvanced()" class="info description">{{task.description}}</p>
                 <dl class="attributes">
-                    <dt class="key assigned_to">Assigned to:</dt>
-                    <dd class="value_item assigned_to {{cssLast($last)}}" ng-repeat="task_user in task.users">
+                    <dt ng-show="isViewAdvanced()" class="key assigned_to">Assigned to:</dt>
+                    <dd ng-show="isViewAdvanced()" class="value_item assigned_to {{cssLast($last)}}" ng-repeat="task_user in task.users">
                         <em class="key user">{{task_user.firstname}} {{task_user.lastname}}: </em>
                         <p class="value user">{{task_user.progress_description}}</p>
                     </dd>
-                    <dd class="value none assigned_to" ng-if="!task.users || task.users.length == 0">
+                    <dd ng-show="isViewAdvanced()" class="value none assigned_to" ng-if="!task.users || task.users.length == 0">
                         Need Assignee
                     </dd>
-                    <dt class="key priority">Priority:</dt>
-                    <dd class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
-                    <dd class="value none priority" ng-if="!task.priority">Not defined</dd>
+                    <dt ng-show="isViewAdvanced()" class="key priority">Priority:</dt>
+                    <dd ng-show="isViewAdvanced()" class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
+                    <dd ng-show="isViewAdvanced()" class="value none priority" ng-if="!task.priority">Not defined</dd>
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline {{checkDateImportance(task.deadline, task.status)}}" ng-if="task.deadline">{{prettyDateDeadline(task.deadline, task.status)}}</dd>
                     <dd class="value none deadline" ng-if="!task.deadline">Not defined</dd>

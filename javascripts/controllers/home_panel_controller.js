@@ -16,6 +16,18 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
+    $scope.$parent.isViewAdvanced = function() {
+        if(!("view_advanced" in $localStorage)) {
+            $localStorage.view_advanced = false;
+        } else {
+            return $localStorage.view_advanced;
+        }
+    }
+
+    $scope.$parent.viewAdvanced = function(flag) {
+        $localStorage.view_advanced = flag;
+    }
+
     if(!$localStorage.hasOwnProperty('tasks_maximized')) {
         $localStorage.tasks_maximized = true;
     }
@@ -589,6 +601,21 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }
     }
 
+    $scope.user_projects = {};
+
+    $scope.getProjectsByUser = function (user_id) {
+        //Get projects list
+        $http({
+            method: 'GET',
+            url: projectsApiBaseURL + '/users/' + user_id + '/projects',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.user_projects[user_id] = response.data;
+        });
+    }
+
     if($localStorage.loggedin_user) {
         //Get users list
         $http({
@@ -601,6 +628,9 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             $scope.users = response.data;
 
             for (var i = 0; i < $scope.users.length; i++) {
+                //Get projects
+                $scope.getProjectsByUser($scope.users[i].id);
+
                 //Get task metrics
                 $http({
                     method: 'GET',

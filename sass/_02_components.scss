@@ -98,20 +98,24 @@
 .preview.users {
     position: relative;
     .item.alert {}
+
+    .item {
+
+    }
+
     .link_block {
+        padding: 10px 5px;
         @include clearfix();
     }
     .avatar {
-        position: absolute;
-        left: 5px;
-        top: 50%;
-        transform: translateY(-50%);
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
     }
     .info {
-        position: absolute;
-        left: 50px;
-        top: 50%;
-        transform: translateY(-50%);
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
     }
     .key.user {
         float: none;
@@ -132,26 +136,46 @@
         color: $green;
         padding-left: 5px;
     }
+
+    .details {
+        margin-top: 10px;
+        position: relative;
+        @include clearfix();
+        width: 100%;
+    }
+
+    .attributes {
+        -webkit-box-shadow: 1px 1px 5px 1px rgba(138,138,138,1);
+        -moz-box-shadow: 1px 1px 5px 1px rgba(138,138,138,1);
+        box-shadow: 1px 1px 5px 1px rgba(138,138,138,1);
+        background-color: $light_blue;
+    }
+
+    .attributes.projects {
+        padding: 5px;
+        @include border-radius(5px);
+        color: black;
+    }
     .attributes.task-metrics {
         padding: 5px;
-        float: right;
-        background-color: black;
-        color: white;
+        margin-top: 10px;
+        @include border-radius(5px);
+        background-color: $light_blue;
         .key {
             font-weight: normal;
-            color: white;
+            color: black;
         }
         .key.alert {
             background-color: transparent;
-            color: white;
+            color: black;
         }
         .key.success {
             background-color: transparent;
-            color: white;
+            color: black;
         }
         .value {
             font-weight: normal;
-            color: white;
+            color: black;
         }
         .value.alert {
             background-color: transparent;
