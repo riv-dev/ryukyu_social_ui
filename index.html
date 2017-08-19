@@ -38,10 +38,10 @@
       <nav ng-if="loggedin_user" class="navigation">
         <ul class="links">
           <li class="item"><a class="link active" href="./home-panel">Home Panel</a></li>
-          <li class="item"><a class="link" href="./home-panel-2">Home Panel 2</a></li>
           <li class="item"><a class="link" href="./users/{{loggedin_user.id}}">My Profile</a></li>
           <li class="item login" ng-if="!loggedin_user"><a class="link" href="./login">Log In</a></li>
           <li class="item logout" ng-if="loggedin_user"><a class="link" href="./logout">Log Out</a></li>
+          <li class="item" ng-show="loggedin_user && loggedin_user.admin"><a class="link" href="./manager-panel">Manager Panel</a></li>
         </ul>
       </nav>
 
@@ -58,7 +58,7 @@
       <script src="javascripts/services/site_notifications.js"></script>
       <script src="javascripts/services/common_functions.js"></script>
       <script src="javascripts/controllers/home_panel_controller.js"></script>
-      <script src="javascripts/controllers/home_panel_two_controller.js"></script>
+      <script src="javascripts/controllers/manager_panel_controller.js"></script>
       <script src="javascripts/controllers/user_panel_controller.js"></script>
       <script src="javascripts/controllers/project_panel_controller.js"></script>
       <script src="javascripts/controllers/task_panel_controller.js"></script>
