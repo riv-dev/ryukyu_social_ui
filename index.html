@@ -43,7 +43,6 @@
           <li class="item"><a class="link" href="./users/{{loggedin_user.id}}">My Profile</a></li>
           <li class="item login" ng-if="!loggedin_user"><a class="link" href="./login">Log In</a></li>
           <li class="item logout" ng-if="loggedin_user"><a class="link" href="./logout">Log Out</a></li>
-          <li class="item" ng-show="loggedin_user && loggedin_user.admin"><a class="link" href="./manager-panel">Manager Panel</a></li>
         </ul>
       </nav>
 
