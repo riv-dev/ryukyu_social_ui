@@ -1,5 +1,5 @@
-app.controller('homePanelTwoController', function($scope, $http, $location, $localStorage, CommonFunctions) {
-    $scope.$parent.hero = "Home Panel";
+app.controller('managerPanelController', function($scope, $http, $location, $localStorage, CommonFunctions) {
+    $scope.$parent.hero = "Manager Panel";
     $scope.$parent.panel_class = "home";
 
     if($localStorage.flash_message == "Successful Login!") { 
