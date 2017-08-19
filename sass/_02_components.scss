@@ -106,6 +106,11 @@
     .link_block {
         padding: 10px 5px;
         @include clearfix();
+        &:hover {
+            .attributes {
+                background-color: white;
+            }
+        }
     }
     .avatar {
         position: relative;
@@ -149,9 +154,12 @@
         -moz-box-shadow: 1px 1px 5px 1px rgba(138,138,138,1);
         box-shadow: 1px 1px 5px 1px rgba(138,138,138,1);
         background-color: $light_blue;
+        margin-left: 15px;
+        margin-right: 15px;
     }
 
     .attributes.projects {
+        margin-top: 10px;
         padding: 5px;
         @include border-radius(5px);
         color: black;
@@ -159,8 +167,8 @@
     .attributes.task-metrics {
         padding: 5px;
         margin-top: 10px;
+        margin-bottom: 20px;
         @include border-radius(5px);
-        background-color: $light_blue;
         .key {
             font-weight: normal;
             color: black;
