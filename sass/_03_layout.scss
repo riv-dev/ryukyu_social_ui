@@ -27,6 +27,8 @@
 
 //Layouts for Main Element
 .main.home {
+    position: relative;
+
     .section.projects {
         width: 40%;
         &.full {
@@ -37,6 +39,7 @@
     .section.projects_two {
         width: 100%;
     }
+
     .section.tasks {
         width: 30%;
         &.minimized {
@@ -66,6 +69,17 @@
     }
     .section.users {
         width: 30%;
+    }
+
+    .section.maximized {
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+
+    .section.minimized {
+        display: none;
     }
 }
 
