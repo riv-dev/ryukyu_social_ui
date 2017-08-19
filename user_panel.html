@@ -108,24 +108,24 @@
         <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
             <a class="link_block" href="./users/{{this_user.id}}/tasks/{{task.task_id}}">
                 <h3 class="name">{{task.name}}</h3>
-                <p class="info description">{{task.description}}</p>
+                <p ng-show="isViewAdvanced()" class="info description">{{task.description}}</p>
                 <dl class="attributes">
-                    <dt class="key this_user_progress">
+                    <dt ng-show="isViewAdvanced()" class="key this_user_progress">
                         <em ng-if="loggedin_user.id==this_user.id">My</em>
                         <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em>                         
                          Progress:
                     </dt>
-                    <dd class="value this_user_progress" ng-if="task_user.user_id == this_user.id" ng-repeat="task_user in task.users">
+                    <dd ng-show="isViewAdvanced()" class="value this_user_progress" ng-if="task_user.user_id == this_user.id" ng-repeat="task_user in task.users">
                         {{task_user.progress_description}}
                     </dd>
-                    <dt class="key assigned_to" ng-if="task.users.length > 1">Also assigned to this task:</dt>
-                    <dd class="value_item assigned_to {{cssLast($last)}}" ng-if="task_user.user_id != this_user.id" ng-repeat="task_user in task.users">
+                    <dt ng-show="isViewAdvanced()" class="key assigned_to" ng-if="task.users.length > 1">Also assigned to this task:</dt>
+                    <dd ng-show="isViewAdvanced()" class="value_item assigned_to {{cssLast($last)}}" ng-if="task_user.user_id != this_user.id" ng-repeat="task_user in task.users">
                         <em class="key user">{{task_user.firstname}} {{task_user.lastname}}: </em>
                         <p class="value user">{{task_user.progress_description}}</p>
                     </dd>
-                    <dt class="key priority">Priority:</dt>
-                    <dd class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
-                    <dd class="value none priority" ng-if="!task.priority">Not defined</dd>
+                    <dt ng-show="isViewAdvanced()" class="key priority">Priority:</dt>
+                    <dd ng-show="isViewAdvanced()" class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
+                    <dd ng-show="isViewAdvanced()" class="value none priority" ng-if="!task.priority">Not defined</dd>
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline {{checkDateImportance(task.deadline, task.status)}}" ng-if="task.deadline">{{prettyDateDeadline(task.deadline, task.status)}}</dd>
                     <dd class="value none deadline" ng-if="!task.deadline">Not defined</dd>
@@ -182,25 +182,25 @@
             <a class="link_block" href="./users/{{this_user.id}}/projects/{{project.project_id}}">
                 <h3 class="name">{{project.name}}</h3>
                 <dl class="attributes">
-                    <dt class="key users">Users:</dt>
-                    <dd class="value_item users  {{cssLast($last)}}" ng-repeat="project_user in project.users">
+                    <dt ng-show="isViewAdvanced()" class="key users">Users:</dt>
+                    <dd ng-show="isViewAdvanced()" class="value_item users  {{cssLast($last)}}" ng-repeat="project_user in project.users">
                         <em class="key role" ng-if="project_user.role">{{project_user.role}}: </em>
                         <em class="key none role" ng-if="!project_user.role">Undefined Role: </em>
                         <p class="value role">{{project_user.firstname}} {{project_user.lastname}}</p>
                     </dd>
-                    <dd class="value none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
-                    <dt class="key start_date">Start Date:</dt>
-                    <dd class="value start_date" ng-if="project.start_date">{{prettyDateDeadline(project.start_date)}}</dd>
-                    <dd class="value none start_date" ng-if="!project.start_date">Not defined</dd>
+                    <dd ng-show="isViewAdvanced()" class="value none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
+                    <dt ng-show="isViewAdvanced()" class="key start_date">Start Date:</dt>
+                    <dd ng-show="isViewAdvanced()" class="value start_date" ng-if="project.start_date">{{prettyDateDeadline(project.start_date)}}</dd>
+                    <dd ng-show="isViewAdvanced()" class="value none start_date" ng-if="!project.start_date">Not defined</dd>
                     <dt class="key deadline">Deadline:</dt>
                     <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
                     <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
-                    <dt class="key tasks_rank">Top Tasks:</dt>
-                    <dd class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
+                    <dt ng-show="isViewAdvanced()" class="key tasks_rank">Top Tasks:</dt>
+                    <dd ng-show="isViewAdvanced()" class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
                         <span class="key rank">{{$index + 1}}</span>
                         <p class="value rank">{{project_task.name}}</p>
                     </dd>
-                    <dd class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
+                    <dd ng-show="isViewAdvanced()" class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
                 </dl>
             </a>
             <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
