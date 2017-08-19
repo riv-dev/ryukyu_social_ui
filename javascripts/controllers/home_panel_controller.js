@@ -601,6 +601,21 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }
     }
 
+    $scope.user_projects = {};
+
+    $scope.getProjectsByUser = function (user_id) {
+        //Get projects list
+        $http({
+            method: 'GET',
+            url: projectsApiBaseURL + '/users/' + user_id + '/projects',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.user_projects[user_id] = response.data;
+        });
+    }
+
     if($localStorage.loggedin_user) {
         //Get users list
         $http({
@@ -613,6 +628,9 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             $scope.users = response.data;
 
             for (var i = 0; i < $scope.users.length; i++) {
+                //Get projects
+                $scope.getProjectsByUser($scope.users[i].id);
+
                 //Get task metrics
                 $http({
                     method: 'GET',

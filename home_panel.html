@@ -150,7 +150,7 @@
         </ul>
     </header>
     <ul class="preview users">
-        <li ng-if="user.firstname!='Root'" class="item {{tasksCountCSS(user.doing_count)}}" ng-repeat="user in users">
+        <li ng-show="user.firstname!='Root'" class="item {{tasksCountCSS(user.doing_count)}}" ng-repeat="user in users">
             <a class="link_block" href="./users/{{user.id}}">
                 <div ng-if="user.photo" class="avatar">
                     <img src = "{{user.photo.uri}}" />
@@ -163,14 +163,24 @@
                     <p class="value user">{{user.firstname}} {{user.lastname}}</p>
                     <p ng-if="user.doing_count==0" class="message free">I'm free! Not doing any tasks</p>
                 </div>
-                <dl class="attributes task-metrics">
-                    <dt class="key tasks-count {{tasksCountCSS(user.tasks_count)}}">Tasks: </dt>
-                    <dd class="value tasks-count {{tasksCountCSS(user.tasks_count)}}">{{user.tasks_count}}</dd>
-                    <dt class="key doing-count {{tasksCountCSS(user.doing_count)}}">Doing: </dt>
-                    <dd class="value doing-count {{tasksCountCSS(user.doing_count)}}">{{user.doing_count}}</dd>
-                    <dt class="key finished-count {{tasksCountCSSNice(user.finished_count)}}">Finished: </dt>
-                    <dd class="value finished-count {{tasksCountCSSNice(user.finished_count)}}">{{user.finished_count}}</dd>
-                </dl>
+                <div ng-show="isViewAdvanced()" class="details">
+                    <dl class="attributes projects">
+                        <dt class="key projects">Projects:</dt>
+                        <dd class="value_item projects {{cssLast($last)}}" ng-repeat="project in user_projects[user.id]">
+                            <span class="key rank">{{$index + 1}}</span>
+                            <p class="value rank">{{project.name}}</p>
+                        </dd>
+                        <dd class="value none projects" ng-if="!user_projects[user.id] || user_projects[user.id].length == 0">No Projects</dd>
+                    </dl>
+                    <dl class="attributes task-metrics">
+                        <dt class="key tasks-count {{tasksCountCSS(user.tasks_count)}}">Tasks: </dt>
+                        <dd class="value tasks-count {{tasksCountCSS(user.tasks_count)}}">{{user.tasks_count}}</dd>
+                        <dt class="key doing-count {{tasksCountCSS(user.doing_count)}}">Doing: </dt>
+                        <dd class="value doing-count {{tasksCountCSS(user.doing_count)}}">{{user.doing_count}}</dd>
+                        <dt class="key finished-count {{tasksCountCSSNice(user.finished_count)}}">Finished: </dt>
+                        <dd class="value finished-count {{tasksCountCSSNice(user.finished_count)}}">{{user.finished_count}}</dd>
+                    </dl>
+                </div>
             </a>
         </li>
     </ul>
