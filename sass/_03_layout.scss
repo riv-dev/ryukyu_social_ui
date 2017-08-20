@@ -115,6 +115,34 @@
     }
 }
 
+.main.user, .main.project {
+    .section {
+        .button.view_advanced {
+            position: absolute;
+            top: 5px;
+            right: 65px;
+        }
+
+        .button.view_simple {
+            position: absolute;
+            top: 5px;
+            right: 65px;               
+        }
+
+        .button.layered {
+            position: absolute;
+            top: 5px;
+            right: 25px;
+        }
+
+        .button.vertical {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+    }
+}
+
 .main.home {
     position: relative;
 
@@ -261,6 +289,10 @@
     }
 
     .preview {
+        display: none;
+    }
+
+    .info.none {
         display: none;
     }
     

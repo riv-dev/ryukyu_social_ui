@@ -57,7 +57,7 @@
                         <dd ng-show="isViewAdvanced('projects')" class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
                     </dl>
                 </a>
-                <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
+                <button class="button pin {{projectPinnedClass(status,project)}}" title="pin" ng-click="projectTogglePin(status,project)">Pin</button>
             </li>
         </ul>
         <p ng-if="!projects[status] || projects[status].length == 0" class="info none">No projects</p>
@@ -101,6 +101,14 @@
                     <label class="key limit" for="tasks_limit">Limit Per Page: </label>
                     <select class="input select limit" ng-options="limit for limit in limits" ng-change="getTasks(status,limit,1)" ng-model="limit"></select>
                 </li>
+                <li ng-show="status == 'dump'">
+                        <form class="form task_quick_add">
+                            <p class="field">
+                                <input class="input name" type="text" ng-model="quick_task_form_data.name" placeholder="Quick Task Name">
+                            </p>
+                            <input class="button submit" type="submit" value="Quick Add" ng-click="quick_post_task()">
+                        </form>
+                </li>
                 <li class="item"><a class="link" href="./tasks/new?status={{status}}">Add Task</a></li>
             </ul>
             <button class="button settings {{status}}" ng-click="toggleShowSettings('tasks', status)">Show/Hide Settings</button>
@@ -131,7 +139,7 @@
                         <dd class="value none project" ng-if="!task.project_name">Not Assigned</dd>
                     </dl>
                 </a>
-                <button class="button pin {{taskPinnedClass(task)}}" title="pin" ng-click="taskTogglePin(task)">Pin</button>
+                <button class="button pin {{taskPinnedClass(status,task)}}" title="pin" ng-click="taskTogglePin(status,task)">Pin</button>
             </li>
         </ul>
         <p ng-if="!tasks[status] || tasks[status].length == 0" class="info none">No tasks</p>

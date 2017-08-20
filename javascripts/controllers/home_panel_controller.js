@@ -635,7 +635,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         });
     } //End getProjects()
 
-    $scope.projectPinnedClass = function(project) {
+    $scope.projectPinnedClass = function(status,project) {
         if(project.pinned) {
             return "pinned";
         } else {
@@ -643,7 +643,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }    
     }
 
-    $scope.projectTogglePin = function (project) {
+    $scope.projectTogglePin = function (status,project) {
         var pinned = false;
         if (project.pinned) {
             pinned = false;
@@ -662,14 +662,14 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }
         }).then(
             function successCallback(response) {
-                $scope.getProjects($localStorage.selected_projects_tab, $localStorage.projects_limit, $localStorage.projects_current_page);
+                $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
             },
             function errorCallback(response) {
             }
         );
     }
 
-    $scope.taskPinnedClass = function(task) {
+    $scope.taskPinnedClass = function(status,task) {
         if(task.pinned) {
             return "pinned";
         } else {
@@ -677,7 +677,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }    
     }
 
-    $scope.taskTogglePin = function (task) {
+    $scope.taskTogglePin = function (status,task) {
         var pinned = false;
         if (task.pinned) {
             pinned = false;
@@ -696,7 +696,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }
         }).then(
             function successCallback(response) {
-                $scope.getTasks($localStorage.selected_tasks_tab, $localStorage.tasks_limit, $localStorage.tasks_current_page);    
+                $scope.getTasks(status, $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
             },
             function errorCallback(response) {
             }
@@ -719,7 +719,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }).then(
                 function successCallback(response) {
                     $scope.quick_task_form_data.name = "";
-                    $scope.getTasks($localStorage.selected_tasks_tab, $localStorage.tasks_limit, $localStorage.tasks_current_page);
+                    $scope.getTasks("dump", $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
                 },
                 function errorCallback(response) {
                 }
