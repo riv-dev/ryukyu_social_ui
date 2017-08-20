@@ -64,158 +64,174 @@
     </ul>
 </section>
 
-<section class="section tasks">
+<section ng-if="loggedin_user" class="section tasks {{isMaximizedClass('tasks')}}">
     <header class="header">
         <h2 class="title">
             <em ng-if="loggedin_user.id==this_user.id">My</em>
             <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em> 
              Task Board
         </h2>
-        <ul class="tabs">
-            <li class="item {{selectedClass(selected_tasks_tab,'dump')}}"><button class="tab dump" ng-click="getTasks('dump',selected_project_id_filter,tasks_limit,1)">dump</button></li><!--
-            --><li class="item {{selectedClass(selected_tasks_tab,'waiting')}}"><button class="tab waiting" ng-click="getTasks('waiting',selected_project_id_filter,tasks_limit,1)">waiting</button></li><!--
-            --><li class="item {{selectedClass(selected_tasks_tab,'doing')}}"><button class="tab doing" ng-click="getTasks('doing',selected_project_id_filter,tasks_limit,1)">doing</button></li><!--
-            --><li class="item {{selectedClass(selected_tasks_tab,'finished')}}"><button class="tab finished" ng-click="getTasks('finished',selected_project_id_filter,tasks_limit,1)">finished</button></li>
-        </ul>
-        <ul class="settings {{showHideSettingsClass('tasks')}} {{selected_tasks_tab}}">
-            <li class="item">
-                <label class="key project">Filter by project: </label>
-                <select class="input select project" ng-options="project.project_id as project.name for project in projects_filter" ng-change="getTasks(selected_tasks_tab,selected_project_id_filter,tasks_limit,1)" ng-model="selected_project_id_filter"></select>
-            </li>
-            <li class="item">
-                <label class="key total">Total Tasks: </label>
-                <em class="value total">{{tasks_count}}</em>
-            </li>
-            <li class="item">
-                <label class="key limit" for="tasks_limit">Limit Per Page: </label>
-                <select class="input select limit" ng-options="tasks_limit for tasks_limit in limits" ng-change="getTasks(selected_tasks_tab,selected_project_id_filter,tasks_limit,1)" ng-model="tasks_limit"></select>
-            </li>
-            <li class="item">
-                <a class="link" href="./users/{{this_user_id}}/tasks/new?status={{selected_tasks_tab}}">Add Task</a>
-            </li>
-            <li ng-show="selected_tasks_tab == 'dump'">
-                <form class="form task_quick_add">
-                    <p class="field">
-                        <input class="input name" type="text" ng-model="quick_task_form_data.name" placeholder="Quick Task Name">
-                    </p>
-                    <input class="button submit" type="submit" value="Quick Add" ng-click="quick_post_task()">
-                </form>
-            </li>
-        </ul>
-        <button class="button settings {{showHideSettingsClass('tasks')}} {{selected_tasks_tab}}" ng-click="toggleShowHideSettings('tasks')">Show/Hide Settings</button>
+        <!--<button ng-show="!isMaximized('tasks')" class="button maximize" ng-click="maximize('tasks')">Maximize</button>
+        <button ng-show="isMaximized('tasks')" class="button minimize" ng-click="minimize('tasks')">Minimize</button>-->
+        <button ng-show="!isViewAdvanced('tasks')" class="button view_advanced" ng-click="setViewAdvanced('tasks',true)">View Advanced</button>
+        <button ng-show="isViewAdvanced('tasks')" class="button view_simple" ng-click="setViewAdvanced('tasks', false)">View Simple</button>
+        <button class="button layered" ng-click="setLayout('tasks','layered')">Layered</button>
+        <button class="button vertical" ng-click="setLayout('tasks','vertical')">Vertical</button>
+        <button ng-show="!isViewAdvanced('tasks')" class="button view_advanced" ng-click="setViewAdvanced('tasks',true)">View Advanced</button>
+        <button ng-show="isViewAdvanced('tasks')" class="button view_simple" ng-click="setViewAdvanced('tasks', false)">View Simple</button>
+        <button ng-show="isMaximized('tasks')" class="button horizontal" ng-click="setLayout('tasks','horizontal')">Horizontal</button>
     </header>
-    <ul class="preview tasks">
-        <li class="item {{task.status}} {{archivedClass(task.archived)}}" ng-repeat="task in tasks">
-            <a class="link_block" href="./users/{{this_user.id}}/tasks/{{task.task_id}}">
-                <h3 class="name">{{task.name}}</h3>
-                <p ng-show="isViewAdvanced()" class="info description">{{task.description}}</p>
-                <dl class="attributes">
-                    <dt ng-show="isViewAdvanced()" class="key this_user_progress">
-                        <em ng-if="loggedin_user.id==this_user.id">My</em>
-                        <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em>                         
-                         Progress:
-                    </dt>
-                    <dd ng-show="isViewAdvanced()" class="value this_user_progress" ng-if="task_user.user_id == this_user.id" ng-repeat="task_user in task.users">
-                        {{task_user.progress_description}}
-                    </dd>
-                    <dt ng-show="isViewAdvanced()" class="key assigned_to" ng-if="task.users.length > 1">Also assigned to this task:</dt>
-                    <dd ng-show="isViewAdvanced()" class="value_item assigned_to {{cssLast($last)}}" ng-if="task_user.user_id != this_user.id" ng-repeat="task_user in task.users">
-                        <em class="key user">{{task_user.firstname}} {{task_user.lastname}}: </em>
-                        <p class="value user">{{task_user.progress_description}}</p>
-                    </dd>
-                    <dt ng-show="isViewAdvanced()" class="key priority">Priority:</dt>
-                    <dd ng-show="isViewAdvanced()" class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
-                    <dd ng-show="isViewAdvanced()" class="value none priority" ng-if="!task.priority">Not defined</dd>
-                    <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(task.deadline, task.status)}}" ng-if="task.deadline">{{prettyDateDeadline(task.deadline, task.status)}}</dd>
-                    <dd class="value none deadline" ng-if="!task.deadline">Not defined</dd>
-                    <dt class="key project">Project:</dt>
-                    <dd class="value project" ng-if="task.project_name">{{task.project_name}}</dd>
-                    <dd class="value none project" ng-if="!task.project_name">Not Assigned</dd>
-                </dl>
-            </a>
-            <button class="button pin {{taskPinnedClass(task)}}" title="pin" ng-click="taskTogglePin(task)">Pin</button>
-        </li>
-    </ul>
-    <p ng-if="!tasks || tasks.length == 0" class="info none">No tasks</p>
-    <ul class="pagination" ng-if="tasks_page_count_arr && tasks_page_count_arr.length > 1">
-        <li class="item previous" ng-click="getTasks(selected_tasks_tab,selected_project_id_filter,tasks_limit,tasks_current_page-1)"> 
-            <a href="#">&laquo;</a>
-        </li>
-        <li class="item {{currentTasksPageClass($index+1)}}" ng-repeat="i in tasks_page_count_arr track by $index">
-            <a href="#" ng-click="getTasks(selected_tasks_tab,selected_project_id_filter,tasks_limit,$index+1)">{{$index+1}}</a>
-        </li>
-        <li class="item next" ng-click="getTasks(selected_tasks_tab,selected_project_id_filter,tasks_limit,tasks_current_page+1)">
-            <a href="#">&raquo;</a>
-        </li>
-    </ul>
+
+    <section class="sub-section {{status}} tasks {{getLayoutCSS('tasks')}} {{getTabSelectedCSS('tasks',status)}}" ng-repeat="status in statuses">
+        <header class="header">
+            <h3 class="tab {{status}} {{getTabSelectedCSS('tasks',status)}}" ng-click="setTabSelected('tasks',status)">{{status}}</h3>
+            <ul ng-show="isShowingSettings('tasks',status)" class="settings {{status}}">
+                <li class="item">
+                    <label class="key total">Total Tasks: </label>
+                    <em class="value total">{{getTasksParam(status,'count')}}</em>
+                </li>
+                <!--<li class="item">
+                        <label class="key project">Filter by project: </label>
+                        <select class="input select project" ng-options="project.project_id as project.name for project in projects_filter" ng-change="getTasks(selected_tasks_tab,selected_project_id_filter,tasks_limit,1)" ng-model="selected_project_id_filter"></select>
+                </li>-->
+                <li class="item">
+                    <label class="key limit" for="tasks_limit">Limit Per Page: </label>
+                    <select class="input select limit" ng-options="limit for limit in limits" ng-change="getTasks(status,getTasksParam(status,'project_id_filter'),limit,1)" ng-model="limit"></select>
+                </li>
+                <li ng-show="status == 'dump'">
+                        <form class="form task_quick_add">
+                            <p class="field">
+                                <input class="input name" type="text" ng-model="quick_task_form_data.name" placeholder="Quick Task Name">
+                            </p>
+                            <input class="button submit" type="submit" value="Quick Add" ng-click="quick_post_task()">
+                        </form>
+                </li>
+                <li class="item"><a class="link" href="./tasks/new?status={{status}}">Add Task</a></li>
+            </ul>
+            <button class="button settings {{status}}" ng-click="toggleShowSettings('tasks', status)">Show/Hide Settings</button>
+        </header>
+
+        <ul class="preview tasks">
+            <li class="item {{task.status}}" ng-repeat="task in tasks[status]">
+                <a class="link_block" href="./users/{{this_user.id}}/tasks/{{task.task_id}}">
+                    <h3 class="name">{{task.name}}</h3>
+                    <p ng-show="isViewAdvanced('tasks')" class="info description">{{task.description}}</p>
+                    <dl class="attributes">
+                        <dt ng-show="isViewAdvanced('tasks')" class="key this_user_progress">
+                            <em ng-if="loggedin_user.id==this_user.id">My</em>
+                            <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em> Progress:
+                        </dt>
+                        <dd ng-show="isViewAdvanced()" class="value this_user_progress" ng-if="task_user.user_id == this_user.id" ng-repeat="task_user in task.users">
+                            {{task_user.progress_description}}
+                        </dd>
+                        <dt ng-show="isViewAdvanced('tasks')" class="key assigned_to" ng-if="task.users.length > 1">Also assigned to this task:</dt>
+                        <dd ng-show="isViewAdvanced('tasks')" class="value_item assigned_to {{cssLast($last)}}" ng-if="task_user.user_id != this_user.id"
+                            ng-repeat="task_user in task.users">
+                            <em class="key user">{{task_user.firstname}} {{task_user.lastname}}: </em>
+                            <p class="value user">{{task_user.progress_description}}</p>
+                        </dd>
+                        <dt ng-show="isViewAdvanced('tasks')" class="key priority">Priority:</dt>
+                        <dd ng-show="isViewAdvanced('tasks')" class="value priority {{checkPriorityImportance(task.priority)}}" ng-if="task.priority">{{getPriorityLabel(task.priority)}}</dd>
+                        <dd ng-show="isViewAdvanced('tasks')" class="value none priority" ng-if="!task.priority">Not defined</dd>
+                        <dt class="key deadline">Deadline:</dt>
+                        <dd class="value deadline {{checkDateImportance(task.deadline, task.status)}}" ng-if="task.deadline">{{prettyDateDeadline(task.deadline, task.status)}}</dd>
+                        <dd class="value none deadline" ng-if="!task.deadline">Not defined</dd>
+                        <dt class="key project">Project:</dt>
+                        <dd class="value project" ng-if="task.project_name">{{task.project_name}}</dd>
+                        <dd class="value none project" ng-if="!task.project_name">Not Assigned</dd>
+                    </dl>
+                </a>
+                <button class="button pin {{taskPinnedClass(status,task)}}" title="pin" ng-click="taskTogglePin(status,task)">Pin</button>
+            </li>
+        </ul>
+        <p ng-if="!tasks[status] || tasks[status].length == 0" class="info none">No tasks</p>
+        <ul class="pagination" ng-if="tasks_page_count_arr[status] && tasks_page_count_arr[status].length > 1">
+            <li class="item previous" ng-click="getTasks(status,getTasksParam(status,'project_id_filter'),getTasksParam(status,'limit'),getTasksParam(status,'page')-1)">
+                <a href="#">&laquo;</a>
+            </li>
+            <li class="item {{currentTasksPageClass(status,$index+1)}}" ng-repeat="i in tasks_page_count_arr[status] track by $index">
+                <a href="#" ng-click="getTasks(status,getTasksParam(status,'project_id_filter'),getTasksParam(status,'limit'),$index+1)">{{$index+1}}</a>
+            </li>
+            <li class="item next" ng-click="getTasks(status,getTasksParam(status,'project_id_filter'),getTasksParam(status,'limit'),getTasksParam(status,'page')+1)">
+                <a href="#">&raquo;</a>
+            </li>
+        </ul>
+    </section>
 </section>
 
-<section class="section projects">
-    <header class="header">
-        <h2 class="title">
-            <em ng-if="loggedin_user.id==this_user.id">My</em>
-            <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em>
-             Projects List
-        </h2>
-        <ul class="tabs">
-            <li class="item {{selectedClass(selected_projects_tab,'dump')}}"><button class="tab dump" ng-click="getProjects('dump',projects_limit,1)">dump</button></li><!--
-            --><li class="item {{selectedClass(selected_projects_tab,'waiting')}}"><button class="tab waiting" ng-click="getProjects('waiting',projects_limit,1)">waiting</button></li><!--
-            --><li class="item {{selectedClass(selected_projects_tab,'doing')}}"><button class="tab doing" ng-click="getProjects('doing',projects_limit,1)">doing</button></li><!--
-            --><li class="item {{selectedClass(selected_projects_tab,'finished')}}"><button class="tab finished" ng-click="getProjects('finished',projects_limit,1)">finished</button></li>
-        </ul>
-        <ul class="settings {{showHideSettingsClass('projects')}} {{selected_projects_tab}}">
-            <li class="item">
-                <label class="key total">Total Projects: </label>
-                <em class="value total">{{projects_count}}</em>
-            </li>
-            <li class="item">
-                <label class="key limit" for="projects_limit">Limit Per Page: </label>
-                <select class="input select limit" ng-options="projects_limit for projects_limit in limits" ng-change="getProjects(selected_projects_tab,projects_limit,1)" ng-model="projects_limit"></select>
-            </li>
-            <li class="item"><a class="link" href="./users/{{this_user_id}}/projects/new?status={{selected_projects_tab}}">Add Project</a></li>
-        </ul>
-        <button class="button settings {{showHideSettingsClass('projects')}} {{selected_projects_tab}}" ng-click="toggleShowHideSettings('projects')">Show/Hide Settings</button>
-    </header>
-    <ul class="preview projects">
-        <li class="item {{project.project_status}}" ng-repeat="project in projects">
-            <a class="link_block" href="./users/{{this_user.id}}/projects/{{project.project_id}}">
-                <h3 class="name">{{project.name}}</h3>
-                <dl class="attributes">
-                    <dt ng-show="isViewAdvanced()" class="key users">Users:</dt>
-                    <dd ng-show="isViewAdvanced()" class="value_item users  {{cssLast($last)}}" ng-repeat="project_user in project.users">
-                        <em class="key role" ng-if="project_user.role">{{project_user.role}}: </em>
-                        <em class="key none role" ng-if="!project_user.role">Undefined Role: </em>
-                        <p class="value role">{{project_user.firstname}} {{project_user.lastname}}</p>
-                    </dd>
-                    <dd ng-show="isViewAdvanced()" class="value none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
-                    <dt ng-show="isViewAdvanced()" class="key start_date">Start Date:</dt>
-                    <dd ng-show="isViewAdvanced()" class="value start_date" ng-if="project.start_date">{{prettyDateDeadline(project.start_date)}}</dd>
-                    <dd ng-show="isViewAdvanced()" class="value none start_date" ng-if="!project.start_date">Not defined</dd>
-                    <dt class="key deadline">Deadline:</dt>
-                    <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
-                    <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
-                    <dt ng-show="isViewAdvanced()" class="key tasks_rank">Top Tasks:</dt>
-                    <dd ng-show="isViewAdvanced()" class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
-                        <span class="key rank">{{$index + 1}}</span>
-                        <p class="value rank">{{project_task.name}}</p>
-                    </dd>
-                    <dd ng-show="isViewAdvanced()" class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
-                </dl>
-            </a>
-            <button class="button pin {{projectPinnedClass(project)}}" title="pin" ng-click="projectTogglePin(project)">Pin</button>
-        </li>
-    </ul>
-    <p ng-if="!projects || projects.length == 0" class="info none">No projects</p>
-    <ul class="pagination" ng-if="projects_page_count_arr && projects_page_count_arr.length > 1">
-        <li class="item previous" ng-click="getProjects(selected_projects_tab,projects_limit,projects_current_page-1)"> 
-            <a href="#">&laquo;</a>
-        </li>
-        <li class="item {{currentProjectsPageClass($index+1)}}" ng-repeat="i in projects_page_count_arr track by $index">
-            <a href="#" ng-click="getProjects(selected_projects_tab,projects_limit,$index+1)">{{$index+1}}</a>
-        </li>
-        <li class="item next" ng-click="getProjects(selected_projects_tab,projects_limit,projects_current_page+1)">
-            <a href="#">&raquo;</a>
-        </li>
-    </ul>
-</section>
+<section ng-if="loggedin_user" class="section projects {{isMaximizedClass('projects')}}">
+        <header class="header">
+            <h2 class="title">
+                <em ng-if="loggedin_user.id==this_user.id">My</em>
+                <em ng-if="loggedin_user.id!=this_user.id">{{this_user.firstname}}'s</em> Projects List
+            </h2>
+            <!--<button ng-show="!isMaximized('projects')" class="button maximize" ng-click="maximize('projects')">Maximize</button>
+            <button ng-show="isMaximized('projects')" class="button minimize" ng-click="minimize('projects')">Minimize</button>-->
+            <button ng-show="!isViewAdvanced('projects')" class="button view_advanced" ng-click="setViewAdvanced('projects',true)">View Advanced</button>
+            <button ng-show="isViewAdvanced('projects')" class="button view_simple" ng-click="setViewAdvanced('projects', false)">View Simple</button>
+            <button class="button layered" ng-click="setLayout('projects','layered')">Layered</button>
+            <button class="button vertical" ng-click="setLayout('projects','vertical')">Vertical</button>
+            <button ng-show="isMaximized('projects')" class="button horizontal" ng-click="setLayout('projects','horizontal')">Horizontal</button>
+        </header>
+    
+        <section class="sub-section {{status}} projects {{getLayoutCSS('projects')}} {{getTabSelectedCSS('projects',status)}}" ng-repeat="status in statuses">
+            <header class="header">
+                <h3 class="tab {{status}} {{getTabSelectedCSS('projects',status)}}" ng-click="setTabSelected('projects',status)">{{status}}</h3>
+                <ul ng-show="isShowingSettings('projects',status)" class="settings {{status}}">
+                    <li class="item">
+                        <label class="key total">Total Projects: </label>
+                        <em class="value total">{{getProjectsParam(status,'count')}}</em>
+                    </li>
+                    <li class="item">
+                        <label class="key limit" for="projects_limit">Limit Per Page: </label>
+                        <select class="input select limit" ng-options="limit for limit in limits" ng-change="getAllProjects(status,limit,1)"
+                            ng-model="limit"></select>
+                    </li>
+                    <li class="item"><a class="link" href="./users/{{this_user_id}}/projects/new?status={{selected_projects_tab}}">Add Project</a></li>
+                </ul>
+                <button class="button settings {{status}}" ng-click="toggleShowSettings('projects', status)">Show/Hide Settings</button>
+            </header>
+    
+            <ul class="preview projects">
+                <li class="item {{project.project_status}}" ng-repeat="project in projects[status]">
+                    <a class="link_block" href="./users/{{this_user.id}}/projects/{{project.project_id}}">
+                        <h3 class="name">{{project.name}}</h3>
+                        <dl class="attributes">
+                            <dt ng-show="isViewAdvanced('projects')" class="key users">Users:</dt>
+                            <dd ng-show="isViewAdvanced('projects')" class="value_item users  {{cssLast($last)}}" ng-repeat="project_user in project.users">
+                                <em class="key role" ng-if="project_user.role">{{project_user.role}}: </em>
+                                <em class="key none role" ng-if="!project_user.role">Undefined Role: </em>
+                                <p class="value role">{{project_user.firstname}} {{project_user.lastname}}</p>
+                            </dd>
+                            <dd ng-show="isViewAdvanced('projects')" class="value none users" ng-if="!project.users || project.users.length == 0">No users assigned</dd>
+                            <dt ng-show="isViewAdvanced('projects')" class="key start_date">Start Date:</dt>
+                            <dd ng-show="isViewAdvanced('projects')" class="value start_date" ng-if="project.start_date">{{prettyDateDeadline(project.start_date)}}</dd>
+                            <dd ng-show="isViewAdvanced('projects')" class="value none start_date" ng-if="!project.start_date">Not defined</dd>
+                            <dt class="key deadline">Deadline:</dt>
+                            <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.status)}}</dd>
+                            <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
+                            <dt ng-show="isViewAdvanced('projects')" class="key tasks_rank">Top Tasks:</dt>
+                            <dd ng-show="isViewAdvanced('projects')" class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
+                                <span class="key rank">{{$index + 1}}</span>
+                                <p class="value rank">{{project_task.name}}</p>
+                            </dd>
+                            <dd ng-show="isViewAdvanced('projects')" class="value none tasks" ng-if="!project.tasks || project.tasks.length == 0">No tasks</dd>
+                        </dl>
+                    </a>
+                    <button class="button pin {{projectPinnedClass(status,project)}}" title="pin" ng-click="projectTogglePin(status,project)">Pin</button>
+                </li>
+            </ul>
+            <p ng-if="!projects[status] || projects[status].length == 0" class="info none">No projects</p>
+            <ul class="pagination" ng-if="projects_page_count_arr[status] && projects_page_count_arr[status].length > 1">
+                <li class="item previous" ng-click="getProjects(status,getProjectsParam(status,'limit'),getProjectsParam(status,'page')-1)">
+                    <a href="#">&laquo;</a>
+                </li>
+                <li class="item {{currentProjectsPageClass(status,$index+1)}}" ng-repeat="i in projects_page_count_arr[status] track by $index">
+                    <a href="#" ng-click="getProjects(status,getProjectsParam(status,'limit'),$index+1)">{{$index+1}}</a>
+                </li>
+                <li class="item next" ng-click="getProjects(status,getProjectsParam(status,'limit'),getProjectsParam(status,'page')+1)">
+                    <a href="#">&raquo;</a>
+                </li>
+            </ul>
+        </section>
+    </section>
