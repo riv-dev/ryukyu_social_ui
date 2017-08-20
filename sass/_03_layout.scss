@@ -39,6 +39,21 @@
             top: 5px;
             right: 100px;               
         }
+
+        &.users {
+            .button.view_advanced {
+                position: absolute;
+                top: 5px;
+                right: 40px;
+            }
+
+            .button.view_simple {
+                position: absolute;
+                top: 5px;
+                right: 40px;               
+            }               
+        }
+
     
         .button.layered {
             position: absolute;
@@ -63,6 +78,20 @@
                 position: absolute;
                 top: 5px;
                 right: 130px;               
+            }
+
+            &.users {
+                .button.view_advanced {
+                    position: absolute;
+                    top: 5px;
+                    right: 50px;
+                }
+    
+                .button.view_simple {
+                    position: absolute;
+                    top: 5px;
+                    right: 50px;               
+                }               
             }
 
             .button.layered {

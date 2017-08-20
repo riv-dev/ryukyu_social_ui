@@ -84,6 +84,8 @@
         <button ng-show="isViewAdvanced('tasks')" class="button view_simple" ng-click="setViewAdvanced('tasks', false)">View Simple</button>
         <button class="button layered" ng-click="setLayout('tasks','layered')">Layered</button>
         <button class="button vertical" ng-click="setLayout('tasks','vertical')">Vertical</button>
+        <button ng-show="!isViewAdvanced('tasks')" class="button view_advanced" ng-click="setViewAdvanced('tasks',true)">View Advanced</button>
+        <button ng-show="isViewAdvanced('tasks')" class="button view_simple" ng-click="setViewAdvanced('tasks', false)">View Simple</button>
         <button ng-show="isMaximized('tasks')" class="button horizontal" ng-click="setLayout('tasks','horizontal')">Horizontal</button>
     </header>
 
@@ -156,6 +158,8 @@
         </ul>
         <button ng-show="!isMaximized('users')" class="button maximize" ng-click="maximize('users')">Maximize</button>
         <button ng-show="isMaximized('users')" class="button minimize" ng-click="minimize('users')">Minimize</button>
+        <button ng-show="!isViewAdvanced('users')" class="button view_advanced" ng-click="setViewAdvanced('users',true)">View Advanced</button>
+        <button ng-show="isViewAdvanced('users')" class="button view_simple" ng-click="setViewAdvanced('users', false)">View Simple</button>
     </header>
     <ul class="preview users">
         <li ng-show="user.firstname!='Root'" class="item {{tasksCountCSS(user.doing_count)}}" ng-repeat="user in users">
@@ -171,7 +175,7 @@
                     <p class="value user">{{user.firstname}} {{user.lastname}}</p>
                     <p ng-if="user.doing_count==0" class="message free">I'm free! Not doing any tasks</p>
                 </div>
-                <div ng-show="isViewAdvanced()" class="details">
+                <div ng-show="isViewAdvanced('users')" class="details">
                     <dl class="attributes projects">
                         <dt class="key projects">Projects:</dt>
                         <dd class="value_item projects {{project.project_status}} {{cssLast($last)}}" ng-repeat="project in user_projects[user.id]">
