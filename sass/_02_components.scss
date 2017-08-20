@@ -355,3 +355,16 @@
         }
     }
 }
+
+.sub-section {
+    background-color: transparent;
+
+    text-align: center; //to center pagination
+    * {
+        text-align: left;
+    }
+
+    .pagination {
+        margin-top: 15px;
+    }
+}

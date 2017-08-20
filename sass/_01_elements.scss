@@ -598,6 +598,7 @@
     width: 100%;
     @include border-radius(0px);
     border: none;
+    border-top: 1px solid black;
     text-indent: 9999px;
     overflow: hidden;
     text-align: center;
@@ -790,4 +791,18 @@ button.dump {
     text-align: center !important;
     @include border-radius(40px);
     overflow: hidden;
+}
+
+.tab {
+    position: relative;
+    display: inline-block;
+    border: 1px solid $black;
+    border-bottom: none;
+    border-radius: 3px 3px 0px 0px;
+    //color: $grey;
+    color: $black;
+    font: 11px system-ui;
+    padding: 2px 6px 3px;
+    z-index: 3;
+    top: 1px;
 }

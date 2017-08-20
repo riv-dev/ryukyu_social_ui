@@ -122,11 +122,6 @@
     padding: 15px;
     box-sizing: border-box;
 
-    text-align: center; //to center pagination
-    * {
-        text-align: left;
-    }
-
     .header {
         position: relative;
         border-bottom: 1px solid $black;
@@ -135,14 +130,6 @@
         .title {
             margin-bottom: 0.2em;
         }
-    }
-
-    .tabs {
-
-    }
-
-    .pagination {
-        margin-top: 15px;
     }
 }
 
