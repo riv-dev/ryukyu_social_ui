@@ -6,26 +6,27 @@
         <h2 class="title">Projects List</h2>
         <button ng-show="!isMaximized('projects')" class="button maximize" ng-click="maximize('projects')">Maximize</button>
         <button ng-show="isMaximized('projects')" class="button minimize" ng-click="minimize('projects')">Minimize</button>
-        <button ng-show="isMaximized('projects')" class="button layered" ng-click="layer('projects')">Layer</button>
-        <button ng-show="isMaximized('projects')" class="button horizontal" ng-click="horizontal('projects')">Horizontal</button>
-        <button ng-show="isMaximized('projects')" class="button vertical" ng-click="vertical('projects')">Vertical</button>
+        <button ng-show="isMaximized('projects')" class="button layered" ng-click="setLayout('projects','layered')">Layer</button>
+        <button ng-show="isMaximized('projects')" class="button horizontal" ng-click="setLayout('projects','horizontal')">Horizontal</button>
+        <button ng-show="isMaximized('projects')" class="button vertical" ng-click="setLayout('projects','vertical')">Vertical</button>
     </header>
-    <section class="sub-section {{status}} projects " ng-repeat="status in statuses">
+
+    <section class="sub-section {{status}} projects {{getLayoutCSS('projects')}} {{getTabSelectedCSS('projects',status)}}" ng-repeat="status in statuses">
         <header class="header">
-            <h3 class="tab {{status}} {{selectedClass(status,status)}}" ng-click="getProjects(status,projects_limit,1)">{{status}}</h3>
-            <ul class="settings {{showHideSettingsClass('projects')}} {{status}}">
+            <h3 class="tab {{status}} {{getTabSelectedCSS('projects',status)}}" ng-click="setTabSelected('projects',status)">{{status}}</h3>
+            <ul ng-show="isShowingSettings('projects',status)" class="settings {{status}}">
                 <li class="item">
                     <label class="key total">Total Projects: </label>
                     <em class="value total">{{getProjectsParam(status,'count')}}</em>
                 </li>
                 <li class="item">
                     <label class="key limit" for="projects_limit">Limit Per Page: </label>
-                    <select class="input select limit" ng-options="projects_limit for projects_limit in limits" ng-change="getProjects(status,projects_limit,1)"
-                        ng-model="projects_limit"></select>
+                    <select class="input select limit" ng-options="limit for limit in limits" ng-change="getProjects(status,limit,1)"
+                        ng-model="limit"></select>
                 </li>
                 <li class="item"><a class="link" href="./projects/new?status={{status}}">Add Project</a></li>
             </ul>
-            <button class="button settings {{showHideSettingsClass('projects')}} {{status}}" ng-click="toggleShowHideSettings('projects')">Show/Hide Settings</button>
+            <button class="button settings {{status}}" ng-click="toggleShowSettings('projects', status)">Show/Hide Settings</button>
         </header>
 
         <ul class="preview projects">

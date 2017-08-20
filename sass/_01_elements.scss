@@ -591,6 +591,7 @@
 
 .button.settings {
     position: relative;
+    display: block;
     padding: 15px 0px;
     height: 20px;
     color: $black;
@@ -609,27 +610,15 @@
     }
     &:before {
         position: absolute;
+        display: block;
         text-indent: 0px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         font-size: 20px;
         font-family: "FontAwesome";
-        content: "\f102";
-        display: block;
+        content: "\f1de";
         text-align: center;
-    }
-    &.show {
-        display: block;
-        &:before {
-            content: "\f1de";
-        }
-    }
-    &.hide {
-        display: block;
-        &:before {
-            content: "\f1de";
-        }
     }
 }
 
@@ -801,8 +790,12 @@ button.dump {
     border-radius: 3px 3px 0px 0px;
     //color: $grey;
     color: $black;
-    font: 11px system-ui;
+    font-size: 11px;
+    font-family: 'Didact Gothic';
     padding: 2px 6px 3px;
     z-index: 3;
     top: 1px;
+    &:hover {
+        cursor: pointer;
+    }
 }

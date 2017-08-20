@@ -16,6 +16,39 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
+    //if(!("layout_settings" in $localStorage)) {
+        $localStorage.layout_settings = {
+            "projects": {
+                type: "layered",
+                selected: "dump"
+            },
+            "tasks": {
+                type: "layered",
+                selected: "dump"
+            }
+        }
+    //}
+
+    $scope.setLayout = function(category, value) {
+        $localStorage.layout_settings[category]['type'] = value;
+    }
+
+    $scope.getLayoutCSS = function(category) {
+        return $localStorage.layout_settings[category]['type'];
+    }
+
+    $scope.setTabSelected = function(category,status) {
+        $localStorage.layout_settings[category]['selected'] = status;
+    }
+
+    $scope.getTabSelectedCSS = function(category,status) {
+        if($localStorage.layout_settings[category]['selected'] == status) {
+            return "selected";
+        } else {
+            return "";
+        }
+    }
+
     $scope.statuses = ["dump","waiting","doing","finished"];
 
     //Placeholder for clarity
@@ -27,7 +60,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     };
 
     //Default settings
-    //if (!("projects_params" in $localStorage)) {
+    if (!("projects_params" in $localStorage)) {
         $localStorage.projects_params = {
             "dump": {
                 limit: 5,
@@ -50,7 +83,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 count: null
             }
         }
-    //}
+    }
+
 
     $scope.getProjectsParam = function(status,setting) {
         return $localStorage.projects_params[status][setting];
@@ -187,24 +221,33 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         return moment(isoDateStr).calendar();
     }
 
-    $scope.showSettingsFlags = {
-        tasks: false,
-        projects: false
-    }
-
-    $scope.showHideSettingsClass = function(type) {
-        if($scope.showSettingsFlags[type]) {
-            return "show";
-        } else {
-            return "hide";
+    //Default settings
+    if(!("show_settings" in $localStorage)) {
+        $localStorage.show_settings = {
+            "projects": {
+                "dump": false,
+                "waiting": false,
+                "doing": false,
+                "finished": false
+            },
+            "tasks": {
+                "dump": false,
+                "waiting": false,
+                "doing": false,
+                "finished": false
+            }
         }
     }
 
-    $scope.toggleShowHideSettings = function(type) {
-        if($scope.showSettingsFlags[type]) {
-            $scope.showSettingsFlags[type] = false;
+    $scope.isShowingSettings = function(category, status) {
+        return $localStorage.show_settings[category][status];
+    }
+
+    $scope.toggleShowSettings = function(category, status) {
+        if($localStorage.show_settings[category][status]) {
+            $localStorage.show_settings[category][status] = false;
         } else {
-            $scope.showSettingsFlags[type] = true;
+            $localStorage.show_settings[category][status] = true;
         }
     }
 
@@ -458,10 +501,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     };
 
     $scope.getProjects = function(status,limit,page) {
-        //Save/default settings
-
-        //Use to be status = selected tab
-
+        console.log("Get Projects");
+        console.log("Status: " + status + ", limit: " + limit + ", page: " + page);
         //Save settings
         $scope.setProjectsParam(status,'limit',limit);
         $scope.setProjectsParam(status,'page',page);
