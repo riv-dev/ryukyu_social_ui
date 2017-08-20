@@ -38,8 +38,6 @@
       </header>
       <nav ng-if="loggedin_user" class="navigation">
         <ul class="links">
-          <li class="item" ng-show="!isViewAdvanced()"><button class="button view_advanced" ng-click="viewAdvanced(true)">View Advanced</button></li>
-          <li class="item" ng-show="isViewAdvanced()"><button class="button view_simple" ng-click="viewAdvanced(false)">View Simple</button></li>
           <li class="item"><a class="link active" href="./home-panel">Home Panel</a></li>
           <li class="item"><a class="link" href="./users/{{loggedin_user.id}}">My Profile</a></li>
           <li class="item login" ng-if="!loggedin_user"><a class="link" href="./login">Log In</a></li>

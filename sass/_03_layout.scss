@@ -26,11 +26,72 @@
 }
 
 //Layouts for Main Element
+.main {
+    .section {
+        .button.view_advanced {
+            position: absolute;
+            top: 5px;
+            right: 100px;
+        }
+
+        .button.view_simple {
+            position: absolute;
+            top: 5px;
+            right: 100px;               
+        }
+    
+        .button.layered {
+            position: absolute;
+            top: 5px;
+            right: 60px;
+        }
+
+        .button.vertical {
+            position: absolute;
+            top: 5px;
+            right: 40px;
+        }
+    
+        &.maximized {
+            .button.view_advanced {
+                position: absolute;
+                top: 5px;
+                right: 130px;
+            }
+
+            .button.view_simple {
+                position: absolute;
+                top: 5px;
+                right: 130px;               
+            }
+
+            .button.layered {
+                position: absolute;
+                top: 5px;
+                right: 90px;
+            }
+    
+            .button.vertical {
+                position: absolute;
+                top: 5px;
+                right: 70px;
+            }
+    
+            .button.horizontal {
+                position: absolute;
+                top: 5px;
+                right: 50px;
+            }
+        }
+    }
+}
+
 .main.home {
     position: relative;
 
     .section.projects {
         width: 40%;
+
         &.full {
             width: 70%;
         }
@@ -42,31 +103,8 @@
 
     .section.tasks {
         width: 30%;
-        &.minimized {
-            width: 0%;
-            * {
-                display: none;
-            }
-
-            .header {
-                display: block;
-                height: 20px;
-                width: 80px;
-                border: none;
-                .title {
-                    background-color: $light_orange;
-                    position: absolute;
-                    right: 15px;
-                    top: 0px;
-                    font-size: 10px;
-                    display: block;
-                }
-                .button.minimize,.button.maximize {
-                    display: block;
-                }
-            }
-        }
     }
+
     .section.users {
         width: 30%;
     }
@@ -228,6 +266,13 @@
         }
     }
     
+}
+
+.sub-section.horizontal {
+    float: left;
+    width: 25%;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 

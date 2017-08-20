@@ -95,16 +95,20 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     }
 
     //Default settings
-    if(!("view_advanced" in $localStorage)) {
-        $localStorage.view_advanced = false;
-    } 
+    //if(!("view_advanced" in $localStorage)) {
+        $localStorage.view_advanced = {
+            projects: false,
+            tasks: false,
+            users: false
+        }
+    //} 
 
-    $scope.$parent.isViewAdvanced = function() {
-        return $localStorage.view_advanced;
+    $scope.isViewAdvanced = function(category) {
+        return $localStorage.view_advanced[category];
     }
 
-    $scope.$parent.viewAdvanced = function(flag) {
-        $localStorage.view_advanced = flag;
+    $scope.setViewAdvanced = function(category, flag) {
+        $localStorage.view_advanced[category] = flag;
     }
 
     $scope.maximize = function (this_section_name) {
@@ -122,6 +126,10 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             if ($localStorage.maximized.hasOwnProperty(section_name)) {
                 $localStorage.maximized[section_name] = false;
             }
+        }
+
+        if($scope.getLayoutCSS(this_section_name) == "horizontal") {
+            $scope.setLayout(this_section_name,"layered");
         }
     }
 
