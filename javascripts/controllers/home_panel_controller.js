@@ -16,7 +16,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
-    //if(!("layout_settings" in $localStorage)) {
+    if(!("layout_settings" in $localStorage)) {
         $localStorage.layout_settings = {
             "projects": {
                 type: "layered",
@@ -27,7 +27,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 selected: "dump"
             }
         }
-    //}
+    }
 
     $scope.setLayout = function(category, value) {
         $localStorage.layout_settings[category]['type'] = value;
@@ -139,13 +139,13 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
 
     //Default settings
-    //if(!("view_advanced" in $localStorage)) {
+    if(!("view_advanced" in $localStorage)) {
         $localStorage.view_advanced = {
             projects: false,
             tasks: false,
             users: false
         }
-    //} 
+    } 
 
     $scope.isViewAdvanced = function(category) {
         return $localStorage.view_advanced[category];
