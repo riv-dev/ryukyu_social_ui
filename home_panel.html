@@ -24,6 +24,9 @@
         <button class="button settings {{showHideSettingsClass('projects')}} {{selected_projects_tab}}" ng-click="toggleShowHideSettings('projects')">Show/Hide Settings</button>
         <button ng-show="!isMaximized('projects')" class="button maximize" ng-click="maximize('projects')">Maximize</button>
         <button ng-show="isMaximized('projects')" class="button minimize" ng-click="minimize('projects')">Minimize</button>
+        <button ng-show="isMaximized('projects')" class="button layered" ng-click="layer('projects')">Layer</button>
+        <button ng-show="isMaximized('projects')" class="button horizontal" ng-click="horizontal('projects')">Horizontal</button>
+        <button ng-show="isMaximized('projects')" class="button vertical" ng-click="vertical('projects')">Vertical</button>
     </header>
     <ul class="preview projects">
         <li class="item {{project.status}}" ng-repeat="project in projects">
@@ -101,6 +104,9 @@
         <button class="button settings {{showHideSettingsClass('tasks')}} {{selected_tasks_tab}}" ng-click="toggleShowHideSettings('tasks')">Show/Hide Settings</button>
         <button ng-show="!isMaximized('tasks')" class="button maximize" ng-click="maximize('tasks')">Maximize</button>
         <button ng-show="isMaximized('tasks')" class="button minimize" ng-click="minimize('tasks')">Minimize</button>
+        <button ng-show="isMaximized('tasks')" class="button layered" ng-click="layer('tasks')">Layer</button>
+        <button ng-show="isMaximized('tasks')" class="button horizontal" ng-click="horizontal('tasks')">Horizontal</button>
+        <button ng-show="isMaximized('tasks')" class="button vertical" ng-click="vertical('tasks')">Vertical</button>
     </header>
 
     <ul class="preview tasks">
