@@ -2,15 +2,87 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
     $scope.$parent.hero = "User Panel";
     $scope.$parent.panel_class = "user";
 
+    $scope.statuses = ["dump","waiting","doing","finished"];
+
+    //Default settings
+    if (!("user_panel_projects_params" in $localStorage)) {
+        $localStorage.user_panel_projects_params = {
+            "dump": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "waiting": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "doing": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "finished": {
+                limit: 5,
+                page: 1,
+                count: null
+            }
+        }
+    }
+
+    //Default settings
+    if (!("user_panel_tasks_params" in $localStorage)) {
+        $localStorage.user_panel_tasks_params = {
+            "dump": {
+                limit: 10,
+                page: 1,
+                count: null,
+                project_id_filter: null
+            },
+            "waiting": {
+                limit: 10,
+                page: 1,
+                count: null,
+                project_id_filter: null
+            },
+            "doing": {
+                limit: 10,
+                page: 1,
+                count: null,
+                project_id_filter: null
+            },
+            "finished": {
+                limit: 10,
+                page: 1,
+                count: null,
+                project_id_filter: null
+            }
+        }
+    }
+
+    //Default settings, always reset
+    $localStorage.user_panel_show_settings = {
+        "projects": {
+            "dump": false,
+            "waiting": false,
+            "doing": false,
+            "finished": false
+        },
+        "tasks": {
+            "dump": false,
+            "waiting": false,
+            "doing": false,
+            "finished": false
+        }
+    }
+
     if($localStorage.last_visited_user_id == null || $localStorage.last_visited_user_id != $routeParams.user_id) {
         //clear all settings
-        //$localStorage.user_panel_selected_projects_tab = null; 
-        $localStorage.user_panel_projects_limit = null;
-        $localStorage.user_panel_projects_current_page = null;
-        //$localStorage.user_panel_selected_tasks_tab = null;
-        $localStorage.user_panel_selected_project_id_filter = null; 
-        $localStorage.user_panel_tasks_limit = null;
-        $localStorage.user_panel_tasks_current_page = null;
+        for(var i=0;i<$scope.statuses.length;i++) {
+            var status = $scope.statuses[i]; 
+            $localStorage.user_panel_projects_params[status]['page'] = 1;
+            $localStorage.user_panel_tasks_params[status]['page'] = 1;
+        }
     } 
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
@@ -56,8 +128,6 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
         }
     }
 
-    $scope.statuses = ["dump","waiting","doing","finished"];
-
     //Placeholder for clarity
     $scope.projects = {
         "dump":[],
@@ -65,32 +135,6 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
         "doing":[],
         "finished":[]
     };
-
-    //Default settings
-    if (!("user_panel_projects_params" in $localStorage)) {
-        $localStorage.user_panel_projects_params = {
-            "dump": {
-                limit: 5,
-                page: 1,
-                count: null
-            },
-            "waiting": {
-                limit: 5,
-                page: 1,
-                count: null
-            },
-            "doing": {
-                limit: 5,
-                page: 1,
-                count: null
-            },
-            "finished": {
-                limit: 5,
-                page: 1,
-                count: null
-            }
-        }
-    }
 
 
     $scope.getProjectsParam = function(status,setting) {
@@ -108,37 +152,6 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
         "doing":[],
         "finished":[]
     };
-
-    //Default settings
-    if (!("user_panel_tasks_params" in $localStorage)) {
-        $localStorage.user_panel_tasks_params = {
-            "dump": {
-                limit: 10,
-                page: 1,
-                count: null,
-                project_id_filter: null
-            },
-            "waiting": {
-                limit: 10,
-                page: 1,
-                count: null,
-                project_id_filter: null
-            },
-            "doing": {
-                limit: 10,
-                page: 1,
-                count: null,
-                project_id_filter: null
-            },
-            "finished": {
-                limit: 10,
-                page: 1,
-                count: null,
-                project_id_filter: null
-            }
-        }
-    }
-
 
     $scope.getTasksParam = function(status,setting) {
         return $localStorage.user_panel_tasks_params[status][setting];
@@ -232,28 +245,7 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
         window.history.back();
     }
 
-    $scope.showSettingsFlags = {
-        tasks: false,
-        projects: false
-    }
 
-    //Default settings
-    if (!("user_panel_show_settings" in $localStorage)) {
-        $localStorage.user_panel_show_settings = {
-            "projects": {
-                "dump": false,
-                "waiting": false,
-                "doing": false,
-                "finished": false
-            },
-            "tasks": {
-                "dump": false,
-                "waiting": false,
-                "doing": false,
-                "finished": false
-            }
-        }
-    }
 
     $scope.isShowingSettings = function (category, status) {
         return $localStorage.user_panel_show_settings[category][status];
@@ -295,7 +287,7 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
     //Pagination variables and functions
     $scope.limits = ["5", "10", "15", "20", "all"];
 
-    $scope.currentTasksPageClass = function (page) {
+    $scope.currentTasksPageClass = function (status,page) {
         if (page == $scope.getTasksParam(status, 'page')) {
             return "selected";
         } else {

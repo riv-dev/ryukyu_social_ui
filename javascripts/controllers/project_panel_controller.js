@@ -2,15 +2,55 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
     $scope.$parent.hero = "Project Panel";
     $scope.$parent.panel_class = "project";
 
+    $scope.statuses = ["dump","waiting","doing","finished"];
+
+    //Default settings
+    if (!("project_panel_tasks_params" in $localStorage)) {
+        $localStorage.project_panel_tasks_params = {
+            "dump": {
+                limit: 10,
+                page: 1,
+                count: null,
+                user_id_filter: null
+            },
+            "waiting": {
+                limit: 10,
+                page: 1,
+                count: null,
+                user_id_filter: null
+            },
+            "doing": {
+                limit: 10,
+                page: 1,
+                count: null,
+                user_id_filter: null
+            },
+            "finished": {
+                limit: 10,
+                page: 1,
+                count: null,
+                user_id_filter: null
+            }
+        }
+    }
+
+    //Default settings, always reset
+    $localStorage.project_panel_show_settings = {
+        "tasks": {
+            "dump": false,
+            "waiting": false,
+            "doing": false,
+            "finished": false
+        }
+    }
+
+    //Reset settings on different project visits
     if($localStorage.last_visited_project_id == null || $localStorage.last_visited_project_id != $routeParams.project_id) {
         //clear all settings
-        //$localStorage.project_panel_selected_projects_tab = null; 
-        $localStorage.project_panel_projects_limit = null;
-        $localStorage.project_panel_projects_current_page = null;
-        //$localStorage.project_panel_selected_tasks_tab = null;
-        $localStorage.project_panel_selected_project_id_filter = null; 
-        $localStorage.project_panel_tasks_limit = null;
-        $localStorage.project_panel_tasks_current_page = null;
+        for(var i=0;i<$scope.statuses.length;i++) {
+            var status = $scope.statuses[i]; 
+            $localStorage.project_panel_tasks_params[status]['page'] = 1;
+        }
     } 
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
@@ -56,8 +96,6 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         }
     }
 
-    $scope.statuses = ["dump","waiting","doing","finished"];
-
     //Placeholder for clarity
     $scope.tasks = {
         "dump":[],
@@ -65,36 +103,6 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         "doing":[],
         "finished":[]
     };
-
-    //Default settings
-    if (!("project_panel_tasks_params" in $localStorage)) {
-        $localStorage.project_panel_tasks_params = {
-            "dump": {
-                limit: 10,
-                page: 1,
-                count: null,
-                user_id_filter: null
-            },
-            "waiting": {
-                limit: 10,
-                page: 1,
-                count: null,
-                user_id_filter: null
-            },
-            "doing": {
-                limit: 10,
-                page: 1,
-                count: null,
-                user_id_filter: null
-            },
-            "finished": {
-                limit: 10,
-                page: 1,
-                count: null,
-                user_id_filter: null
-            }
-        }
-    }
 
 
     $scope.getTasksParam = function(status,setting) {
@@ -185,26 +193,11 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         return moment(isoDateStr).calendar();
     }
 
-    $scope.showSettingsFlags = {
-        tasks: false,
-        projects: false
-    }
-
     $scope.back = function() {
         window.history.back();
     }
 
-    //Default settings
-    if (!("project_panel_show_settings" in $localStorage)) {
-        $localStorage.project_panel_show_settings = {
-            "tasks": {
-                "dump": false,
-                "waiting": false,
-                "doing": false,
-                "finished": false
-            }
-        }
-    }
+
 
     $scope.isShowingSettings = function (category, status) {
         return $localStorage.project_panel_show_settings[category][status];
@@ -283,7 +276,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
     //Pagination variables and functions
     $scope.limits = ["5","10","15","20","all"];
 
-    $scope.currentTasksPageClass = function (page) {
+    $scope.currentTasksPageClass = function (status,page) {
         if (page == $scope.getTasksParam(status, 'page')) {
             return "selected";
         } else {

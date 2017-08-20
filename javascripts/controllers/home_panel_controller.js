@@ -2,15 +2,83 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     $scope.$parent.hero = "Home Panel";
     $scope.$parent.panel_class = "home";
 
+    $scope.statuses = ["dump","waiting","doing","finished"];
+
+    //Default settings
+    if (!("projects_params" in $localStorage)) {
+        $localStorage.projects_params = {
+            "dump": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "waiting": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "doing": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "finished": {
+                limit: 5,
+                page: 1,
+                count: null
+            }
+        }
+    }
+
+    //Default settings
+    if (!("tasks_params" in $localStorage)) {
+        $localStorage.tasks_params = {
+            "dump": {
+                limit: 10,
+                page: 1,
+                count: null
+            },
+            "waiting": {
+                limit: 10,
+                page: 1,
+                count: null
+            },
+            "doing": {
+                limit: 10,
+                page: 1,
+                count: null
+            },
+            "finished": {
+                limit: 10,
+                page: 1,
+                count: null
+            }
+        }
+    }
+
+    //Default settings, always reset
+    $localStorage.show_settings = {
+        "projects": {
+            "dump": false,
+            "waiting": false,
+            "doing": false,
+            "finished": false
+        },
+        "tasks": {
+            "dump": false,
+            "waiting": false,
+            "doing": false,
+            "finished": false
+        }
+    }
+
     if($localStorage.flash_message == "Successful Login!") { 
         //clear all settings
-        //$localStorage.selected_projects_tab = null; //Save between sessions
-        $localStorage.projects_limit = null;
-        $localStorage.projects_current_page = null;
-        //$localStorage.selected_tasks_tab = null; //Save between sessions
-        $localStorage.tasks_limit = null;
-        $localStorage.tasks_current_page = null;
-        //delete $localStorage.tasks_maximized; //Save between sessions
+        for(var i=0;i<$scope.statuses.length;i++) {
+            var status = $scope.statuses[i]; 
+            $localStorage.projects_params[status]['page'] = 1;
+            $localStorage.tasks_params[status]['page'] = 1;
+        }
     } 
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
@@ -49,8 +117,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }
     }
 
-    $scope.statuses = ["dump","waiting","doing","finished"];
-
     //Placeholder for clarity
     $scope.projects = {
         "dump":[],
@@ -59,31 +125,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         "finished":[]
     };
 
-    //Default settings
-    if (!("projects_params" in $localStorage)) {
-        $localStorage.projects_params = {
-            "dump": {
-                limit: 5,
-                page: 1,
-                count: null
-            },
-            "waiting": {
-                limit: 5,
-                page: 1,
-                count: null
-            },
-            "doing": {
-                limit: 5,
-                page: 1,
-                count: null
-            },
-            "finished": {
-                limit: 5,
-                page: 1,
-                count: null
-            }
-        }
-    }
+
 
 
     $scope.getProjectsParam = function(status,setting) {
@@ -102,31 +144,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         "finished":[]
     };
 
-    //Default settings
-    if (!("tasks_params" in $localStorage)) {
-        $localStorage.tasks_params = {
-            "dump": {
-                limit: 10,
-                page: 1,
-                count: null
-            },
-            "waiting": {
-                limit: 10,
-                page: 1,
-                count: null
-            },
-            "doing": {
-                limit: 10,
-                page: 1,
-                count: null
-            },
-            "finished": {
-                limit: 10,
-                page: 1,
-                count: null
-            }
-        }
-    }
+
 
 
     $scope.getTasksParam = function(status,setting) {
@@ -234,23 +252,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         return moment(isoDateStr).calendar();
     }
 
-    //Default settings
-    if(!("show_settings" in $localStorage)) {
-        $localStorage.show_settings = {
-            "projects": {
-                "dump": false,
-                "waiting": false,
-                "doing": false,
-                "finished": false
-            },
-            "tasks": {
-                "dump": false,
-                "waiting": false,
-                "doing": false,
-                "finished": false
-            }
-        }
-    }
+
 
     $scope.isShowingSettings = function(category, status) {
         return $localStorage.show_settings[category][status];
@@ -292,7 +294,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     //Pagination variables and functions
     $scope.limits = ["5","10","15","20","all"];
 
-    $scope.currentTasksPageClass = function(page) {
+    $scope.currentTasksPageClass = function(status,page) {
         if(page == $scope.getTasksParam(status,'page')) {
             return "selected";
         } else {

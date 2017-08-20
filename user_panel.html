@@ -146,13 +146,13 @@
         </ul>
         <p ng-if="!tasks[status] || tasks[status].length == 0" class="info none">No tasks</p>
         <ul class="pagination" ng-if="tasks_page_count_arr[status] && tasks_page_count_arr[status].length > 1">
-            <li class="item previous" ng-click="getTasks(status,getTasksParam(status,'limit'),getTasksParam(status,'page')-1)">
+            <li class="item previous" ng-click="getTasks(status,getTasksParam(status,'project_id_filter'),getTasksParam(status,'limit'),getTasksParam(status,'page')-1)">
                 <a href="#">&laquo;</a>
             </li>
             <li class="item {{currentTasksPageClass(status,$index+1)}}" ng-repeat="i in tasks_page_count_arr[status] track by $index">
-                <a href="#" ng-click="getTasks(status,getTasksParam(status,'limit'),$index+1)">{{$index+1}}</a>
+                <a href="#" ng-click="getTasks(status,getTasksParam(status,'project_id_filter'),getTasksParam(status,'limit'),$index+1)">{{$index+1}}</a>
             </li>
-            <li class="item next" ng-click="getTasks(status,getTasksParam(status,'limit'),getTasksParam(status,'page')+1)">
+            <li class="item next" ng-click="getTasks(status,getTasksParam(status,'project_id_filter'),getTasksParam(status,'limit'),getTasksParam(status,'page')+1)">
                 <a href="#">&raquo;</a>
             </li>
         </ul>
