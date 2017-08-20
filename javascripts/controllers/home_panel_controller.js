@@ -2,30 +2,175 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     $scope.$parent.hero = "Home Panel";
     $scope.$parent.panel_class = "home";
 
+    $scope.statuses = ["dump","waiting","doing","finished"];
+
+    //Default settings
+    if (!("projects_params" in $localStorage)) {
+        $localStorage.projects_params = {
+            "dump": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "waiting": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "doing": {
+                limit: 5,
+                page: 1,
+                count: null
+            },
+            "finished": {
+                limit: 5,
+                page: 1,
+                count: null
+            }
+        }
+    }
+
+    //Default settings
+    if (!("tasks_params" in $localStorage)) {
+        $localStorage.tasks_params = {
+            "dump": {
+                limit: 10,
+                page: 1,
+                count: null
+            },
+            "waiting": {
+                limit: 10,
+                page: 1,
+                count: null
+            },
+            "doing": {
+                limit: 10,
+                page: 1,
+                count: null
+            },
+            "finished": {
+                limit: 10,
+                page: 1,
+                count: null
+            }
+        }
+    }
+
+    //Default settings, always reset
+    $localStorage.show_settings = {
+        "projects": {
+            "dump": false,
+            "waiting": false,
+            "doing": false,
+            "finished": false
+        },
+        "tasks": {
+            "dump": false,
+            "waiting": false,
+            "doing": false,
+            "finished": false
+        }
+    }
+
     if($localStorage.flash_message == "Successful Login!") { 
         //clear all settings
-        //$localStorage.selected_projects_tab = null; //Save between sessions
-        $localStorage.projects_limit = null;
-        $localStorage.projects_current_page = null;
-        //$localStorage.selected_tasks_tab = null; //Save between sessions
-        $localStorage.tasks_limit = null;
-        $localStorage.tasks_current_page = null;
-        //delete $localStorage.tasks_maximized; //Save between sessions
+        for(var i=0;i<$scope.statuses.length;i++) {
+            var status = $scope.statuses[i]; 
+            $localStorage.projects_params[status]['page'] = 1;
+            $localStorage.tasks_params[status]['page'] = 1;
+        }
     } 
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
-    $scope.$parent.isViewAdvanced = function() {
-        if(!("view_advanced" in $localStorage)) {
-            $localStorage.view_advanced = false;
-        } else {
-            return $localStorage.view_advanced;
+    if(!("layout_settings" in $localStorage)) {
+        $localStorage.layout_settings = {
+            "projects": {
+                type: "layered",
+                selected: "dump"
+            },
+            "tasks": {
+                type: "layered",
+                selected: "dump"
+            }
         }
     }
 
-    $scope.$parent.viewAdvanced = function(flag) {
-        $localStorage.view_advanced = flag;
+    $scope.setLayout = function(category, value) {
+        $localStorage.layout_settings[category]['type'] = value;
+    }
+
+    $scope.getLayoutCSS = function(category) {
+        return $localStorage.layout_settings[category]['type'];
+    }
+
+    $scope.setTabSelected = function(category,status) {
+        $localStorage.layout_settings[category]['selected'] = status;
+    }
+
+    $scope.getTabSelectedCSS = function(category,status) {
+        if($localStorage.layout_settings[category]['selected'] == status) {
+            return "selected";
+        } else {
+            return "";
+        }
+    }
+
+    //Placeholder for clarity
+    $scope.projects = {
+        "dump":[],
+        "waiting":[],
+        "doing":[],
+        "finished":[]
+    };
+
+
+
+
+    $scope.getProjectsParam = function(status,setting) {
+        return $localStorage.projects_params[status][setting];
+    }
+
+    $scope.setProjectsParam = function(status,setting,value) {
+        $localStorage.projects_params[status][setting] = value; 
+    }
+
+    //Placeholder for clarity
+    $scope.tasks = {
+        "dump":[],
+        "waiting":[],
+        "doing":[],
+        "finished":[]
+    };
+
+
+
+
+    $scope.getTasksParam = function(status,setting) {
+        return $localStorage.tasks_params[status][setting];
+    }
+
+    $scope.setTasksParam = function(status,setting,value) {
+        $localStorage.tasks_params[status][setting] = value; 
+    }
+
+
+    //Default settings
+    if(!("view_advanced" in $localStorage)) {
+        $localStorage.view_advanced = {
+            projects: false,
+            tasks: false,
+            users: false
+        }
+    } 
+
+    $scope.isViewAdvanced = function(category) {
+        return $localStorage.view_advanced[category];
+    }
+
+    $scope.setViewAdvanced = function(category, flag) {
+        $localStorage.view_advanced[category] = flag;
     }
 
     $scope.maximize = function (this_section_name) {
@@ -43,6 +188,10 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             if ($localStorage.maximized.hasOwnProperty(section_name)) {
                 $localStorage.maximized[section_name] = false;
             }
+        }
+
+        if($scope.getLayoutCSS(this_section_name) == "horizontal") {
+            $scope.setLayout(this_section_name,"layered");
         }
     }
 
@@ -75,45 +224,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }
     }
 
-
-    if(!$localStorage.hasOwnProperty('tasks_maximized')) {
-        $localStorage.tasks_maximized = true;
-    }
-
-    $scope.tasksMinMaxButtonClass = function() {
-        if($localStorage.tasks_maximized) {
-            return "minimize";
-        } else {
-            return "maximize";
-        }
-    }
-
-    $scope.tasksMinMaxSectionClass = function() {
-        if($localStorage.tasks_maximized) {
-            return "maximized";
-        } else {
-            return "minimized";
-        }
-    }
-
-    $scope.projectsMinMaxSectionClass = function() {
-        if($localStorage.tasks_maximized) {
-            return "compact";
-        } else {
-            return "full";
-        }
-    }
-
-    $scope.minMaxTasksSection = function() {
-        if($localStorage.tasks_maximized) {
-            $localStorage.tasks_maximized = false;
-        } else {
-            $localStorage.tasks_maximized = true;
-        }
-    }
-
-
-
     $scope.prettyDateDeadline = function(isoDateStr, status) {
         if(moment() > moment(isoDateStr) && (status == "dump" || status=="waiting" || status == "doing")) {
             return "Past Due";
@@ -142,24 +252,17 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         return moment(isoDateStr).calendar();
     }
 
-    $scope.showSettingsFlags = {
-        tasks: false,
-        projects: false
+
+
+    $scope.isShowingSettings = function(category, status) {
+        return $localStorage.show_settings[category][status];
     }
 
-    $scope.showHideSettingsClass = function(type) {
-        if($scope.showSettingsFlags[type]) {
-            return "show";
+    $scope.toggleShowSettings = function(category, status) {
+        if($localStorage.show_settings[category][status]) {
+            $localStorage.show_settings[category][status] = false;
         } else {
-            return "hide";
-        }
-    }
-
-    $scope.toggleShowHideSettings = function(type) {
-        if($scope.showSettingsFlags[type]) {
-            $scope.showSettingsFlags[type] = false;
-        } else {
-            $scope.showSettingsFlags[type] = true;
+            $localStorage.show_settings[category][status] = true;
         }
     }
 
@@ -191,16 +294,16 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     //Pagination variables and functions
     $scope.limits = ["5","10","15","20","all"];
 
-    $scope.currentTasksPageClass = function(page) {
-        if(page == $scope.tasks_current_page) {
+    $scope.currentTasksPageClass = function(status,page) {
+        if(page == $scope.getTasksParam(status,'page')) {
             return "selected";
         } else {
             return "";
         }
     }
 
-    $scope.currentProjectsPageClass = function(page) {
-        if(page == $scope.projects_current_page) {
+    $scope.currentProjectsPageClass = function(status,page) {
+        if(page == $scope.getProjectsParam(status,'page')) {
             return "selected";
         } else {
             return "";
@@ -246,34 +349,22 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }
     }
 
+    //Placeholder for clarity
+    //Used for pagination
+    $scope.tasks_page_count_arr = {
+        "dump":[],
+        "waiting":[],
+        "doing":[],
+        "finished":[]
+    };
+
     $scope.getTasks = function(status,limit,page) {
         //Save/Default settings
-        if(!status || status == null || status == undefined) {
-            $scope.selected_tasks_tab = "doing";
-            $localStorage.selected_tasks_tab = $scope.selected_tasks_tab;
-            status = $scope.selected_tasks_tab;
-        } else {
-            $localStorage.selected_tasks_tab = status;
-            $scope.selected_tasks_tab = status;
-        }
-
-        if(!limit || limit == null || limit == undefined) {
-            $scope.tasks_limit = $scope.limits[1];
-            $localStorage.tasks_limit = $scope.tasks_limit;
-            limit = $scope.tasks_limit;
-        } else {
-            $localStorage.tasks_limit = limit;
-            $scope.tasks_limit = limit;
-        }
-
-        if(!page || page == null || page == undefined) {
-            $scope.tasks_current_page = 1;
-            $localStorage.tasks_current_page = $scope.tasks_current_page;
-            page = $scope.tasks_current_page;
-        } else {
-            $localStorage.tasks_current_page = page;
-            $scope.tasks_current_page = page;
-        }
+        console.log("Get Tasks");
+        console.log("Status: " + status + ", limit: " + limit + ", page: " + page);
+        //Save settings
+        $scope.setTasksParam(status,'limit',limit);
+        $scope.setTasksParam(status,'page',page);
 
         var queryStr = "?status="+status;
 
@@ -285,28 +376,29 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 'x-access-token': CommonFunctions.getToken()
             }
         }).then(function (response) {
-            $scope.tasks_count = parseInt(response.data);
+            var tasks_count = parseInt(response.data); 
+            $scope.setTasksParam(status,'count', tasks_count);
 
             //For pagination
-            if(limit != "all" && $scope.tasks_count && $scope.tasks_count > 0) {
-                var tasks_page_count = Math.ceil($scope.tasks_count / parseInt(limit));
-                $scope.tasks_page_count_arr = createNumbersArray(tasks_page_count);
+            if(limit != "all" && tasks_count && tasks_count > 0) {
+                var tasks_page_count = Math.ceil(tasks_count / parseInt(limit));
+                $scope.tasks_page_count_arr[status] = createNumbersArray(tasks_page_count);
             } else {
-                $scope.tasks_page_count_arr = createNumbersArray(1);
+                $scope.tasks_page_count_arr[status] = createNumbersArray(1);
             }
 
             //Set the current page
             var pageInt = parseInt(page,10);
             if(pageInt) {
                 if(pageInt <= 0) { //don't let pages go below zero
-                    $scope.tasks_current_page = 1;
-                } else if (pageInt > $scope.tasks_page_count_arr.length) { //don't let pages go past max pages
-                    $scope.tasks_current_page = $scope.tasks_page_count_arr.length;
+                    $scope.setTasksParam(status,'page',1);
+                } else if (pageInt > $scope.tasks_page_count_arr[status].length) { //don't let pages go past max pages
+                    $scope.setTasksParam(status,'page',$scope.tasks_page_count_arr[status].length);
                 } else {
-                    $scope.tasks_current_page = pageInt;
+                    $scope.setTasksParam(status,'page',pageInt);
                 }
             } else {
-                $scope.tasks_current_page = 1;
+                $scope.setTasksParam(status,'page',1);
             }
 
             //Build the query string to get the tasks for the current page
@@ -326,7 +418,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             if(limit && limit != "all") {
                 queryLimit = "limit="+limit;
                 queryArr.push(queryLimit);
-                queryPage = "page="+$scope.tasks_current_page;
+                queryPage = "page="+$scope.getTasksParam(status,'page'); //processed page
                 queryArr.push(queryPage);
             }
 
@@ -342,10 +434,10 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     'x-access-token': CommonFunctions.getToken()
                 }
             }).then(function (response) {
-                $scope.tasks = response.data;
+                $scope.tasks[status] = response.data;
 
-                for(var i=0;i<$scope.tasks.length;i++) {
-                    var current_task = $scope.tasks[i];
+                for(var i=0;i<$scope.tasks[status].length;i++) {
+                    var current_task = $scope.tasks[status][i];
                     var current_project_id = current_task.project_id;
 
                     //Get the project name
@@ -361,7 +453,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             }
                         }).then(function (response) {
                             var current_project = response.data;
-                            $scope.tasks[parseInt(response.config["params"]["i"])]["project_name"] = current_project.name;
+                            $scope.tasks[status][parseInt(response.config["params"]["i"])]["project_name"] = current_project.name;
                         });                    
                     }
 
@@ -376,7 +468,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                            'i': i
                         }
                     }).then(function (response) {
-                        $scope.tasks[parseInt(response.config["params"]["i"])]["users"] = response.data
+                        $scope.tasks[status][parseInt(response.config["params"]["i"])]["users"] = response.data
 
                         for(var j=0;j<response.data.length;j++) {
                             $http({
@@ -392,8 +484,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             }).then(function (response) {
                                 var i = parseInt(response.config["params"]["i"]);
                                 var j = parseInt(response.config["params"]["j"]);
-                                $scope.tasks[i]["users"][j].firstname = response.data.firstname; 
-                                $scope.tasks[i]["users"][j].lastname = response.data.lastname; 
+                                $scope.tasks[status][i]["users"][j].firstname = response.data.firstname; 
+                                $scope.tasks[status][i]["users"][j].lastname = response.data.lastname; 
                             });                          
                         }
 
@@ -403,34 +495,21 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         });
     }//End getTasks()
 
+    //Placeholder for clarity
+    //Used for pagination
+    $scope.projects_page_count_arr = {
+        "dump":[],
+        "waiting":[],
+        "doing":[],
+        "finished":[]
+    };
+
     $scope.getProjects = function(status,limit,page) {
-        //Save/default settings
-        if(!status || status == null || status == undefined) {
-            $scope.selected_projects_tab = "doing";
-            $localStorage.selected_projects_tab = $scope.selected_projects_tab;
-            status = $scope.selected_projects_tab;
-        } else {
-            $localStorage.selected_projects_tab = status;
-            $scope.selected_projects_tab = status;
-        }
-
-        if(!limit || limit == null || limit == undefined) {
-            $scope.projects_limit = $scope.limits[1];
-            $localStorage.projects_limit = $scope.projects_limit;
-            limit = $scope.projects_limit;
-        } else {
-            $localStorage.projects_limit = limit;
-            $scope.projects_limit = limit;
-        }
-
-        if(!page || page == null || page == undefined) {
-            $scope.projects_current_page = 1;
-            $localStorage.projects_current_page = $scope.projects_current_page;
-            page = $scope.projects_current_page;
-        } else {
-            $localStorage.projects_current_page = page;
-            $scope.projects_current_page = page;
-        }
+        console.log("Get Projects");
+        console.log("Status: " + status + ", limit: " + limit + ", page: " + page);
+        //Save settings
+        $scope.setProjectsParam(status,'limit',limit);
+        $scope.setProjectsParam(status,'page',page);
 
         var queryStr = "?status="+status;
 
@@ -442,28 +521,29 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 'x-access-token': CommonFunctions.getToken()
             }
         }).then(function (response) {
-            $scope.projects_count = parseInt(response.data);
+            var projects_count = parseInt(response.data); 
+            $scope.setProjectsParam(status,'count', projects_count);
 
             //For pagination
-            if(limit != "all" && $scope.projects_count && $scope.projects_count > 0) {
-                var projects_page_count = Math.ceil($scope.projects_count / parseInt(limit));
-                $scope.projects_page_count_arr = createNumbersArray(projects_page_count);
+            if(limit != "all" && projects_count && projects_count > 0) {
+                var projects_page_count = Math.ceil(projects_count / parseInt(limit));
+                $scope.projects_page_count_arr[status] = createNumbersArray(projects_page_count);
             } else {
-                $scope.projects_page_count_arr = createNumbersArray(1);
+                $scope.projects_page_count_arr[status] = createNumbersArray(1);
             }
 
             //Set the current page
             var pageInt = parseInt(page,10);
             if(pageInt) {
                 if(pageInt <= 0) { //don't let pages go below zero
-                    $scope.projects_current_page = 1;
-                } else if (pageInt > $scope.projects_page_count_arr.length) { //don't let pages go past max pages
-                    $scope.projects_current_page = $scope.projects_page_count_arr.length;
+                    $scope.setProjectsParam(status,'page',1);
+                } else if (pageInt > $scope.projects_page_count_arr[status].length) { //don't let pages go past max pages
+                    $scope.setProjectsParam(status,'page',$scope.projects_page_count_arr[status].length);
                 } else {
-                    $scope.projects_current_page = pageInt;
+                    $scope.setProjectsParam(status,'page',pageInt);
                 }
             } else {
-                $scope.projects_current_page = 1;
+                $scope.setProjectsParam(status,'page',1);
             }
 
             //Build the query string to get the projects for the current page
@@ -483,7 +563,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             if(limit && limit != "all") {
                 queryLimit = "limit="+limit;
                 queryArr.push(queryLimit);
-                queryPage = "page="+$scope.projects_current_page;
+                queryPage = "page="+$scope.getProjectsParam(status,'page'); //processed page
                 queryArr.push(queryPage);
             }
 
@@ -499,10 +579,10 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     'x-access-token': CommonFunctions.getToken()
                 }
             }).then(function (response) {
-                $scope.projects = response.data;
+                $scope.projects[status] = response.data;
 
                 for(var i=0;i<response.data.length;i++) {
-                    var current_project = $scope.projects[i];
+                    var current_project = $scope.projects[status][i];
                     var current_project_id = current_project.id;
 
                     $http({
@@ -515,7 +595,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             'i': i
                         }
                     }).then(function (response) {
-                        $scope.projects[parseInt(response.config["params"]["i"])]["users"] = response.data;
+                        $scope.projects[status][parseInt(response.config["params"]["i"])]["users"] = response.data;
 
                         for(var j=0;j<response.data.length;j++) {
                             $http({
@@ -531,8 +611,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             }).then(function (response) {
                                 var i = parseInt(response.config["params"]["i"]);
                                 var j = parseInt(response.config["params"]["j"]);
-                                $scope.projects[i]["users"][j].firstname = response.data.firstname; 
-                                $scope.projects[i]["users"][j].lastname = response.data.lastname; 
+                                $scope.projects[status][i]["users"][j].firstname = response.data.firstname; 
+                                $scope.projects[status][i]["users"][j].lastname = response.data.lastname; 
                             });                          
 
 
@@ -550,14 +630,14 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             'i': i
                         }
                     }).then(function (response) {
-                        $scope.projects[parseInt(response.config["params"]["i"])]["tasks"] = response.data;
+                        $scope.projects[status][parseInt(response.config["params"]["i"])]["tasks"] = response.data;
                     });                    
                 }
             });
         });
     } //End getProjects()
 
-    $scope.projectPinnedClass = function(project) {
+    $scope.projectPinnedClass = function(status,project) {
         if(project.pinned) {
             return "pinned";
         } else {
@@ -565,7 +645,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }    
     }
 
-    $scope.projectTogglePin = function (project) {
+    $scope.projectTogglePin = function (status,project) {
         var pinned = false;
         if (project.pinned) {
             pinned = false;
@@ -584,14 +664,14 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }
         }).then(
             function successCallback(response) {
-                $scope.getProjects($localStorage.selected_projects_tab, $localStorage.projects_limit, $localStorage.projects_current_page);
+                $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
             },
             function errorCallback(response) {
             }
         );
     }
 
-    $scope.taskPinnedClass = function(task) {
+    $scope.taskPinnedClass = function(status,task) {
         if(task.pinned) {
             return "pinned";
         } else {
@@ -599,7 +679,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         }    
     }
 
-    $scope.taskTogglePin = function (task) {
+    $scope.taskTogglePin = function (status,task) {
         var pinned = false;
         if (task.pinned) {
             pinned = false;
@@ -618,7 +698,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }
         }).then(
             function successCallback(response) {
-                $scope.getTasks($localStorage.selected_tasks_tab, $localStorage.tasks_limit, $localStorage.tasks_current_page);    
+                $scope.getTasks(status, $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
             },
             function errorCallback(response) {
             }
@@ -641,7 +721,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }).then(
                 function successCallback(response) {
                     $scope.quick_task_form_data.name = "";
-                    $scope.getTasks($localStorage.selected_tasks_tab, $localStorage.tasks_limit, $localStorage.tasks_current_page);
+                    $scope.getTasks("dump", $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
                 },
                 function errorCallback(response) {
                 }
@@ -743,9 +823,12 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }
         });
 
-        $scope.getProjects($localStorage.selected_projects_tab, $localStorage.projects_limit, $localStorage.projects_current_page);
+        for(var i=0;i<$scope.statuses.length;i++) {
+            var status = $scope.statuses[i]; 
+            $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
+            $scope.getTasks(status, $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
+        }
 
-        $scope.getTasks($localStorage.selected_tasks_tab, $localStorage.tasks_limit, $localStorage.tasks_current_page);
     } 
 
 });
