@@ -208,7 +208,7 @@
                             <dd ng-show="isViewAdvanced('projects')" class="value start_date" ng-if="project.start_date">{{prettyDate(project.start_date)}}</dd>
                             <dd ng-show="isViewAdvanced('projects')" class="value none start_date" ng-if="!project.start_date">Not defined</dd>
                             <dt class="key deadline">Deadline:</dt>
-                            <dd class="value deadline {{checkDateImportance(project.deadline, project.status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.project_status)}}</dd>
+                            <dd class="value deadline {{checkDateImportance(project.deadline, project.project_status)}}" ng-if="project.deadline">{{prettyDateDeadline(project.deadline, project.project_status)}}</dd>
                             <dd class="value none deadline" ng-if="!project.deadline">Not defined</dd>
                             <dt ng-show="isViewAdvanced('projects')" class="key tasks_rank">Top Tasks:</dt>
                             <dd ng-show="isViewAdvanced('projects')" class="value_item tasks_rank {{cssLast($last)}}" ng-repeat="project_task in project.tasks">
