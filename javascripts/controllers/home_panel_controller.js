@@ -710,12 +710,13 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 });
 
                 gantt.config.initial_scroll = false;
-                gantt.attachEvent("onLoadEnd", function(){
-                    gantt.showDate(new Date(moment().format()));
-                });
 
                 gantt.init("gantt_here");
                 gantt.parse(gantt_projects);
+
+                gantt.attachEvent("onLoadEnd", function(){
+                    gantt.showDate(new Date(moment().format()));
+                });
 
             });
         });
