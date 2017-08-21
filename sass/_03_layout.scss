@@ -259,12 +259,14 @@
 
 //Hide gantt chart when not in gantt layout mode
 .sub-section.gantt-chart {
-    display: none;
+    position: relative;
+    visibility: hidden;
+    width: 100%;
 }
 
 //Show gantt chart when in gantt layout mode
 .sub-section.gantt-chart.gantt {
-    display: block;
+    visibility: visible;
 }
 
 //Hide project tabs when in gantt layout mode
