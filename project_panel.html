@@ -59,6 +59,36 @@
         <dt class="key description">Description:</dt>
         <dd class="value description"><pre ng-bind-html="this_project.description | linky"></pre><dd>
     </dl>
+    <div class="attributes extra">
+        <div ng-show="loggedin_user.admin || this_user_write_access > 0" 
+            ngf-select ngf-drop ng-model="uploadFiles" class="dd-area"
+            ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
+            ngf-drag-over-class="{accept:'dragover', reject:'dragover-err'}"  
+            ngf-resize="resizeObj" ngf-multiple="true" ngf-keep="true" 
+            ngf-max-size="50MB" ngf-fix-orientation="orientation" 
+            ngf-drop-available="dropAvailable">
+            <div class="dd-content">Select File or Drop File</div>
+            <div class="add-photo"></div>
+        </div>
+        <div class="line-buttons"><input class="button submit" type="submit" value="Upload all" ng-click="uploadAllFiles()"></div>
+        <ul class="list-files" ng-show="uploadFiles.length > 0">
+            <li class="list-files-item repeated-item" ng-repeat="file in uploadFiles">
+                {{file.name}} 
+                <button class="button delete submit" ng-click="delete_upload_file($index)">Delete</button>
+                <button class="button upload submit" ng-click="upload_single_file($index, file)">Upload</button>
+                <div class="progress-delay">
+                    <div class="progress-bar" ng-style="{width : ( file._percentage + '%' ) }"></div>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-files" ng-show="projectFiles.length > 0">
+            <li class="list-files-item repeated-item" ng-repeat="file in projectFiles">
+                <img class="icon-file" ng-src="{{getFileIcon(file.file_type)}}" />
+                <a ng-click="getFile(file.file_uri)">{{file.name}}</a> 
+                <button class="button delete submit" ng-click="delete_file($index, file.id, file.name)">Delete</button>
+            </li>
+        </ul>
+    </div>
     <ul class="links">
         <li class="item back" ng-if="!this_user_id"><a class="link" ng-click="back()">Go Back</a></li>
         <li class="item back" ng-if="this_user_id"><a class="link" href="./users/{{this_user_id}}">Go Back to User</a></li>
