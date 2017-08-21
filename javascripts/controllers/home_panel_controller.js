@@ -709,8 +709,14 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     title: moment().format('DD-MM-YYYY') // the marker's tooltip
                 });
 
+                gantt.config.initial_scroll = false;
+                gantt.attachEvent("onLoadEnd", function(){
+                    gantt.showDate(new Date(moment().format()));
+                });
+
                 gantt.init("gantt_here");
                 gantt.parse(gantt_projects);
+
             });
         });
     } //End getProjects()
