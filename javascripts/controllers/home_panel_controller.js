@@ -631,7 +631,14 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     if(current_project.deadline) {
                         end = moment(current_project.deadline);
                     } else {
-                        end = moment().add('3','days');
+                        var startCopy = moment(start.format());
+                        end = startCopy.add('3','days');
+                    }
+
+                    //Take care of invalid negative cases
+                    if(!current_project.start_date && start > end) {
+                        var endCopy = moment(end.format());
+                        start = endCopy.subtract('3','days');
                     }
 
                     duration = moment.duration(end.diff(start)).asDays();
