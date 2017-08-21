@@ -99,6 +99,9 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
     $scope.setLayout = function(category, value) {
         $localStorage.layout_settings[category]['type'] = value;
+        if(value == "gantt") {
+            gantt.setSizes(); //re-render the gantt chart, needed to size correctly
+        }
     }
 
     $scope.getLayoutCSS = function(category) {
