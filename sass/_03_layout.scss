@@ -180,6 +180,10 @@
     .section.maximized {
         width: 100%;
         float: none;
+        &.users {
+            width: 50%;
+            margin: auto;
+        }
     }
     .section.minimized {
         display: none;
