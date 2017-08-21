@@ -11,6 +11,7 @@
         <button class="button layered" ng-click="setLayout('projects','layered')">Layered</button>
         <button class="button vertical" ng-click="setLayout('projects','vertical')">Vertical</button>
         <button ng-show="isMaximized('projects')" class="button horizontal" ng-click="setLayout('projects','horizontal')">Horizontal</button>
+        <button ng-show="isMaximized('projects')" class="button gantt" ng-click="setLayout('projects','gantt')">Gantt</button>
     </header>
 
     <section class="sub-section {{status}} projects {{getLayoutCSS('projects')}} {{getTabSelectedCSS('projects',status)}}" ng-repeat="status in statuses">
@@ -72,6 +73,10 @@
                 <a href="#">&raquo;</a>
             </li>
         </ul>
+    </section>
+
+    <section ng-show="loggedin_user" class="sub-section gantt-chart {{getLayoutCSS('projects')}}">
+        <div id="gantt_here" style='width:100%; height:auto;'></div>
     </section>
 </section>
 
@@ -206,6 +211,3 @@
     </ul>
 </section>
 
-<section ng-show="loggedin_user" class="section gantt">
-    <div id="gantt_here" style='width:100%; height:420px;'></div>
-</section>

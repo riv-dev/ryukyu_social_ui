@@ -192,6 +192,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
         if($scope.getLayoutCSS(this_section_name) == "horizontal") {
             $scope.setLayout(this_section_name,"layered");
+        } else if($scope.getLayoutCSS(this_section_name) == "gantt") {
+            $scope.setLayout(this_section_name,"layered");
         }
     }
 
@@ -693,7 +695,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     });                    
                 }
 
-                gantt.config.sort = true;
+                gantt.config.autosize = "y";
                 gantt.init("gantt_here");
                 gantt.parse(gantt_projects);
             });

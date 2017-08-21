@@ -5,21 +5,17 @@
         .logo {
             margin-bottom: 10px;
         }
-
         .message.login_status {
             margin-left: 10px;
         }
-
         .message.flash {
             margin-top: 10px;
         }
     }
-
     .main {
         padding: 15px;
         @include clearfix();
     }
-
     .footer {
         padding: 15px;
     }
@@ -33,65 +29,43 @@
             top: 5px;
             right: 100px;
         }
-
         .button.view_simple {
             position: absolute;
             top: 5px;
-            right: 100px;               
+            right: 100px;
         }
-
         &.users {
             .button.view_advanced {
                 position: absolute;
                 top: 5px;
                 right: 40px;
             }
-
             .button.view_simple {
                 position: absolute;
                 top: 5px;
-                right: 40px;               
-            }               
+                right: 40px;
+            }
         }
-
-    
         .button.layered {
             position: absolute;
             top: 5px;
             right: 60px;
         }
-
         .button.vertical {
             position: absolute;
             top: 5px;
             right: 40px;
         }
-    
         &.maximized {
             .button.view_advanced {
                 position: absolute;
                 top: 5px;
                 right: 130px;
             }
-
             .button.view_simple {
                 position: absolute;
                 top: 5px;
-                right: 130px;               
-            }
-
-            &.users {
-                .button.view_advanced {
-                    position: absolute;
-                    top: 5px;
-                    right: 50px;
-                }
-    
-                .button.view_simple {
-                    position: absolute;
-                    top: 5px;
-                    right: 50px;               
-                }               
+                right: 130px;
             }
 
             .button.layered {
@@ -99,42 +73,85 @@
                 top: 5px;
                 right: 90px;
             }
-    
             .button.vertical {
                 position: absolute;
                 top: 5px;
                 right: 70px;
             }
-    
             .button.horizontal {
                 position: absolute;
                 top: 5px;
                 right: 50px;
             }
-        }
-    }
-}
 
-.main.user, .main.project {
+            &.projects {
+                .button.view_advanced {
+                    position: absolute;
+                    top: 5px;
+                    right: 150px;
+                }
+                .button.view_simple {
+                    position: absolute;
+                    top: 5px;
+                    right: 150px;
+                }
+
+                .button.layered {
+                    position: absolute;
+                    top: 5px;
+                    right: 110px;
+                }
+                .button.vertical {
+                    position: absolute;
+                    top: 5px;
+                    right: 90px;
+                }
+                .button.horizontal {
+                    position: absolute;
+                    top: 5px;
+                    right: 70px;
+                }
+                .button.gantt {
+                    position: absolute;
+                    top: 5px;
+                    right: 50px;
+                }
+            }//&.projects
+
+            &.users {
+                .button.view_advanced {
+                    position: absolute;
+                    top: 5px;
+                    right: 50px;
+                }
+                .button.view_simple {
+                    position: absolute;
+                    top: 5px;
+                    right: 50px;
+                }
+            }//&.users
+        }//&.maximized
+    }//&.section
+}//&.main
+
+.main.user,
+.main.project {
     .section {
         .button.view_advanced {
             position: absolute;
             top: 5px;
             right: 65px;
         }
-
         .button.view_simple {
             position: absolute;
             top: 5px;
-            right: 65px;               
+            right: 65px;
         }
-
         .button.layered {
             position: absolute;
             top: 5px;
             right: 25px;
         }
-
         .button.vertical {
             position: absolute;
             top: 5px;
@@ -145,32 +162,25 @@
 
 .main.home {
     position: relative;
-
     .section.projects {
         width: 40%;
     }
-
     .section.projects_two {
         width: 100%;
     }
-
     .section.tasks {
         width: 30%;
     }
-
     .section.users {
         width: 30%;
     }
-
     .section.gantt {
         width: 100%;
     }
-
     .section.maximized {
         width: 100%;
         float: none;
     }
-
     .section.minimized {
         display: none;
     }
@@ -206,9 +216,8 @@
     }
     .section.users {
         width: 33%;
-    }    
+    }
 }
-
 
 //Sections
 .section {
@@ -217,12 +226,10 @@
     width: 33.33%;
     padding: 15px;
     box-sizing: border-box;
-
     .header {
         position: relative;
         border-bottom: 1px solid $black;
         padding: 0px;
-
         .title {
             margin-bottom: 0.2em;
         }
@@ -230,18 +237,14 @@
 }
 
 //Customize inside
-.section.tasks {
-
-}
+.section.tasks {}
 
 //Customize inside
-.section.projects {
-
-}
+.section.projects {}
 
 //Customize inside
 .section.users {
-    .form.assign_user {    
+    .form.assign_user {
         margin-top: 10px;
     }
 }
@@ -250,20 +253,32 @@
     margin-bottom: 20px;
 }
 
+//Hide gantt chart when not in gantt layout mode
+.sub-section.gantt-chart {
+    display: none;
+}
+
+//Show gantt chart when in gantt layout mode
+.sub-section.gantt-chart.gantt {
+    display: block;
+}
+
+//Hide project tabs when in gantt layout mode
+.sub-section.projects.gantt {
+    display: none;
+}
+
+//Layout when in layered layout mode
 .sub-section.layered {
     position: static !important;
     margin-top: 22px;
-
     .header {
         position: static !important;
-
         .button {
             position: relative;
             z-index: 2;
         }
-
     }
-
     .tab {
         position: absolute;
         border: 1px solid $grey;
@@ -271,46 +286,36 @@
         color: $grey;
         top: 45px;
         z-index: 1;
-
         &.dump {
             left: 15px;
         }
-
         &.waiting {
             left: 61px;
         }
-
         &.doing {
             left: 115px;
         }
-
         &.finished {
             left: 161px;
         }
     }
-
     .settings {
         display: none;
     }
-
     .preview {
         display: none;
     }
-
     .info.none {
         display: none;
     }
-    
     .pagination {
         display: none;
     }
-
     &.selected {
         z-index: 100;
         .settings {
             display: block;
         }
-
         .tab {
             font-weight: bold;
             border: 1px solid $black;
@@ -318,16 +323,13 @@
             color: $black;
             z-index: 3;
         }
-
         .preview {
             display: block;
         }
-
         .pagination {
             display: inline-block;
         }
     }
-    
 }
 
 .sub-section.horizontal {
@@ -336,8 +338,6 @@
     padding-left: 5px;
     padding-right: 5px;
 }
-
-
 
 //Customize inside
 .section.details {
@@ -361,22 +361,18 @@
         width: 50%;
         margin-bottom: 25px;
     }
-
     .key,
     .value {
         font-size: 16px;
         margin-bottom: 10px;
     }
-
     .info {
         position: relative;
         font-size: 16px;
     }
-
     .info.description.edit {
         text-align: right;
     }
-
     .button.edit.description {
         position: relative;
         text-indent: 0px;
@@ -397,25 +393,26 @@
         top: 0px;
         right: 0px;
     }
-
     .attributes.metrics {
         background-color: $light_grey;
-        .key,.value,.link {
+        .key,
+        .value,
+        .link {
             font-size: 12px;
         }
         padding: 10px;
         margin-top: 15px;
         margin-bottom: 15px;
     }
-
-    .attributes.extra{
+    .attributes.extra {
         background-color: $light_grey;
-        .key,.value,.link {
+        .key,
+        .value,
+        .link {
             font-size: 10px;
         }
         padding: 10px;
-    }    
-
+    }
     .form {
         width: 100%;
         padding: 0px;
@@ -428,35 +425,32 @@
         .buttons {
             text-align: right;
         }
-
         .button.submit {
             display: inline-block;
             font-size: 14px;
             padding: 5px 10px;
             margin-right: 10px;
         }
-
         .button.cancel {
             display: inline-block;
             font-size: 14px;
         }
     }
-
-    .form, .input, .area {
+    .form,
+    .input,
+    .area {
         font-size: 16px;
         width: 100%;
     }
-
-    .value.bio, .value.description {
+    .value.bio,
+    .value.description {
         padding-left: 3px;
     }
-
     .links {
         padding: 15px 0px 15px;
         border-top: 1px solid #c2c2c2;
     }
 }
-
 
 .section.projects_two {
     .header {
@@ -466,7 +460,6 @@
         .link_block {
             height: 64px;
         }
-
         .avatar {
             position: absolute;
             background-color: $white;
@@ -479,7 +472,6 @@
             left: 60px;
             top: 50%;
             transform: translateY(-50%);
-
             .value {
                 font-size: 16px;
             }
@@ -497,28 +489,25 @@
             font-size: 16px;
             line-height: 40px;
         }
-
-        .button.expand, button.collapse {
+        .button.expand,
+        button.collapse {
             position: absolute;
             right: 5px;
             top: 50%;
-            transform: translateY(-50%);            
+            transform: translateY(-50%);
         }
-
         .button.add {
             position: absolute;
             left: 5px;
             top: 50%;
-            transform: translateY(-50%);                 
+            transform: translateY(-50%);
         }
     }
-
     &.status {
         .header {
             height: 40px;
         }
     }
-
     .preview {
         padding-left: 25px;
         background-color: transparent;
