@@ -701,6 +701,14 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     {name:"start_date", label:"Start Date", width: 80, align: "center" },
                     {name:"duration",   label:"Duration",   width: 80, align: "center" },
                 ];
+
+                var markerId = gantt.addMarker({
+                    start_date: new Date(), //a Date object that sets the marker's date
+                    css: "today", //a CSS class applied to the marker
+                    text: "Now", //the marker title
+                    title:date_to_str( new Date()) // the marker's tooltip
+                });
+
                 gantt.init("gantt_here");
                 gantt.parse(gantt_projects);
             });
