@@ -249,6 +249,62 @@
     }
 }
 
+.button.view_advanced {
+    position: relative; //top: 5px;
+    //right: 5px;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 18px;
+    text-indent: 9999px;
+    color: $black;
+    margin: 0px;
+    padding: 0px;
+    &:hover {
+        background-color: none;
+        color: $blue;
+    }
+    &:before {
+        position: absolute;
+        text-indent: 0px;
+        left: 3px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f06e";
+    }
+}
+
+.button.view_simple {
+    position: relative; //top: 5px;
+    //right: 5px;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 18px;
+    text-indent: 9999px;
+    color: $black;
+    margin: 0px;
+    padding: 0px;
+    &:hover {
+        background-color: none;
+        color: $blue;
+    }
+    &:before {
+        position: absolute;
+        text-indent: 0px;
+        left: 3px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f070";
+    }
+}
+
 .button.add {
     position: relative; //top: 5px;
     //right: 5px;
@@ -359,7 +415,82 @@
         display: block;
         font-size: 14px;
         font-family: "FontAwesome";
-        content: "\f2d1";
+        content: "\f2d2";
+    }
+}
+
+.button.layered {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 20px;
+    text-indent: 9999px;
+    color: $black;
+    margin: 0px;
+    padding: 0px;
+    &:hover {
+        background-color: none;
+        color: $blue;
+    }
+    &:before {
+        text-indent: 0px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f0c8";
+    }
+}
+
+.button.horizontal {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 20px;
+    text-indent: 9999px;
+    color: $black;
+    margin: 0px;
+    padding: 0px;
+    &:hover {
+        background-color: none;
+        color: $blue;
+    }
+    &:before {
+        text-indent: 0px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f07e";
+    }
+}
+
+.button.vertical {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 20px;
+    text-indent: 9999px;
+    color: $black;
+    margin: 0px;
+    padding: 0px;
+    &:hover {
+        background-color: none;
+        color: $blue;
+    }
+    &:before {
+        text-indent: 0px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f07d";
     }
 }
 
@@ -388,7 +519,7 @@
         display: block;
         font-size: 14px;
         font-family: "FontAwesome";
-        content: "\f2d2";
+        content: "\f2d0";
     }
 }
 
@@ -452,6 +583,7 @@
 
 .button.settings {
     position: relative;
+    display: block;
     padding: 15px 0px;
     height: 20px;
     color: $black;
@@ -459,6 +591,8 @@
     width: 100%;
     @include border-radius(0px);
     border: none;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     text-indent: 9999px;
     overflow: hidden;
     text-align: center;
@@ -469,27 +603,15 @@
     }
     &:before {
         position: absolute;
+        display: block;
         text-indent: 0px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         font-size: 20px;
         font-family: "FontAwesome";
-        content: "\f102";
-        display: block;
+        content: "\f1de";
         text-align: center;
-    }
-    &.show {
-        display: block;
-        &:before {
-            content: "\f1de";
-        }
-    }
-    &.hide {
-        display: block;
-        &:before {
-            content: "\f1de";
-        }
     }
 }
 
@@ -651,4 +773,22 @@ button.dump {
     text-align: center !important;
     @include border-radius(40px);
     overflow: hidden;
+}
+
+.tab {
+    position: relative;
+    display: inline-block;
+    border: 1px solid $black;
+    border-bottom: none;
+    border-radius: 3px 3px 0px 0px;
+    //color: $grey;
+    color: $black;
+    font-size: 11px;
+    font-family: 'Didact Gothic';
+    padding: 2px 6px 3px;
+    z-index: 3;
+    top: 1px;
+    &:hover {
+        cursor: pointer;
+    }
 }

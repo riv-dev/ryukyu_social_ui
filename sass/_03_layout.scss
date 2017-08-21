@@ -26,50 +26,153 @@
 }
 
 //Layouts for Main Element
+.main {
+    .section {
+        .button.view_advanced {
+            position: absolute;
+            top: 5px;
+            right: 100px;
+        }
+
+        .button.view_simple {
+            position: absolute;
+            top: 5px;
+            right: 100px;               
+        }
+
+        &.users {
+            .button.view_advanced {
+                position: absolute;
+                top: 5px;
+                right: 40px;
+            }
+
+            .button.view_simple {
+                position: absolute;
+                top: 5px;
+                right: 40px;               
+            }               
+        }
+
+    
+        .button.layered {
+            position: absolute;
+            top: 5px;
+            right: 60px;
+        }
+
+        .button.vertical {
+            position: absolute;
+            top: 5px;
+            right: 40px;
+        }
+    
+        &.maximized {
+            .button.view_advanced {
+                position: absolute;
+                top: 5px;
+                right: 130px;
+            }
+
+            .button.view_simple {
+                position: absolute;
+                top: 5px;
+                right: 130px;               
+            }
+
+            &.users {
+                .button.view_advanced {
+                    position: absolute;
+                    top: 5px;
+                    right: 50px;
+                }
+    
+                .button.view_simple {
+                    position: absolute;
+                    top: 5px;
+                    right: 50px;               
+                }               
+            }
+
+            .button.layered {
+                position: absolute;
+                top: 5px;
+                right: 90px;
+            }
+    
+            .button.vertical {
+                position: absolute;
+                top: 5px;
+                right: 70px;
+            }
+    
+            .button.horizontal {
+                position: absolute;
+                top: 5px;
+                right: 50px;
+            }
+        }
+    }
+}
+
+.main.user, .main.project {
+    .section {
+        .button.view_advanced {
+            position: absolute;
+            top: 5px;
+            right: 65px;
+        }
+
+        .button.view_simple {
+            position: absolute;
+            top: 5px;
+            right: 65px;               
+        }
+
+        .button.layered {
+            position: absolute;
+            top: 5px;
+            right: 25px;
+        }
+
+        .button.vertical {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+    }
+}
+
 .main.home {
+    position: relative;
+
     .section.projects {
         width: 40%;
-        &.full {
-            width: 70%;
-        }
     }
 
     .section.projects_two {
         width: 100%;
     }
+
     .section.tasks {
         width: 30%;
-        &.minimized {
-            width: 0%;
-            * {
-                display: none;
-            }
-
-            .header {
-                display: block;
-                height: 20px;
-                width: 80px;
-                border: none;
-                .title {
-                    background-color: $light_orange;
-                    position: absolute;
-                    right: 15px;
-                    top: 0px;
-                    font-size: 10px;
-                    display: block;
-                }
-                .button.minimize,.button.maximize {
-                    display: block;
-                }
-            }
-        }
     }
+
     .section.users {
         width: 30%;
     }
 
     .section.gantt {
         width: 100%;
+    }
+
+    .section.maximized {
+        width: 100%;
+        float: none;
+    }
+
+    .section.minimized {
+        display: none;
     }
 }
 
@@ -114,11 +217,6 @@
     padding: 15px;
     box-sizing: border-box;
 
-    text-align: center; //to center pagination
-    * {
-        text-align: left;
-    }
-
     .header {
         position: relative;
         border-bottom: 1px solid $black;
@@ -127,14 +225,6 @@
         .title {
             margin-bottom: 0.2em;
         }
-    }
-
-    .tabs {
-
-    }
-
-    .pagination {
-        margin-top: 15px;
     }
 }
 
@@ -154,6 +244,99 @@
         margin-top: 10px;
     }
 }
+
+.sub-section {
+    margin-bottom: 20px;
+}
+
+.sub-section.layered {
+    position: static !important;
+    margin-top: 22px;
+
+    .header {
+        position: static !important;
+
+        .button {
+            position: relative;
+            z-index: 2;
+        }
+
+    }
+
+    .tab {
+        position: absolute;
+        border: 1px solid $grey;
+        border-bottom: none;
+        color: $grey;
+        top: 45px;
+        z-index: 1;
+
+        &.dump {
+            left: 15px;
+        }
+
+        &.waiting {
+            left: 61px;
+        }
+
+        &.doing {
+            left: 115px;
+        }
+
+        &.finished {
+            left: 161px;
+        }
+    }
+
+    .settings {
+        display: none;
+    }
+
+    .preview {
+        display: none;
+    }
+
+    .info.none {
+        display: none;
+    }
+    
+    .pagination {
+        display: none;
+    }
+
+    &.selected {
+        z-index: 100;
+        .settings {
+            display: block;
+        }
+
+        .tab {
+            font-weight: bold;
+            border: 1px solid $black;
+            border-bottom: none;
+            color: $black;
+            z-index: 3;
+        }
+
+        .preview {
+            display: block;
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+    }
+    
+}
+
+.sub-section.horizontal {
+    float: left;
+    width: 25%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
 
 //Customize inside
 .section.details {
