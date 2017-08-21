@@ -1972,47 +1972,48 @@ button.dump {
 
 /* line 214, ../sass/_03_layout.scss */
 .section {
+  position: relative;
   float: left;
   width: 33.33%;
   padding: 15px;
   box-sizing: border-box;
 }
-/* line 220, ../sass/_03_layout.scss */
+/* line 221, ../sass/_03_layout.scss */
 .section .header {
   position: relative;
   border-bottom: 1px solid black;
   padding: 0px;
 }
-/* line 225, ../sass/_03_layout.scss */
+/* line 226, ../sass/_03_layout.scss */
 .section .header .title {
   margin-bottom: 0.2em;
 }
 
-/* line 243, ../sass/_03_layout.scss */
+/* line 244, ../sass/_03_layout.scss */
 .section.users .form.assign_user {
   margin-top: 10px;
 }
 
-/* line 248, ../sass/_03_layout.scss */
+/* line 249, ../sass/_03_layout.scss */
 .sub-section {
   margin-bottom: 20px;
 }
 
-/* line 252, ../sass/_03_layout.scss */
+/* line 253, ../sass/_03_layout.scss */
 .sub-section.layered {
   position: static !important;
   margin-top: 22px;
 }
-/* line 256, ../sass/_03_layout.scss */
+/* line 257, ../sass/_03_layout.scss */
 .sub-section.layered .header {
   position: static !important;
 }
-/* line 259, ../sass/_03_layout.scss */
+/* line 260, ../sass/_03_layout.scss */
 .sub-section.layered .header .button {
   position: relative;
   z-index: 2;
 }
-/* line 266, ../sass/_03_layout.scss */
+/* line 267, ../sass/_03_layout.scss */
 .sub-section.layered .tab {
   position: absolute;
   border: 1px solid #c2c2c2;
@@ -2021,47 +2022,47 @@ button.dump {
   top: 45px;
   z-index: 1;
 }
-/* line 274, ../sass/_03_layout.scss */
+/* line 275, ../sass/_03_layout.scss */
 .sub-section.layered .tab.dump {
   left: 15px;
 }
-/* line 278, ../sass/_03_layout.scss */
+/* line 279, ../sass/_03_layout.scss */
 .sub-section.layered .tab.waiting {
   left: 61px;
 }
-/* line 282, ../sass/_03_layout.scss */
+/* line 283, ../sass/_03_layout.scss */
 .sub-section.layered .tab.doing {
   left: 115px;
 }
-/* line 286, ../sass/_03_layout.scss */
+/* line 287, ../sass/_03_layout.scss */
 .sub-section.layered .tab.finished {
   left: 161px;
 }
-/* line 291, ../sass/_03_layout.scss */
+/* line 292, ../sass/_03_layout.scss */
 .sub-section.layered .settings {
   display: none;
 }
-/* line 295, ../sass/_03_layout.scss */
+/* line 296, ../sass/_03_layout.scss */
 .sub-section.layered .preview {
   display: none;
 }
-/* line 299, ../sass/_03_layout.scss */
+/* line 300, ../sass/_03_layout.scss */
 .sub-section.layered .info.none {
   display: none;
 }
-/* line 303, ../sass/_03_layout.scss */
+/* line 304, ../sass/_03_layout.scss */
 .sub-section.layered .pagination {
   display: none;
 }
-/* line 307, ../sass/_03_layout.scss */
+/* line 308, ../sass/_03_layout.scss */
 .sub-section.layered.selected {
   z-index: 100;
 }
-/* line 309, ../sass/_03_layout.scss */
+/* line 310, ../sass/_03_layout.scss */
 .sub-section.layered.selected .settings {
   display: block;
 }
-/* line 313, ../sass/_03_layout.scss */
+/* line 314, ../sass/_03_layout.scss */
 .sub-section.layered.selected .tab {
   font-weight: bold;
   border: 1px solid black;
@@ -2069,16 +2070,16 @@ button.dump {
   color: black;
   z-index: 3;
 }
-/* line 321, ../sass/_03_layout.scss */
+/* line 322, ../sass/_03_layout.scss */
 .sub-section.layered.selected .preview {
   display: block;
 }
-/* line 325, ../sass/_03_layout.scss */
+/* line 326, ../sass/_03_layout.scss */
 .sub-section.layered.selected .pagination {
   display: inline-block;
 }
 
-/* line 332, ../sass/_03_layout.scss */
+/* line 333, ../sass/_03_layout.scss */
 .sub-section.horizontal {
   float: left;
   width: 25%;
@@ -2086,46 +2087,46 @@ button.dump {
   padding-right: 5px;
 }
 
-/* line 343, ../sass/_03_layout.scss */
+/* line 344, ../sass/_03_layout.scss */
 .section.details .header {
   border-bottom: none;
 }
-/* line 346, ../sass/_03_layout.scss */
+/* line 347, ../sass/_03_layout.scss */
 .section.details .title {
   font-size: 40px;
   border-bottom: none;
   display: inline-block;
   padding-right: 20px;
 }
-/* line 352, ../sass/_03_layout.scss */
+/* line 353, ../sass/_03_layout.scss */
 .section.details .name {
   font-size: 34px;
   font-weight: normal;
   color: #5e5e5e;
   margin-bottom: 5px;
 }
-/* line 358, ../sass/_03_layout.scss */
+/* line 359, ../sass/_03_layout.scss */
 .section.details .figure {
   border: 1px solid black;
   width: 50%;
   margin-bottom: 25px;
 }
-/* line 364, ../sass/_03_layout.scss */
+/* line 365, ../sass/_03_layout.scss */
 .section.details .key,
 .section.details .value {
   font-size: 16px;
   margin-bottom: 10px;
 }
-/* line 370, ../sass/_03_layout.scss */
+/* line 371, ../sass/_03_layout.scss */
 .section.details .info {
   position: relative;
   font-size: 16px;
 }
-/* line 375, ../sass/_03_layout.scss */
+/* line 376, ../sass/_03_layout.scss */
 .section.details .info.description.edit {
   text-align: right;
 }
-/* line 379, ../sass/_03_layout.scss */
+/* line 380, ../sass/_03_layout.scss */
 .section.details .button.edit.description {
   position: relative;
   text-indent: 0px;
@@ -2133,7 +2134,7 @@ button.dump {
   height: auto;
   overflow: initial;
 }
-/* line 385, ../sass/_03_layout.scss */
+/* line 386, ../sass/_03_layout.scss */
 .section.details .button.edit.description:before {
   position: relative;
   display: inline-block;
@@ -2141,87 +2142,87 @@ button.dump {
   top: 0px;
   left: 5px;
 }
-/* line 393, ../sass/_03_layout.scss */
+/* line 394, ../sass/_03_layout.scss */
 .section.details .button.edit.name {
   font-size: 16px;
   position: absolute;
   top: 0px;
   right: 0px;
 }
-/* line 400, ../sass/_03_layout.scss */
+/* line 401, ../sass/_03_layout.scss */
 .section.details .attributes.metrics {
   background-color: #e2e2e2;
   padding: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
-/* line 402, ../sass/_03_layout.scss */
+/* line 403, ../sass/_03_layout.scss */
 .section.details .attributes.metrics .key, .section.details .attributes.metrics .value, .section.details .attributes.metrics .link {
   font-size: 12px;
 }
-/* line 410, ../sass/_03_layout.scss */
+/* line 411, ../sass/_03_layout.scss */
 .section.details .attributes.extra {
   background-color: #e2e2e2;
   padding: 10px;
 }
-/* line 412, ../sass/_03_layout.scss */
+/* line 413, ../sass/_03_layout.scss */
 .section.details .attributes.extra .key, .section.details .attributes.extra .value, .section.details .attributes.extra .link {
   font-size: 10px;
 }
-/* line 418, ../sass/_03_layout.scss */
+/* line 419, ../sass/_03_layout.scss */
 .section.details .form {
   width: 100%;
   padding: 0px;
   border: none;
   padding-bottom: 15px;
 }
-/* line 423, ../sass/_03_layout.scss */
+/* line 424, ../sass/_03_layout.scss */
 .section.details .form .input.name {
   font-size: 30px;
   height: 40px;
 }
-/* line 427, ../sass/_03_layout.scss */
+/* line 428, ../sass/_03_layout.scss */
 .section.details .form .buttons {
   text-align: right;
 }
-/* line 431, ../sass/_03_layout.scss */
+/* line 432, ../sass/_03_layout.scss */
 .section.details .form .button.submit {
   display: inline-block;
   font-size: 14px;
   padding: 5px 10px;
   margin-right: 10px;
 }
-/* line 438, ../sass/_03_layout.scss */
+/* line 439, ../sass/_03_layout.scss */
 .section.details .form .button.cancel {
   display: inline-block;
   font-size: 14px;
 }
-/* line 444, ../sass/_03_layout.scss */
+/* line 445, ../sass/_03_layout.scss */
 .section.details .form, .section.details .input, .section.details .area {
   font-size: 16px;
   width: 100%;
 }
-/* line 449, ../sass/_03_layout.scss */
+/* line 450, ../sass/_03_layout.scss */
 .section.details .value.bio, .section.details .value.description {
   padding-left: 3px;
 }
-/* line 453, ../sass/_03_layout.scss */
+/* line 454, ../sass/_03_layout.scss */
 .section.details .links {
   padding: 15px 0px 15px;
   border-top: 1px solid #c2c2c2;
 }
 
-/* line 461, ../sass/_03_layout.scss */
+/* line 462, ../sass/_03_layout.scss */
 .section.projects_two .header {
   position: relative;
   height: 64px;
   background-color: #e2e2e2;
 }
-/* line 465, ../sass/_03_layout.scss */
+/* line 466, ../sass/_03_layout.scss */
 .section.projects_two .header .link_block {
   height: 64px;
 }
-/* line 469, ../sass/_03_layout.scss */
+/* line 470, ../sass/_03_layout.scss */
 .section.projects_two .header .avatar {
   position: absolute;
   background-color: white;
@@ -2229,18 +2230,18 @@ button.dump {
   top: 50%;
   transform: translateY(-50%);
 }
-/* line 476, ../sass/_03_layout.scss */
+/* line 477, ../sass/_03_layout.scss */
 .section.projects_two .header .info {
   position: absolute;
   left: 60px;
   top: 50%;
   transform: translateY(-50%);
 }
-/* line 482, ../sass/_03_layout.scss */
+/* line 483, ../sass/_03_layout.scss */
 .section.projects_two .header .info .value {
   font-size: 16px;
 }
-/* line 486, ../sass/_03_layout.scss */
+/* line 487, ../sass/_03_layout.scss */
 .section.projects_two .header .title {
   position: relative;
   line-height: 40px;
@@ -2248,32 +2249,32 @@ button.dump {
   margin-right: 5px;
   display: inline-block;
 }
-/* line 493, ../sass/_03_layout.scss */
+/* line 494, ../sass/_03_layout.scss */
 .section.projects_two .header .link {
   display: inline-block;
   text-decoration: underline;
   font-size: 16px;
   line-height: 40px;
 }
-/* line 500, ../sass/_03_layout.scss */
+/* line 501, ../sass/_03_layout.scss */
 .section.projects_two .header .button.expand, .section.projects_two .header button.collapse {
   position: absolute;
   right: 5px;
   top: 50%;
   transform: translateY(-50%);
 }
-/* line 507, ../sass/_03_layout.scss */
+/* line 508, ../sass/_03_layout.scss */
 .section.projects_two .header .button.add {
   position: absolute;
   left: 5px;
   top: 50%;
   transform: translateY(-50%);
 }
-/* line 516, ../sass/_03_layout.scss */
+/* line 517, ../sass/_03_layout.scss */
 .section.projects_two.status .header {
   height: 40px;
 }
-/* line 521, ../sass/_03_layout.scss */
+/* line 522, ../sass/_03_layout.scss */
 .section.projects_two .preview {
   padding-left: 25px;
   background-color: transparent;

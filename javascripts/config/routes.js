@@ -16,10 +16,6 @@ app.config(function($routeProvider, $locationProvider) {
     templateUrl: "home_panel.html",
     controller: "homePanelController"
   })
-  .when("/manager-panel", {
-    templateUrl: "manager_panel.html",
-    controller: "managerPanelController"
-  })
   .when("/users/new", {
     templateUrl: "new_user.html",
     controller: "newUserController"
