@@ -706,7 +706,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     start_date: new Date(), //a Date object that sets the marker's date
                     css: "today", //a CSS class applied to the marker
                     text: "Now", //the marker title
-                    title:date_to_str( new Date()) // the marker's tooltip
+                    title: moment().format('DD-MM-YYYY') // the marker's tooltip
                 });
 
                 gantt.init("gantt_here");
