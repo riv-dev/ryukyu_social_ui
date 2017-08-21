@@ -101,6 +101,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         $localStorage.layout_settings[category]['type'] = value;
         if(value == "gantt") {
             gantt.setSizes(); //re-render the gantt chart, needed to size correctly
+            gantt.showDate(new Date(moment().format()));
         }
     }
 
