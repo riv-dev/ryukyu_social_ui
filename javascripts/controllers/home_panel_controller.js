@@ -696,6 +696,11 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 }
 
                 gantt.config.autosize = "y";
+                gantt.config.columns = [
+                    {name:"text",       label:"Project Name",  width:"*", tree:true },
+                    {name:"start_date", label:"Start Date", width: 80, align: "center" },
+                    {name:"duration",   label:"Duration",   width: 80, align: "center" },
+                ];
                 gantt.init("gantt_here");
                 gantt.parse(gantt_projects);
             });
