@@ -106,7 +106,7 @@
                             <input class="button submit" type="submit" value="Quick Add" ng-click="quick_post_task()">
                         </form>
                 </li>
-                <li class="item"><a class="link" href="./tasks/new?status={{status}}">Add Task</a></li>
+                <li class="item"><a class="link" href="./users/{{this_user.id}}/tasks/new?status={{status}}">Add Task</a></li>
             </ul>
             <button class="button settings {{status}}" ng-click="toggleShowSettings('tasks', status)">Show/Hide Settings</button>
         </header>
