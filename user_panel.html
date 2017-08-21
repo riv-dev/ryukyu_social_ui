@@ -187,7 +187,7 @@
                         <select class="input select limit" ng-options="limit for limit in limits" ng-change="getAllProjects(status,limit,1)"
                             ng-model="limit"></select>
                     </li>
-                    <li class="item"><a class="link" href="./users/{{this_user_id}}/projects/new?status={{selected_projects_tab}}">Add Project</a></li>
+                    <li class="item"><a class="link" href="./users/{{this_user_id}}/projects/new?status={{status}}">Add Project</a></li>
                 </ul>
                 <button class="button settings {{status}}" ng-click="toggleShowSettings('projects', status)">Show/Hide Settings</button>
             </header>
