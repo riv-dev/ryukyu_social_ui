@@ -24,7 +24,7 @@
                 </li>
                 <li class="item">
                     <label class="key limit" for="projects_limit">Limit Per Page: </label>
-                    <select class="input select limit" ng-options="limit for limit in limits" ng-change="getAllProjects(status,limit,1)"
+                    <select class="input select limit" ng-options="limit for limit in limits" ng-change="getProjects(status,limit,1)"
                         ng-model="limit"></select>
                 </li>
                 <li class="item"><a class="link" href="./projects/new?status={{status}}">Add Project</a></li>
