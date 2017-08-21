@@ -192,6 +192,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
         if($scope.getLayoutCSS(this_section_name) == "horizontal") {
             $scope.setLayout(this_section_name,"layered");
+        } else if($scope.getLayoutCSS(this_section_name) == "gantt") {
+            $scope.setLayout(this_section_name,"layered");
         }
     }
 
@@ -581,9 +583,68 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }).then(function (response) {
                 $scope.projects[status] = response.data;
 
+                var gantt_projects = {
+                    data: []
+                };
+
+                /*$scope.example_tasks = {
+                    data: [
+                        {
+                            id: 1, text: "Project #2", start_date: "01-04-2013", duration: 18, order: 10,
+                            progress: 0.4, open: true
+                        },
+                        {
+                            id: 2, text: "Task #1", start_date: "02-04-2013", duration: 8, order: 10,
+                            progress: 0.6, parent: 1
+                        },
+                        {
+                            id: 3, text: "Task #2", start_date: "11-04-2013", duration: 8, order: 20,
+                            progress: 0.6, parent: 1
+                        },
+                        {
+                            id: 4, text: "Project #3", start_date: "01-04-2013", duration: 18, order: 30,
+                            progress: 0.4, open: true
+                        }
+                    ],
+                    links: [
+                        { id: 1, source: 1, target: 2, type: "1" },
+                        { id: 2, source: 2, target: 3, type: "0" },
+                        { id: 3, source: 3, target: 4, type: "0" },
+                        { id: 4, source: 2, target: 5, type: "2" },
+                    ]
+                };*/
+
                 for(var i=0;i<response.data.length;i++) {
                     var current_project = $scope.projects[status][i];
                     var current_project_id = current_project.id;
+
+                    var start;
+                    var end;
+                    var duration;
+                    if(current_project.start_date) {
+                        start = moment(current_project.start_date);
+                    } else {
+                        start = moment();
+                    }
+
+                    if(current_project.deadline) {
+                        end = moment(current_project.deadline);
+                    } else {
+                        end = start.add('3','months');
+                    }
+
+                    duration = moment.duration(end.diff(start)).asDays();
+
+                    gantt_projects.data.push(
+                        {
+                            id: current_project.id,
+                            text: current_project.name,
+                            start_date: start.format('DD-MM-YYYY'),
+                            duration: duration,
+                            order: i,
+                            open: true
+                        }
+                    );
 
                     $http({
                         method: 'GET',
@@ -633,6 +694,10 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                         $scope.projects[status][parseInt(response.config["params"]["i"])]["tasks"] = response.data;
                     });                    
                 }
+
+                gantt.config.autosize = "y";
+                gantt.init("gantt_here");
+                gantt.parse(gantt_projects);
             });
         });
     } //End getProjects()
@@ -828,7 +893,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
             $scope.getTasks(status, $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
         }
-
     } 
 
 });

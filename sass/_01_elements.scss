@@ -70,6 +70,10 @@
     color: $black;
 }
 
+.item {
+    position: relative;
+}
+
 .link {
     font-size: 16px;
     text-decoration: none;
@@ -516,6 +520,31 @@
         font-size: 14px;
         font-family: "FontAwesome";
         content: "\f2d0";
+    }
+}
+
+.button.gantt {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    border: none;
+    height: 18px;
+    line-height: 18px;
+    width: 20px;
+    text-indent: 9999px;
+    color: $black;
+    margin: 0px;
+    padding: 0px;
+    &:hover {
+        background-color: none;
+        color: $blue;
+    }
+    &:before {
+        text-indent: 0px;
+        display: block;
+        font-size: 14px;
+        font-family: "FontAwesome";
+        content: "\f0ae";
     }
 }
 
