@@ -635,6 +635,13 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
                     duration = moment.duration(end.diff(start)).asDays();
 
+                    var status_colors = {
+                        "dump": "white",
+                        "waiting": "#ffe5fc",
+                        "doing": "#fffce2",
+                        "finished": "#e8ffed"
+                    }
+
                     gantt_projects.data.push(
                         {
                             id: current_project.id,
@@ -642,7 +649,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             start_date: start.format('DD-MM-YYYY'),
                             duration: duration,
                             order: i,
-                            open: true
+                            open: true,
+                            color: status_colors[current_project.status]
                         }
                     );
 
