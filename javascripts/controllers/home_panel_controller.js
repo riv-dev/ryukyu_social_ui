@@ -621,6 +621,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     var start;
                     var end;
                     var duration;
+
                     if(current_project.start_date) {
                         start = moment(current_project.start_date);
                     } else {
@@ -630,7 +631,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     if(current_project.deadline) {
                         end = moment(current_project.deadline);
                     } else {
-                        end = start.add('3','months');
+                        end = moment().add('3','days');
                     }
 
                     duration = moment.duration(end.diff(start)).asDays();
