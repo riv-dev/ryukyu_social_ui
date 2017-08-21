@@ -703,7 +703,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 ];
 
                 var markerId = gantt.addMarker({
-                    start_date: new Date(), //a Date object that sets the marker's date
+                    start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
                     css: "today", //a CSS class applied to the marker
                     text: "Now", //the marker title
                     title: moment().format('DD-MM-YYYY') // the marker's tooltip
@@ -714,7 +714,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 gantt.init("gantt_here");
                 gantt.parse(gantt_projects);
 
-                gantt.attachEvent("onLoadEnd", function(){
+                gantt.attachEvent("onParse", function(){
                     gantt.showDate(new Date(moment().format()));
                 });
 
