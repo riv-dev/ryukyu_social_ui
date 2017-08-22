@@ -1,4 +1,4 @@
-app.controller('taskPanelController', function ($scope, $http, $routeParams, $location, $localStorage, CommonFunctions) {
+app.controller('taskPanelController', function ($scope, $http, $window, $routeParams, $location, $localStorage, Upload, CommonFunctions) {
     $scope.$parent.hero = "Task Panel";
     $scope.$parent.panel_class = "task";
 
@@ -410,6 +410,165 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
         }
     }
 
+    $scope.getFileIcon = function(fileType) {
+        var imgIcon = "/images";
+        switch (fileType) {
+            case 'image/jpeg':
+                imgIcon += '/icon/jpg.png';
+                break;
+            case 'image/gif':
+                imgIcon += '/icon/gif.png';
+                break;
+            case 'image/png':
+                imgIcon += '/icon/png.png';
+                break;
+            case 'image/svg+xml':
+                imgIcon += '/icon/svg.png';
+                break;
+            case 'text/html':
+                imgIcon += '/icon/html.png';
+                break;
+            case 'text/csv':
+                imgIcon += '/icon/csv.png';
+                break;
+            case 'application/x-javascript':
+                imgIcon += '/icon/javascript.png';
+                break;
+            case 'application/json':
+                imgIcon += '/icon/json.png';
+                break;
+            case 'application/xml':
+                imgIcon += '/icon/xml.png';
+                break;
+            case 'application/pdf':
+                imgIcon += '/icon/pdf.png';
+                break;
+            case 'application/zip':
+                imgIcon += '/icon/zip.png';
+                break;
+            case 'video/x-msvideo':
+                imgIcon += '/icon/avi.png';
+                break;
+            case 'audio/mpeg':
+                imgIcon += '/icon/mp3.png';
+                break;
+            case 'text/css':
+                imgIcon += '/icon/css.png';
+                break;
+            case 'application/msword':
+                imgIcon += '/icon/css.png';
+                break;
+            case 'application/vnd.ms-excel':
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                imgIcon += '/icon/xls.png';
+                break;
+            case 'application/vnd.ms-powerpoint':
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+                imgIcon += '/icon/ppt.png';
+                break;
+            case 'application/x-shockwave-flash':
+                imgIcon += '/icon/fla.png';
+                break;
+            default:
+                imgIcon += '/icon/file.png';
+                break;
+        }
+        return imgIcon;
+    };
+
+    $scope.getFile = function(uri) {
+        $window.open(filesApiBaseURL + uri);
+    }
+
+    $scope.upload_files = function (files) {
+        if (files && files.length) {
+            angular.forEach(files, function (file, key) {
+                $scope.upload_single_file(0, file);
+            });
+        }
+    }
+
+    $scope.upload_single_file = function(index, fileData) {
+        if (!fileData.$error) {
+            Upload.upload({
+                url: filesApiBaseURL + "/files/" + $routeParams.task_id + "/tasks",
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                },
+                data: {
+                    file: fileData
+                }
+            }).progress(function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            }).success(function (data, status, headers, config) {
+                delete $scope.uploadFiles[index];
+                $scope.uploadFiles.splice(index, 1);
+                if ($scope.projectFiles.message) $scope.projectFiles = [];
+                $scope.projectFiles.push(data);
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    sound: false,
+                    size: 'mini',
+                    msg: 'Successfully added file ' + fileData.name + '!'
+                });
+            });
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Error added ' + '.'
+            });
+        }
+    }
+    
+    $scope.delete_upload_file = function(index) {
+        delete $scope.uploadFiles[index];
+        $scope.uploadFiles.splice(index, 1);
+    }
+
+    $scope.delete_file = function(index, id, filename) {
+        $http({
+            method: 'DELETE',
+            url: filesApiBaseURL + '/files/' + id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                delete $scope.projectFiles[index];
+                $scope.projectFiles.splice(index, 1);
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    sound: false,
+                    size: 'mini',
+                    msg: 'Deleted file ' + filename + '!'
+                });
+            },
+            function errorCallback(response) {
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    sound: false,
+                    size: 'mini',
+                    msg: 'Error deleting file ' + filename + '.'
+                });
+            }
+        );
+    }
+
+    $scope.uploadAllFiles = function() {
+        if ($scope.uploadFiles) {
+            $scope.upload_files($scope.uploadFiles);
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Error adding file.'
+            });
+        }
+    };
+
     if ($localStorage.loggedin_user) {
 
 
@@ -440,8 +599,17 @@ app.controller('taskPanelController', function ($scope, $http, $routeParams, $lo
         }).then(function (response) {
             $scope.projects = response.data;
         });
-
-
+        
+        //Get all files for project
+        $http({
+            method: 'GET',
+            url: filesApiBaseURL + "/files/" + $routeParams.task_id + "/tasks",
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.projectFiles = response.data;
+        });
 
     }
 

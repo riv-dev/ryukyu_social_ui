@@ -759,7 +759,8 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 imgIcon += '/icon/xls.png';
                 break;
             case 'application/vnd.ms-powerpoint':
-                imgIcon += 'ppt.png';
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+                imgIcon += '/icon/ppt.png';
                 break;
             case 'application/x-shockwave-flash':
                 imgIcon += '/icon/fla.png';
@@ -777,10 +778,9 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
 
     $scope.upload_files = function (files) {
         if (files && files.length) {
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                $scope.upload_single_file(i, file);
-            }
+            angular.forEach(files, function (file, key) {
+                $scope.upload_single_file(0, file);
+            });
         }
     }
 
@@ -813,7 +813,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 position: 'top right',
                 sound: false,
                 size: 'mini',
-                msg: 'Error added ' + '.'
+                msg: 'Error added ' + fileData.name + '.'
             });
         }
     }
