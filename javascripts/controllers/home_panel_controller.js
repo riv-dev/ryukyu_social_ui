@@ -99,10 +99,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
     $scope.setLayout = function(category, value) {
         $localStorage.layout_settings[category]['type'] = value;
-        if(value == "gantt") {
-            gantt.setSizes(); //re-render the gantt chart, needed to size correctly
-            gantt.showDate(new Date(moment().format()));
-        }
     }
 
     $scope.getLayoutCSS = function(category) {
@@ -129,8 +125,12 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         "finished":[]
     };
 
-
-
+    $scope.gantt_projects = {
+        "dump": {data:[],links:[]},
+        "waiting": {data:[],links:[]},
+        "doing": {data:[],links:[]},
+        "finished":{data:[],links:[]}
+    };
 
     $scope.getProjectsParam = function(status,setting) {
         return $localStorage.projects_params[status][setting];
@@ -147,9 +147,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         "doing":[],
         "finished":[]
     };
-
-
-
 
     $scope.getTasksParam = function(status,setting) {
         return $localStorage.tasks_params[status][setting];
@@ -587,10 +584,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }).then(function (response) {
                 $scope.projects[status] = response.data;
 
-                var gantt_projects = {
-                    data: []
-                };
-
                 /*$scope.example_tasks = {
                     data: [
                         {
@@ -617,6 +610,11 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                         { id: 4, source: 2, target: 5, type: "2" },
                     ]
                 };*/
+
+                $scope.gantt_projects[status] = {
+                    data: [],
+                    links: []
+                };
 
                 for(var i=0;i<response.data.length;i++) {
                     var current_project = $scope.projects[status][i];
@@ -654,7 +652,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                         "finished": "#e8ffed"
                     }
 
-                    gantt_projects.data.push(
+                    $scope.gantt_projects[status].data.push(
                         {
                             id: current_project.id,
                             text: current_project.name,
@@ -714,30 +712,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                         $scope.projects[status][parseInt(response.config["params"]["i"])]["tasks"] = response.data;
                     });                    
                 }
-
-                gantt.config.autosize = "y";
-                gantt.config.columns = [
-                    {name:"text",       label:"Project Name",  width:"*", tree:true },
-                    {name:"start_date", label:"Start Date", width: 80, align: "center" },
-                    {name:"duration",   label:"Duration",   width: 80, align: "center" },
-                ];
-
-                var markerId = gantt.addMarker({
-                    start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
-                    css: "today", //a CSS class applied to the marker
-                    text: "Now", //the marker title
-                    title: moment().format('DD-MM-YYYY') // the marker's tooltip
-                });
-
-                gantt.config.initial_scroll = false;
-
-                gantt.init("gantt_here");
-                gantt.parse(gantt_projects);
-
-                gantt.attachEvent("onParse", function(){
-                    gantt.showDate(new Date(moment().format()));
-                });
-
             });
         });
     } //End getProjects()
@@ -933,6 +907,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
             $scope.getTasks(status, $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
         }
+
     } 
 
 });
