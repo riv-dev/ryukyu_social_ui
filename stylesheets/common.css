@@ -1,4 +1,4 @@
-/* line 5, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,45 +20,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
@@ -119,19 +119,19 @@ img {
   text-decoration: none;
   color: #5e5e5e;
 }
-/* line 18, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .logo a:visited {
   color: #5e5e5e;
 }
-/* line 21, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .logo a:focus {
   color: #5e5e5e;
 }
-/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .logo a:hover {
   color: #5e5e5e;
 }
-/* line 27, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .logo a:active {
   color: #5e5e5e;
 }
@@ -224,19 +224,19 @@ img {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-/* line 18, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link:visited {
   color: #081ed1;
 }
-/* line 21, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link:focus {
   color: #081ed1;
 }
-/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link:hover {
   color: #081ed1;
 }
-/* line 27, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link:active {
   color: #081ed1;
 }
@@ -255,19 +255,19 @@ img {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-/* line 18, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link_block:visited {
   color: black;
 }
-/* line 21, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link_block:focus {
   color: black;
 }
-/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link_block:hover {
   color: black;
 }
-/* line 27, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .link_block:active {
   color: black;
 }
@@ -336,19 +336,19 @@ img {
   background-color: transparent;
   color: #081ed1;
 }
-/* line 18, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .button.cancel:visited {
   color: #081ed1;
 }
-/* line 21, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .button.cancel:focus {
   color: #081ed1;
 }
-/* line 24, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .button.cancel:hover {
   color: #081ed1;
 }
-/* line 27, ../../../../../Users/riv/.rvm/gems/ruby-2.4.0@global/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
 .button.cancel:active {
   color: #081ed1;
 }
@@ -386,6 +386,38 @@ img {
 }
 
 /* line 178, ../sass/_01_elements.scss */
+.button.upload {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  height: 18px;
+  line-height: 18px;
+  width: 18px;
+  text-indent: 9999px;
+  color: black;
+  margin: 0px;
+  padding: 0px;
+}
+/* line 192, ../sass/_01_elements.scss */
+.button.upload:hover {
+  background-color: none;
+  color: #c40505;
+}
+/* line 196, ../sass/_01_elements.scss */
+.button.upload:before {
+  position: absolute;
+  text-indent: 0px;
+  left: 3px;
+  display: block;
+  font-size: 14px;
+  font-family: "FontAwesome";
+  content: "\f093";
+}
+
+/* line 207, ../sass/_01_elements.scss */
 .button.pin {
   position: absolute;
   top: 5px;
@@ -401,12 +433,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 192, ../sass/_01_elements.scss */
+/* line 221, ../sass/_01_elements.scss */
 .button.pin:hover {
   background-color: none;
   color: #c40505;
 }
-/* line 196, ../sass/_01_elements.scss */
+/* line 225, ../sass/_01_elements.scss */
 .button.pin:before {
   position: absolute;
   text-indent: 0px;
@@ -417,16 +449,16 @@ img {
   content: "\f08d";
 }
 
-/* line 207, ../sass/_01_elements.scss */
+/* line 236, ../sass/_01_elements.scss */
 .pinned {
   color: #c40505 !important;
 }
-/* line 210, ../sass/_01_elements.scss */
+/* line 239, ../sass/_01_elements.scss */
 .pinned:hover {
   background-color: none;
   color: #c2c2c2 !important;
 }
-/* line 215, ../sass/_01_elements.scss */
+/* line 244, ../sass/_01_elements.scss */
 .pinned:before {
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
@@ -435,7 +467,7 @@ img {
   transform: rotate(-45deg);
 }
 
-/* line 224, ../sass/_01_elements.scss */
+/* line 253, ../sass/_01_elements.scss */
 .button.calendar {
   position: relative;
   overflow: hidden;
@@ -449,12 +481,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 237, ../sass/_01_elements.scss */
+/* line 266, ../sass/_01_elements.scss */
 .button.calendar:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 241, ../sass/_01_elements.scss */
+/* line 270, ../sass/_01_elements.scss */
 .button.calendar:before {
   position: absolute;
   text-indent: 0px;
@@ -465,7 +497,7 @@ img {
   content: "\f073";
 }
 
-/* line 252, ../sass/_01_elements.scss */
+/* line 281, ../sass/_01_elements.scss */
 .button.view_advanced {
   position: relative;
   overflow: hidden;
@@ -479,12 +511,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 265, ../sass/_01_elements.scss */
+/* line 294, ../sass/_01_elements.scss */
 .button.view_advanced:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 269, ../sass/_01_elements.scss */
+/* line 298, ../sass/_01_elements.scss */
 .button.view_advanced:before {
   position: absolute;
   text-indent: 0px;
@@ -495,7 +527,7 @@ img {
   content: "\f06e";
 }
 
-/* line 280, ../sass/_01_elements.scss */
+/* line 309, ../sass/_01_elements.scss */
 .button.view_simple {
   position: relative;
   overflow: hidden;
@@ -509,12 +541,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 293, ../sass/_01_elements.scss */
+/* line 322, ../sass/_01_elements.scss */
 .button.view_simple:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 297, ../sass/_01_elements.scss */
+/* line 326, ../sass/_01_elements.scss */
 .button.view_simple:before {
   position: absolute;
   text-indent: 0px;
@@ -525,7 +557,7 @@ img {
   content: "\f070";
 }
 
-/* line 308, ../sass/_01_elements.scss */
+/* line 337, ../sass/_01_elements.scss */
 .button.add {
   position: relative;
   overflow: hidden;
@@ -539,12 +571,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 321, ../sass/_01_elements.scss */
+/* line 350, ../sass/_01_elements.scss */
 .button.add:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 325, ../sass/_01_elements.scss */
+/* line 354, ../sass/_01_elements.scss */
 .button.add:before {
   position: absolute;
   text-indent: 0px;
@@ -556,7 +588,7 @@ img {
   content: "\f055";
 }
 
-/* line 337, ../sass/_01_elements.scss */
+/* line 366, ../sass/_01_elements.scss */
 .button.expand {
   position: relative;
   overflow: hidden;
@@ -570,12 +602,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 350, ../sass/_01_elements.scss */
+/* line 379, ../sass/_01_elements.scss */
 .button.expand:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 354, ../sass/_01_elements.scss */
+/* line 383, ../sass/_01_elements.scss */
 .button.expand:before {
   position: absolute;
   text-indent: 0px;
@@ -586,7 +618,7 @@ img {
   content: "\f196";
 }
 
-/* line 365, ../sass/_01_elements.scss */
+/* line 394, ../sass/_01_elements.scss */
 .button.collapse {
   position: relative;
   overflow: hidden;
@@ -600,12 +632,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 378, ../sass/_01_elements.scss */
+/* line 407, ../sass/_01_elements.scss */
 .button.collapse:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 382, ../sass/_01_elements.scss */
+/* line 411, ../sass/_01_elements.scss */
 .button.collapse:before {
   position: absolute;
   text-indent: 0px;
@@ -616,7 +648,7 @@ img {
   content: "\f147";
 }
 
-/* line 393, ../sass/_01_elements.scss */
+/* line 422, ../sass/_01_elements.scss */
 .button.minimize {
   position: absolute;
   top: 5px;
@@ -632,12 +664,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 407, ../sass/_01_elements.scss */
+/* line 436, ../sass/_01_elements.scss */
 .button.minimize:hover {
   background-color: #e2edff;
   color: #081ed1;
 }
-/* line 411, ../sass/_01_elements.scss */
+/* line 440, ../sass/_01_elements.scss */
 .button.minimize:before {
   position: absolute;
   text-indent: 0px;
@@ -648,7 +680,7 @@ img {
   content: "\f2d2";
 }
 
-/* line 422, ../sass/_01_elements.scss */
+/* line 451, ../sass/_01_elements.scss */
 .button.layered {
   position: relative;
   overflow: hidden;
@@ -662,12 +694,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 434, ../sass/_01_elements.scss */
+/* line 463, ../sass/_01_elements.scss */
 .button.layered:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 438, ../sass/_01_elements.scss */
+/* line 467, ../sass/_01_elements.scss */
 .button.layered:before {
   text-indent: 0px;
   display: block;
@@ -676,7 +708,7 @@ img {
   content: "\f0c8";
 }
 
-/* line 447, ../sass/_01_elements.scss */
+/* line 476, ../sass/_01_elements.scss */
 .button.horizontal {
   position: relative;
   overflow: hidden;
@@ -690,12 +722,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 459, ../sass/_01_elements.scss */
+/* line 488, ../sass/_01_elements.scss */
 .button.horizontal:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 463, ../sass/_01_elements.scss */
+/* line 492, ../sass/_01_elements.scss */
 .button.horizontal:before {
   text-indent: 0px;
   display: block;
@@ -704,7 +736,7 @@ img {
   content: "\f07e";
 }
 
-/* line 472, ../sass/_01_elements.scss */
+/* line 501, ../sass/_01_elements.scss */
 .button.vertical {
   position: relative;
   overflow: hidden;
@@ -718,12 +750,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 484, ../sass/_01_elements.scss */
+/* line 513, ../sass/_01_elements.scss */
 .button.vertical:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 488, ../sass/_01_elements.scss */
+/* line 517, ../sass/_01_elements.scss */
 .button.vertical:before {
   text-indent: 0px;
   display: block;
@@ -732,7 +764,7 @@ img {
   content: "\f07d";
 }
 
-/* line 497, ../sass/_01_elements.scss */
+/* line 526, ../sass/_01_elements.scss */
 .button.maximize {
   position: absolute;
   top: 5px;
@@ -748,12 +780,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 511, ../sass/_01_elements.scss */
+/* line 540, ../sass/_01_elements.scss */
 .button.maximize:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 515, ../sass/_01_elements.scss */
+/* line 544, ../sass/_01_elements.scss */
 .button.maximize:before {
   position: absolute;
   text-indent: 0px;
@@ -764,7 +796,7 @@ img {
   content: "\f2d0";
 }
 
-/* line 526, ../sass/_01_elements.scss */
+/* line 555, ../sass/_01_elements.scss */
 .button.gantt {
   position: relative;
   overflow: hidden;
@@ -778,12 +810,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 538, ../sass/_01_elements.scss */
+/* line 567, ../sass/_01_elements.scss */
 .button.gantt:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 542, ../sass/_01_elements.scss */
+/* line 571, ../sass/_01_elements.scss */
 .button.gantt:before {
   text-indent: 0px;
   display: block;
@@ -792,7 +824,7 @@ img {
   content: "\f0ae";
 }
 
-/* line 551, ../sass/_01_elements.scss */
+/* line 580, ../sass/_01_elements.scss */
 .button.permissions {
   position: absolute;
   top: 5px;
@@ -808,12 +840,12 @@ img {
   margin: 0px;
   padding: 0px !important;
 }
-/* line 565, ../sass/_01_elements.scss */
+/* line 594, ../sass/_01_elements.scss */
 .button.permissions:hover {
   background-color: transparent !important;
   color: #081ed1 !important;
 }
-/* line 569, ../sass/_01_elements.scss */
+/* line 598, ../sass/_01_elements.scss */
 .button.permissions:before {
   position: absolute;
   text-indent: 0px;
@@ -824,7 +856,7 @@ img {
   content: "\f023";
 }
 
-/* line 580, ../sass/_01_elements.scss */
+/* line 609, ../sass/_01_elements.scss */
 .button.edit {
   position: relative;
   top: 0px;
@@ -840,12 +872,12 @@ img {
   margin: 0px;
   padding: 0px !important;
 }
-/* line 594, ../sass/_01_elements.scss */
+/* line 623, ../sass/_01_elements.scss */
 .button.edit:hover {
   background-color: transparent !important;
   color: #081ed1 !important;
 }
-/* line 598, ../sass/_01_elements.scss */
+/* line 627, ../sass/_01_elements.scss */
 .button.edit:before {
   position: absolute;
   text-indent: 0px;
@@ -856,7 +888,7 @@ img {
   content: "\f040";
 }
 
-/* line 609, ../sass/_01_elements.scss */
+/* line 638, ../sass/_01_elements.scss */
 .button.settings {
   position: relative;
   display: block;
@@ -880,11 +912,11 @@ img {
   transition: 0.2s;
   cursor: pointer;
 }
-/* line 626, ../sass/_01_elements.scss */
+/* line 655, ../sass/_01_elements.scss */
 .button.settings:hover {
   background-color: #e2edff;
 }
-/* line 629, ../sass/_01_elements.scss */
+/* line 658, ../sass/_01_elements.scss */
 .button.settings:before {
   position: absolute;
   display: block;
@@ -898,17 +930,17 @@ img {
   text-align: center;
 }
 
-/* line 647, ../sass/_01_elements.scss */
+/* line 676, ../sass/_01_elements.scss */
 .show {
   display: block;
 }
 
-/* line 651, ../sass/_01_elements.scss */
+/* line 680, ../sass/_01_elements.scss */
 .hide {
   display: none;
 }
 
-/* line 655, ../sass/_01_elements.scss */
+/* line 684, ../sass/_01_elements.scss */
 .disabled {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -918,98 +950,98 @@ img {
   user-select: none;
 }
 
-/* line 664, ../sass/_01_elements.scss */
+/* line 693, ../sass/_01_elements.scss */
 .footer {
   text-align: center;
   font-size: 10px;
   color: #5e5e5e;
 }
 
-/* line 671, ../sass/_01_elements.scss */
+/* line 700, ../sass/_01_elements.scss */
 .alert {
   color: #424000;
   background-color: #f9f795;
   border-color: #424000;
 }
 
-/* line 677, ../sass/_01_elements.scss */
+/* line 706, ../sass/_01_elements.scss */
 .fail {
   color: #8c0000;
   background-color: #ffb2b2;
   border-color: #8c0000;
 }
 
-/* line 683, ../sass/_01_elements.scss */
+/* line 712, ../sass/_01_elements.scss */
 .success {
   color: #104c11;
   background-color: #e8ffed;
   border-color: #104c11;
 }
 
-/* line 689, ../sass/_01_elements.scss */
+/* line 718, ../sass/_01_elements.scss */
 .none {
   color: #939393;
 }
 
-/* line 693, ../sass/_01_elements.scss */
+/* line 722, ../sass/_01_elements.scss */
 .important {
   font-weight: bold;
   color: #c40505;
 }
 
-/* line 698, ../sass/_01_elements.scss */
+/* line 727, ../sass/_01_elements.scss */
 .finished,
 button.finished {
   color: #1f7c20;
   background-color: #e8ffed;
 }
 
-/* line 704, ../sass/_01_elements.scss */
+/* line 733, ../sass/_01_elements.scss */
 .doing,
 button.doing {
   color: #081ed1;
   background-color: #fffce2;
 }
 
-/* line 710, ../sass/_01_elements.scss */
+/* line 739, ../sass/_01_elements.scss */
 .new,
 button.new {
   color: #db7400;
   background-color: white;
 }
 
-/* line 716, ../sass/_01_elements.scss */
+/* line 745, ../sass/_01_elements.scss */
 .waiting,
 button.waiting {
   color: black;
   background-color: #ffe5fc;
 }
 
-/* line 722, ../sass/_01_elements.scss */
+/* line 751, ../sass/_01_elements.scss */
 .dump,
 button.dump {
   color: black;
   background-color: white;
 }
 
-/* line 728, ../sass/_01_elements.scss */
+/* line 757, ../sass/_01_elements.scss */
 .archived {
   color: black;
   background-color: #e2e2e2;
 }
 
-/* line 733, ../sass/_01_elements.scss */
+/* line 762, ../sass/_01_elements.scss */
 .active {
   font-weight: bold;
   text-decoration: underline;
 }
 
-/* line 739, ../sass/_01_elements.scss */
+/* line 768, ../sass/_01_elements.scss */
 .is_mine {
   background-color: #f9f795;
 }
 
-/* line 743, ../sass/_01_elements.scss */
+/* line 772, ../sass/_01_elements.scss */
 .markdown {
   /* Begin bidirectionality settings (do not change) */
 }
@@ -1263,29 +1295,29 @@ button.dump {
     page-break-before: avoid;
   }
 }
-/* line 745, ../sass/_01_elements.scss */
+/* line 774, ../sass/_01_elements.scss */
 .markdown img.small {
   width: 25%;
   height: auto;
 }
-/* line 749, ../sass/_01_elements.scss */
+/* line 778, ../sass/_01_elements.scss */
 .markdown img.medium {
   width: 50%;
   height: auto;
 }
-/* line 753, ../sass/_01_elements.scss */
+/* line 782, ../sass/_01_elements.scss */
 .markdown img.large {
   width: 100%;
   height: auto;
 }
 
-/* line 759, ../sass/_01_elements.scss */
-.image.profile {
+/* line 788, ../sass/_01_elements.scss */
+.image.profile, .dd-area {
   cursor: pointer;
   position: relative;
 }
-/* line 763, ../sass/_01_elements.scss */
-.image.profile .add-photo {
+/* line 792, ../sass/_01_elements.scss */
+.image.profile .add-photo, .dd-area .add-photo {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1297,8 +1329,8 @@ button.dump {
   transition: all .3s;
   font: normal normal normal 14px/1 FontAwesome;
 }
-/* line 775, ../sass/_01_elements.scss */
-.image.profile .add-photo:after {
+/* line 804, ../sass/_01_elements.scss */
+.image.profile .add-photo:after, .dd-area .add-photo:after {
   content: "\f067";
   color: #fff;
   font-size: 50px;
@@ -1307,12 +1339,66 @@ button.dump {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* line 786, ../sass/_01_elements.scss */
-.image.profile:hover .add-photo {
+/* line 815, ../sass/_01_elements.scss */
+.image.profile:hover .add-photo, .dd-area:hover .add-photo {
   opacity: 1;
 }
 
-/* line 791, ../sass/_01_elements.scss */
+/* line 820, ../sass/_01_elements.scss */
+.dd-area {
+  min-height: 80px;
+  border: 2px dashed #494949;
+}
+/* line 824, ../sass/_01_elements.scss */
+.dd-area .dd-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* line 833, ../sass/_01_elements.scss */
+.list-files-item {
+  position: relative;
+  margin-top: 15px;
+}
+/* line 837, ../sass/_01_elements.scss */
+.list-files-item .button.upload {
+  right: 30px;
+}
+
+/* line 843, ../sass/_01_elements.scss */
+.progress-delay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+}
+/* line 850, ../sass/_01_elements.scss */
+.progress-delay .progress-bar {
+  position: relative;
+  height: 100%;
+  width: 0;
+  background-color: #e8e8e8;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+/* line 859, ../sass/_01_elements.scss */
+.line-buttons {
+  margin-top: 10px;
+}
+
+/* line 863, ../sass/_01_elements.scss */
+.icon-file {
+  width: 24px;
+  vertical-align: middle;
+}
+
+/* line 868, ../sass/_01_elements.scss */
 .avatar {
   height: 40px;
   width: 40px;
@@ -1327,7 +1413,7 @@ button.dump {
   overflow: hidden;
 }
 
-/* line 803, ../sass/_01_elements.scss */
+/* line 880, ../sass/_01_elements.scss */
 .tab {
   position: relative;
   display: inline-block;
@@ -1341,23 +1427,97 @@ button.dump {
   z-index: 3;
   top: 1px;
 }
-/* line 816, ../sass/_01_elements.scss */
+/* line 893, ../sass/_01_elements.scss */
 .tab:hover {
   cursor: pointer;
 }
 
-/* line 821, ../sass/_01_elements.scss */
+/* line 898, ../sass/_01_elements.scss */
 .gantt_task_content {
   color: black !important;
 }
 
-/* line 825, ../sass/_01_elements.scss */
+/* line 902, ../sass/_01_elements.scss */
 .gantt_task_line {
   -webkit-box-shadow: 1px 1px 2px 1px #8f8f8f;
   -moz-box-shadow: 1px 1px 2px 1px #8f8f8f;
   box-shadow: 1px 1px 2px 1px #8f8f8f;
 }
 
+/* line 908, ../sass/_01_elements.scss */
+.repeated-item.ng-enter {
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+  max-height: 0;
+  opacity: 0;
+  left: 0;
+}
+
+/* line 918, ../sass/_01_elements.scss */
+.repeated-item.ng-enter.ng-enter-active {
+  max-height: 90px;
+  opacity: 1;
+  left: 0;
+}
+
+/* line 924, ../sass/_01_elements.scss */
+.repeated-item.ng-leave {
+  -webkit-animation: 0.5s anim_fade;
+  -moz-animation: 0.5s anim_fade;
+  -o-animation: 0.5s anim_fade;
+  animation: 0.5s anim_fade;
+}
+
+@keyframes anim_fade {
+  from {
+    max-height: 90px;
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+/*
+  Unfortunately each browser vendor requires
+  its own definition of keyframe animation code...
+*/
+@-webkit-keyframes anim_fade {
+  from {
+    max-height: 90px;
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+@-moz-keyframes anim_fade {
+  from {
+    max-height: 90px;
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+@-o-keyframes anim_fade {
+  from {
+    max-height: 90px;
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
 /* line 3, ../sass/_02_components.scss */
 .links {
   padding: 15px;
