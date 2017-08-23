@@ -198,6 +198,7 @@
                         <dd class="value_item projects {{project.project_status}} {{cssLast($last)}}" ng-repeat="project in user_projects[user.id]">
                             <span class="key rank">{{$index + 1}}</span>
                             <p class="value rank">{{project.name}}</p>
+                            <em ng-show="project.user_pinned" class="button pin pinned">Pinned</em>
                         </dd>
                         <dd class="value none projects" ng-if="!user_projects[user.id] || user_projects[user.id].length == 0">No Projects</dd>
                     </dl>
