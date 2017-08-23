@@ -44,10 +44,14 @@ app.directive('dhxGantt1', function () {
         gantt1.showDate(new Date(moment().format()));
       });
 
-      $scope.$watch($attrs.layout, function(layout_selection) {
-        gantt1.setSizes(); //re-render the gantt chart, needed to size correctly
-        gantt1.showDate(new Date(moment().format())); 
-      });
+      $scope.$watch($attrs.layout, function(layout_selection){
+        if(layout_selection == 'gantt') {
+          setTimeout(function(){ 
+            gantt1.setSizes();
+            gantt1.showDate(new Date(moment().format()));
+          }, 1000);
+        }
+      }, true);
 
       //init gantt
       gantt1.init($element[0]);
@@ -99,10 +103,14 @@ app.directive('dhxGantt2', function () {
         gantt2.showDate(new Date(moment().format())); 
       });
 
-      $scope.$watch($attrs.layout, function(layout_selection) {
-        gantt2.setSizes(); //re-render the gantt chart, needed to size correctly
-        gantt2.showDate(new Date(moment().format())); 
-      });
+      $scope.$watch($attrs.layout, function(layout_selection){
+        if(layout_selection == 'gantt') {
+          setTimeout(function(){ 
+            gantt2.setSizes();
+            gantt2.showDate(new Date(moment().format()));
+          }, 1000);
+        }
+      }, true);
 
       //init gantt
       gantt2.init($element[0]);
@@ -154,10 +162,14 @@ app.directive('dhxGantt3', function () {
         gantt3.showDate(new Date(moment().format()));
       });
 
-      $scope.$watch($attrs.layout, function(layout_selection) {
-        gantt3.setSizes(); //re-render the gantt chart, needed to size correctly
-        gantt3.showDate(new Date(moment().format())); 
-      });
+      $scope.$watch($attrs.layout, function(layout_selection){
+        if(layout_selection == 'gantt') {
+          setTimeout(function(){ 
+            gantt3.setSizes();
+            gantt3.showDate(new Date(moment().format()));
+          }, 1000);
+        }
+      }, true);
 
       //init gantt
       gantt3.init($element[0]);
@@ -209,10 +221,14 @@ app.directive('dhxGantt4', function () {
         gantt4.showDate(new Date(moment().format())); 
       });
 
-      $scope.$watch($attrs.layout, function(layout_selection) {
-        gantt4.setSizes(); //re-render the gantt chart, needed to size correctly
-        gantt4.showDate(new Date(moment().format())); 
-      });
+      $scope.$watch($attrs.layout, function(layout_selection){
+        if(layout_selection == 'gantt') {
+          setTimeout(function(){ 
+            gantt4.setSizes();
+            gantt4.showDate(new Date(moment().format()));
+          }, 100);
+        }
+      }, true);
 
       //init gantt
       gantt4.init($element[0]);

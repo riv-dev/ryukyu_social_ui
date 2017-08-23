@@ -63,10 +63,10 @@
         </ul>
         <p ng-if="!projects[status] || projects[status].length == 0" class="info none">No projects</p>
 
-        <div ng-if="status=='dump'" class="gantt-chart" dhx-gantt1 status="{{status}}" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
-        <div ng-if="status=='waiting'" class="gantt-chart" dhx-gantt2 status="{{status}}" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
-        <div ng-if="status=='doing'" class="gantt-chart" dhx-gantt3 status="{{status}}" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
-        <div ng-if="status=='finished'" class="gantt-chart" dhx-gantt4 status="{{status}}" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+        <div ng-if="status=='dump'" class="gantt-chart" dhx-gantt1 layout="getLayoutCSS('projects')" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+        <div ng-if="status=='waiting'" class="gantt-chart" dhx-gantt2 layout="getLayoutCSS('projects')" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+        <div ng-if="status=='doing'" class="gantt-chart" dhx-gantt3 layout="getLayoutCSS('projects')" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+        <div ng-if="status=='finished'" class="gantt-chart" dhx-gantt4 layout="getLayoutCSS('projects')" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
 
         <ul class="pagination" ng-if="projects_page_count_arr[status] && projects_page_count_arr[status].length > 1">
             <li class="item previous" ng-click="getProjects(status,getProjectsParam(status,'limit'),getProjectsParam(status,'page')-1)">
