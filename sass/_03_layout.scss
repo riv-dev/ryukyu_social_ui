@@ -257,21 +257,23 @@
     margin-bottom: 20px;
 }
 
-//Hide gantt chart when not in gantt layout mode
-.sub-section.gantt-chart {
-    position: relative;
-    visibility: hidden;
-    width: 100%;
-}
-
-//Show gantt chart when in gantt layout mode
-.sub-section.gantt-chart.gantt {
-    visibility: visible;
+.sub-section.projects {
+    .gantt-chart {
+        display: none;
+        width: 100%;
+    }
 }
 
 //Hide project tabs when in gantt layout mode
+//Display controls though...
 .sub-section.projects.gantt {
-    display: none;
+    .preview {
+        display: none;
+    }
+
+    .gantt-chart {
+        display: block;
+    }
 }
 
 //Layout when in layered layout mode
