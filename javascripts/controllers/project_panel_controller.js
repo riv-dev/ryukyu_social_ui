@@ -34,6 +34,12 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         }
     }
 
+    $scope.selected_user_id_filter = null;
+
+    $scope.$watch('selected_user_id_filter', function(value) {
+        alert("changed! value="+value);
+    });
+
     //Default settings, always reset
     $localStorage.project_panel_show_settings = {
         "tasks": {
@@ -50,6 +56,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         for(var i=0;i<$scope.statuses.length;i++) {
             var status = $scope.statuses[i]; 
             $localStorage.project_panel_tasks_params[status]['page'] = 1;
+            $localStorage.project_panel_tasks_params[status]['user_id_filter'] = null;
         }
     } 
 
@@ -112,7 +119,6 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
     $scope.setTasksParam = function(status,setting,value) {
         $localStorage.project_panel_tasks_params[status][setting] = value; 
     }
-
 
     //Default settings
     if(!("project_panel_view_advanced" in $localStorage)) {
