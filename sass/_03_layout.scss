@@ -45,6 +45,37 @@
                 top: 5px;
                 right: 40px;
             }
+
+            .button.pin {
+                position: absolute;
+                top: 0px;
+                right: 3px;
+                overflow: hidden;
+                background-color: transparent;
+                border: none;
+                height: 10px;
+                line-height: 10px;
+                width: 10px;
+                text-indent: 9999px;
+                color: $grey;
+                margin: 0px;
+                padding: 0px;
+                &:hover {
+                    background-color: none;
+                    color: $red !important;
+                    cursor: none;
+                }
+                &:before {
+                    position: absolute;
+                    text-indent: 0px;
+                    top: 0px;
+                    right: 0px;
+                    display: block;
+                    font-size: 8px;
+                    font-family: "FontAwesome";
+                    content: "\f08d";
+                }
+            }
         }
         .button.layered {
             position: absolute;
