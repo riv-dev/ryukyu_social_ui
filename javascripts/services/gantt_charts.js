@@ -8,18 +8,16 @@ app.directive('dhxGantt1', function () {
     { name: "duration", label: "Duration", width: 80, align: "center" },
   ];
 
-  var markerId = gantt1.addMarker({
-    start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
-    css: "today", //a CSS class applied to the marker
-    text: "Now", //the marker title
-    title: moment().format('DD-MM-YYYY') // the marker's tooltip
-  });
-
-  //gantt1.config.initial_scroll = false;
-
   gantt1.config.sort = true;
 
   gantt1.attachEvent("onDataRender", function () {
+    var markerId = gantt1.addMarker({
+      start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
+      css: "today", //a CSS class applied to the marker
+      text: "Now", //the marker title
+      title: moment().format('DD-MM-YYYY') // the marker's tooltip
+    });
+
     gantt1.showDate(new Date(moment().format()));
   });
 
@@ -67,18 +65,15 @@ app.directive('dhxGantt2', function () {
     { name: "duration", label: "Duration", width: 80, align: "center" },
   ];
 
-  var markerId = gantt2.addMarker({
-    start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
-    css: "today", //a CSS class applied to the marker
-    text: "Now", //the marker title
-    title: moment().format('DD-MM-YYYY') // the marker's tooltip
-  });
-
-  //gantt2.config.initial_scroll = false;
-
   gantt2.config.sort = true;
 
   gantt2.attachEvent("onDataRender", function () {
+    var markerId = gantt2.addMarker({
+      start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
+      css: "today", //a CSS class applied to the marker
+      text: "Now", //the marker title
+      title: moment().format('DD-MM-YYYY') // the marker's tooltip
+    });
     gantt2.showDate(new Date(moment().format()));
   });
 
@@ -126,18 +121,15 @@ app.directive('dhxGantt3', function () {
     { name: "duration", label: "Duration", width: 80, align: "center" },
   ];
 
-  var markerId = gantt3.addMarker({
-    start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
-    css: "today", //a CSS class applied to the marker
-    text: "Now", //the marker title
-    title: moment().format('DD-MM-YYYY') // the marker's tooltip
-  });
-
-  //gantt3.config.initial_scroll = false;
-
   gantt3.config.sort = true;
 
   gantt3.attachEvent("onDataRender", function () {
+    var markerId = gantt3.addMarker({
+      start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
+      css: "today", //a CSS class applied to the marker
+      text: "Now", //the marker title
+      title: moment().format('DD-MM-YYYY') // the marker's tooltip
+    });
     gantt3.showDate(new Date(moment().format()));
   });
 
@@ -185,18 +177,15 @@ app.directive('dhxGantt4', function () {
     { name: "duration", label: "Duration", width: 80, align: "center" },
   ];
 
-  var markerId = gantt4.addMarker({
-    start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
-    css: "today", //a CSS class applied to the marker
-    text: "Now", //the marker title
-    title: moment().format('DD-MM-YYYY') // the marker's tooltip
-  });
-
-  //gantt4.config.initial_scroll = false;
-
   gantt4.config.sort = true;
 
   gantt4.attachEvent("onDataRender", function () {
+    var markerId = gantt4.addMarker({
+      start_date: new Date(new Date(moment().format())), //a Date object that sets the marker's date
+      css: "today", //a CSS class applied to the marker
+      text: "Now", //the marker title
+      title: moment().format('DD-MM-YYYY') // the marker's tooltip
+    });
     gantt4.showDate(new Date(moment().format()));
   });
 
