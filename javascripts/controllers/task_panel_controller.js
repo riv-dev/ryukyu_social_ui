@@ -491,7 +491,7 @@ app.controller('taskPanelController', function ($scope, $http, $window, $routePa
     $scope.upload_single_file = function(index, fileData) {
         if (!fileData.$error) {
             Upload.upload({
-                url: filesApiBaseURL + "/files/" + $routeParams.task_id + "/tasks",
+                url: filesApiBaseURL + "/tasks/" + $routeParams.task_id + "/files",
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
@@ -600,10 +600,10 @@ app.controller('taskPanelController', function ($scope, $http, $window, $routePa
             $scope.projects = response.data;
         });
         
-        //Get all files for project
+        //Get all files for task
         $http({
             method: 'GET',
-            url: filesApiBaseURL + "/files/" + $routeParams.task_id + "/tasks",
+            url: filesApiBaseURL + "/tasks/" + $routeParams.task_id + "/files",
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }

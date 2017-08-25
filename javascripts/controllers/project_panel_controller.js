@@ -787,7 +787,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
     $scope.upload_single_file = function(index, fileData) {
         if (!fileData.$error) {
             Upload.upload({
-                url: filesApiBaseURL + "/files/" + $routeParams.project_id + "/projects",
+                url: filesApiBaseURL + "/projects/" + $routeParams.project_id + "/files",
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 },
@@ -986,7 +986,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         //Get all files for project
         $http({
             method: 'GET',
-            url: filesApiBaseURL + "/files/" + $routeParams.project_id + "/projects",
+            url: filesApiBaseURL + "/projects/" + $routeParams.project_id + "/files",
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
