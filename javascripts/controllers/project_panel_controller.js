@@ -11,34 +11,39 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                 limit: 10,
                 page: 1,
                 count: null,
-                user_id_filter: null
+                user_id_filter: 0
             },
             "waiting": {
                 limit: 10,
                 page: 1,
                 count: null,
-                user_id_filter: null
+                user_id_filter: 0
             },
             "doing": {
                 limit: 10,
                 page: 1,
                 count: null,
-                user_id_filter: null
+                user_id_filter: 0
             },
             "finished": {
                 limit: 10,
                 page: 1,
                 count: null,
-                user_id_filter: null
+                user_id_filter: 0
             }
         }
     }
 
-    $scope.selected_user_id_filter = null;
+    $scope.project_panel_tasks_params = $localStorage.project_panel_tasks_params;
 
-    $scope.$watch('selected_user_id_filter', function(value) {
-        alert("changed! value="+value);
-    });
+    $scope.getTasksParam = function(status,setting) {
+        return $localStorage.project_panel_tasks_params[status][setting];
+    }
+
+    $scope.setTasksParam = function(status,setting,value) {
+        $localStorage.project_panel_tasks_params[status][setting] = value; 
+        $scope.project_panel_tasks_params[status][setting] = value;
+    }
 
     //Default settings, always reset
     $localStorage.project_panel_show_settings = {
@@ -55,8 +60,8 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         //clear all settings
         for(var i=0;i<$scope.statuses.length;i++) {
             var status = $scope.statuses[i]; 
-            $localStorage.project_panel_tasks_params[status]['page'] = 1;
-            $localStorage.project_panel_tasks_params[status]['user_id_filter'] = null;
+            $scope.setTasksParam(status,'page',1);
+            $scope.setTasksParam(status,'user_id_filter',0); 
         }
     } 
 
@@ -111,14 +116,15 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         "finished":[]
     };
 
-
-    $scope.getTasksParam = function(status,setting) {
-        return $localStorage.project_panel_tasks_params[status][setting];
+    $scope.unassigned_tasks = {
+        "dump":[],
+        "waiting":[],
+        "doing":[],
+        "finished":[]        
     }
 
-    $scope.setTasksParam = function(status,setting,value) {
-        $localStorage.project_panel_tasks_params[status][setting] = value; 
-    }
+
+
 
     //Default settings
     if(!("project_panel_view_advanced" in $localStorage)) {
@@ -357,7 +363,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                 });                    
             }
 
-            $scope.users_filter = [{firstname: "all", lastname: "", user_id: 0}];
+            $scope.users_filter = [{firstname: "all", lastname: "", user_id: 0},{firstname: "unassigned", lastname: "", user_id: -1}];
             $scope.users_filter = $scope.users_filter.concat($scope.assigned_users);
             $scope.selected_user_id_filter = $scope.users_filter[0];
         });
@@ -429,14 +435,18 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         var queryStr = "?status="+status;
 
         var userFilterBase = "";
+        var unassignedTag = "";
 
         if(!isNaN(user_id) && user_id > 0) {
             console.log("User ID: " + user_id);
             console.log("Limit : " + limit);
             userFilterBase = '/users/' + user_id;
         }
+        else if(user_id == -1) {
+            unassignedTag = "unassigned-";
+        }
 
-        var tasksCountURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/tasks-count' + queryStr;
+        var tasksCountURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/' + unassignedTag + 'tasks-count' + queryStr;
 
         //Get total tasks count first in order to calculate pagination parameters
         $http({
@@ -496,7 +506,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                 queryStr = "?" + queryArr.join("&");
             }
 
-            var tasksURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/tasks' + queryStr;
+            var tasksURL = tasksApiBaseURL + userFilterBase + '/projects/' + $routeParams.project_id + '/' + unassignedTag + 'tasks' + queryStr;
 
             //Get the project's tasks
             $http({
@@ -529,42 +539,44 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
                         });                    
                     }
 
-                    //Get all users on the current task
-                    $http({
-                        method: 'GET',
-                        url: tasksApiBaseURL + '/tasks/'+$scope.getTaskID(current_task)+'/users',
-                        headers: {
-                           'x-access-token': CommonFunctions.getToken()
-                        },
-                        params: {
-                           'i': i
-                        }
-                    }).then(function (response) {
-                        $scope.tasks[status][parseInt(response.config["params"]["i"])]["users"] = response.data
-
-                        for(var j=0;j<response.data.length;j++) {
-                            if($routeParams.user_id == response.data[j]["user_id"]) {
-                                $scope.this_task_user = response.data[j];
+                    if (user_id != -1) { //if this is an assigned task
+                        //Get all users on the current task
+                        $http({
+                            method: 'GET',
+                            url: tasksApiBaseURL + '/tasks/' + $scope.getTaskID(current_task) + '/users',
+                            headers: {
+                                'x-access-token': CommonFunctions.getToken()
+                            },
+                            params: {
+                                'i': i
                             }
+                        }).then(function (response) {
+                            $scope.tasks[status][parseInt(response.config["params"]["i"])]["users"] = response.data
 
-                            $http({
-                                method: 'GET',
-                                url: usersApiBaseURL + '/users/'+response.data[j]["user_id"],
-                                headers: {
-                                    'x-access-token': CommonFunctions.getToken()
-                                },
-                                params: {
-                                    'i': response.config["params"]["i"],
-                                    'j': j
+                            for (var j = 0; j < response.data.length; j++) {
+                                if ($routeParams.user_id == response.data[j]["user_id"]) {
+                                    $scope.this_task_user = response.data[j];
                                 }
-                            }).then(function (response) {
-                                var i = parseInt(response.config["params"]["i"]);
-                                var j = parseInt(response.config["params"]["j"]);
-                                $scope.tasks[status][i]["users"][j].firstname = response.data.firstname; 
-                                $scope.tasks[status][i]["users"][j].lastname = response.data.lastname; 
-                            });                          
-                        }
-                    });                   
+
+                                $http({
+                                    method: 'GET',
+                                    url: usersApiBaseURL + '/users/' + response.data[j]["user_id"],
+                                    headers: {
+                                        'x-access-token': CommonFunctions.getToken()
+                                    },
+                                    params: {
+                                        'i': response.config["params"]["i"],
+                                        'j': j
+                                    }
+                                }).then(function (response) {
+                                    var i = parseInt(response.config["params"]["i"]);
+                                    var j = parseInt(response.config["params"]["j"]);
+                                    $scope.tasks[status][i]["users"][j].firstname = response.data.firstname;
+                                    $scope.tasks[status][i]["users"][j].lastname = response.data.lastname;
+                                });
+                            }
+                        });
+                    }
                 }
             });        
         });
