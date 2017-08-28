@@ -60,8 +60,7 @@
         <dd class="value description"><pre ng-bind-html="this_project.description | linky"></pre><dd>
     </dl>
     <div class="attributes extra">
-        <div ng-show="loggedin_user.admin || this_user_write_access > 0" 
-            ngf-select ngf-drop ng-model="uploadFiles" class="dd-area"
+        <div ngf-select ngf-drop ng-model="uploadFiles" class="dd-area"
             ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
             ngf-drag-over-class="{accept:'dragover', reject:'dragover-err'}"  
             ngf-resize="resizeObj" ngf-multiple="true" ngf-keep="true" 
@@ -70,7 +69,10 @@
             <div class="dd-content">Select File or Drop File</div>
             <div class="add-photo"></div>
         </div>
-        <div class="line-buttons"><input class="button submit" type="submit" value="Upload all" ng-click="uploadAllFiles()"></div>
+        <div class="line-buttons">
+            <input class="button submit" type="submit" value="Upload all" ng-click="uploadAllFiles()">
+            <input class="button submit" type="submit" value="Delete all" ng-click="deleteAllFiles()">
+        </div>
         <ul class="list-files file-before-upload" ng-show="uploadFiles.length > 0">
             <li class="list-files-item repeated-item" ng-repeat="file in uploadFiles">
                 {{file.name}} 
@@ -85,7 +87,7 @@
             <li class="list-files-item repeated-item" ng-repeat="file in projectFiles">
                 <img class="icon-file" ng-src="{{getFileIcon(file.file_type)}}" />
                 <a ng-click="getFile(file.file_uri)">{{file.name}}</a> 
-                <button class="button delete submit" ng-click="delete_file($index, file.id, file.name)">Delete</button>
+                <button class="button delete submit" ng-click="delete_file($index, file.id, file.name)" ng-show="loggedin_user.admin || this_user_write_access > 0">Delete</button>
             </li>
         </ul>
     </div>

@@ -570,6 +570,35 @@ app.controller('taskPanelController', function ($scope, $http, $window, $timeout
             }
         );
     }
+    
+    $scope.deleteAllFiles = function() {
+        $http({
+            method: 'DELETE',
+            url: filesApiBaseURL + '/tasks/' + $routeParams.task_id + '/files',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                delete $scope.taskFiles;
+                $scope.taskFiles = [];
+                Lobibox.notify('success', {
+                    position: 'top right',
+                    sound: false,
+                    size: 'mini',
+                    msg: 'Deleted all file!'
+                });
+            },
+            function errorCallback(response) {
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    sound: false,
+                    size: 'mini',
+                    msg: 'Error deleting all file.'
+                });
+            }
+        );
+    };
 
     $scope.uploadAllFiles = function() {
         if ($scope.uploadFiles) {

@@ -91,8 +91,7 @@
         </dd>
     </dl>
     <div class="attributes extra">
-        <div ng-show="loggedin_user.admin || this_user_write_access > 0" 
-            ngf-select ngf-drop ng-model="uploadFiles" class="dd-area"
+        <div ngf-select ngf-drop ng-model="uploadFiles" class="dd-area"
             ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
             ngf-drag-over-class="{accept:'dragover', reject:'dragover-err'}"  
             ngf-resize="resizeObj" ngf-multiple="true" ngf-keep="true" 
@@ -101,7 +100,10 @@
             <div class="dd-content">Select File or Drop File</div>
             <div class="add-photo"></div>
         </div>
-        <div class="line-buttons"><input class="button submit" type="submit" value="Upload all" ng-click="uploadAllFiles()"></div>
+        <div class="line-buttons">
+            <input class="button submit" type="submit" value="Upload all" ng-click="uploadAllFiles()">
+            <input class="button submit" type="submit" value="Delete all" ng-click="deleteAllFiles()">
+        </div>
         <ul class="list-files file-before-upload" ng-show="uploadFiles.length > 0">
             <li class="list-files-item repeated-item" ng-repeat="file in uploadFiles">
                 {{file.name}} 
