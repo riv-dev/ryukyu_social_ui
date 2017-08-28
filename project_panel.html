@@ -86,7 +86,7 @@
         <ul class="list-files file-upload" ng-show="projectFiles.length > 0">
             <li class="list-files-item repeated-item" ng-repeat="file in projectFiles">
                 <img class="icon-file" ng-src="{{getFileIcon(file.file_type)}}" />
-                <a ng-click="getFile(file.file_uri)">{{file.name}}</a> 
+                <a href="{{getFile(file.file_uri)}}" target="_self">{{file.name}}</a> 
                 <button class="button delete submit" ng-click="delete_file($index, file.id, file.name)" ng-show="loggedin_user.admin || this_user_write_access > 0">Delete</button>
             </li>
         </ul>
