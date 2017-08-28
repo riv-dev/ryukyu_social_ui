@@ -6,6 +6,7 @@ var userProfileApiBaseURL = null;
 var projectsApiBaseURL = null;
 var projectPhotosApiBaseURL = null;
 var tasksApiBaseURL = null;
+var filesApiBaseURL = null;
 
 switch (run_environment) {
   case 'local_development':
@@ -15,6 +16,7 @@ switch (run_environment) {
     projectPhotosApiBaseURL = "http://localhost:8004";
     tasksApiBaseURL = "http://localhost:8003";
     userProfileApiBaseURL = "http://localhost:8005";
+    filesApiBaseURL = "http://localhost:8006";
     break;
   case 'remote_development':
     usersApiBaseURL = "https://ryukyu-social-dev.cleverword.com/users_service/api";
@@ -23,6 +25,7 @@ switch (run_environment) {
     projectPhotosApiBaseURL = "https://ryukyu-social-dev.cleverword.com/project_photos_service/api";
     tasksApiBaseURL = "https://ryukyu-social-dev.cleverword.com/tasks_service/api";  
     userProfileApiBaseURL = "https://ryukyu-social-dev.cleverword.com/user_profile_service/api";
+    filesApiBaseURL = "https://ryukyu-social-dev.cleverword.com/files_service/api";
     break;
   case 'production':
     usersApiBaseURL = "https://ryukyu-social.cleverword.com/users_service/api";
@@ -31,6 +34,7 @@ switch (run_environment) {
     projectPhotosApiBaseURL = "https://ryukyu-social.cleverword.com/project_photos_service/api";
     tasksApiBaseURL = "https://ryukyu-social.cleverword.com/tasks_service/api";
     userProfileApiBaseURL = "https://ryukyu-social.cleverword.com/user_profile_service/api";
+    filesApiBaseURL = "https://ryukyu-social.cleverword.com/files_service/api";
     break;
   default:
     usersApiBaseURL = "http://localhost:8000";
@@ -39,4 +43,5 @@ switch (run_environment) {
     projectPhotosApiBaseURL = "http://localhost:8004";
     tasksApiBaseURL = "http://localhost:8003";  
     userProfileApiBaseURL = "http://localhost:8005";
+    filesApiBaseURL = "http://localhost:8006";
 }
