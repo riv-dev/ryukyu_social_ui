@@ -477,7 +477,7 @@ app.controller('taskPanelController', function ($scope, $http, $window, $timeout
     };
 
     $scope.getFile = function(uri) {
-        $window.open(filesApiBaseURL + uri);
+        return filesApiBaseURL + uri;
     }
 
     $scope.upload_files = function (files) {
