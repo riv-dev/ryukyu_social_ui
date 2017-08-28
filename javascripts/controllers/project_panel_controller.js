@@ -791,7 +791,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
     };
 
     $scope.getFile = function(uri) {
-        $window.open(filesApiBaseURL + uri);
+        return filesApiBaseURL + uri;
     }
 
     $scope.upload_files = function (files) {
@@ -887,61 +887,81 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
     }
 
     $scope.delete_file = function(index, id, filename) {
-        $http({
-            method: 'DELETE',
-            url: filesApiBaseURL + '/files/' + id,
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(
-            function successCallback(response) {
-                delete $scope.projectFiles[index];
-                $scope.projectFiles.splice(index, 1);
-                Lobibox.notify('success', {
-                    position: 'top right',
-                    sound: false,
-                    size: 'mini',
-                    msg: 'Deleted file ' + filename + '!'
-                });
-            },
-            function errorCallback(response) {
-                Lobibox.notify('error', {
-                    position: 'top right',
-                    sound: false,
-                    size: 'mini',
-                    msg: 'Error deleting file ' + filename + '.'
-                });
-            }
-        );
+        var answer = prompt('Remove file ' + filename + ' from this project?  Type "yes" to confirm');
+        if(answer == "yes") {
+            $http({
+                method: 'DELETE',
+                url: filesApiBaseURL + '/files/' + id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+                function successCallback(response) {
+                    delete $scope.projectFiles[index];
+                    $scope.projectFiles.splice(index, 1);
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Deleted file ' + filename + '!'
+                    });
+                },
+                function errorCallback(response) {
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Error deleting file ' + filename + '.'
+                    });
+                }
+            );
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Did not type "yes". ' + filename + ' not removed from the project.'
+            });
+        }
     }
     
     $scope.deleteAllFiles = function() {
-        $http({
-            method: 'DELETE',
-            url: filesApiBaseURL + '/projects/' + $routeParams.project_id + '/files',
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(
-            function successCallback(response) {
-                delete $scope.projectFiles;
-                $scope.projectFiles = [];
-                Lobibox.notify('success', {
-                    position: 'top right',
-                    sound: false,
-                    size: 'mini',
-                    msg: 'Deleted all file!'
-                });
-            },
-            function errorCallback(response) {
-                Lobibox.notify('error', {
-                    position: 'top right',
-                    sound: false,
-                    size: 'mini',
-                    msg: 'Error deleting all file.'
-                });
-            }
-        );
+        var answer = prompt('Remove all file from this project?  Type "yes" to confirm');
+        if(answer == "yes") {
+            $http({
+                method: 'DELETE',
+                url: filesApiBaseURL + '/projects/' + $routeParams.project_id + '/files',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+                function successCallback(response) {
+                    delete $scope.projectFiles;
+                    $scope.projectFiles = [];
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Deleted all file!'
+                    });
+                },
+                function errorCallback(response) {
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Error deleting all file.'
+                    });
+                }
+            );
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Did not type "yes". All file not removed from the project.'
+            });
+        }
     };
 
     $scope.uploadAllFiles = function() {
