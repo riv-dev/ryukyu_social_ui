@@ -786,7 +786,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
 
     $scope.upload_single_file = function(index, fileData) {
         if (!fileData.$error) {
-            Upload.upload({
+            fileData.upload = Upload.upload({
                 url: filesApiBaseURL + "/projects/" + $routeParams.project_id + "/files",
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
@@ -794,19 +794,34 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 data: {
                     file: fileData
                 }
-            }).progress(function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            }).success(function (data, status, headers, config) {
-                delete $scope.uploadFiles[index];
-                $scope.uploadFiles.splice(index, 1);
-                if ($scope.projectFiles.message) $scope.projectFiles = [];
-                $scope.projectFiles.push(data);
-                Lobibox.notify('success', {
-                    position: 'top right',
-                    sound: false,
-                    size: 'mini',
-                    msg: 'Successfully added file ' + fileData.name + '!'
+            });
+
+            fileData.upload.then(function (response) {
+                $timeout(function () {
+                    if (fileData.progress == 100) {
+                        delete $scope.uploadFiles[index];
+                        $scope.uploadFiles.splice(index, 1);
+                    }
+                    if ($scope.projectFiles.message) $scope.projectFiles = [];
+                    $scope.projectFiles.push(response.data);
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Successfully added file ' + fileData.name + '!'
+                    });
                 });
+            }, function (response) {
+                if (response.status > 0)
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: response.status + ': ' + response.data + '.'
+                    });
+            }, function (evt) {
+                // Math.min is to fix IE which reports 200% sometimes
+                fileData.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
         } else {
             Lobibox.notify('error', {

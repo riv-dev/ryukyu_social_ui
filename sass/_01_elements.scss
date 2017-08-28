@@ -173,6 +173,14 @@
         font-family: "FontAwesome";
         content: "\f00d";
     }
+
+    .file-before-upload &{
+        top: 0;
+    }
+    
+    .file-upload &{
+        top: 2px;
+    }
 }
 
 .button.upload {
@@ -201,6 +209,10 @@
         font-size: 14px;
         font-family: "FontAwesome";
         content: "\f093";
+    }
+    
+    .file-before-upload &{
+        top: 0;
     }
 }
 
@@ -833,6 +845,7 @@ button.dump {
     &-item {
         position: relative;
         margin-top: 15px;
+        padding-bottom: 8px;
 
         .button.upload {
             right: 30px;
@@ -851,7 +864,7 @@ button.dump {
         position: relative;
         height: 100%;
         width: 0;
-        background-color: #e8e8e8;
+        background-color: #5cb85c;
         @include transition(0.3s);
     }
 }

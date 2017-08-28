@@ -102,18 +102,18 @@
             <div class="add-photo"></div>
         </div>
         <div class="line-buttons"><input class="button submit" type="submit" value="Upload all" ng-click="uploadAllFiles()"></div>
-        <ul class="list-files" ng-show="uploadFiles.length > 0">
+        <ul class="list-files file-before-upload" ng-show="uploadFiles.length > 0">
             <li class="list-files-item repeated-item" ng-repeat="file in uploadFiles">
                 {{file.name}} 
                 <button class="button delete submit" ng-click="delete_upload_file($index)">Delete</button>
                 <button class="button upload submit" ng-click="upload_single_file($index, file)">Upload</button>
-                <div class="progress-delay">
-                    <div class="progress-bar" ng-style="{width : ( file._percentage + '%' ) }"></div>
+                <div class="progress-delay" ng-show="file.progress >= 0">
+                    <div class="progress-bar" ng-style="{width : ( file.progress + '%' ) }"></div>
                 </div>
             </li>
         </ul>
-        <ul class="list-files" ng-show="projectFiles.length > 0">
-            <li class="list-files-item repeated-item" ng-repeat="file in projectFiles">
+        <ul class="list-files file-upload" ng-show="taskFiles.length > 0">
+            <li class="list-files-item repeated-item" ng-repeat="file in taskFiles">
                 <img class="icon-file" ng-src="{{getFileIcon(file.file_type)}}" />
                 <a ng-click="getFile(file.file_uri)">{{file.name}}</a> 
                 <button class="button delete submit" ng-click="delete_file($index, file.id, file.name)">Delete</button>
