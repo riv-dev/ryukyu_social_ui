@@ -517,7 +517,7 @@ app.controller('taskPanelController', function ($scope, $http, $window, $routePa
                 position: 'top right',
                 sound: false,
                 size: 'mini',
-                msg: 'Error added ' + '.'
+                msg: 'Error added ' + fileData.name + '.'
             });
         }
     }
