@@ -2,6 +2,19 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     $scope.$parent.hero = "Home Panel";
     $scope.$parent.panel_class = "home";
 
+    //Caches for optimization
+    $scope.users_cache = {
+        //Cache by user id
+    }
+
+    $scope.tasks_cache = {
+
+    }
+
+    $scope.projects_cache = {
+
+    }
+
     $scope.statuses = ["dump","waiting","doing","finished"];
 
     //Default settings
@@ -443,21 +456,29 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     var current_task = $scope.tasks[status][i];
                     var current_project_id = current_task.project_id;
 
+                    $scope.tasks_cache[current_task.id] = current_task; //cache the task
+
                     //Get the project name
                     if(current_project_id) {
-                        $http({
-                            method: 'GET',
-                            url: projectsApiBaseURL + '/projects/'+current_project_id,
-                            headers: {
-                                'x-access-token': CommonFunctions.getToken()
-                            },
-                            params: {
-                                'i': i
-                            }
-                        }).then(function (response) {
-                            var current_project = response.data;
-                            $scope.tasks[status][parseInt(response.config["params"]["i"])]["project_name"] = current_project.name;
-                        });                    
+                        if ($scope.projects_cache[current_project_id]) {
+                            $scope.tasks[status][i]["project_name"] = $scope.projects_cache[current_project_id].name; 
+                            console.log("Using projects cache: {name: " + $scope.projects_cache[current_project_id].name + "}");
+                        } else {
+                            $http({
+                                method: 'GET',
+                                url: projectsApiBaseURL + '/projects/' + current_project_id,
+                                headers: {
+                                    'x-access-token': CommonFunctions.getToken()
+                                },
+                                params: {
+                                    'i': i
+                                }
+                            }).then(function (response) {
+                                var current_project = response.data;
+                                $scope.tasks[status][parseInt(response.config["params"]["i"])]["project_name"] = current_project.name;
+                                $scope.projects_cache[current_project_id] = response.data; //cache
+                            });
+                        }
                     }
 
                     //Get all users on the current task
@@ -474,22 +495,33 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                         $scope.tasks[status][parseInt(response.config["params"]["i"])]["users"] = response.data
 
                         for(var j=0;j<response.data.length;j++) {
-                            $http({
-                                method: 'GET',
-                                url: usersApiBaseURL + '/users/'+response.data[j]["user_id"],
-                                headers: {
-                                    'x-access-token': CommonFunctions.getToken()
-                                },
-                                params: {
-                                    'i': response.config["params"]["i"],
-                                    'j': j
-                                }
-                            }).then(function (response) {
+                            var user_id = response.data[j]["user_id"];
+
+                            if ($scope.users_cache[user_id]) {
                                 var i = parseInt(response.config["params"]["i"]);
-                                var j = parseInt(response.config["params"]["j"]);
-                                $scope.tasks[status][i]["users"][j].firstname = response.data.firstname; 
-                                $scope.tasks[status][i]["users"][j].lastname = response.data.lastname; 
-                            });                          
+                                $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
+                                $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;
+                                console.log("Using cache for user: {firstname: " + $scope.users_cache[user_id].firstname + ", lastname: " + $scope.users_cache[user_id].lastname + "}");
+                            } else {
+                                $http({
+                                    method: 'GET',
+                                    url: usersApiBaseURL + '/users/' + user_id,
+                                    headers: {
+                                        'x-access-token': CommonFunctions.getToken()
+                                    },
+                                    params: {
+                                        'i': response.config["params"]["i"],
+                                        'j': j
+                                    }
+                                }).then(function (response) {
+                                    var i = parseInt(response.config["params"]["i"]);
+                                    var j = parseInt(response.config["params"]["j"]);
+                                    $scope.tasks[status][i]["users"][j].firstname = response.data.firstname;
+                                    $scope.tasks[status][i]["users"][j].lastname = response.data.lastname;
+
+                                    $scope.users_cache[user_id] = response.data; //cache the user for the future
+                                });
+                            }
                         }
 
                     });                   
@@ -620,6 +652,9 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     var current_project = $scope.projects[status][i];
                     var current_project_id = current_project.id;
 
+                    //Cache for optimization
+                    $scope.projects_cache[current_project_id] = current_project;
+
                     var start;
                     var end;
                     var duration;
@@ -677,24 +712,31 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                         $scope.projects[status][parseInt(response.config["params"]["i"])]["users"] = response.data;
 
                         for(var j=0;j<response.data.length;j++) {
-                            $http({
-                                method: 'GET',
-                                url: usersApiBaseURL + '/users/'+response.data[j]["user_id"],
-                                headers: {
-                                    'x-access-token': CommonFunctions.getToken()
-                                },
-                                params: {
-                                    'i': response.config["params"]["i"],
-                                    'j': j
-                                }
-                            }).then(function (response) {
+                            var user_id = response.data[j]["user_id"];
+                            if ($scope.users_cache[user_id]) {
                                 var i = parseInt(response.config["params"]["i"]);
-                                var j = parseInt(response.config["params"]["j"]);
-                                $scope.projects[status][i]["users"][j].firstname = response.data.firstname; 
-                                $scope.projects[status][i]["users"][j].lastname = response.data.lastname; 
-                            });                          
-
-
+                                $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
+                                $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;                                
+                                console.log("Using cache for user: {firstname: " + $scope.users_cache[user_id].firstname + ", lastname: " + $scope.users_cache[user_id].lastname + "}");
+                            } else {
+                                $http({
+                                    method: 'GET',
+                                    url: usersApiBaseURL + '/users/' + user_id,
+                                    headers: {
+                                        'x-access-token': CommonFunctions.getToken()
+                                    },
+                                    params: {
+                                        'i': response.config["params"]["i"],
+                                        'j': j
+                                    }
+                                }).then(function (response) {
+                                    var i = parseInt(response.config["params"]["i"]);
+                                    var j = parseInt(response.config["params"]["j"]);
+                                    $scope.projects[status][i]["users"][j].firstname = response.data.firstname;
+                                    $scope.projects[status][i]["users"][j].lastname = response.data.lastname;
+                                    $scope.users_cache[user_id] = response.data; //cache the user for the future
+                                });
+                            }
                         }
                     });                    
 
@@ -835,6 +877,9 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             $scope.users = response.data;
 
             for (var i = 0; i < $scope.users.length; i++) {
+                //Cache the user by id for optimization
+                $scope.users_cache[$scope.users[i].id] = $scope.users[i];
+
                 //Get projects
                 $scope.getProjectsByUser($scope.users[i].id);
 
