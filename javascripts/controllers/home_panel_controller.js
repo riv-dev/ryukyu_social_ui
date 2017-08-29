@@ -462,7 +462,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                     if(current_project_id) {
                         if ($scope.projects_cache[current_project_id]) {
                             $scope.tasks[status][i]["project_name"] = $scope.projects_cache[current_project_id].name; 
-                            console.log("Using projects cache: {name: " + $scope.projects_cache[current_project_id].name + "}");
+                            //console.log("Using projects cache: {name: " + $scope.projects_cache[current_project_id].name + "}");
                         } else {
                             $http({
                                 method: 'GET',
@@ -501,7 +501,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                                 var i = parseInt(response.config["params"]["i"]);
                                 $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
                                 $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;
-                                console.log("Using cache for user: {firstname: " + $scope.users_cache[user_id].firstname + ", lastname: " + $scope.users_cache[user_id].lastname + "}");
+                                //console.log("Using cache for user: {firstname: " + $scope.users_cache[user_id].firstname + ", lastname: " + $scope.users_cache[user_id].lastname + "}");
                             } else {
                                 $http({
                                     method: 'GET',
@@ -717,7 +717,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                                 var i = parseInt(response.config["params"]["i"]);
                                 $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
                                 $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;                                
-                                console.log("Using cache for user: {firstname: " + $scope.users_cache[user_id].firstname + ", lastname: " + $scope.users_cache[user_id].lastname + "}");
+                                //console.log("Using cache for user: {firstname: " + $scope.users_cache[user_id].firstname + ", lastname: " + $scope.users_cache[user_id].lastname + "}");
                             } else {
                                 $http({
                                     method: 'GET',
