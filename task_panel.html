@@ -78,7 +78,7 @@
         </dd>
     </dl>
 
-    <dl class="attributes extra">
+    <dl class="attributes metrics">
         <dt class="key created_by">Created by:</dt>
         <dd class="value created_by">{{this_task.creator_name}}</dd>
         <dt class="key created_at">Created at:</dt>
@@ -90,6 +90,38 @@
             <input class="checkbox" type="checkbox" ng-model="this_task.archived" ng-true-value="1" ng-false-value="0" ng-change="put('archived',this_task.archived)">
         </dd>
     </dl>
+    <div class="attributes extra">
+        <div ngf-select ngf-drop ng-model="uploadFiles" class="dd-area"
+            ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
+            ngf-drag-over-class="{accept:'dragover', reject:'dragover-err'}"  
+            ngf-resize="resizeObj" ngf-multiple="true" ngf-keep="true" 
+            ngf-max-size="50MB" ngf-fix-orientation="orientation" 
+            ngf-drop-available="dropAvailable">
+            <div class="dd-content">Select File or Drop File</div>
+            <div class="add-photo"></div>
+        </div>
+        <div class="line-buttons">
+            <input class="button submit" type="submit" value="Upload all" ng-click="uploadAllFiles()">
+            <input class="button submit" type="submit" value="Delete all" ng-click="deleteAllFiles()">
+        </div>
+        <ul class="list-files file-before-upload" ng-show="uploadFiles.length > 0">
+            <li class="list-files-item repeated-item" ng-repeat="file in uploadFiles">
+                {{file.name}} 
+                <button class="button delete submit" ng-click="delete_upload_file($index)">Delete</button>
+                <button class="button upload submit" ng-click="upload_single_file($index, file)">Upload</button>
+                <div class="progress-delay" ng-show="file.progress >= 0">
+                    <div class="progress-bar" ng-style="{width : ( file.progress + '%' ) }"></div>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-files file-upload" ng-show="taskFiles.length > 0">
+            <li class="list-files-item repeated-item" ng-repeat="file in taskFiles">
+                <img class="icon-file" ng-src="{{getFileIcon(file.file_type)}}" />
+                <a href="{{getFile(file.file_uri)}}">{{file.name}}</a> 
+                <button class="button delete submit" ng-click="delete_file($index, file.id, file.name)">Delete</button>
+            </li>
+        </ul>
+    </div>
     <ul class="links">
         <li class="item back" ng-if="!this_user_id && !this_project_id"><a class="link" ng-click="back()" href="./">Go Back</a></li>
         <li class="item back" ng-if="this_user_id"><a class="link" href="./users/{{this_user_id}}">Go Back to User</a></li>

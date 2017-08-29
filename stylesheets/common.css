@@ -386,8 +386,52 @@ img {
   font-family: "FontAwesome";
   content: "\f00d";
 }
+/* line 179, ../sass/_01_elements.scss */
+.file-before-upload .button.delete {
+  top: 0;
+}
+/* line 183, ../sass/_01_elements.scss */
+.file-upload .button.delete {
+  top: 2px;
+}
 
-/* line 180, ../sass/_01_elements.scss */
+/* line 188, ../sass/_01_elements.scss */
+.button.upload {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  height: 18px;
+  line-height: 18px;
+  width: 18px;
+  text-indent: 9999px;
+  color: black;
+  margin: 0px;
+  padding: 0px;
+}
+/* line 202, ../sass/_01_elements.scss */
+.button.upload:hover {
+  background-color: none;
+  color: #c40505;
+}
+/* line 206, ../sass/_01_elements.scss */
+.button.upload:before {
+  position: absolute;
+  text-indent: 0px;
+  left: 3px;
+  display: block;
+  font-size: 14px;
+  font-family: "FontAwesome";
+  content: "\f093";
+}
+/* line 216, ../sass/_01_elements.scss */
+.file-before-upload .button.upload {
+  top: 0;
+}
+
+/* line 221, ../sass/_01_elements.scss */
 .button.pin {
   position: absolute;
   top: 5px;
@@ -403,12 +447,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 194, ../sass/_01_elements.scss */
+/* line 235, ../sass/_01_elements.scss */
 .button.pin:hover {
   background-color: none;
   color: #c40505;
 }
-/* line 198, ../sass/_01_elements.scss */
+/* line 239, ../sass/_01_elements.scss */
 .button.pin:before {
   position: absolute;
   text-indent: 0px;
@@ -419,16 +463,16 @@ img {
   content: "\f08d";
 }
 
-/* line 209, ../sass/_01_elements.scss */
+/* line 250, ../sass/_01_elements.scss */
 .pinned {
   color: #c40505 !important;
 }
-/* line 212, ../sass/_01_elements.scss */
+/* line 253, ../sass/_01_elements.scss */
 .pinned:hover {
   background-color: none;
   color: #c2c2c2 !important;
 }
-/* line 217, ../sass/_01_elements.scss */
+/* line 258, ../sass/_01_elements.scss */
 .pinned:before {
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
@@ -437,7 +481,7 @@ img {
   transform: rotate(-45deg);
 }
 
-/* line 226, ../sass/_01_elements.scss */
+/* line 267, ../sass/_01_elements.scss */
 .button.calendar {
   position: relative;
   overflow: hidden;
@@ -451,12 +495,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 239, ../sass/_01_elements.scss */
+/* line 280, ../sass/_01_elements.scss */
 .button.calendar:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 243, ../sass/_01_elements.scss */
+/* line 284, ../sass/_01_elements.scss */
 .button.calendar:before {
   position: absolute;
   text-indent: 0px;
@@ -467,7 +511,7 @@ img {
   content: "\f073";
 }
 
-/* line 254, ../sass/_01_elements.scss */
+/* line 295, ../sass/_01_elements.scss */
 .button.view_advanced {
   position: relative;
   overflow: hidden;
@@ -481,12 +525,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 267, ../sass/_01_elements.scss */
+/* line 308, ../sass/_01_elements.scss */
 .button.view_advanced:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 271, ../sass/_01_elements.scss */
+/* line 312, ../sass/_01_elements.scss */
 .button.view_advanced:before {
   position: absolute;
   text-indent: 0px;
@@ -497,7 +541,7 @@ img {
   content: "\f06e";
 }
 
-/* line 282, ../sass/_01_elements.scss */
+/* line 323, ../sass/_01_elements.scss */
 .button.view_simple {
   position: relative;
   overflow: hidden;
@@ -511,12 +555,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 295, ../sass/_01_elements.scss */
+/* line 336, ../sass/_01_elements.scss */
 .button.view_simple:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 299, ../sass/_01_elements.scss */
+/* line 340, ../sass/_01_elements.scss */
 .button.view_simple:before {
   position: absolute;
   text-indent: 0px;
@@ -527,7 +571,7 @@ img {
   content: "\f070";
 }
 
-/* line 310, ../sass/_01_elements.scss */
+/* line 351, ../sass/_01_elements.scss */
 .button.add {
   position: relative;
   overflow: hidden;
@@ -541,12 +585,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 323, ../sass/_01_elements.scss */
+/* line 364, ../sass/_01_elements.scss */
 .button.add:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 327, ../sass/_01_elements.scss */
+/* line 368, ../sass/_01_elements.scss */
 .button.add:before {
   position: absolute;
   text-indent: 0px;
@@ -558,7 +602,7 @@ img {
   content: "\f055";
 }
 
-/* line 339, ../sass/_01_elements.scss */
+/* line 380, ../sass/_01_elements.scss */
 .button.expand {
   position: relative;
   overflow: hidden;
@@ -572,12 +616,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 352, ../sass/_01_elements.scss */
+/* line 393, ../sass/_01_elements.scss */
 .button.expand:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 356, ../sass/_01_elements.scss */
+/* line 397, ../sass/_01_elements.scss */
 .button.expand:before {
   position: absolute;
   text-indent: 0px;
@@ -588,7 +632,7 @@ img {
   content: "\f196";
 }
 
-/* line 367, ../sass/_01_elements.scss */
+/* line 408, ../sass/_01_elements.scss */
 .button.collapse {
   position: relative;
   overflow: hidden;
@@ -602,12 +646,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 380, ../sass/_01_elements.scss */
+/* line 421, ../sass/_01_elements.scss */
 .button.collapse:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 384, ../sass/_01_elements.scss */
+/* line 425, ../sass/_01_elements.scss */
 .button.collapse:before {
   position: absolute;
   text-indent: 0px;
@@ -618,7 +662,7 @@ img {
   content: "\f147";
 }
 
-/* line 395, ../sass/_01_elements.scss */
+/* line 436, ../sass/_01_elements.scss */
 .button.minimize {
   position: absolute;
   top: 5px;
@@ -634,12 +678,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 409, ../sass/_01_elements.scss */
+/* line 450, ../sass/_01_elements.scss */
 .button.minimize:hover {
   background-color: #e2edff;
   color: #081ed1;
 }
-/* line 413, ../sass/_01_elements.scss */
+/* line 454, ../sass/_01_elements.scss */
 .button.minimize:before {
   position: absolute;
   text-indent: 0px;
@@ -650,7 +694,7 @@ img {
   content: "\f2d2";
 }
 
-/* line 424, ../sass/_01_elements.scss */
+/* line 465, ../sass/_01_elements.scss */
 .button.layered {
   position: relative;
   overflow: hidden;
@@ -664,12 +708,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 436, ../sass/_01_elements.scss */
+/* line 477, ../sass/_01_elements.scss */
 .button.layered:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 440, ../sass/_01_elements.scss */
+/* line 481, ../sass/_01_elements.scss */
 .button.layered:before {
   text-indent: 0px;
   display: block;
@@ -678,7 +722,7 @@ img {
   content: "\f0c8";
 }
 
-/* line 449, ../sass/_01_elements.scss */
+/* line 490, ../sass/_01_elements.scss */
 .button.horizontal {
   position: relative;
   overflow: hidden;
@@ -692,12 +736,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 461, ../sass/_01_elements.scss */
+/* line 502, ../sass/_01_elements.scss */
 .button.horizontal:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 465, ../sass/_01_elements.scss */
+/* line 506, ../sass/_01_elements.scss */
 .button.horizontal:before {
   text-indent: 0px;
   display: block;
@@ -706,7 +750,7 @@ img {
   content: "\f07e";
 }
 
-/* line 474, ../sass/_01_elements.scss */
+/* line 515, ../sass/_01_elements.scss */
 .button.vertical {
   position: relative;
   overflow: hidden;
@@ -720,12 +764,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 486, ../sass/_01_elements.scss */
+/* line 527, ../sass/_01_elements.scss */
 .button.vertical:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 490, ../sass/_01_elements.scss */
+/* line 531, ../sass/_01_elements.scss */
 .button.vertical:before {
   text-indent: 0px;
   display: block;
@@ -734,7 +778,7 @@ img {
   content: "\f07d";
 }
 
-/* line 499, ../sass/_01_elements.scss */
+/* line 540, ../sass/_01_elements.scss */
 .button.maximize {
   position: absolute;
   top: 5px;
@@ -750,12 +794,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 513, ../sass/_01_elements.scss */
+/* line 554, ../sass/_01_elements.scss */
 .button.maximize:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 517, ../sass/_01_elements.scss */
+/* line 558, ../sass/_01_elements.scss */
 .button.maximize:before {
   position: absolute;
   text-indent: 0px;
@@ -766,7 +810,7 @@ img {
   content: "\f2d0";
 }
 
-/* line 528, ../sass/_01_elements.scss */
+/* line 569, ../sass/_01_elements.scss */
 .button.gantt {
   position: relative;
   overflow: hidden;
@@ -780,12 +824,12 @@ img {
   margin: 0px;
   padding: 0px;
 }
-/* line 540, ../sass/_01_elements.scss */
+/* line 581, ../sass/_01_elements.scss */
 .button.gantt:hover {
   background-color: none;
   color: #081ed1;
 }
-/* line 544, ../sass/_01_elements.scss */
+/* line 585, ../sass/_01_elements.scss */
 .button.gantt:before {
   text-indent: 0px;
   display: block;
@@ -794,7 +838,7 @@ img {
   content: "\f0ae";
 }
 
-/* line 553, ../sass/_01_elements.scss */
+/* line 594, ../sass/_01_elements.scss */
 .button.permissions {
   position: absolute;
   top: 5px;
@@ -810,12 +854,12 @@ img {
   margin: 0px;
   padding: 0px !important;
 }
-/* line 567, ../sass/_01_elements.scss */
+/* line 608, ../sass/_01_elements.scss */
 .button.permissions:hover {
   background-color: transparent !important;
   color: #081ed1 !important;
 }
-/* line 571, ../sass/_01_elements.scss */
+/* line 612, ../sass/_01_elements.scss */
 .button.permissions:before {
   position: absolute;
   text-indent: 0px;
@@ -826,7 +870,7 @@ img {
   content: "\f023";
 }
 
-/* line 582, ../sass/_01_elements.scss */
+/* line 623, ../sass/_01_elements.scss */
 .button.edit {
   position: relative;
   top: 0px;
@@ -842,12 +886,12 @@ img {
   margin: 0px;
   padding: 0px !important;
 }
-/* line 596, ../sass/_01_elements.scss */
+/* line 637, ../sass/_01_elements.scss */
 .button.edit:hover {
   background-color: transparent !important;
   color: #081ed1 !important;
 }
-/* line 600, ../sass/_01_elements.scss */
+/* line 641, ../sass/_01_elements.scss */
 .button.edit:before {
   position: absolute;
   text-indent: 0px;
@@ -858,7 +902,7 @@ img {
   content: "\f040";
 }
 
-/* line 611, ../sass/_01_elements.scss */
+/* line 652, ../sass/_01_elements.scss */
 .button.settings {
   position: relative;
   display: block;
@@ -882,11 +926,11 @@ img {
   transition: 0.2s;
   cursor: pointer;
 }
-/* line 628, ../sass/_01_elements.scss */
+/* line 669, ../sass/_01_elements.scss */
 .button.settings:hover {
   background-color: #e2edff;
 }
-/* line 631, ../sass/_01_elements.scss */
+/* line 672, ../sass/_01_elements.scss */
 .button.settings:before {
   position: absolute;
   display: block;
@@ -900,17 +944,17 @@ img {
   text-align: center;
 }
 
-/* line 649, ../sass/_01_elements.scss */
+/* line 690, ../sass/_01_elements.scss */
 .show {
   display: block;
 }
 
-/* line 653, ../sass/_01_elements.scss */
+/* line 694, ../sass/_01_elements.scss */
 .hide {
   display: none;
 }
 
-/* line 657, ../sass/_01_elements.scss */
+/* line 698, ../sass/_01_elements.scss */
 .disabled {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -920,98 +964,98 @@ img {
   user-select: none;
 }
 
-/* line 666, ../sass/_01_elements.scss */
+/* line 707, ../sass/_01_elements.scss */
 .footer {
   text-align: center;
   font-size: 10px;
   color: #5e5e5e;
 }
 
-/* line 673, ../sass/_01_elements.scss */
+/* line 714, ../sass/_01_elements.scss */
 .alert {
   color: #424000;
   background-color: #f9f795;
   border-color: #424000;
 }
 
-/* line 679, ../sass/_01_elements.scss */
+/* line 720, ../sass/_01_elements.scss */
 .fail {
   color: #8c0000;
   background-color: #ffb2b2;
   border-color: #8c0000;
 }
 
-/* line 685, ../sass/_01_elements.scss */
+/* line 726, ../sass/_01_elements.scss */
 .success {
   color: #104c11;
   background-color: #e8ffed;
   border-color: #104c11;
 }
 
-/* line 691, ../sass/_01_elements.scss */
+/* line 732, ../sass/_01_elements.scss */
 .none {
   color: #939393;
 }
 
-/* line 695, ../sass/_01_elements.scss */
+/* line 736, ../sass/_01_elements.scss */
 .important {
   font-weight: bold;
   color: #c40505;
 }
 
-/* line 700, ../sass/_01_elements.scss */
+/* line 741, ../sass/_01_elements.scss */
 .finished,
 button.finished {
   color: #1f7c20;
   background-color: #e8ffed;
 }
 
-/* line 706, ../sass/_01_elements.scss */
+/* line 747, ../sass/_01_elements.scss */
 .doing,
 button.doing {
   color: #081ed1;
   background-color: #fffce2;
 }
 
-/* line 712, ../sass/_01_elements.scss */
+/* line 753, ../sass/_01_elements.scss */
 .new,
 button.new {
   color: #db7400;
   background-color: white;
 }
 
-/* line 718, ../sass/_01_elements.scss */
+/* line 759, ../sass/_01_elements.scss */
 .waiting,
 button.waiting {
   color: black;
   background-color: #ffe5fc;
 }
 
-/* line 724, ../sass/_01_elements.scss */
+/* line 765, ../sass/_01_elements.scss */
 .dump,
 button.dump {
   color: black;
   background-color: white;
 }
 
-/* line 730, ../sass/_01_elements.scss */
+/* line 771, ../sass/_01_elements.scss */
 .archived {
   color: black;
   background-color: #e2e2e2;
 }
 
-/* line 735, ../sass/_01_elements.scss */
+/* line 776, ../sass/_01_elements.scss */
 .active {
   font-weight: bold;
   text-decoration: underline;
 }
 
-/* line 741, ../sass/_01_elements.scss */
+/* line 782, ../sass/_01_elements.scss */
 .is_mine {
   background-color: #f9f795;
 }
 
-/* line 745, ../sass/_01_elements.scss */
+/* line 786, ../sass/_01_elements.scss */
 .markdown {
   /* Begin bidirectionality settings (do not change) */
 }
@@ -1265,29 +1309,29 @@ button.dump {
     page-break-before: avoid;
   }
 }
-/* line 747, ../sass/_01_elements.scss */
+/* line 788, ../sass/_01_elements.scss */
 .markdown img.small {
   width: 25%;
   height: auto;
 }
-/* line 751, ../sass/_01_elements.scss */
+/* line 792, ../sass/_01_elements.scss */
 .markdown img.medium {
   width: 50%;
   height: auto;
 }
-/* line 755, ../sass/_01_elements.scss */
+/* line 796, ../sass/_01_elements.scss */
 .markdown img.large {
   width: 100%;
   height: auto;
 }
 
-/* line 761, ../sass/_01_elements.scss */
-.image.profile {
+/* line 802, ../sass/_01_elements.scss */
+.image.profile, .dd-area {
   cursor: pointer;
   position: relative;
 }
-/* line 765, ../sass/_01_elements.scss */
-.image.profile .add-photo {
+/* line 806, ../sass/_01_elements.scss */
+.image.profile .add-photo, .dd-area .add-photo {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1299,8 +1343,8 @@ button.dump {
   transition: all .3s;
   font: normal normal normal 14px/1 FontAwesome;
 }
-/* line 777, ../sass/_01_elements.scss */
-.image.profile .add-photo:after {
+/* line 818, ../sass/_01_elements.scss */
+.image.profile .add-photo:after, .dd-area .add-photo:after {
   content: "\f067";
   color: #fff;
   font-size: 50px;
@@ -1309,12 +1353,67 @@ button.dump {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* line 788, ../sass/_01_elements.scss */
-.image.profile:hover .add-photo {
+/* line 829, ../sass/_01_elements.scss */
+.image.profile:hover .add-photo, .dd-area:hover .add-photo {
   opacity: 1;
 }
 
-/* line 793, ../sass/_01_elements.scss */
+/* line 834, ../sass/_01_elements.scss */
+.dd-area {
+  min-height: 80px;
+  border: 2px dashed #494949;
+}
+/* line 838, ../sass/_01_elements.scss */
+.dd-area .dd-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* line 847, ../sass/_01_elements.scss */
+.list-files-item {
+  position: relative;
+  margin-top: 15px;
+  padding-bottom: 8px;
+}
+/* line 852, ../sass/_01_elements.scss */
+.list-files-item .button.upload {
+  right: 30px;
+}
+
+/* line 858, ../sass/_01_elements.scss */
+.progress-delay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+}
+/* line 865, ../sass/_01_elements.scss */
+.progress-delay .progress-bar {
+  position: relative;
+  height: 100%;
+  width: 0;
+  background-color: #5cb85c;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+/* line 874, ../sass/_01_elements.scss */
+.line-buttons {
+  margin-top: 10px;
+}
+
+/* line 878, ../sass/_01_elements.scss */
+.icon-file {
+  width: 24px;
+  vertical-align: middle;
+}
+
+/* line 883, ../sass/_01_elements.scss */
 .avatar {
   height: 40px;
   width: 40px;
@@ -1329,7 +1428,7 @@ button.dump {
   overflow: hidden;
 }
 
-/* line 805, ../sass/_01_elements.scss */
+/* line 895, ../sass/_01_elements.scss */
 .tab {
   position: relative;
   display: inline-block;
@@ -1343,12 +1442,12 @@ button.dump {
   z-index: 3;
   top: 1px;
 }
-/* line 818, ../sass/_01_elements.scss */
+/* line 908, ../sass/_01_elements.scss */
 .tab:hover {
   cursor: pointer;
 }
 
-/* line 823, ../sass/_01_elements.scss */
+/* line 913, ../sass/_01_elements.scss */
 .gantt1_task_content,
 .gantt2_task_content,
 .gantt3_task_content,
@@ -1356,7 +1455,7 @@ button.dump {
   color: black !important;
 }
 
-/* line 830, ../sass/_01_elements.scss */
+/* line 920, ../sass/_01_elements.scss */
 .gantt1_task_line,
 .gantt2_task_line,
 .gantt3_task_line,
@@ -1366,6 +1465,80 @@ button.dump {
   box-shadow: 1px 1px 2px 1px #8f8f8f;
 }
 
+/* line 929, ../sass/_01_elements.scss */
+.repeated-item.ng-enter {
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+  max-height: 0;
+  opacity: 0;
+  left: 0;
+}
+
+/* line 939, ../sass/_01_elements.scss */
+.repeated-item.ng-enter.ng-enter-active {
+  max-height: 90px;
+  opacity: 1;
+  left: 0;
+}
+
+/* line 945, ../sass/_01_elements.scss */
+.repeated-item.ng-leave {
+  -webkit-animation: 0.5s anim_fade;
+  -moz-animation: 0.5s anim_fade;
+  -o-animation: 0.5s anim_fade;
+  animation: 0.5s anim_fade;
+}
+
+@keyframes anim_fade {
+  from {
+    max-height: 90px;
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+/*
+  Unfortunately each browser vendor requires
+  its own definition of keyframe animation code...
+*/
+@-webkit-keyframes anim_fade {
+  from {
+    max-height: 90px;
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+@-moz-keyframes anim_fade {
+  from {
+    max-height: 90px;
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+@-o-keyframes anim_fade {
+  from {
+    max-height: 90px;
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
 /* line 3, ../sass/_02_components.scss */
 .links {
   padding: 15px;

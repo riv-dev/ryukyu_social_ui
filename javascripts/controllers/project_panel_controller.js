@@ -1,4 +1,4 @@
-app.controller('projectPanelController', function($scope, $http, $timeout, $routeParams, $location, $localStorage, Upload, CommonFunctions) {
+app.controller('projectPanelController', function($scope, $http, $window, $timeout, $routeParams, $location, $localStorage, Upload, CommonFunctions) {
     $scope.$parent.hero = "Project Panel";
     $scope.$parent.panel_class = "project";
 
@@ -678,13 +678,13 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             }
             for (var i = 0; i < files.length; i++) {
                 (function (f) {
-                    $scope.upload(f);
+                    $scope.uploadPhoto(f);
                 })(files[i]);
             }
         }
     });
 
-    $scope.upload = function(file) {
+    $scope.uploadPhoto = function(file) {
         Upload.upload({
             url: projectPhotosApiBaseURL + "/projects/" + $routeParams.project_id + "/photo",
             method: 'POST',
@@ -724,6 +724,133 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
         });
     } //End upload()
 
+    $scope.getFileIcon = function(fileType) {
+        var imgIcon = "/images";
+        switch (fileType) {
+            case 'image/jpeg':
+                imgIcon += '/icon/jpg.png';
+                break;
+            case 'image/gif':
+                imgIcon += '/icon/gif.png';
+                break;
+            case 'image/png':
+                imgIcon += '/icon/png.png';
+                break;
+            case 'image/svg+xml':
+                imgIcon += '/icon/svg.png';
+                break;
+            case 'text/html':
+                imgIcon += '/icon/html.png';
+                break;
+            case 'text/csv':
+                imgIcon += '/icon/csv.png';
+                break;
+            case 'application/x-javascript':
+                imgIcon += '/icon/javascript.png';
+                break;
+            case 'application/json':
+                imgIcon += '/icon/json.png';
+                break;
+            case 'application/xml':
+                imgIcon += '/icon/xml.png';
+                break;
+            case 'application/pdf':
+                imgIcon += '/icon/pdf.png';
+                break;
+            case 'application/zip':
+                imgIcon += '/icon/zip.png';
+                break;
+            case 'video/x-msvideo':
+                imgIcon += '/icon/avi.png';
+                break;
+            case 'audio/mpeg':
+                imgIcon += '/icon/mp3.png';
+                break;
+            case 'text/css':
+                imgIcon += '/icon/css.png';
+                break;
+            case 'application/msword':
+                imgIcon += '/icon/css.png';
+                break;
+            case 'application/vnd.ms-excel':
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                imgIcon += '/icon/xls.png';
+                break;
+            case 'application/vnd.ms-powerpoint':
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+                imgIcon += '/icon/ppt.png';
+                break;
+            case 'application/x-shockwave-flash':
+                imgIcon += '/icon/fla.png';
+                break;
+            default:
+                imgIcon += '/icon/file.png';
+                break;
+        }
+        return imgIcon;
+    };
+
+    $scope.getFile = function(uri) {
+        return filesApiBaseURL + uri;
+    }
+
+    $scope.upload_files = function (files) {
+        if (files && files.length) {
+            angular.forEach(files, function (file, key) {
+                $scope.upload_single_file(0, file);
+            });
+        }
+    }
+
+    $scope.upload_single_file = function(index, fileData) {
+        if (!fileData.$error) {
+            fileData.upload = Upload.upload({
+                url: filesApiBaseURL + "/projects/" + $routeParams.project_id + "/files",
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                },
+                data: {
+                    file: fileData
+                }
+            });
+
+            fileData.upload.then(function (response) {
+                $timeout(function () {
+                    if (fileData.progress == 100) {
+                        delete $scope.uploadFiles[index];
+                        $scope.uploadFiles.splice(index, 1);
+                    }
+                    if ($scope.projectFiles.message) $scope.projectFiles = [];
+                    $scope.projectFiles.push(response.data);
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Successfully added file ' + fileData.name + '!'
+                    });
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: response.status + ': ' + response.data + '.'
+                    });
+            }, function (evt) {
+                // Math.min is to fix IE which reports 200% sometimes
+                fileData.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            });
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Error added ' + fileData.name + '.'
+            });
+        }
+    }
+
     $scope.delete_photo = function() {
         $http({
             method: 'DELETE',
@@ -735,6 +862,7 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             function successCallback(response) {
                 Lobibox.notify('success', {
                     position: 'top right',
+                    sound: false,
                     size: 'mini',
                     msg: 'Deleted photo!'
                 });
@@ -745,12 +873,109 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             function errorCallback(response) {
                 Lobibox.notify('error', {
                     position: 'top right',
+                    sound: false,
                     size: 'mini',
                     msg: 'Error deleting photo.'
                 });
             }
         );
     }
+
+    $scope.delete_upload_file = function(index) {
+        delete $scope.uploadFiles[index];
+        $scope.uploadFiles.splice(index, 1);
+    }
+
+    $scope.delete_file = function(index, id, filename) {
+        var answer = prompt('Remove file ' + filename + ' from this project?  Type "yes" to confirm');
+        if(answer == "yes") {
+            $http({
+                method: 'DELETE',
+                url: filesApiBaseURL + '/files/' + id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+                function successCallback(response) {
+                    delete $scope.projectFiles[index];
+                    $scope.projectFiles.splice(index, 1);
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Deleted file ' + filename + '!'
+                    });
+                },
+                function errorCallback(response) {
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Error deleting file ' + filename + '.'
+                    });
+                }
+            );
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Did not type "yes". ' + filename + ' not removed from the project.'
+            });
+        }
+    }
+    
+    $scope.deleteAllFiles = function() {
+        var answer = prompt('Remove all file from this project?  Type "yes" to confirm');
+        if(answer == "yes") {
+            $http({
+                method: 'DELETE',
+                url: filesApiBaseURL + '/projects/' + $routeParams.project_id + '/files',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+                function successCallback(response) {
+                    delete $scope.projectFiles;
+                    $scope.projectFiles = [];
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Deleted all file!'
+                    });
+                },
+                function errorCallback(response) {
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Error deleting all file.'
+                    });
+                }
+            );
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Did not type "yes". All file not removed from the project.'
+            });
+        }
+    };
+
+    $scope.uploadAllFiles = function() {
+        if ($scope.uploadFiles) {
+            $scope.upload_files($scope.uploadFiles);
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Error adding file.'
+            });
+        }
+    };
 
     $scope.quick_task_form_data = {};
 
@@ -838,6 +1063,17 @@ app.controller('projectPanelController', function($scope, $http, $timeout, $rout
             }
         }).then(function (response) {
             $scope.users = response.data;
+        });
+
+        //Get all files for project
+        $http({
+            method: 'GET',
+            url: filesApiBaseURL + "/projects/" + $routeParams.project_id + "/files",
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.projectFiles = response.data;
         });
     } 
 
