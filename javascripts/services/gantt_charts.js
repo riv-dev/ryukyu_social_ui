@@ -1,6 +1,6 @@
 //Free version of Gantt only allows one instance of gantt chart
 //Hack to get four gantt charts on one page.
-app.directive('dhxGantt1', function () {
+app.directive('dhxGantt1', function ($location) {
   gantt1.config.autosize = "y";
   gantt1.config.columns = [
     { name: "text", label: "Project Name", width: "*", tree: true },
@@ -20,6 +20,10 @@ app.directive('dhxGantt1', function () {
 
     gantt1.showDate(new Date(moment().format()));
   });
+
+  gantt1.showLightbox = function(id) {
+    window.location = '/projects/' + id;
+  }
 
   return {
     restrict: 'A',
@@ -57,7 +61,7 @@ app.directive('dhxGantt1', function () {
   }
 });
 
-app.directive('dhxGantt2', function () {
+app.directive('dhxGantt2', function ($location) {
   gantt2.config.autosize = "y";
   gantt2.config.columns = [
     { name: "text", label: "Project Name", width: "*", tree: true },
@@ -76,6 +80,11 @@ app.directive('dhxGantt2', function () {
     });
     gantt2.showDate(new Date(moment().format()));
   });
+
+  gantt2.showLightbox = function(id) {
+    window.location = '/projects/' + id;
+  }
+
 
   return {
     restrict: 'A',
@@ -113,7 +122,7 @@ app.directive('dhxGantt2', function () {
   }
 });
 
-app.directive('dhxGantt3', function () {
+app.directive('dhxGantt3', function ($location) {
   gantt3.config.autosize = "y";
   gantt3.config.columns = [
     { name: "text", label: "Project Name", width: "*", tree: true },
@@ -132,6 +141,11 @@ app.directive('dhxGantt3', function () {
     });
     gantt3.showDate(new Date(moment().format()));
   });
+
+  gantt3.showLightbox = function(id) {
+    window.location = '/projects/' + id;
+  }
+
 
   return {
     restrict: 'A',
@@ -169,7 +183,7 @@ app.directive('dhxGantt3', function () {
   }
 });
 
-app.directive('dhxGantt4', function () {
+app.directive('dhxGantt4', function ($location) {
   gantt4.config.autosize = "y";
   gantt4.config.columns = [
     { name: "text", label: "Project Name", width: "*", tree: true },
@@ -188,6 +202,10 @@ app.directive('dhxGantt4', function () {
     });
     gantt4.showDate(new Date(moment().format()));
   });
+
+  gantt4.showLightbox = function(id) {
+    window.location = '/projects/' + id;
+  }
 
   return {
     restrict: 'A',
