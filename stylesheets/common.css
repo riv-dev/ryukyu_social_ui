@@ -1987,6 +1987,26 @@ button.dump {
   margin-top: 15px;
 }
 
+/* line 378, ../sass/_02_components.scss */
+.context-menu {
+  padding: 5px 0px;
+  background-color: #e2e2e2;
+  -webkit-box-shadow: 1px 1px 5px 1px #8b8b8b;
+  -moz-box-shadow: 1px 1px 5px 1px #8b8b8b;
+  box-shadow: 1px 1px 5px 1px #8b8b8b;
+}
+/* line 385, ../sass/_02_components.scss */
+.context-menu .item {
+  padding: 5px 15px;
+  font-size: 12px;
+  font-family: 'Arial';
+}
+/* line 390, ../sass/_02_components.scss */
+.context-menu .item:hover {
+  background-color: #e2edff;
+  cursor: pointer;
+}
+
 /* line 3, ../sass/_03_layout.scss */
 .site .header {
   padding: 15px;

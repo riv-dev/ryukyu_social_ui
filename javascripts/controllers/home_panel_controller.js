@@ -15,6 +15,13 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
     }
 
+    $scope.selected_project_id = {
+        dump: 2,
+        waiting: 3,
+        doing: 4,
+        finished: 5
+    }
+
     $scope.statuses = ["dump","waiting","doing","finished"];
 
     //Default settings
@@ -96,6 +103,16 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
+
+    $scope.goToPage = function(project_id) {
+        $('.context-menu').hide();
+        window.location = '/projects/' + project_id;
+    }
+
+    $scope.displayEditProject = function(project_id) {
+        $('.context-menu').hide();
+        console.log("Edit: " + project_id);
+    }
 
     if(!("layout_settings" in $localStorage)) {
         $localStorage.layout_settings = {
