@@ -374,3 +374,37 @@
         margin-top: 15px;
     }
 }
+
+.context-menu {
+    padding: 5px 0px;
+    background-color: $light_grey;
+    -webkit-box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);
+    -moz-box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);
+    box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);    
+    position: absolute;
+    display: none;
+
+    .item {
+        padding: 5px 15px;
+        font-size: 12px;
+        font-family: 'Arial';
+
+        &:hover {
+            background-color: $light_blue;
+            cursor: pointer;
+        }
+    }
+}
+
+.popup.gantt {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(200,200,200,0.4);
+    overflow-y: auto;
+    height: calc(100% - 50px);
+    .form {
+        background-color: white;
+    }
+}
