@@ -1994,20 +1994,22 @@ button.dump {
   -webkit-box-shadow: 1px 1px 5px 1px #8b8b8b;
   -moz-box-shadow: 1px 1px 5px 1px #8b8b8b;
   box-shadow: 1px 1px 5px 1px #8b8b8b;
+  position: absolute;
+  display: none;
 }
-/* line 385, ../sass/_02_components.scss */
+/* line 387, ../sass/_02_components.scss */
 .context-menu .item {
   padding: 5px 15px;
   font-size: 12px;
   font-family: 'Arial';
 }
-/* line 390, ../sass/_02_components.scss */
+/* line 392, ../sass/_02_components.scss */
 .context-menu .item:hover {
   background-color: #e2edff;
   cursor: pointer;
 }
 
-/* line 397, ../sass/_02_components.scss */
+/* line 399, ../sass/_02_components.scss */
 .popup.gantt {
   position: fixed;
   width: 100%;
@@ -2017,7 +2019,7 @@ button.dump {
   overflow-y: auto;
   height: calc(100% - 50px);
 }
-/* line 405, ../sass/_02_components.scss */
+/* line 407, ../sass/_02_components.scss */
 .popup.gantt .form {
   background-color: white;
 }

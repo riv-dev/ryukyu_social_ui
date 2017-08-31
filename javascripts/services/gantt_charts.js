@@ -77,15 +77,15 @@ app.directive('dhxGantt1', function ($location) {
 
       var menuElId = "";
       gantt1.attachEvent("onContextMenu", function(taskId, linkId, event){
-        var x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft,
-          y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-    
         menuElId = $attrs.contextmenu;
+        $("#"+menuElId).on('mouseleave',function() {
+          $("#"+menuElId).hide();
+        });
         if(taskId){
-          $("#"+menuElId).css('position','fixed');
-          $("#"+menuElId).css('top',y-5);
-          $("#"+menuElId).css('left',x-5);
           $("#"+menuElId).show();
+          $("#"+menuElId).detach().appendTo("body"); //position to body
+          $("#"+menuElId).css('position','absolute');
+          $("#"+menuElId).css({left:event.pageX, top:event.pageY});
           $scope.setSelectedProjectId(taskId);
           console.log("$scope.selectedProjectId = " + $scope.selectedProjectId);
         }
@@ -94,11 +94,6 @@ app.directive('dhxGantt1', function ($location) {
         }
     
         return true;
-      });
-
-      $("#"+menuElId).hide();
-      $("#"+menuElId).on('mouseleave',function() {
-        $("#"+menuElId).hide(); 
       });
 
       //init gantt
@@ -184,15 +179,15 @@ app.directive('dhxGantt2', function ($location) {
 
       var menuElId = "";
       gantt2.attachEvent("onContextMenu", function(taskId, linkId, event){
-        var x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft,
-          y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-    
         menuElId = $attrs.contextmenu;
+        $("#"+menuElId).on('mouseleave',function() {
+          $("#"+menuElId).hide();
+        });
         if(taskId){
-          $("#"+menuElId).css('position','fixed');
-          $("#"+menuElId).css('top',y-5);
-          $("#"+menuElId).css('left',x-5);
           $("#"+menuElId).show();
+          $("#"+menuElId).detach().appendTo("body"); //position to body
+          $("#"+menuElId).css('position','absolute');
+          $("#"+menuElId).css({left:event.pageX, top:event.pageY});
           $scope.setSelectedProjectId(taskId);
           console.log("$scope.selectedProjectId = " + $scope.selectedProjectId);
         }
@@ -201,11 +196,6 @@ app.directive('dhxGantt2', function ($location) {
         }
     
         return true;
-      });
-
-      $("#"+menuElId).hide();
-      $("#"+menuElId).on('mouseleave',function() {
-        $("#"+menuElId).hide(); 
       });
 
       //init gantt
@@ -291,15 +281,15 @@ app.directive('dhxGantt3', function ($location) {
 
       var menuElId = "";
       gantt3.attachEvent("onContextMenu", function(taskId, linkId, event){
-        var x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft,
-          y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-    
         menuElId = $attrs.contextmenu;
+        $("#"+menuElId).on('mouseleave',function() {
+          $("#"+menuElId).hide();
+        });
         if(taskId){
-          $("#"+menuElId).css('position','fixed');
-          $("#"+menuElId).css('top',y-5);
-          $("#"+menuElId).css('left',x-5);
           $("#"+menuElId).show();
+          $("#"+menuElId).detach().appendTo("body"); //position to body
+          $("#"+menuElId).css('position','absolute');
+          $("#"+menuElId).css({left:event.pageX, top:event.pageY});
           $scope.setSelectedProjectId(taskId);
           console.log("$scope.selectedProjectId = " + $scope.selectedProjectId);
         }
@@ -308,11 +298,6 @@ app.directive('dhxGantt3', function ($location) {
         }
     
         return true;
-      });
-
-      $("#"+menuElId).hide();
-      $("#"+menuElId).on('mouseleave',function() {
-        $("#"+menuElId).hide(); 
       });
 
       //init gantt
@@ -398,15 +383,15 @@ app.directive('dhxGantt4', function ($location) {
 
       var menuElId = "";
       gantt4.attachEvent("onContextMenu", function(taskId, linkId, event){
-        var x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft,
-          y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-
         menuElId = $attrs.contextmenu;
+        $("#"+menuElId).on('mouseleave',function() {
+          $("#"+menuElId).hide();
+        });
         if(taskId){
-          $("#"+menuElId).css('position','fixed');
-          $("#"+menuElId).css('top',y-5);
-          $("#"+menuElId).css('left',x-5);
           $("#"+menuElId).show();
+          $("#"+menuElId).detach().appendTo("body"); //position to body
+          $("#"+menuElId).css('position','absolute');
+          $("#"+menuElId).css({left:event.pageX, top:event.pageY});
           $scope.setSelectedProjectId(taskId);
           console.log("$scope.selectedProjectId = " + $scope.selectedProjectId);
         }
@@ -417,15 +402,8 @@ app.directive('dhxGantt4', function ($location) {
         return true;
       });
 
-      $("#"+menuElId).hide();
-      $("#"+menuElId).on('mouseleave',function() {
-        $("#"+menuElId).hide(); 
-      });
-
       //init gantt
       gantt4.init($element[0]);
     }
   }
 });
-
-

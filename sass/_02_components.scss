@@ -381,6 +381,8 @@
     -webkit-box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);
     -moz-box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);
     box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);    
+    position: absolute;
+    display: none;
 
     .item {
         padding: 5px 15px;

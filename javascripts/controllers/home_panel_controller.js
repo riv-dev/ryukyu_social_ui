@@ -16,11 +16,9 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     }
 
     $scope.selected_project_id = {
-        dump: 2,
-        waiting: 3,
-        doing: 4,
-        finished: 5
+        value: "1" //must do like this for directive two way binding to work
     }
+
     $scope.put_project_id = null;
 
     $scope.statuses = ["dump","waiting","doing","finished"];

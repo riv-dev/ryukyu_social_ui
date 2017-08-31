@@ -1,7 +1,7 @@
 <p ng-if="!loggedin_user" class="message welcome">Welcome to Ryukyu Social</p>
 <p ng-if="!loggedin_user" class="message welcome">Please <a href="./login">log in</a></p>
 
-<section ng-if="loggedin_user" class="section projects {{isMaximizedClass('projects')}}">
+<section ng-show="loggedin_user" class="section projects {{isMaximizedClass('projects')}}">
     <header class="header">
         <h2 class="title">Projects List</h2>
         <button ng-show="!isMaximized('projects')" class="button maximize" ng-click="maximize('projects')">Maximize</button>
@@ -63,10 +63,12 @@
         </ul>
         <p ng-if="!projects[status] || projects[status].length == 0" class="info none">No projects</p>
 
-        <div ng-if="status=='dump'" class="gantt-chart" dhx-gantt1 layout="getLayoutCSS('projects')" contextmenu="gantt_menu_dump" selected-project-id="selected_project_id.dump" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
-        <div ng-if="status=='waiting'" class="gantt-chart" dhx-gantt2 layout="getLayoutCSS('projects')" contextmenu="gantt_menu_waiting" selected-project-id="selected_project_id.waiting" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
-        <div ng-if="status=='doing'" class="gantt-chart" dhx-gantt3 layout="getLayoutCSS('projects')" contextmenu="gantt_menu_doing" selected-project-id="selected_project_id.doing" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
-        <div ng-if="status=='finished'" class="gantt-chart" dhx-gantt4 layout="getLayoutCSS('projects')" contextmenu="gantt_menu_finished" selected-project-id="selected_project_id.finished" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+        <div ng-if="status=='dump'" class="gantt-chart" dhx-gantt1 layout="getLayoutCSS('projects')" contextmenu="gantt_menu" selected-project-id="selected_project_id.value" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+        <div ng-if="status=='waiting'" class="gantt-chart" dhx-gantt2 layout="getLayoutCSS('projects')" contextmenu="gantt_menu" selected-project-id="selected_project_id.value" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+        <div ng-if="status=='doing'" class="gantt-chart" dhx-gantt3 layout="getLayoutCSS('projects')" contextmenu="gantt_menu" selected-project-id="selected_project_id.value" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+        <div ng-if="status=='finished'" class="gantt-chart" dhx-gantt4 layout="getLayoutCSS('projects')" contextmenu="gantt_menu" selected-project-id="selected_project_id.value" data="gantt_projects[status]" style="height:auto; width:100%;"></div>
+
+
 
         <ul class="pagination" ng-if="projects_page_count_arr[status] && projects_page_count_arr[status].length > 1">
             <li class="item previous" ng-click="getProjects(status,getProjectsParam(status,'limit'),getProjectsParam(status,'page')-1)">
@@ -82,42 +84,6 @@
 
     </section>
 
-    <ul id="gantt_menu_dump" class="context-menu">
-        <li class="item" ng-click="goToPage(selected_project_id.dump)">
-            Go to page
-        </li>
-        <li class="item" ng-click="displayEditProject(selected_project_id.dump)">
-            Edit
-        </li>
-    </ul>
-
-    <ul id="gantt_menu_waiting" class="context-menu">
-        <li class="item" ng-click="goToPage(selected_project_id.waiting)">
-            Go to page
-        </li>
-        <li class="item" ng-click="displayEditProject(selected_project_id.waiting)">
-            Edit
-        </li>
-    </ul>
-
-    <ul id="gantt_menu_doing" class="context-menu">
-        <li class="item" ng-click="goToPage(selected_project_id.doing)">
-            Go to page
-        </li>
-        <li class="item" ng-click="displayEditProject(selected_project_id.doing)">
-            Edit
-        </li>
-    </ul>
-
-    <ul id="gantt_menu_finished" class="context-menu">
-        <li class="item" ng-click="goToPage(selected_project_id.finished)">
-            Go to page
-        </li>
-        <li class="item" ng-click="displayEditProject(selected_project_id.finished)">
-            Edit
-        </li>
-    </ul>
-  
 </section>
 
 <section ng-if="loggedin_user" class="section tasks {{isMaximizedClass('tasks')}}">
@@ -332,3 +298,12 @@
         <p class="field"><a class="button cancel" ng-click="back_project()" href="#">Cancel</a></p>
     </form>
 </div>
+
+<ul id="gantt_menu" class="context-menu">
+    <li class="item" ng-click="goToPage(selected_project_id.value)">
+        Go to page
+    </li>
+    <li class="item" ng-click="displayEditProject(selected_project_id.value)">
+        Edit
+    </li>
+</ul>
