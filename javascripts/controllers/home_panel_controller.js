@@ -21,6 +21,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         doing: 4,
         finished: 5
     }
+    $scope.put_project_id = null;
 
     $scope.statuses = ["dump","waiting","doing","finished"];
 
@@ -109,10 +110,104 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         window.location = '/projects/' + project_id;
     }
 
+    $('.popup.gantt').hide();
     $scope.displayEditProject = function(project_id) {
         $('.context-menu').hide();
         console.log("Edit: " + project_id);
+        $scope.put_project_id = project_id;
+
+        //First Find out if the user has write access
+        $http({
+            method: 'GET',
+            url: projectsApiBaseURL + '/projects/' + project_id + '/users/' + $localStorage.loggedin_user.id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function(response) {
+            if(response.data.write_access && response.data.write_access > 0) {
+                //Get the project details to fill in form defaults
+                $http({
+                    method: 'GET',
+                    url: projectsApiBaseURL + '/projects/' + project_id,
+                    headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+                }).then(function (response) {
+                  $scope.edit_project_name = response.data.name;
+                  $scope.edit_project_description = response.data.description;
+                  $scope.edit_project_status = response.data.status;
+                  $scope.original_project_status = response.data.status;
+                  $scope.edit_project_value = response.data.value;
+                  $scope.edit_project_effort = response.data.effort;
+                  if(response.data.start_date) {
+                      $scope.edit_project_start_date = moment(response.data.start_date).toDate();
+                      $scope.edit_project_start_time = moment(response.data.start_date).toDate(); 
+                  }
+                  if(response.data.deadline) {
+                      $scope.edit_project_deadline_date = moment(response.data.deadline).toDate();
+                      $scope.edit_project_deadline_time = moment(response.data.deadline).toDate();
+                  }
+                });
+            } else {
+                $localStorage.flash_message = "You do not have write permissions for this project.";
+                $scope.$parent.flash_level = "fail";
+                $('.popup.gantt').hide();
+            }  
+        });    
+
+
+        $('.popup.gantt').show();
     }
+
+    $scope.back_project = function() {
+        $('.popup.gantt').hide();
+    }
+
+    $scope.put_project = function() {
+        $scope.put_project_status = $scope.edit_project_status;
+
+        $http({
+            method: 'PUT',
+            url: projectsApiBaseURL + '/projects/' + $scope.put_project_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                   name: $scope.edit_project_name, 
+                   description: $scope.edit_project_description, 
+                   status: $scope.edit_project_status, 
+                   effort: $scope.edit_project_effort, 
+                   value: $scope.value, 
+                   start_date: CommonFunctions.getDateTimeMoment($scope.edit_project_start_date,$scope.edit_project_start_time),
+                   deadline: CommonFunctions.getDateTimeMoment($scope.edit_project_deadline_date,$scope.edit_project_deadline_time)
+                } 
+        }).then(
+            function successCallback(response) {
+                $localStorage.flash_message = "Successfully edited project!";
+                $scope.$parent.flash_level = "success";
+                if($scope.original_project_status != $scope.put_project_status) {
+                    $scope.getProjects($scope.original_project_status, $scope.getProjectsParam($scope.original_project_status,'limit'), $scope.getProjectsParam($scope.original_project_status,'page'));
+                }
+                $scope.getProjects($scope.put_project_status, $scope.getProjectsParam($scope.put_project_status,'limit'), $scope.getProjectsParam($scope.put_project_status,'page'));
+                $('.popup.gantt').hide();
+            },
+            function errorCallback(response) {
+                $scope.$parent.flash_message = "Error editing project.";
+                $scope.$parent.flash_level = "fail";
+                $scope.errors = {};
+                var responseError;
+                for (var i=0; i < response.data.errors.length; i++) {
+                    responseError = response.data.errors[i];
+                    if(responseError.hasOwnProperty('param')) {
+                        if(!$scope.errors[responseError['param']]) {
+                            $scope.errors[responseError['param']] = [];
+                        }
+                        $scope.errors[responseError['param']].push(responseError['msg']);
+                    }
+                }
+            }
+        );
+    };
 
     if(!("layout_settings" in $localStorage)) {
         $localStorage.layout_settings = {

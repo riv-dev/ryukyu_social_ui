@@ -255,3 +255,84 @@
         </li>
     </ul>
 </section>
+
+<div class="popup gantt">
+    <form class="form project" name="project_form">
+        <h2 class="title">New Project</h2>
+        <p class="field">
+            <label class="label" for="name">Name: </label>
+            <input class="input name" type="text" ng-model="edit_project_name">
+            <ul class="validation_errors" ng-if="errors.name">
+                <li class="item" ng-repeat="x in errors.name">
+                    {{x}}
+                </li>
+            </ul>
+        </p>
+        <p class="field">
+            <label class="label" for="description">Description: </label>
+            <textarea class="input area" type="text" ng-model="edit_project_description"></textarea>
+            <ul class="validation_errors" ng-if="errors.description">
+                <li class="item" ng-repeat="x in errors.description">
+                    {{x}}
+                </li>
+            </ul>
+        </p>
+        <p class="field">
+            <label class="label" for="priority">Status: </label>
+            <select class="input select" ng-options="status for status in statuses" ng-model="edit_project_status"></select>
+            <ul class="validation_errors" ng-if="errors.priority">
+                <li class="item" ng-repeat="x in errors.priority">
+                    {{x}}
+                </li>
+            </ul>
+        </p>
+        <p class="field">
+            <label class="label" for="value">Value: </label>
+            <input class="input" type="text" ng-model="edit_project_value">
+            <ul class="validation_errors" ng-if="errors.value">
+                <li class="item" ng-repeat="x in errors.value">
+                    {{x}}
+                </li>
+            </ul>
+        </p>
+        <p class="field">
+            <label class="label" for="effort">Effort: </label>
+            <input class="input" type="text" ng-model="edit_project_effort">
+            <ul class="validation_errors" ng-if="errors.effort">
+                <li class="item" ng-repeat="x in errors.effort">
+                    {{x}}
+                </li>
+            </ul>
+        </p>
+        <p class="field">
+            <label class="label" for="start_date">Start Date: </label>
+            <input id="start_date" name="start_date_input" class="input date" type="date" ng-model="edit_project_start_date">
+            <ul class="validation_errors" ng-if="errors.start_date">
+                <li class="item" ng-repeat="x in errors.start_date">
+                    {{x}}
+                </li>
+            </ul>
+        </p>
+        <p class="field">
+            <label class="label" for="start_time">Start Time: </label>
+            <input name="start_time_input" class="input time" type="time" ng-model="edit_project_start_time">
+        </p>
+        <p class="field">
+            <label class="label" for="deadline_date">Deadline Date: </label>
+            <input id="date" name="deadline_date_input" class="input date" type="date" ng-model="edit_project_deadline_date">
+            <ul class="validation_errors" ng-if="errors.deadline">
+                <li class="item" ng-repeat="x in errors.deadline">
+                    {{x}}
+                </li>
+            </ul>
+        </p>
+        <p class="field">
+            <label class="label" for="deadline_time">Deadline Time: </label>
+            <input id="time" name="deadline_date_input" class="input time" type="time" ng-model="edit_project_deadline_time">
+        </p>
+        <p class="field">
+            <input class="button submit" type="submit" value="Update Project" ng-click="put_project()">
+        </p>
+        <p class="field"><a class="button cancel" ng-click="back_project()" href="#">Cancel</a></p>
+    </form>
+</div>

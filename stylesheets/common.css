@@ -2007,6 +2007,21 @@ button.dump {
   cursor: pointer;
 }
 
+/* line 397, ../sass/_02_components.scss */
+.popup.gantt {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(200, 200, 200, 0.4);
+  overflow-y: auto;
+  height: calc(100% - 50px);
+}
+/* line 405, ../sass/_02_components.scss */
+.popup.gantt .form {
+  background-color: white;
+}
+
 /* line 3, ../sass/_03_layout.scss */
 .site .header {
   padding: 15px;

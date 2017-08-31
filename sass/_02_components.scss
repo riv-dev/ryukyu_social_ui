@@ -393,3 +393,16 @@
         }
     }
 }
+
+.popup.gantt {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(200,200,200,0.4);
+    overflow-y: auto;
+    height: calc(100% - 50px);
+    .form {
+        background-color: white;
+    }
+}
