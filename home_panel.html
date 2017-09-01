@@ -220,7 +220,7 @@
 
 <div class="popup gantt">
     <form class="form project" name="project_form">
-        <h2 class="title">New Project</h2>
+        <h2 class="title">Edit Project</h2>
         <p class="field">
             <label class="label" for="name">Name: </label>
             <input class="input name" type="text" ng-model="edit_project_name">
@@ -293,9 +293,10 @@
             <input id="time" name="deadline_date_input" class="input time" type="time" ng-model="edit_project_deadline_time">
         </p>
         <p class="field">
-            <input class="button submit" type="submit" value="Update Project" ng-click="put_project()">
+            <input class="button submit" type="submit" value="Update Project" ng-click="put_project(selected_project_id.value)">
         </p>
         <p class="field"><a class="button cancel" ng-click="back_project()" href="#">Cancel</a></p>
+        <p class="field"><button class="button trash" ng-click="remove_project(selected_project_id.value)" title="Delete">Delete</button></p>
     </form>
 </div>
 
@@ -305,5 +306,8 @@
     </li>
     <li class="item" ng-click="displayEditProject(selected_project_id.value)">
         Edit
+    </li>
+    <li class="item" ng-click="remove_project(selected_project_id.value)">
+        Delete
     </li>
 </ul>
