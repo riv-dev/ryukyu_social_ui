@@ -19,8 +19,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         value: "1" //must do like this for directive two way binding to work
     }
 
-    $scope.put_project_id = null;
-
     $scope.statuses = ["dump","waiting","doing","finished"];
 
     //Default settings
@@ -112,7 +110,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     $scope.displayEditProject = function(project_id) {
         $('.context-menu').hide();
         console.log("Edit: " + project_id);
-        $scope.put_project_id = project_id;
 
         //First Find out if the user has write access
         $http({
@@ -121,35 +118,27 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
-        }).then(function(response) {
-            if(response.data.write_access && response.data.write_access > 0) {
-                //Get the project details to fill in form defaults
-                $http({
-                    method: 'GET',
-                    url: projectsApiBaseURL + '/projects/' + project_id,
-                    headers: {
-                    'x-access-token': CommonFunctions.getToken()
+        }).then(function (response) {
+            if (response.data.write_access && response.data.write_access > 0) {
+                $scope.edit_project_name = $scope.projects_cache[project_id].name;
+                $scope.original_project_name = $scope.projects_cache[project_id].name;
+                $scope.edit_project_description = $scope.projects_cache[project_id].description;
+                $scope.edit_project_status = $scope.projects_cache[project_id].status;
+                $scope.original_project_status = $scope.projects_cache[project_id].status;
+                $scope.edit_project_value = $scope.projects_cache[project_id].value;
+                $scope.edit_project_effort = $scope.projects_cache[project_id].effort;
+                if ($scope.projects_cache[project_id].start_date) {
+                    $scope.edit_project_start_date = moment($scope.projects_cache[project_id].start_date).toDate();
+                    $scope.edit_project_start_time = moment($scope.projects_cache[project_id].start_date).toDate();
                 }
-                }).then(function (response) {
-                  $scope.edit_project_name = response.data.name;
-                  $scope.edit_project_description = response.data.description;
-                  $scope.edit_project_status = response.data.status;
-                  $scope.original_project_status = response.data.status;
-                  $scope.edit_project_value = response.data.value;
-                  $scope.edit_project_effort = response.data.effort;
-                  if(response.data.start_date) {
-                      $scope.edit_project_start_date = moment(response.data.start_date).toDate();
-                      $scope.edit_project_start_time = moment(response.data.start_date).toDate(); 
-                  }
-                  if(response.data.deadline) {
-                      $scope.edit_project_deadline_date = moment(response.data.deadline).toDate();
-                      $scope.edit_project_deadline_time = moment(response.data.deadline).toDate();
-                  }
-                });
+                if ($scope.projects_cache[project_id].deadline) {
+                    $scope.edit_project_deadline_date = moment($scope.projects_cache[project_id].deadline).toDate();
+                    $scope.edit_project_deadline_time = moment($scope.projects_cache[project_id].deadline).toDate();
+                }
             } else {
-                $localStorage.flash_message = "You do not have write permissions for this project.";
-                $scope.$parent.flash_level = "fail";
-                $('.popup.gantt').hide();
+                $('.popup.gantt').hide(function () {
+                    alert("You do not have write permissions for this project");
+                });
             }  
         });    
 
@@ -161,12 +150,10 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         $('.popup.gantt').hide();
     }
 
-    $scope.put_project = function() {
-        $scope.put_project_status = $scope.edit_project_status;
-
+    $scope.put_project = function(project_id) {
         $http({
             method: 'PUT',
-            url: projectsApiBaseURL + '/projects/' + $scope.put_project_id,
+            url: projectsApiBaseURL + '/projects/' + project_id,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             },
@@ -181,12 +168,12 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 } 
         }).then(
             function successCallback(response) {
-                $localStorage.flash_message = "Successfully edited project!";
+                $scope.$parent.flash_message = "Successfully edited project!";
                 $scope.$parent.flash_level = "success";
-                if($scope.original_project_status != $scope.put_project_status) {
+                if($scope.original_project_status != $scope.edit_project_status) {
                     $scope.getProjects($scope.original_project_status, $scope.getProjectsParam($scope.original_project_status,'limit'), $scope.getProjectsParam($scope.original_project_status,'page'));
                 }
-                $scope.getProjects($scope.put_project_status, $scope.getProjectsParam($scope.put_project_status,'limit'), $scope.getProjectsParam($scope.put_project_status,'page'));
+                $scope.getProjects($scope.edit_project_status, $scope.getProjectsParam($scope.edit_project_status,'limit'), $scope.getProjectsParam($scope.edit_project_status,'page'));
                 $('.popup.gantt').hide();
             },
             function errorCallback(response) {
@@ -206,6 +193,32 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }
         );
     };
+
+    $scope.remove_project = function(project_id) {
+        var project_name = $scope.projects_cache[project_id].name;
+        var project_status = $scope.projects_cache[project_id].status;
+
+        var answer = prompt('Type in project name "' + project_name + '" to confirm delete (case-sensitive).');         
+        
+        if(answer == project_name) {
+            //(this) is equivalent to ($scope) inside the function
+            $http({
+                method: 'DELETE',
+                url: projectsApiBaseURL + '/projects/' + project_id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                //Refresh assigned users
+                $scope.getProjects(project_status, $scope.getProjectsParam(project_status,'limit'), $scope.getProjectsParam(project_status,'page'));
+                $('.popup.gantt').hide(function() {
+                    alert("Deleted Project: " + project_name);
+                });
+            });          
+        } else {
+            alert('Did not type "'+ project_name + '".  Project not deleted');
+        }
+    }
 
     if(!("layout_settings" in $localStorage)) {
         $localStorage.layout_settings = {
