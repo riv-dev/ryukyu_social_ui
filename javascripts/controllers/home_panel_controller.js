@@ -120,6 +120,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }
         }).then(function (response) {
             if (response.data.write_access && response.data.write_access > 0) {
+                $('.popup.gantt').show();
                 $scope.edit_project_name = $scope.projects_cache[project_id].name;
                 $scope.original_project_name = $scope.projects_cache[project_id].name;
                 $scope.edit_project_description = $scope.projects_cache[project_id].description;
@@ -142,8 +143,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             }  
         });    
 
-
-        $('.popup.gantt').show();
     }
 
     $scope.back_project = function() {
@@ -194,30 +193,44 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         );
     };
 
-    $scope.remove_project = function(project_id) {
+    $scope.remove_project = function (project_id) {
         var project_name = $scope.projects_cache[project_id].name;
         var project_status = $scope.projects_cache[project_id].status;
 
-        var answer = prompt('Type in project name "' + project_name + '" to confirm delete (case-sensitive).');         
-        
-        if(answer == project_name) {
-            //(this) is equivalent to ($scope) inside the function
-            $http({
-                method: 'DELETE',
-                url: projectsApiBaseURL + '/projects/' + project_id,
-                headers: {
-                    'x-access-token': CommonFunctions.getToken()
+        //First Find out if the user has write access
+        $http({
+            method: 'GET',
+            url: projectsApiBaseURL + '/projects/' + project_id + '/users/' + $localStorage.loggedin_user.id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            if (response.data.write_access && response.data.write_access > 1) {
+
+                var answer = prompt('Type in project name "' + project_name + '" to confirm delete (case-sensitive).');
+
+                if (answer == project_name) {
+                    //(this) is equivalent to ($scope) inside the function
+                    $http({
+                        method: 'DELETE',
+                        url: projectsApiBaseURL + '/projects/' + project_id,
+                        headers: {
+                            'x-access-token': CommonFunctions.getToken()
+                        }
+                    }).then(function (response) {
+                        //Refresh assigned users
+                        $scope.getProjects(project_status, $scope.getProjectsParam(project_status, 'limit'), $scope.getProjectsParam(project_status, 'page'));
+                        $('.popup.gantt').hide(function () {
+                            alert("Deleted Project: " + project_name);
+                        });
+                    });
+                } else {
+                    alert('Did not type "' + project_name + '".  Project not deleted');
                 }
-            }).then(function (response) {
-                //Refresh assigned users
-                $scope.getProjects(project_status, $scope.getProjectsParam(project_status,'limit'), $scope.getProjectsParam(project_status,'page'));
-                $('.popup.gantt').hide(function() {
-                    alert("Deleted Project: " + project_name);
-                });
-            });          
-        } else {
-            alert('Did not type "'+ project_name + '".  Project not deleted');
-        }
+            } else {
+                alert("Project not deleted, you do not have admin privileges for this project.");
+            }
+        });
     }
 
     if(!("layout_settings" in $localStorage)) {
