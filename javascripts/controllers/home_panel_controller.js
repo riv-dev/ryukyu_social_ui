@@ -1,4 +1,4 @@
-app.controller('homePanelController', function($scope, $http, $location, $localStorage, CommonFunctions) {
+app.controller('homePanelController', function($scope, $http, $location, $localStorage, $mdDialog, CommonFunctions) {
     $scope.$parent.hero = "Home Panel";
     $scope.$parent.panel_class = "home";
 
@@ -1013,6 +1013,50 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         });
     }
 
+    $scope.showPrompt = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.prompt()
+            .title('Create group')
+            .placeholder('Group name')
+            .ariaLabel('Group name')
+            .targetEvent(ev)
+            .ok('Create')
+            .cancel('Cancel');
+    
+        $mdDialog.show(confirm).then(function(result) {
+            $http({
+                method: 'POST',
+                url: groupsApiBaseURL + '/groups',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                },
+                data: {
+                    name: result
+                }
+            }).then(
+                function successCallback(response) {
+                    $scope.groups.push({id: response.data.group_id, name: result});
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Create group ' + result + ' successfully!'
+                    });
+                },
+                function errorCallback(response) { 
+                    if (response.status > 0)
+                        Lobibox.notify('error', {
+                            position: 'top right',
+                            sound: false,
+                            size: 'mini',
+                            msg: response.status + ': ' + response.data + '.'
+                        });
+                }
+            );
+        }, function() {
+        });
+    };
+
     if($localStorage.loggedin_user) {
         //Get users list
         $http({
@@ -1093,6 +1137,16 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
                 });
             }
+        });
+
+        $http({
+            method: 'GET',
+            url: groupsApiBaseURL + '/groups',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.groups = response.data;
         });
 
         for(var i=0;i<$scope.statuses.length;i++) {
