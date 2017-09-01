@@ -33,7 +33,7 @@
         </header>
 
         <ul class="preview projects">
-            <li class="item {{project.status}}" ng-repeat="project in projects[status]">
+            <li class="item {{project.status}}" ng-repeat="project in projects[status]" ng-right-click="showContextMenu($event, project.id)">
                 <a class="link_block" href="./projects/{{project.id}}">
                     <h3 class="name">{{project.name}}</h3>
                     <dl class="attributes">

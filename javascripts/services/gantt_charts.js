@@ -78,9 +78,7 @@ app.directive('dhxGantt1', function ($location) {
       var menuElId = "";
       gantt1.attachEvent("onContextMenu", function(taskId, linkId, event){
         menuElId = $attrs.contextmenu;
-        $("#"+menuElId).on('mouseleave',function() {
-          $("#"+menuElId).hide();
-        });
+
         if(taskId){
           $("#"+menuElId).show();
           $("#"+menuElId).detach().appendTo("body"); //position to body
@@ -180,9 +178,6 @@ app.directive('dhxGantt2', function ($location) {
       var menuElId = "";
       gantt2.attachEvent("onContextMenu", function(taskId, linkId, event){
         menuElId = $attrs.contextmenu;
-        $("#"+menuElId).on('mouseleave',function() {
-          $("#"+menuElId).hide();
-        });
         if(taskId){
           $("#"+menuElId).show();
           $("#"+menuElId).detach().appendTo("body"); //position to body
@@ -282,9 +277,7 @@ app.directive('dhxGantt3', function ($location) {
       var menuElId = "";
       gantt3.attachEvent("onContextMenu", function(taskId, linkId, event){
         menuElId = $attrs.contextmenu;
-        $("#"+menuElId).on('mouseleave',function() {
-          $("#"+menuElId).hide();
-        });
+
         if(taskId){
           $("#"+menuElId).show();
           $("#"+menuElId).detach().appendTo("body"); //position to body
@@ -384,9 +377,7 @@ app.directive('dhxGantt4', function ($location) {
       var menuElId = "";
       gantt4.attachEvent("onContextMenu", function(taskId, linkId, event){
         menuElId = $attrs.contextmenu;
-        $("#"+menuElId).on('mouseleave',function() {
-          $("#"+menuElId).hide();
-        });
+
         if(taskId){
           $("#"+menuElId).show();
           $("#"+menuElId).detach().appendTo("body"); //position to body
