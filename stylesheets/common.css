@@ -2052,6 +2052,7 @@ button.dump {
 /* line 408, ../sass/_02_components.scss */
 .popup.gantt {
   position: fixed;
+  z-index: 1000;
   width: 100%;
   top: 0;
   left: 0;
@@ -2059,7 +2060,7 @@ button.dump {
   overflow-y: auto;
   height: calc(100% - 50px);
 }
-/* line 416, ../sass/_02_components.scss */
+/* line 417, ../sass/_02_components.scss */
 .popup.gantt .form {
   background-color: white;
 }

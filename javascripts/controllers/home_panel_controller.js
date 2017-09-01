@@ -101,6 +101,18 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     CommonFunctions.setFlashMessage($scope, $localStorage);
     CommonFunctions.checkLoggedInUser($scope, $localStorage, $location);
 
+    $("#gantt_menu").on('mouseleave',function() {
+        $("#gantt_menu").hide();
+    });
+
+    $scope.showContextMenu = function(event,project_id) {
+        $("#gantt_menu").show();
+        $("#gantt_menu").detach().appendTo("body"); //position to body
+        $("#gantt_menu").css('position','absolute');
+        $("#gantt_menu").css({left:event.pageX, top:event.pageY});
+        $scope.selected_project_id.value = project_id;
+    }
+
     $scope.goToPage = function(project_id) {
         $('.context-menu').hide();
         window.location = '/projects/' + project_id;
