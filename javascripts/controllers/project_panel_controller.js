@@ -323,7 +323,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             },
-            data: {user_id: $scope.selected_user_id}
+            data: {user_id: $scope.selected_user_id, write_access: 1}
         }).then(function (response) {
             //Refresh assigned users
             get_project_users();
