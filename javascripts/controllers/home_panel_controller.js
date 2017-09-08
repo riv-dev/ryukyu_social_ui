@@ -1024,38 +1024,86 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
             .cancel('Cancel');
     
         $mdDialog.show(confirm).then(function(result) {
+            if (result != undefined && result.trim() != "") {
+                $http({
+                    method: 'POST',
+                    url: groupsApiBaseURL + '/groups',
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    },
+                    data: {
+                        name: result
+                    }
+                }).then(
+                    function successCallback(response) {
+                        $scope.groups.push({id: response.data.group_id, name: result});
+                        Lobibox.notify('success', {
+                            position: 'top right',
+                            sound: false,
+                            size: 'mini',
+                            msg: 'Create group ' + result + ' successfully!'
+                        });
+                    },
+                    function errorCallback(response) { 
+                        if (response.status > 0)
+                            Lobibox.notify('error', {
+                                position: 'top right',
+                                sound: false,
+                                size: 'mini',
+                                msg: response.status + ': ' + response.data + '.'
+                            });
+                    }
+                );
+            } else {
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    sound: false,
+                    size: 'mini',
+                    msg: 'Group name not empty.'
+                });
+            }
+        }, function() {
+        });
+    };
+
+    $scope.delete_group = function(index, id, group_name) {
+        var answer = prompt('Remove group ' + group_name + '?  Type "yes" to confirm');
+        if(answer == "yes") {
             $http({
-                method: 'POST',
-                url: groupsApiBaseURL + '/groups',
+                method: 'DELETE',
+                url: groupsApiBaseURL + '/groups/' + id,
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
-                },
-                data: {
-                    name: result
                 }
             }).then(
                 function successCallback(response) {
-                    $scope.groups.push({id: response.data.group_id, name: result});
+                    delete $scope.groups[index];
+                    $scope.groups.splice(index, 1);
                     Lobibox.notify('success', {
                         position: 'top right',
                         sound: false,
                         size: 'mini',
-                        msg: 'Create group ' + result + ' successfully!'
+                        msg: 'Deleted group ' + group_name + '!'
                     });
                 },
-                function errorCallback(response) { 
-                    if (response.status > 0)
-                        Lobibox.notify('error', {
-                            position: 'top right',
-                            sound: false,
-                            size: 'mini',
-                            msg: response.status + ': ' + response.data + '.'
-                        });
+                function errorCallback(response) {
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Error deleting group ' + group_name + '.'
+                    });
                 }
             );
-        }, function() {
-        });
-    };
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Did not type "yes". ' + filename + ' not removed from the project.'
+            });
+        }
+    }
 
     if($localStorage.loggedin_user) {
         //Get users list

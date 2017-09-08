@@ -226,15 +226,14 @@
         </ul>
         <button ng-show="!isMaximized('groups')" class="button maximize" ng-click="maximize('groups')">Maximize</button>
         <button ng-show="isMaximized('groups')" class="button minimize" ng-click="minimize('groups')">Minimize</button>
-        <button ng-show="!isViewAdvanced('groups')" class="button view_advanced" ng-click="setViewAdvanced('groups',true)">View Advanced</button>
-        <button ng-show="isViewAdvanced('groups')" class="button view_simple" ng-click="setViewAdvanced('groups', false)">View Simple</button>
     </header>
 
     <ul class="preview groups">
         <li class="item" ng-repeat="group in groups">
-            <a class="link_block" href="./tasks/{{group.id}}">
+            <a class="link_block" href="./groups/{{group.id}}">
                 <h3 class="name">{{group.name}}</h3>
             </a>
+            <button class="button delete submit" ng-click="delete_group($index, group.id, group.name)" ng-show="loggedin_user.admin">Delete</button>
         </li>
     </ul>
     <p ng-if="!groups || groups.length == 0" class="info none">No groups</p>
