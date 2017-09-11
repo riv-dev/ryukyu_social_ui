@@ -333,39 +333,7 @@
     }
 }
 
-.tabs {
-    position: relative;
-    &:after {
-        position: relative;
-        display: block;
-        content: '';
-        border-top: 1px solid $black;
-        z-index: 2;
-    }
-    .item {
-        position: relative;
-        top: 1px;
-        display: inline-block;
-        margin-right: 5px;
-        z-index: 1;
-        &.selected {
-            z-index: 3;
-            .tab {
-                border-color: $black;
-                color: $black;
-                font-weight: bold;
-            }
-        }
-        .tab {
-            border: 1px solid $grey;
-            border-bottom: none;
-            border-radius: 3px 3px 0px 0px;
-            color: $grey;
-        }
-    }
-}
-
-.section.projects, .section.tasks {
+.section.projects, .section.tasks, .section.code_checker_results {
     .header {
         border-bottom: none;
     }
@@ -417,4 +385,24 @@
     .form {
         background-color: white;
     }
+}
+
+.code_checker {
+    background-color: #e2e2e2;
+    padding: 15px;
+    text-align: center;
+    .button.add_code_checker {
+        margin-top: 15px;
+    }
+    .title {
+        font-size: 18px !important;
+        display: block !important;
+        padding-top: 0px !important;
+        padding-right: 0px !important;
+    }
+    .attributes.metrics {
+        text-align: left;
+        padding: 0px !important;
+    }
+    margin-bottom: 15px;
 }

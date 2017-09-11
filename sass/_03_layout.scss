@@ -243,6 +243,9 @@
     .section.users {
         width: 33.33%;
     }
+    .section.code_checker_results {
+        width: 66.67%;
+    }
 }
 
 .main.task {
@@ -337,6 +340,16 @@
         &.finished {
             left: 161px;
         }
+
+        &.W3C {
+            left: 15px;
+        }
+        &.Ryukyu {
+            left: 57px;
+        }
+        &.AChecker {
+            left: 110px;
+        }
     }
     .settings {
         display: none;
@@ -363,6 +376,9 @@
             z-index: 3;
         }
         .preview {
+            display: block;
+        }
+        .info.none {
             display: block;
         }
         .pagination {
