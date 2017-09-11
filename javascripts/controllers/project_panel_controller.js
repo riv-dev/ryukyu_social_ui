@@ -100,7 +100,11 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             $scope.setTasksParam(status,'page',1);
             $scope.setTasksParam(status,'user_id_filter',0); 
 
-            $scope.setCodeCheckerResultsParam(status,'page',1);
+        }
+
+        for(var i=0;i<$scope.validator_types.length;i++) {
+            var validator_type = $scope.validator_types[i]; 
+            $scope.setCodeCheckerResultsParam(validator_type,'page',1);
         }
     } 
 
@@ -1240,6 +1244,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             function successCallback(response) {
                 $scope.code_checker_running = false;
                 $scope.get_code_checker_project();
+
+                for(var i=0;i<$scope.validator_types.length;i++) {
+                    var validator_type = $scope.validator_types[i]; 
+                    $scope.setCodeCheckerResultsParam(validator_type,'page',1);
+                    $scope.getCodeCheckerResults(validator_type, $scope.getCodeCheckerResultsParam(validator_type,'limit'), $scope.getCodeCheckerResultsParam(validator_type,'page'));
+                }
             },
             function errorCallback(response) {
             }
