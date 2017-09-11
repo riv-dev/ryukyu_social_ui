@@ -35,7 +35,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }
     }
 
-    //if (!("project_panel_code_checker_results_params" in $localStorage)) {
+    if (!("project_panel_code_checker_results_params" in $localStorage)) {
         $localStorage.project_panel_code_checker_results_params = {
             "W3C": {
                 limit: 10,
@@ -53,7 +53,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 count: null
             }
         }
-    //}
+    }
 
     $scope.project_panel_tasks_params = $localStorage.project_panel_tasks_params;
 
