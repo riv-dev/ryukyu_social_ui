@@ -709,6 +709,10 @@
         content: "\f1de";
         text-align: center;
     }
+
+    &.W3C, &.Ryukyu, &.AChecker {
+        background-color: white;
+    }
 }
 
 //Images
@@ -936,6 +940,10 @@ button.dump {
     &:hover {
         cursor: pointer;
     }
+}
+
+.W3C, .Ryukyu, .AChecker {
+    background-color: white;
 }
 
 .gantt1_task_content,

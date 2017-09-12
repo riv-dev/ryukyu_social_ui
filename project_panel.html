@@ -59,6 +59,81 @@
         <dt class="key description">Description:</dt>
         <dd class="value description"><pre ng-bind-html="this_project.description | linky"></pre><dd>
     </dl>
+    <div class="code_checker">
+        <h3 class="title">Code Checker</h3>
+        <button ng-show="!this_code_checker_project" class="button add_code_checker" ng-click="add_code_checker()">Add Code Checker Service</button>
+        <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form">
+            <dt class="key source_server">Source Code URL:</dt>
+            <dd ng-show="this_code_checker_project.source_code_server" class="value source_server">{{this_code_checker_project.source_code_server}}</dd>
+            <dd ng-show="!this_code_checker_project.source_code_server" class="value source_server none">Not defined</dd>
+            <dt class="key dev_server">Dev Server URL:</dt>
+            <dd ng-show="this_code_checker_project.development_server" class="value dev_server">{{this_code_checker_project.development_server}}</dd>
+            <dd ng-show="!this_code_checker_project.development_server" class="value dev_server none">Not defined</dd>
+            <dt class="key dev_username">Dev Server Username:</dt>
+            <dd ng-show="this_code_checker_project.dev_server_username" class="value dev_username">{{this_code_checker_project.dev_server_username}}</dd>
+            <dd ng-show="!this_code_checker_project.dev_server_username" class="value dev_username none">Not defined</dd>
+            <dt class="key dev_password">Dev Server Password:</dt>
+            <dd ng-show="this_code_checker_project.dev_server_password" class="value dev_password">{{this_code_checker_project.dev_server_password}}</dd>
+            <dd ng-show="!this_code_checker_project.dev_server_password" class="value dev_password none">Not defined</dd>
+            <dt class="key urls_to_check">URL's to Check:</dt>
+            <dd ng-show="!this_code_checker_project.urls_to_check" class="value urls_to_check none">None defined</dd>
+            <dd ng-repeat="url in this_code_checker_project.urls_to_check" class="value_item urls_to_check">
+                <span>{{url.url}}</span><button class="button delete" ng-click="remove_url_to_check(url.id)">Delete</button>
+            </dd>
+            <button ng-show="this_code_checker_project" class="button edit metrics" ng-click="show_edit_code_checker_form()" ng-show="loggedin_user.admin || this_user_write_access > 0">Edit Metrics</button>
+        </dl>
+        <form ng-show="this_code_checker_project && edit_code_checker_form" class="form metrics" name="metrics_form">
+            <p class="field">
+                <label class="label">Source Code URL</label>
+                <input class="input name" type="text" ng-model="this_code_checker_project.source_code_server"></input>
+            </p>
+            <p class="field">
+                <label class="label">Dev Server URL</label>
+                <input class="input name" type="text" ng-model="this_code_checker_project.development_server"></input>
+            </p>
+            <p class="field">
+                <label class="label">Dev Server Username</label>
+                <input class="input name" type="text" ng-model="this_code_checker_project.dev_server_username"></input>
+            </p>
+            <p class="field">
+                <label class="label">Dev Server Password</label>
+                <input class="input name" type="text" ng-model="this_code_checker_project.dev_server_password"></input>
+            </p>
+            <div class="buttons">
+                <input class="button submit" type="submit" value="Update Metrics" ng-click="update_code_checker()">
+                <a class="button cancel" ng-click="cancel_update_code_checker()">Cancel</a>
+            </div>
+        </form>
+        <dl class="attributes metrics add_url" ng-show="this_code_checker_project && !edit_code_checker_form">
+            <dt class="key add_url">Add URL to Check</dt>
+            <dd class="value add_url">
+                <form class="form urls_to_check" name="urls_to_check_form">
+                    <p class="field">
+                        <input class="input url_to_check_add" type="text" ng-model="url_to_add"></input>
+                    </p>
+                    <input class="button submit" type="submit" value="Add" ng-click="add_url_to_check(url_to_add)">
+                </form>
+            </dd>
+        </dl>
+
+
+        <button ng-show="this_code_checker_project && !code_checker_running" class="button run" ng-click="run_code_checker()">Run Code Checker</button>
+        <p ng-show="code_checker_running">Running...</p>
+        <dl ng-show="this_code_checker_project" class="attributes metrics results">
+            <dt class="key code_checker_status">Results Status: </dt>
+            <dd class="value code_checker_status">{{this_code_checker_project.last_check_status}}</dd>
+            <dt class="key code_checker_message">Results Message: </dd>
+            <dd class="value code_checker_message">{{this_code_checker_project.last_check_message}}</dd>
+            <dt class="key last_run">Last Checked: </dt>
+            <dd class="value last_run">{{this_code_checker_project.last_checked}}</dd>
+            <dt class="key errors_count">Errors Count:</dt>
+            <dd class="value errors_count">{{this_code_checker_project.total_error_count}}</dd>
+            <dt class="key warnings_count">Warnings Count:</dt>
+            <dd class="value warnings_count">{{this_code_checker_project.total_warning_count}}</dd>
+        </dl>
+        <button ng-show="this_code_checker_project" class="button remove" ng-click="remove_code_checker()">Remove Code Checker Service</button>
+    </div>
+
     <div class="attributes extra">
         <div ngf-select ngf-drop ng-model="uploadFiles" class="dd-area"
             ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="camera" 
@@ -211,4 +286,55 @@
             <input class="button submit" type="submit" value="Assign User" ng-click="assign_user()">
         </p>        
     </form>
+</section>
+
+<section ng-show="this_code_checker_project" class="section code_checker_results {{isMaximizedClass('code_checker_results')}}">
+    <header class="header">
+        <h2 class="title">Code Checker Results</h2>
+        <button class="button layered" ng-click="setLayout('code_checker_results','layered')">Layered</button>
+        <button class="button vertical" ng-click="setLayout('code_checker_results','vertical')">Vertical</button>
+    </header>
+
+    <section class="sub-section {{validator_type}} code_checker_results {{getLayoutCSS('code_checker_results')}} {{getTabSelectedCSS('code_checker_results',validator_type)}}" ng-repeat="validator_type in validator_types">
+        <header class="header">
+            <h3 class="tab {{validator_type}} {{getTabSelectedCSS('code_checker_results',validator_type)}}" ng-click="setTabSelected('code_checker_results',validator_type)">{{validator_type}}</h3>
+            <ul ng-show="isShowingSettings('code_checker_results',validator_type)" class="settings {{validator_type}}">
+                <li class="item">
+                    <label class="key total">Total Results: </label>
+                    <em class="value total">{{getCodeCheckerResultsParam(validator_type,'count')}}</em>
+                </li>
+                <li class="item">
+                    <label class="key limit" for="code_checker_results_limit">Limit Per Page: </label>
+                    <select class="input select limit" ng-options="limit for limit in limits" ng-change="getCodeCheckerResults(validator_type,project_panel_code_checker_results_params[validator_type]['limit'],1)" ng-model="project_panel_code_checker_results_params[validator_type]['limit']"></select>
+                </li>
+            </ul>
+            <button class="button settings {{validator_type}}" ng-click="toggleShowSettings('code_checker_results', validator_type)">Show/Hide Settings</button>
+        </header>
+
+        <ul class="preview code_checker_results">
+            <li class="item {{result.validator}} {{result.level}}" ng-repeat="result in code_checker_results[validator_type]">
+                <a class="link_block" href="#">
+                    <h3 class="name">{{result.message}}</h3>
+                    <dl class="attributes">
+                        <dt class="key line_num">Line:</dt>
+                        <dd class="value line_num">{{result.line_num}}</dd>
+                        <dt class="key source">Source:</dt>
+                        <dd class="value source">{{result.source}}</dd>
+                    </dl>
+                </a>
+            </li>
+        </ul>
+        <p ng-show="!code_checker_results[validator_type] || code_checker_results[validator_type].length == 0" class="info none">No code_checker_results</p>
+        <ul class="pagination" ng-if="code_checker_results_page_count_arr[validator_type] && code_checker_results_page_count_arr[validator_type].length > 1">
+            <li class="item previous" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),getCodeCheckerResultsParam(validator_type,'page')-1)">
+                <a href="#">&laquo;</a>
+            </li>
+            <li class="item {{currentCodeCheckerResultsPageClass(validator_type,$index+1)}}" ng-repeat="i in code_checker_results_page_count_arr[validator_type] track by $index">
+                <a href="#" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),$index+1)">{{$index+1}}</a>
+            </li>
+            <li class="item next" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),getCodeCheckerResultsParam(validator_type,'page')+1)">
+                <a href="#">&raquo;</a>
+            </li>
+        </ul>
+    </section>
 </section>
