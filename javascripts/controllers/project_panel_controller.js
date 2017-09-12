@@ -176,9 +176,6 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         "AChecker":[]
     };
 
-
-
-
     //Default settings
     if(!("project_panel_view_advanced" in $localStorage)) {
         $localStorage.project_panel_view_advanced = {
@@ -1201,6 +1198,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }).then(
             function successCallback(response) {
                 $scope.get_code_checker_project();
+                $scope.edit_code_checker_form = false;
             },
             function errorCallback(response) {
             }
@@ -1221,6 +1219,22 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             function successCallback(response) {
                 $scope.get_code_checker_project();
                 $scope.url_to_add = null;
+            },
+            function errorCallback(response) {
+            }
+        );        
+    }
+
+    $scope.remove_url_to_check = function(id) {
+        $http({
+            method: 'DELETE',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/urls-to-check/' + id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
             },
             function errorCallback(response) {
             }
@@ -1275,6 +1289,17 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             $scope.$parent.flash_message = 'Did not type "yes". Code Checker not removed from the project.';
             $scope.$parent.flash_level = "fail";
         }
+    }
+
+    $scope.edit_code_checker_form = false;
+
+    $scope.show_edit_code_checker_form = function() {
+        $scope.edit_code_checker_form = true;
+    }
+
+    $scope.cancel_update_code_checker = function() {
+        $scope.edit_code_checker_form = false;
+        $scope.get_code_checker_project();
     }
 
     $scope.quick_task_form_data = {};

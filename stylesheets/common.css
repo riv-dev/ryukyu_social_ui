@@ -1704,7 +1704,7 @@ button.dump {
 .preview.users {
   position: relative;
 }
-/* line 106, ../sass/_02_components.scss */
+/* line 102, ../sass/_02_components.scss */
 .preview.users .link_block {
   padding: 10px 5px;
 }
@@ -1714,46 +1714,46 @@ button.dump {
   display: table;
   clear: both;
 }
-/* line 110, ../sass/_02_components.scss */
+/* line 106, ../sass/_02_components.scss */
 .preview.users .link_block:hover .attributes {
   background-color: white;
 }
-/* line 115, ../sass/_02_components.scss */
+/* line 111, ../sass/_02_components.scss */
 .preview.users .avatar {
   position: relative;
   display: inline-block;
   vertical-align: middle;
 }
-/* line 120, ../sass/_02_components.scss */
+/* line 116, ../sass/_02_components.scss */
 .preview.users .info {
   position: relative;
   display: inline-block;
   vertical-align: middle;
 }
-/* line 125, ../sass/_02_components.scss */
+/* line 121, ../sass/_02_components.scss */
 .preview.users .key.user {
   float: none;
   display: block;
   font-size: 16px;
 }
-/* line 130, ../sass/_02_components.scss */
+/* line 126, ../sass/_02_components.scss */
 .preview.users .value.user {
   float: none;
   display: block;
   font-size: 14px;
   padding-left: 3px;
 }
-/* line 136, ../sass/_02_components.scss */
+/* line 132, ../sass/_02_components.scss */
 .preview.users .progress_description {
   margin-top: 10px;
 }
-/* line 139, ../sass/_02_components.scss */
+/* line 135, ../sass/_02_components.scss */
 .preview.users .message.free {
   font-weight: bold;
   color: #1f7c20;
   padding-left: 5px;
 }
-/* line 145, ../sass/_02_components.scss */
+/* line 140, ../sass/_02_components.scss */
 .preview.users .details {
   margin-top: 10px;
   position: relative;
@@ -1765,7 +1765,7 @@ button.dump {
   display: table;
   clear: both;
 }
-/* line 152, ../sass/_02_components.scss */
+/* line 146, ../sass/_02_components.scss */
 .preview.users .attributes {
   -webkit-box-shadow: 1px 1px 5px 1px #8a8a8a;
   -moz-box-shadow: 1px 1px 5px 1px #8a8a8a;
@@ -1774,7 +1774,7 @@ button.dump {
   margin-left: 15px;
   margin-right: 15px;
 }
-/* line 161, ../sass/_02_components.scss */
+/* line 154, ../sass/_02_components.scss */
 .preview.users .attributes.projects {
   margin-top: 10px;
   padding: 5px;
@@ -1783,7 +1783,7 @@ button.dump {
   border-radius: 5px;
   color: black;
 }
-/* line 167, ../sass/_02_components.scss */
+/* line 160, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics {
   padding: 5px;
   margin-top: 10px;
@@ -1792,94 +1792,94 @@ button.dump {
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 172, ../sass/_02_components.scss */
+/* line 165, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .key {
   font-weight: normal;
   color: black;
 }
-/* line 176, ../sass/_02_components.scss */
+/* line 169, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .key.alert {
   background-color: transparent;
   color: black;
 }
-/* line 180, ../sass/_02_components.scss */
+/* line 173, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .key.success {
   background-color: transparent;
   color: black;
 }
-/* line 184, ../sass/_02_components.scss */
+/* line 177, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .value {
   font-weight: normal;
   color: black;
 }
-/* line 188, ../sass/_02_components.scss */
+/* line 181, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .value.alert {
   background-color: transparent;
   font-weight: bold;
   color: #c40505;
 }
-/* line 193, ../sass/_02_components.scss */
+/* line 186, ../sass/_02_components.scss */
 .preview.users .attributes.task-metrics .value.success {
   background-color: transparent;
   color: #1f7c20;
 }
 
-/* line 203, ../sass/_02_components.scss */
+/* line 196, ../sass/_02_components.scss */
 .figure .caption {
   text-align: center;
 }
 
-/* line 209, ../sass/_02_components.scss */
+/* line 202, ../sass/_02_components.scss */
 .form {
   width: 50%;
   margin: auto;
   border: 1px solid #c2c2c2;
   padding: 30px;
 }
-/* line 214, ../sass/_02_components.scss */
+/* line 207, ../sass/_02_components.scss */
 .form .title {
   border-bottom: 1px solid black;
   margin-bottom: 15px;
 }
-/* line 218, ../sass/_02_components.scss */
+/* line 211, ../sass/_02_components.scss */
 .form .field {
   position: relative;
   margin-bottom: 15px;
 }
-/* line 222, ../sass/_02_components.scss */
+/* line 215, ../sass/_02_components.scss */
 .form .validation_errors {
   position: relative;
   top: -10px;
 }
-/* line 225, ../sass/_02_components.scss */
+/* line 218, ../sass/_02_components.scss */
 .form .validation_errors .item {
   list-style-type: disc;
   list-style-position: inside;
   color: red;
 }
-/* line 232, ../sass/_02_components.scss */
+/* line 224, ../sass/_02_components.scss */
 .form .button.trash {
   height: 24px;
   line-height: 24px;
   width: 24px;
 }
-/* line 236, ../sass/_02_components.scss */
+/* line 228, ../sass/_02_components.scss */
 .form .button.trash:before {
   font-size: 20px;
 }
 
-/* line 243, ../sass/_02_components.scss */
+/* line 235, ../sass/_02_components.scss */
 .form.assign_user {
   background-color: #e2edff;
   margin-top: 10px;
   width: 100%;
 }
-/* line 247, ../sass/_02_components.scss */
+/* line 239, ../sass/_02_components.scss */
 .form.assign_user .input {
   width: 100%;
 }
 
-/* line 252, ../sass/_02_components.scss */
+/* line 244, ../sass/_02_components.scss */
 .form.task_quick_add {
   background-color: transparent;
   border: none;
@@ -1889,14 +1889,14 @@ button.dump {
   margin-top: 0px;
   position: relative;
 }
-/* line 260, ../sass/_02_components.scss */
+/* line 252, ../sass/_02_components.scss */
 .form.task_quick_add .field {
   display: block;
   width: 100%;
   padding-right: 75px;
   margin-bottom: 0px;
 }
-/* line 266, ../sass/_02_components.scss */
+/* line 258, ../sass/_02_components.scss */
 .form.task_quick_add .input {
   font-size: 12px;
   line-height: 20px;
@@ -1904,7 +1904,7 @@ button.dump {
   width: 100%;
   font-weight: normal;
 }
-/* line 273, ../sass/_02_components.scss */
+/* line 265, ../sass/_02_components.scss */
 .form.task_quick_add .button {
   position: absolute;
   top: 5px;
@@ -1917,27 +1917,27 @@ button.dump {
   padding: 0px;
 }
 
-/* line 286, ../sass/_02_components.scss */
+/* line 278, ../sass/_02_components.scss */
 .form.update_progress {
   width: 100%;
   border: none;
   padding: 0px 5px 0px;
 }
-/* line 290, ../sass/_02_components.scss */
+/* line 282, ../sass/_02_components.scss */
 .form.update_progress .title {
   font-size: 14px;
 }
-/* line 293, ../sass/_02_components.scss */
+/* line 285, ../sass/_02_components.scss */
 .form.update_progress .label {
   color: black;
   font-size: 12px;
 }
-/* line 297, ../sass/_02_components.scss */
+/* line 289, ../sass/_02_components.scss */
 .form.update_progress .input {
   width: 100%;
   font-size: 12px;
 }
-/* line 301, ../sass/_02_components.scss */
+/* line 293, ../sass/_02_components.scss */
 .form.update_progress .button {
   padding: 5px;
   font-size: 12px;
@@ -1946,7 +1946,7 @@ button.dump {
   border-radius: 2px;
 }
 
-/* line 309, ../sass/_02_components.scss */
+/* line 301, ../sass/_02_components.scss */
 .pagination {
   display: inline-block;
   margin: auto;
@@ -1958,47 +1958,49 @@ button.dump {
   clear: both;
 }
 
-/* line 315, ../sass/_02_components.scss */
+/* line 307, ../sass/_02_components.scss */
 .pagination .item {
   float: left;
 }
-/* line 317, ../sass/_02_components.scss */
+/* line 309, ../sass/_02_components.scss */
 .pagination .item a {
   display: block;
   color: black;
   text-decoration: none;
   padding: 8px 16px;
 }
-/* line 324, ../sass/_02_components.scss */
+/* line 316, ../sass/_02_components.scss */
 .pagination .item.selected a {
   background-color: #4CAF50;
   color: white;
 }
-/* line 330, ../sass/_02_components.scss */
+/* line 322, ../sass/_02_components.scss */
 .pagination .item:not(.selected) a:hover {
   background-color: #ddd;
 }
 
-/* line 337, ../sass/_02_components.scss */
-.section.projects .header, .section.tasks .header, .section.code_checker_results .header {
+/* line 331, ../sass/_02_components.scss */
+.section.projects .header,
+.section.tasks .header,
+.section.code_checker_results .header {
   border-bottom: none;
 }
 
-/* line 342, ../sass/_02_components.scss */
+/* line 336, ../sass/_02_components.scss */
 .sub-section {
   background-color: transparent;
   text-align: center;
 }
-/* line 346, ../sass/_02_components.scss */
+/* line 339, ../sass/_02_components.scss */
 .sub-section * {
   text-align: left;
 }
-/* line 350, ../sass/_02_components.scss */
+/* line 342, ../sass/_02_components.scss */
 .sub-section .pagination {
   margin-top: 15px;
 }
 
-/* line 355, ../sass/_02_components.scss */
+/* line 347, ../sass/_02_components.scss */
 .context-menu {
   padding: 5px 0px;
   background-color: #e2e2e2;
@@ -2008,19 +2010,19 @@ button.dump {
   position: absolute;
   display: none;
 }
-/* line 364, ../sass/_02_components.scss */
+/* line 355, ../sass/_02_components.scss */
 .context-menu .item {
   padding: 5px 15px;
   font-size: 12px;
   font-family: 'Arial';
 }
-/* line 369, ../sass/_02_components.scss */
+/* line 359, ../sass/_02_components.scss */
 .context-menu .item:hover {
   background-color: #e2edff;
   cursor: pointer;
 }
 
-/* line 376, ../sass/_02_components.scss */
+/* line 366, ../sass/_02_components.scss */
 .popup.gantt {
   position: fixed;
   z-index: 1000;
@@ -2031,33 +2033,153 @@ button.dump {
   overflow-y: auto;
   height: calc(100% - 50px);
 }
-/* line 385, ../sass/_02_components.scss */
+/* line 375, ../sass/_02_components.scss */
 .popup.gantt .form {
   background-color: white;
 }
 
-/* line 390, ../sass/_02_components.scss */
+/* line 380, ../sass/_02_components.scss */
 .code_checker {
   background-color: #e2e2e2;
   padding: 15px;
   text-align: center;
   margin-bottom: 15px;
 }
-/* line 394, ../sass/_02_components.scss */
+/* line 384, ../sass/_02_components.scss */
 .code_checker .button.add_code_checker {
   margin-top: 15px;
 }
-/* line 397, ../sass/_02_components.scss */
+/* line 387, ../sass/_02_components.scss */
 .code_checker .title {
   font-size: 18px !important;
   display: block !important;
   padding-top: 0px !important;
   padding-right: 0px !important;
 }
-/* line 403, ../sass/_02_components.scss */
+/* line 393, ../sass/_02_components.scss */
 .code_checker .attributes.metrics {
+  position: relative;
   text-align: left;
   padding: 0px !important;
+}
+/* line 398, ../sass/_02_components.scss */
+.code_checker .attributes.metrics.code_checker_project {
+  margin-bottom: 0px !important;
+}
+/* line 401, ../sass/_02_components.scss */
+.code_checker .attributes.metrics.add_url {
+  margin-top: 0px !important;
+}
+/* line 404, ../sass/_02_components.scss */
+.code_checker .button.run {
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 20px;
+}
+/* line 409, ../sass/_02_components.scss */
+.code_checker .key {
+  margin-bottom: 3px !important;
+}
+/* line 412, ../sass/_02_components.scss */
+.code_checker .key.add_url {
+  margin-top: 10px;
+}
+/* line 415, ../sass/_02_components.scss */
+.code_checker .value.add_url {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-bottom: 0px !important;
+}
+/* line 420, ../sass/_02_components.scss */
+.code_checker .value.add_url .form {
+  padding-bottom: 0px;
+}
+/* line 422, ../sass/_02_components.scss */
+.code_checker .value.add_url .form .field {
+  padding-right: 43px;
+  margin-bottom: 0px;
+}
+/* line 423, ../sass/_02_components.scss */
+.code_checker .value.add_url .form .field .input {
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+/* line 432, ../sass/_02_components.scss */
+.code_checker .value.add_url .form .button.submit {
+  width: 40px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0px !important;
+  font-size: 12px !important;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-right: 0px !important;
+}
+/* line 445, ../sass/_02_components.scss */
+.code_checker .value_item.urls_to_check {
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+/* line 449, ../sass/_02_components.scss */
+.code_checker .value_item.urls_to_check:hover {
+  background-color: #e2edff;
+}
+/* line 452, ../sass/_02_components.scss */
+.code_checker .value_item.urls_to_check .button.delete {
+  height: 10px;
+  width: 10px;
+  line-height: 10px;
+  top: 0px;
+}
+/* line 457, ../sass/_02_components.scss */
+.code_checker .value_item.urls_to_check .button.delete:before {
+  font-size: 10px;
+}
+/* line 463, ../sass/_02_components.scss */
+.code_checker .button.edit.metrics {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+/* line 467, ../sass/_02_components.scss */
+.code_checker .button.edit.metrics:before {
+  font-size: 12px;
+}
+/* line 471, ../sass/_02_components.scss */
+.code_checker .form.metrics {
+  text-align: left;
+}
+/* line 473, ../sass/_02_components.scss */
+.code_checker .form.metrics .label {
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+/* line 477, ../sass/_02_components.scss */
+.code_checker .form.metrics .field {
+  margin-bottom: 10px;
+}
+/* line 480, ../sass/_02_components.scss */
+.code_checker .form.metrics .input {
+  height: 20px !important;
+  line-height: 20px !important;
+  font-size: 12px !important;
+  margin-bottom: 0px;
+}
+/* line 487, ../sass/_02_components.scss */
+.code_checker .form.metrics .buttons .button.submit {
+  font-size: 12px;
+  padding: 3px;
+  margin-right: 3px;
+}
+
+/* line 498, ../sass/_02_components.scss */
+.code_checker_results .item.error .name {
+  color: #c40505;
 }
 
 /* line 3, ../sass/_03_layout.scss */
