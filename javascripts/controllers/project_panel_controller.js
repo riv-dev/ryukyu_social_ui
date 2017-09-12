@@ -135,6 +135,14 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }
     }
 
+    //Gracefull upgrade
+    if(!$localStorage.project_panel_layout_settings["code_checker_results"]) {
+        $localStorage.project_panel_layout_settings["code_checker_results"] = {
+            type: "layered",
+            selected: "W3C"            
+        }
+    }
+
     $scope.setLayout = function(category, value) {
         $localStorage.project_panel_layout_settings[category]['type'] = value;
     }
