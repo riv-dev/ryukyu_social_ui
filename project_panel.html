@@ -63,7 +63,8 @@
         <h3 class="title">Code Checker</h3>
         <button ng-show="!this_code_checker_project" class="button add_code_checker" ng-click="add_code_checker()">Add Code Checker Service</button>
         <h4 class="title check_settings">SASS Check Settings</h4>
-        <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form">
+        <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form['sass']">
+            <button ng-show="this_code_checker_project" class="button edit metrics" ng-click="show_edit_code_checker_form('sass')" ng-show="loggedin_user.admin || this_user_write_access > 0">Edit Metrics</button>
             <dt class="key source_server">Github Code URL:</dt>
             <dd ng-show="this_code_checker_project.source_code_server" class="value source_server">{{this_code_checker_project.source_code_server}}</dd>
             <dd ng-show="!this_code_checker_project.source_code_server" class="value source_server none">Not defined</dd>
@@ -85,8 +86,27 @@
                 </form>
             </dd>
         </dl>
+        <form ng-show="this_code_checker_project && edit_code_checker_form['sass']" class="form metrics" name="metrics_form">
+                <p class="field">
+                    <label class="label">Github Code URL</label>
+                    <input class="input name" type="text" ng-model="this_code_checker_project.source_code_server"></input>
+                </p>
+                <p class="field">
+                    <label class="label">Github Username</label>
+                    <input class="input name" type="text" ng-model="this_code_checker_project.source_username"></input>
+                </p>
+                <p class="field">
+                    <label class="label">Github Password</label>
+                    <input class="input name" type="password" ng-model="this_code_checker_project.source_password"></input>
+                </p>
+                <div class="buttons">
+                    <input class="button submit" type="submit" value="Update Metrics" ng-click="update_code_checker('sass')">
+                    <a class="button cancel" ng-click="cancel_update_code_checker('sass')">Cancel</a>
+                </div>
+        </form>
         <h4 class="title check_settings">HTML Check Settings</h4>
-        <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form">
+        <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form['html']">
+            <button ng-show="this_code_checker_project" class="button edit metrics" ng-click="show_edit_code_checker_form('html')" ng-show="loggedin_user.admin || this_user_write_access > 0">Edit Metrics</button>
             <dt class="key dev_server">Dev Server URL:</dt>
             <dd ng-show="this_code_checker_project.development_server" class="value dev_server">{{this_code_checker_project.development_server}}</dd>
             <dd ng-show="!this_code_checker_project.development_server" class="value dev_server none">Not defined</dd>
@@ -101,7 +121,6 @@
             <dd ng-repeat="url in this_code_checker_project.urls_to_check" class="value_item urls_to_check">
                 <span>{{url.url}}</span><button class="button delete" ng-click="remove_url_to_check(url.id)">Delete</button>
             </dd>
-            <button ng-show="this_code_checker_project" class="button edit metrics" ng-click="show_edit_code_checker_form()" ng-show="loggedin_user.admin || this_user_write_access > 0">Edit Metrics</button>
             <dt class="key add_url">Add URL to Check</dt>
             <dd class="value add_url">
                 <form class="form urls_to_check" name="urls_to_check_form">
@@ -113,19 +132,7 @@
             </dd>
         </dl>
 
-        <form ng-show="this_code_checker_project && edit_code_checker_form" class="form metrics" name="metrics_form">
-            <p class="field">
-                <label class="label">Github Code URL</label>
-                <input class="input name" type="text" ng-model="this_code_checker_project.source_code_server"></input>
-            </p>
-            <p class="field">
-                <label class="label">Github Username</label>
-                <input class="input name" type="text" ng-model="this_code_checker_project.source_username"></input>
-            </p>
-            <p class="field">
-                <label class="label">Github Password</label>
-                <input class="input name" type="password" ng-model="this_code_checker_project.source_password"></input>
-            </p>
+        <form ng-show="this_code_checker_project && edit_code_checker_form['html']" class="form metrics" name="metrics_form">
             <p class="field">
                 <label class="label">Dev Server URL</label>
                 <input class="input name" type="text" ng-model="this_code_checker_project.development_server"></input>
@@ -139,8 +146,8 @@
                 <input class="input name" type="text" ng-model="this_code_checker_project.dev_server_password"></input>
             </p>
             <div class="buttons">
-                <input class="button submit" type="submit" value="Update Metrics" ng-click="update_code_checker()">
-                <a class="button cancel" ng-click="cancel_update_code_checker()">Cancel</a>
+                <input class="button submit" type="submit" value="Update Metrics" ng-click="update_code_checker('html')">
+                <a class="button cancel" ng-click="cancel_update_code_checker('html')">Cancel</a>
             </div>
         </form>
 

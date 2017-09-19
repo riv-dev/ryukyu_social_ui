@@ -1207,19 +1207,25 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         );
     }
 
-    $scope.update_code_checker = function() {
-        var update_data = {
-            source_code_server: $scope.this_code_checker_project.source_code_server,
-            source_username: $scope.this_code_checker_project.source_username,
-            development_server: $scope.this_code_checker_project.development_server,
-            dev_server_username: $scope.this_code_checker_project.dev_server_username,
-            dev_server_password: $scope.this_code_checker_project.dev_server_password           
+    $scope.update_code_checker = function(type) {
+        var update_data = {}
+        if(type == "html") {
+            update_data = {
+                development_server: $scope.this_code_checker_project.development_server,
+                dev_server_username: $scope.this_code_checker_project.dev_server_username,
+                dev_server_password: $scope.this_code_checker_project.dev_server_password           
+            }
+        } else if (type == "sass") {
+            update_data = {
+                source_code_server: $scope.this_code_checker_project.source_code_server,
+                source_username: $scope.this_code_checker_project.source_username,
+            }
+            if($scope.this_code_checker_project.source_password && $scope.this_code_checker_project.source_password.length > 0) {
+                update_data.source_password = $scope.this_code_checker_project.source_password;
+                console.log("Github password: " + update_data.source_password);
+            }
         }
 
-        if($scope.this_code_checker_project.source_password && $scope.this_code_checker_project.source_password.length > 0) {
-            update_data.source_password = $scope.this_code_checker_project.source_password;
-            console.log("Github password: " + update_data.source_password);
-        }
         $http({
             method: 'PUT',
             url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id,
@@ -1230,7 +1236,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }).then(
             function successCallback(response) {
                 $scope.get_code_checker_project();
-                $scope.edit_code_checker_form = false;
+                $scope.edit_code_checker_form[type] = false;
             },
             function errorCallback(response) {
             }
@@ -1361,14 +1367,17 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }
     }
 
-    $scope.edit_code_checker_form = false;
-
-    $scope.show_edit_code_checker_form = function() {
-        $scope.edit_code_checker_form = true;
+    $scope.edit_code_checker_form = {
+        html: false,
+        sass: false
     }
 
-    $scope.cancel_update_code_checker = function() {
-        $scope.edit_code_checker_form = false;
+    $scope.show_edit_code_checker_form = function(type) {
+        $scope.edit_code_checker_form[type] = true;
+    }
+
+    $scope.cancel_update_code_checker = function(type) {
+        $scope.edit_code_checker_form[type] = false;
         $scope.get_code_checker_project();
     }
 
