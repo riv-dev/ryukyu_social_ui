@@ -390,6 +390,13 @@
         padding-top: 0px !important;
         padding-right: 0px !important;
     }
+
+    .title.check_settings {
+        font-size: 16px !important;
+        text-align: left !important;
+        margin-top: 15px !important;
+        margin-bottom: 5px !important;
+    }
     .attributes.metrics {
         position: relative;
         text-align: left;
@@ -398,10 +405,14 @@
     .attributes.metrics.code_checker_project {
         margin-bottom: 0px !important;
     }
-    .attributes.metrics.add_url {
+    .attributes.metrics.add_url, .attributes.metrics.add_sass_folder {
         margin-top: 0px !important;
     }
+    .status.run {
+        margin-top: 30px;
+    }
     .button.run {
+        margin-top: 30px;
         height: 50px;
         line-height: 50px;
         padding: 0px 20px;
@@ -409,10 +420,10 @@
     .key {
         margin-bottom: 3px !important;
     }
-    .key.add_url {
+    .key.add_url, .key.add_sass_folder {
         margin-top: 10px;
     }
-    .value.add_url {
+    .value.add_url, .value.add_sass_folder {
         position: relative;
         display: block;
         width: 100%;
@@ -442,7 +453,11 @@
             }
         }
     }
-    .value_item.urls_to_check {
+
+    .value.urls_to_check.none, .value.sass_folders.none {
+        margin-bottom: 3px !important;
+    }
+    .value_item.urls_to_check, .value_item.sass_folders {
         display: list-item;
         list-style-type: disc;
         list-style-position: inside;
