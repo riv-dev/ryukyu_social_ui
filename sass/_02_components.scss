@@ -384,18 +384,22 @@
     .button.add_code_checker {
         margin-top: 15px;
     }
-    .title {
+
+    h3.title {
         font-size: 18px !important;
         display: block !important;
         padding-top: 0px !important;
         padding-right: 0px !important;
     }
 
-    .title.check_settings {
+    h4.title.check_settings {
         font-size: 16px !important;
         text-align: left !important;
+        display: block;
         margin-top: 15px !important;
         margin-bottom: 5px !important;
+        padding-top: 0px !important;
+        padding-right: 0px !important;
     }
     .attributes.metrics {
         position: relative;
