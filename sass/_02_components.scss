@@ -410,6 +410,7 @@
     }
     .status.run {
         margin-top: 30px;
+        color: $green;
     }
     .button.run {
         margin-top: 30px;
@@ -505,6 +506,9 @@
                 margin-right: 3px;
             }
         }
+    }
+    .button.remove {
+
     }
 }
 

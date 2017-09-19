@@ -1319,6 +1319,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
     $scope.code_checker_results = {};
     $scope.run_code_checker = function() {
         $scope.code_checker_running = true;
+        $('.code_checker .button').prop('disabled', true);
         $http({
             method: 'PUT',
             url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/run',
@@ -1332,7 +1333,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             function successCallback(response) {
                 $scope.code_checker_running = false;
                 $scope.get_code_checker_project();
-
+                $('.code_checker .button').prop('disabled', false);
                 for(var i=0;i<$scope.validator_types.length;i++) {
                     var validator_type = $scope.validator_types[i]; 
                     $scope.setCodeCheckerResultsParam(validator_type,'page',1);
@@ -1342,6 +1343,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             function errorCallback(response) {
                 $scope.code_checker_running = false;
                 $scope.get_code_checker_project();
+                $('.code_checker .button').prop('disabled', false);
             }
         );
     }    
