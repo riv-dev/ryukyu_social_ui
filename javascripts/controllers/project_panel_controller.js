@@ -1334,6 +1334,8 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 }
             },
             function errorCallback(response) {
+                $scope.code_checker_running = false;
+                $scope.get_code_checker_project();
             }
         );
     }    
