@@ -2080,6 +2080,7 @@ button.dump {
 /* line 411, ../sass/_02_components.scss */
 .code_checker .status.run {
   margin-top: 30px;
+  color: #1f7c20;
 }
 /* line 415, ../sass/_02_components.scss */
 .code_checker .button.run {
@@ -2193,7 +2194,7 @@ button.dump {
   margin-right: 3px;
 }
 
-/* line 514, ../sass/_02_components.scss */
+/* line 517, ../sass/_02_components.scss */
 .code_checker_results .item.error .name {
   color: #c40505;
 }
