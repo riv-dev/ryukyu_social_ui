@@ -2056,59 +2056,71 @@ button.dump {
   padding-top: 0px !important;
   padding-right: 0px !important;
 }
-/* line 393, ../sass/_02_components.scss */
+/* line 394, ../sass/_02_components.scss */
+.code_checker .title.check_settings {
+  font-size: 16px !important;
+  text-align: left !important;
+  margin-top: 15px !important;
+  margin-bottom: 5px !important;
+}
+/* line 400, ../sass/_02_components.scss */
 .code_checker .attributes.metrics {
   position: relative;
   text-align: left;
   padding: 0px !important;
 }
-/* line 398, ../sass/_02_components.scss */
+/* line 405, ../sass/_02_components.scss */
 .code_checker .attributes.metrics.code_checker_project {
   margin-bottom: 0px !important;
 }
-/* line 401, ../sass/_02_components.scss */
-.code_checker .attributes.metrics.add_url {
+/* line 408, ../sass/_02_components.scss */
+.code_checker .attributes.metrics.add_url, .code_checker .attributes.metrics.add_sass_folder {
   margin-top: 0px !important;
 }
-/* line 404, ../sass/_02_components.scss */
+/* line 411, ../sass/_02_components.scss */
+.code_checker .status.run {
+  margin-top: 30px;
+}
+/* line 415, ../sass/_02_components.scss */
 .code_checker .button.run {
+  margin-top: 30px;
   height: 50px;
   line-height: 50px;
   padding: 0px 20px;
 }
-/* line 409, ../sass/_02_components.scss */
+/* line 421, ../sass/_02_components.scss */
 .code_checker .key {
   margin-bottom: 3px !important;
 }
-/* line 412, ../sass/_02_components.scss */
-.code_checker .key.add_url {
+/* line 424, ../sass/_02_components.scss */
+.code_checker .key.add_url, .code_checker .key.add_sass_folder {
   margin-top: 10px;
 }
-/* line 415, ../sass/_02_components.scss */
-.code_checker .value.add_url {
+/* line 427, ../sass/_02_components.scss */
+.code_checker .value.add_url, .code_checker .value.add_sass_folder {
   position: relative;
   display: block;
   width: 100%;
   margin-bottom: 0px !important;
 }
-/* line 420, ../sass/_02_components.scss */
-.code_checker .value.add_url .form {
+/* line 432, ../sass/_02_components.scss */
+.code_checker .value.add_url .form, .code_checker .value.add_sass_folder .form {
   padding-bottom: 0px;
 }
-/* line 422, ../sass/_02_components.scss */
-.code_checker .value.add_url .form .field {
+/* line 434, ../sass/_02_components.scss */
+.code_checker .value.add_url .form .field, .code_checker .value.add_sass_folder .form .field {
   padding-right: 43px;
   margin-bottom: 0px;
 }
-/* line 423, ../sass/_02_components.scss */
-.code_checker .value.add_url .form .field .input {
+/* line 435, ../sass/_02_components.scss */
+.code_checker .value.add_url .form .field .input, .code_checker .value.add_sass_folder .form .field .input {
   height: 20px;
   line-height: 20px;
   font-size: 14px;
   margin-bottom: 0px;
 }
-/* line 432, ../sass/_02_components.scss */
-.code_checker .value.add_url .form .button.submit {
+/* line 444, ../sass/_02_components.scss */
+.code_checker .value.add_url .form .button.submit, .code_checker .value.add_sass_folder .form .button.submit {
   width: 40px;
   height: 20px;
   line-height: 20px;
@@ -2119,65 +2131,69 @@ button.dump {
   right: 0px;
   margin-right: 0px !important;
 }
-/* line 445, ../sass/_02_components.scss */
-.code_checker .value_item.urls_to_check {
+/* line 458, ../sass/_02_components.scss */
+.code_checker .value.urls_to_check.none, .code_checker .value.sass_folders.none {
+  margin-bottom: 3px !important;
+}
+/* line 461, ../sass/_02_components.scss */
+.code_checker .value_item.urls_to_check, .code_checker .value_item.sass_folders {
   display: list-item;
   list-style-type: disc;
   list-style-position: inside;
 }
-/* line 449, ../sass/_02_components.scss */
-.code_checker .value_item.urls_to_check:hover {
+/* line 465, ../sass/_02_components.scss */
+.code_checker .value_item.urls_to_check:hover, .code_checker .value_item.sass_folders:hover {
   background-color: #e2edff;
 }
-/* line 452, ../sass/_02_components.scss */
-.code_checker .value_item.urls_to_check .button.delete {
+/* line 468, ../sass/_02_components.scss */
+.code_checker .value_item.urls_to_check .button.delete, .code_checker .value_item.sass_folders .button.delete {
   height: 10px;
   width: 10px;
   line-height: 10px;
   top: 0px;
 }
-/* line 457, ../sass/_02_components.scss */
-.code_checker .value_item.urls_to_check .button.delete:before {
+/* line 473, ../sass/_02_components.scss */
+.code_checker .value_item.urls_to_check .button.delete:before, .code_checker .value_item.sass_folders .button.delete:before {
   font-size: 10px;
 }
-/* line 463, ../sass/_02_components.scss */
+/* line 479, ../sass/_02_components.scss */
 .code_checker .button.edit.metrics {
   position: absolute;
   top: 0px;
   right: 0px;
 }
-/* line 467, ../sass/_02_components.scss */
+/* line 483, ../sass/_02_components.scss */
 .code_checker .button.edit.metrics:before {
   font-size: 12px;
 }
-/* line 471, ../sass/_02_components.scss */
+/* line 487, ../sass/_02_components.scss */
 .code_checker .form.metrics {
   text-align: left;
 }
-/* line 473, ../sass/_02_components.scss */
+/* line 489, ../sass/_02_components.scss */
 .code_checker .form.metrics .label {
   font-size: 12px;
   margin-bottom: 3px;
 }
-/* line 477, ../sass/_02_components.scss */
+/* line 493, ../sass/_02_components.scss */
 .code_checker .form.metrics .field {
   margin-bottom: 10px;
 }
-/* line 480, ../sass/_02_components.scss */
+/* line 496, ../sass/_02_components.scss */
 .code_checker .form.metrics .input {
   height: 20px !important;
   line-height: 20px !important;
   font-size: 12px !important;
   margin-bottom: 0px;
 }
-/* line 487, ../sass/_02_components.scss */
+/* line 503, ../sass/_02_components.scss */
 .code_checker .form.metrics .buttons .button.submit {
   font-size: 12px;
   padding: 3px;
   margin-right: 3px;
 }
 
-/* line 498, ../sass/_02_components.scss */
+/* line 514, ../sass/_02_components.scss */
 .code_checker_results .item.error .name {
   color: #c40505;
 }

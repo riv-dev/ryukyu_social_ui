@@ -1148,6 +1148,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }).then(
             function successCallback(response) {
                 $scope.this_code_checker_project = response.data;
+                $scope.this_code_checker_project.source_password = ""; //do not show github password
 
                 //Get url's to check
                 $http({
@@ -1162,6 +1163,22 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                     },
                     function errorCallback(response) { 
                         $scope.this_code_checker_project.urls_to_check = [];
+                    }
+                );
+
+                //Get sass folders to check
+                $http({
+                    method: 'GET',
+                    url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/sass-folders',
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    }
+                }).then(
+                    function successCallback(response) {
+                        $scope.this_code_checker_project.sass_folders = response.data;
+                    },
+                    function errorCallback(response) { 
+                        $scope.this_code_checker_project.sass_folders = [];
                     }
                 );
             },
@@ -1191,18 +1208,25 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
     }
 
     $scope.update_code_checker = function() {
+        var update_data = {
+            source_code_server: $scope.this_code_checker_project.source_code_server,
+            source_username: $scope.this_code_checker_project.source_username,
+            development_server: $scope.this_code_checker_project.development_server,
+            dev_server_username: $scope.this_code_checker_project.dev_server_username,
+            dev_server_password: $scope.this_code_checker_project.dev_server_password           
+        }
+
+        if($scope.this_code_checker_project.source_password && $scope.this_code_checker_project.source_password.length > 0) {
+            update_data.source_password = $scope.this_code_checker_project.source_password;
+            console.log("Github password: " + update_data.source_password);
+        }
         $http({
             method: 'PUT',
             url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             },
-            data: {
-                source_code_server: $scope.this_code_checker_project.source_code_server,
-                development_server: $scope.this_code_checker_project.development_server,
-                dev_server_username: $scope.this_code_checker_project.dev_server_username,
-                dev_server_password: $scope.this_code_checker_project.dev_server_password
-            }
+            data: update_data
         }).then(
             function successCallback(response) {
                 $scope.get_code_checker_project();
@@ -1233,10 +1257,46 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         );        
     }
 
+    $scope.add_sass_folder = function(relative_path) {
+        $http({
+            method: 'POST',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/sass-folders',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                relative_path: relative_path
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+                $scope.sass_folder_to_add = null;
+            },
+            function errorCallback(response) {
+            }
+        );        
+    }
+
     $scope.remove_url_to_check = function(id) {
         $http({
             method: 'DELETE',
             url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/urls-to-check/' + id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+            },
+            function errorCallback(response) {
+            }
+        );        
+    }
+
+    $scope.remove_sass_folder = function(id) {
+        $http({
+            method: 'DELETE',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/sass-folders/' + id,
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }

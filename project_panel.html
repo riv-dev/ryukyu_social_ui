@@ -62,10 +62,31 @@
     <div class="code_checker">
         <h3 class="title">Code Checker</h3>
         <button ng-show="!this_code_checker_project" class="button add_code_checker" ng-click="add_code_checker()">Add Code Checker Service</button>
+        <h4 class="title check_settings">SASS Check Settings</h4>
         <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form">
-            <dt class="key source_server">Source Code URL:</dt>
+            <dt class="key source_server">Github Code URL:</dt>
             <dd ng-show="this_code_checker_project.source_code_server" class="value source_server">{{this_code_checker_project.source_code_server}}</dd>
             <dd ng-show="!this_code_checker_project.source_code_server" class="value source_server none">Not defined</dd>
+            <dt class="key source_username">Github Username:</dt>
+            <dd ng-show="this_code_checker_project.source_username" class="value source_username">{{this_code_checker_project.source_username}}</dd>
+            <dd ng-show="!this_code_checker_project.source_username" class="value source_username none">Not defined</dd>
+            <dt class="key urls_to_check">SASS folders to Check:</dt>
+            <dd ng-show="!this_code_checker_project.sass_folders" class="value sass_folders none">None defined</dd>
+            <dd ng-repeat="sass_folder in this_code_checker_project.sass_folders" class="value_item sass_folders">
+                <span>{{sass_folder.relative_path}}</span><button class="button delete" ng-click="remove_sass_folder(sass_folder.id)">Delete</button>
+            </dd>
+            <dt class="key add_sass_folder">Add SASS Folder to Check</dt>
+            <dd class="value add_sass_folder">
+                <form class="form sass_folders" name="sass_folders_form">
+                    <p class="field">
+                        <input class="input sass_folder_add" type="text" ng-model="sass_folder_to_add"></input>
+                    </p>
+                    <input class="button submit" type="submit" value="Add" ng-click="add_sass_folder(sass_folder_to_add)">
+                </form>
+            </dd>
+        </dl>
+        <h4 class="title check_settings">HTML Check Settings</h4>
+        <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form">
             <dt class="key dev_server">Dev Server URL:</dt>
             <dd ng-show="this_code_checker_project.development_server" class="value dev_server">{{this_code_checker_project.development_server}}</dd>
             <dd ng-show="!this_code_checker_project.development_server" class="value dev_server none">Not defined</dd>
@@ -81,11 +102,29 @@
                 <span>{{url.url}}</span><button class="button delete" ng-click="remove_url_to_check(url.id)">Delete</button>
             </dd>
             <button ng-show="this_code_checker_project" class="button edit metrics" ng-click="show_edit_code_checker_form()" ng-show="loggedin_user.admin || this_user_write_access > 0">Edit Metrics</button>
+            <dt class="key add_url">Add URL to Check</dt>
+            <dd class="value add_url">
+                <form class="form urls_to_check" name="urls_to_check_form">
+                    <p class="field">
+                        <input class="input url_to_check_add" type="text" ng-model="url_to_add"></input>
+                    </p>
+                    <input class="button submit" type="submit" value="Add" ng-click="add_url_to_check(url_to_add)">
+                </form>
+            </dd>
         </dl>
+
         <form ng-show="this_code_checker_project && edit_code_checker_form" class="form metrics" name="metrics_form">
             <p class="field">
-                <label class="label">Source Code URL</label>
+                <label class="label">Github Code URL</label>
                 <input class="input name" type="text" ng-model="this_code_checker_project.source_code_server"></input>
+            </p>
+            <p class="field">
+                <label class="label">Github Username</label>
+                <input class="input name" type="text" ng-model="this_code_checker_project.source_username"></input>
+            </p>
+            <p class="field">
+                <label class="label">Github Password</label>
+                <input class="input name" type="password" ng-model="this_code_checker_project.source_password"></input>
             </p>
             <p class="field">
                 <label class="label">Dev Server URL</label>
@@ -104,21 +143,9 @@
                 <a class="button cancel" ng-click="cancel_update_code_checker()">Cancel</a>
             </div>
         </form>
-        <dl class="attributes metrics add_url" ng-show="this_code_checker_project && !edit_code_checker_form">
-            <dt class="key add_url">Add URL to Check</dt>
-            <dd class="value add_url">
-                <form class="form urls_to_check" name="urls_to_check_form">
-                    <p class="field">
-                        <input class="input url_to_check_add" type="text" ng-model="url_to_add"></input>
-                    </p>
-                    <input class="button submit" type="submit" value="Add" ng-click="add_url_to_check(url_to_add)">
-                </form>
-            </dd>
-        </dl>
-
 
         <button ng-show="this_code_checker_project && !code_checker_running" class="button run" ng-click="run_code_checker()">Run Code Checker</button>
-        <p ng-show="code_checker_running">Running...</p>
+        <p ng-show="code_checker_running" class="status run">Running...</p>
         <dl ng-show="this_code_checker_project" class="attributes metrics results">
             <dt class="key code_checker_status">Results Status: </dt>
             <dd class="value code_checker_status">{{this_code_checker_project.last_check_status}}</dd>
@@ -316,8 +343,10 @@
                 <a class="link_block" href="#">
                     <h3 class="name">{{result.message}}</h3>
                     <dl class="attributes">
-                        <dt class="key line_num">File:</dt>
-                        <dd class="value line_num">{{result.url}}</dd>                       
+                        <dt class="key file_type">Type:</dt>
+                        <dd class="value file_type">{{result.file_type}}</dd>
+                        <dt class="key file_path">File:</dt>
+                        <dd class="value file_path">{{result.url}}</dd>                       
                         <dt class="key line_num">Line:</dt>
                         <dd class="value line_num">{{result.line_num}}</dd>
                         <dt class="key source">Source:</dt>
