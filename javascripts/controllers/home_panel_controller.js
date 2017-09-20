@@ -970,6 +970,11 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         });
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////// 
+    /////////////////////////////// On Page Load //////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
     if($localStorage.loggedin_user) {
         //Get users list
         $http({
@@ -985,10 +990,10 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 //Cache the user by id for optimization
                 $scope.users_cache[$scope.users[i].id] = $scope.users[i];
 
-                //Get projects
+                //Get projects for each users
                 $scope.getProjectsByUser($scope.users[i].id);
 
-                //Get task metrics
+                //Get task metrics for each user
                 $http({
                     method: 'GET',
                     url: tasksApiBaseURL + '/users/' + $scope.users[i].id + '/tasks-count',
@@ -1051,10 +1056,12 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 });
             }
 
-            //Cache already exists, now get projects optimized no need to get users again
+            //Users cache already exists here
             for(var i=0;i<$scope.statuses.length;i++) {
                 var status = $scope.statuses[i]; 
+                //Get company projects
                 $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
+                //Get company tasks
                 $scope.getTasks(status, $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
             }
         });
