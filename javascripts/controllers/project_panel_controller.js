@@ -5,6 +5,11 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
     $scope.statuses = ["dump","waiting","doing","finished"];
     $scope.validator_types = ["W3C","Ryukyu","AChecker"];
 
+    //Caches for optimization
+    $scope.users_cache = {
+        //Cache by user id
+    }
+
     //Default settings
     if (!("project_panel_tasks_params" in $localStorage)) {
         $localStorage.project_panel_tasks_params = {
@@ -415,19 +420,8 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 //Use the "user_id" field
                 var current_user_id = current_user.user_id;
 
-                $http({
-                    method: 'GET',
-                    url: usersApiBaseURL + '/users/'+current_user_id,
-                    headers: {
-                        'x-access-token': CommonFunctions.getToken()
-                    },
-                    params: {
-                        'i': i
-                    }
-                }).then(function (response) {
-                    $scope.assigned_users[parseInt(response.config["params"]["i"])]["firstname"] = response.data.firstname;
-                    $scope.assigned_users[parseInt(response.config["params"]["i"])]["lastname"] = response.data.lastname;
-                });                    
+                $scope.assigned_users[i]["firstname"] = $scope.users_cache[current_user_id].firstname;
+                $scope.assigned_users[i]["lastname"] = $scope.users_cache[current_user_id].lastname;
             }
 
             $scope.users_filter = [{firstname: "all", lastname: "", user_id: 0},{firstname: "unassigned", lastname: "", user_id: -1}];
@@ -595,22 +589,8 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                     var current_task = $scope.tasks[status][i];
                     var current_project_id = current_task.project_id;
 
-                    //Get the project name
-                    if(current_project_id) {
-                        $http({
-                            method: 'GET',
-                            url: projectsApiBaseURL + '/projects/'+current_project_id,
-                            headers: {
-                                'x-access-token': CommonFunctions.getToken()
-                            },
-                            params: {
-                                'i': i
-                            }
-                        }).then(function (response) {
-                            var current_project = response.data;
-                            $scope.tasks[status][parseInt(response.config["params"]["i"])]["project_name"] = current_project.name;
-                        });                    
-                    }
+
+                     $scope.tasks[status][i]["project_name"] = $scope.this_project.name;
 
                     if (user_id != -1) { //if this is an assigned task
                         //Get all users on the current task
@@ -631,22 +611,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                                     $scope.this_task_user = response.data[j];
                                 }
 
-                                $http({
-                                    method: 'GET',
-                                    url: usersApiBaseURL + '/users/' + response.data[j]["user_id"],
-                                    headers: {
-                                        'x-access-token': CommonFunctions.getToken()
-                                    },
-                                    params: {
-                                        'i': response.config["params"]["i"],
-                                        'j': j
-                                    }
-                                }).then(function (response) {
-                                    var i = parseInt(response.config["params"]["i"]);
-                                    var j = parseInt(response.config["params"]["j"]);
-                                    $scope.tasks[status][i]["users"][j].firstname = response.data.firstname;
-                                    $scope.tasks[status][i]["users"][j].lastname = response.data.lastname;
-                                });
+                                var current_user_id = response.data[j]["user_id"];
+
+                                var i = parseInt(response.config["params"]["i"]);
+                     
+                                $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
+                                $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
                             }
                         });
                     }
@@ -1408,6 +1378,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
 
     }
 
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////// 
+    /////////////////////////////// On Page Load //////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
     if($localStorage.loggedin_user) {
         //Get permissions information
         $http({
@@ -1450,31 +1426,42 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 $scope.this_project_photo.uri = "./images/default_project.png";
                 $scope.this_project_photo.caption = "Todo project photo microservice";
             });
+
+            //Get all users for assigning new users
+            $http({
+                method: 'GET',
+                url: usersApiBaseURL + '/users',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                $scope.users = response.data;
+                //Cache the users
+                for (var i = 0; i < $scope.users.length; i++) {
+                    //Cache the user by id for optimization
+                    $scope.users_cache[$scope.users[i].id] = $scope.users[i];
+                }
+
+                //Get all users on the current project
+                get_project_users();
+
+                //Get all tasks on the curent project
+                for(var i=0;i<$scope.statuses.length;i++) {
+                    var status = $scope.statuses[i]; 
+                    $scope.getTasks(status, $scope.getTasksParam(status,'user_id_filter'),$scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
+                }
+            });
         });
 
 
-        get_project_users();
 
-        for(var i=0;i<$scope.statuses.length;i++) {
-            var status = $scope.statuses[i]; 
-            $scope.getTasks(status, $scope.getTasksParam(status,'user_id_filter'),$scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
-        }
 
         for(var i=0;i<$scope.validator_types.length;i++) {
             var validator_type = $scope.validator_types[i]; 
             $scope.getCodeCheckerResults(validator_type, $scope.getCodeCheckerResultsParam(validator_type,'limit'), $scope.getCodeCheckerResultsParam(validator_type,'page'));
         }
 
-        //Get all users for assigning new users
-        $http({
-            method: 'GET',
-            url: usersApiBaseURL + '/users',
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            $scope.users = response.data;
-        });
+
 
         //Get all files for project
         $http({
