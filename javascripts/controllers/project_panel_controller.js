@@ -420,8 +420,13 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 //Use the "user_id" field
                 var current_user_id = current_user.user_id;
 
-                $scope.assigned_users[i]["firstname"] = $scope.users_cache[current_user_id].firstname;
-                $scope.assigned_users[i]["lastname"] = $scope.users_cache[current_user_id].lastname;
+                //try block for users removed, get undefined error
+                try {
+                    $scope.assigned_users[i]["firstname"] = $scope.users_cache[current_user_id].firstname;
+                    $scope.assigned_users[i]["lastname"] = $scope.users_cache[current_user_id].lastname;
+                } catch(err) {
+                    console.log(err);
+                }
             }
 
             $scope.users_filter = [{firstname: "all", lastname: "", user_id: 0},{firstname: "unassigned", lastname: "", user_id: -1}];
@@ -615,8 +620,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
 
                                 var i = parseInt(response.config["params"]["i"]);
                      
-                                $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
-                                $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                                try {
+                                    $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
+                                    $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                                } catch(err) {
+                                    console.log(err);
+                                }
                             }
                         });
                     }
@@ -1453,15 +1462,10 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             });
         });
 
-
-
-
         for(var i=0;i<$scope.validator_types.length;i++) {
             var validator_type = $scope.validator_types[i]; 
             $scope.getCodeCheckerResults(validator_type, $scope.getCodeCheckerResultsParam(validator_type,'limit'), $scope.getCodeCheckerResultsParam(validator_type,'page'));
         }
-
-
 
         //Get all files for project
         $http({

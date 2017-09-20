@@ -645,8 +645,13 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                         for(var j=0;j<response.data.length;j++) {
                             var user_id = response.data[j]["user_id"];
                             var i = parseInt(response.config["params"]["i"]);
-                            $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
-                            $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;
+                            //try block for removed users, get undefined error
+                            try {
+                                $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
+                                $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;
+                            } catch(err) {
+                                console.log(err);
+                            }
                             //console.log("Using cache for user: {firstname: " + $scope.users_cache[user_id].firstname + ", lastname: " + $scope.users_cache[user_id].lastname + "}");
                         }
                     });                   
@@ -840,8 +845,12 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             var user_id = response.data[j]["user_id"];
                             var i = parseInt(response.config["params"]["i"]);
                             //use the cache
-                            $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
-                            $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;                                
+                            try {
+                                $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
+                                $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;                                
+                            } catch(err) {
+                                console.log(err);
+                            }
                         }
                     });                    
 
