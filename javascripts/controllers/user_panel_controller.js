@@ -514,8 +514,12 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
 
                             var current_user_id = response.data[j]["user_id"];
          
-                            $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
-                            $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                            try {
+                                $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
+                                $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                            } catch(err) {
+                                console.log(err);
+                            }
                         }
                     });                   
                 }
@@ -633,8 +637,12 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
 
                         for(var j=0;j<response.data.length;j++) {
                             var current_user_id = response.data[j]["user_id"];
-                            $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
-                            $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                            try {
+                                $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
+                                $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                            } catch(err) {
+                                console.log(err);
+                            }
                         }
                     });                    
 
