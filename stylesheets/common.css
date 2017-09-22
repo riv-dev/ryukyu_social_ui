@@ -2836,3 +2836,8 @@ button.dump {
   padding-left: 25px;
   background-color: transparent;
 }
+
+/* line 573, ../sass/_03_layout.scss */
+.sub-section.code_checker_results .input.select.file {
+  width: 50%;
+}
