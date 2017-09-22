@@ -338,8 +338,12 @@
                     <em class="value total">{{getCodeCheckerResultsParam(validator_type,'count')}}</em>
                 </li>
                 <li class="item">
+                    <label class="key user">Filter by file: </label>
+                    <select class="input select file" ng-options="output_url.url as output_url.url for output_url in output_urls[validator_type]" ng-change="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),getCodeCheckerResultsParam(validator_type,'page'),getCodeCheckerResultsParam(validator_type,'file'))" ng-model="project_panel_code_checker_results_params[validator_type]['file']"></select>
+                </li>
+                <li class="item">
                     <label class="key limit" for="code_checker_results_limit">Limit Per Page: </label>
-                    <select class="input select limit" ng-options="limit for limit in limits" ng-change="getCodeCheckerResults(validator_type,project_panel_code_checker_results_params[validator_type]['limit'],1)" ng-model="project_panel_code_checker_results_params[validator_type]['limit']"></select>
+                    <select class="input select limit" ng-options="limit for limit in limits" ng-change="getCodeCheckerResults(validator_type,project_panel_code_checker_results_params[validator_type]['limit'],1,getCodeCheckerResultsParam(validator_type,'file'))" ng-model="project_panel_code_checker_results_params[validator_type]['limit']"></select>
                 </li>
             </ul>
             <button class="button settings {{validator_type}}" ng-click="toggleShowSettings('code_checker_results', validator_type)">Show/Hide Settings</button>
@@ -364,13 +368,13 @@
         </ul>
         <p ng-show="!code_checker_results[validator_type] || code_checker_results[validator_type].length == 0" class="info none">No code_checker_results</p>
         <ul class="pagination" ng-if="code_checker_results_page_count_arr[validator_type] && code_checker_results_page_count_arr[validator_type].length > 1">
-            <li class="item previous" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),getCodeCheckerResultsParam(validator_type,'page')-1)">
+            <li class="item previous" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),getCodeCheckerResultsParam(validator_type,'page')-1,getCodeCheckerResultsParam(validator_type,'file'))">
                 <a href="#">&laquo;</a>
             </li>
             <li class="item {{currentCodeCheckerResultsPageClass(validator_type,$index+1)}}" ng-repeat="i in code_checker_results_page_count_arr[validator_type] track by $index">
-                <a href="#" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),$index+1)">{{$index+1}}</a>
+                <a href="#" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),$index+1,getCodeCheckerResultsParam(validator_type,'file'))">{{$index+1}}</a>
             </li>
-            <li class="item next" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),getCodeCheckerResultsParam(validator_type,'page')+1)">
+            <li class="item next" ng-click="getCodeCheckerResults(validator_type,getCodeCheckerResultsParam(validator_type,'limit'),getCodeCheckerResultsParam(validator_type,'page')+1,getCodeCheckerResultsParam(validator_type,'file'))">
                 <a href="#">&raquo;</a>
             </li>
         </ul>
