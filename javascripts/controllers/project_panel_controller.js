@@ -45,17 +45,20 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             "W3C": {
                 limit: 10,
                 page: 1,
-                count: null
+                count: null,
+                file: "all"
             },
             "Ryukyu": {
                 limit: 10,
                 page: 1,
-                count: null
+                count: null,
+                file: "all"
             },
             "AChecker": {
                 limit: 10,
                 page: 1,
-                count: null
+                count: null,
+                file: "all" 
             }
         }
     }
@@ -635,15 +638,20 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
     } //End getTasks()
 
 
-    $scope.getCodeCheckerResults = function(validator_type,limit,page) {
+    $scope.getCodeCheckerResults = function(validator_type,limit,page,file) {
         //Save/Default settings
         console.log("Get Code Checker Results");
-        console.log("Status: " + validator_type + ", limit: " + limit + ", page: " + page);
+        console.log("Status: " + validator_type + ", limit: " + limit + ", page: " + page + ", file: " + file);
         //Save settings
         $scope.setCodeCheckerResultsParam(validator_type,'limit',limit);
         $scope.setCodeCheckerResultsParam(validator_type,'page',page);
+        $scope.setCodeCheckerResultsParam(validator_type,'file',file);
 
         var queryStr = "?validator="+validator_type;
+
+        if(file && file != "all") {
+            queryStr = queryStr + "&url="+file;
+        }
 
         var codeCheckerResultsCountURL = codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/result-messages-count' + queryStr;
 
@@ -686,6 +694,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             var queryStatus = null;
             var queryLimit = null;
             var queryPage = null;
+            var queryFile = null;
 
             //Query to filter by validator_type
             if(validator_type && validator_type != "all") {
@@ -700,6 +709,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 queryPage = "page="+$scope.getCodeCheckerResultsParam(validator_type,'page'); //processed page
                 queryArr.push(queryPage);
             }
+
+             //Query to filter by file 
+             if(file && file != "all") {
+                queryFile = "url="+file;
+                queryArr.push(queryFile);
+            }           
 
             if(queryArr.length > 0) {
                 queryStr = "?" + queryArr.join("&");
@@ -1318,6 +1333,9 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                     $scope.setCodeCheckerResultsParam(validator_type,'page',1);
                     $scope.getCodeCheckerResults(validator_type, $scope.getCodeCheckerResultsParam(validator_type,'limit'), $scope.getCodeCheckerResultsParam(validator_type,'page'));
                 }
+
+                //Get the checked urls list for select box filter
+                $scope.get_code_checker_checked_files();
             },
             function errorCallback(response) {
                 $scope.code_checker_running = false;
@@ -1326,6 +1344,38 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             }
         );
     }    
+
+    $scope.output_urls = {
+        "W3C": [],
+        "Ryukyu": [],
+        "AChecker": []
+    }
+    $scope.get_code_checker_checked_files = function () {
+        for (var i = 0; i < $scope.validator_types.length; i++) {
+            $http({
+                method: 'GET',
+                url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/output-urls?validator='+$scope.validator_types[i],
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                },
+                params: {
+                   'i': i
+                }
+            }).then(
+                function successCallback(response) {
+                    var i = parseInt(response.config["params"]["i"]);
+                    var output_urls = response.data;
+                    output_urls.push({url: "all"});
+                    $scope.output_urls[$scope.validator_types[i]] = output_urls;
+                },
+                function errorCallback(response) {
+                    var i = parseInt(response.config["params"]["i"]);
+                    $scope.output_urls[$scope.validator_types[i]] = [];
+                }
+            );
+        }
+    }
+
 
     $scope.remove_code_checker = function() {
         var answer = prompt('Remove Code Checker from this project?  Type "yes" to confirm');
@@ -1466,6 +1516,8 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             var validator_type = $scope.validator_types[i]; 
             $scope.getCodeCheckerResults(validator_type, $scope.getCodeCheckerResultsParam(validator_type,'limit'), $scope.getCodeCheckerResultsParam(validator_type,'page'));
         }
+
+        $scope.get_code_checker_checked_files();
 
         //Get all files for project
         $http({
