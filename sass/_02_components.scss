@@ -392,15 +392,29 @@
         padding-right: 0px !important;
     }
 
+    .heading {
+        position: relative;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+
     h4.title.check_settings {
         font-size: 16px !important;
         text-align: left !important;
         display: block;
-        margin-top: 15px !important;
-        margin-bottom: 5px !important;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
         padding-top: 0px !important;
         padding-right: 0px !important;
+        margin-left: 20px;
     }
+
+    .checkbox {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
     .attributes.metrics {
         position: relative;
         text-align: left;

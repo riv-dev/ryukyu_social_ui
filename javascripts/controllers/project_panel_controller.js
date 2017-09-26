@@ -1201,6 +1201,26 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         );
     }
 
+    $scope.update_code_checker_check_sass_html = function() {
+        $http({
+            method: 'PUT',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                check_sass: $scope.this_code_checker_project.check_sass,
+                check_html: $scope.this_code_checker_project.check_html
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
+
     $scope.update_code_checker = function(type) {
         var update_data = {}
         if(type == "html") {
