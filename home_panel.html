@@ -219,6 +219,27 @@
     </ul>
 </section>
 
+<section ng-if="loggedin_user" class="section groups {{isMaximizedClass('groups')}}">
+    <header class="header">
+        <h2 class="title">Groups List</h2>
+        <ul class="settings">
+            <li ng-if="loggedin_user.admin" class="item"><a class="link" ng-click="showPrompt($event)">Add Group</a></li>
+        </ul>
+        <button ng-show="!isMaximized('groups')" class="button maximize" ng-click="maximize('groups')">Maximize</button>
+        <button ng-show="isMaximized('groups')" class="button minimize" ng-click="minimize('groups')">Minimize</button>
+    </header>
+
+    <ul class="preview groups">
+        <li class="item" ng-repeat="group in groups">
+            <a class="link_block" href="./groups/{{group.id}}">
+                <h3 class="name">{{group.name}}</h3>
+            </a>
+            <button class="button delete submit" ng-click="delete_group($index, group.id, group.name)" ng-show="loggedin_user.admin">Delete</button>
+        </li>
+    </ul>
+    <p ng-if="!groups || groups.length == 0" class="info none">No groups</p>
+</section>
+
 <div class="popup gantt">
     <form class="form project" name="project_form">
         <h2 class="title">Edit Project</h2>

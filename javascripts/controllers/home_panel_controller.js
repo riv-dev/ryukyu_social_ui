@@ -1,4 +1,4 @@
-app.controller('homePanelController', function($scope, $http, $location, $localStorage, CommonFunctions) {
+app.controller('homePanelController', function($scope, $http, $location, $localStorage, $mdDialog, CommonFunctions) {
     $scope.$parent.hero = "Home Panel";
     $scope.$parent.panel_class = "home";
 
@@ -1028,6 +1028,98 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         });
     }
 
+    $scope.showPrompt = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.prompt()
+            .title('Create group')
+            .placeholder('Group name')
+            .ariaLabel('Group name')
+            .targetEvent(ev)
+            .ok('Create')
+            .cancel('Cancel');
+    
+        $mdDialog.show(confirm).then(function(result) {
+            if (result != undefined && result.trim() != "") {
+                $http({
+                    method: 'POST',
+                    url: groupsApiBaseURL + '/groups',
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    },
+                    data: {
+                        name: result
+                    }
+                }).then(
+                    function successCallback(response) {
+                        $scope.groups.push({id: response.data.group_id, name: result});
+                        Lobibox.notify('success', {
+                            position: 'top right',
+                            sound: false,
+                            size: 'mini',
+                            msg: 'Create group ' + result + ' successfully!'
+                        });
+                    },
+                    function errorCallback(response) { 
+                        if (response.status > 0)
+                            Lobibox.notify('error', {
+                                position: 'top right',
+                                sound: false,
+                                size: 'mini',
+                                msg: response.status + ': ' + response.data + '.'
+                            });
+                    }
+                );
+            } else {
+                Lobibox.notify('error', {
+                    position: 'top right',
+                    sound: false,
+                    size: 'mini',
+                    msg: 'Group name not empty.'
+                });
+            }
+        }, function() {
+        });
+    };
+
+    $scope.delete_group = function(index, id, group_name) {
+        var answer = prompt('Remove group ' + group_name + '?  Type "yes" to confirm');
+        if(answer == "yes") {
+            $http({
+                method: 'DELETE',
+                url: groupsApiBaseURL + '/groups/' + id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+                function successCallback(response) {
+                    delete $scope.groups[index];
+                    $scope.groups.splice(index, 1);
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Deleted group ' + group_name + '!'
+                    });
+                },
+                function errorCallback(response) {
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Error deleting group ' + group_name + '.'
+                    });
+                }
+            );
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Did not type "yes". ' + filename + ' not removed from the project.'
+            });
+        }
+    }
+   
     $scope.getUsers = function(status) {
         var active_status = 0;
         if(status == "active") {
@@ -1115,6 +1207,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         });
     }
 
+   
     ///////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////// 
     /////////////////////////////// On Page Load //////////////////////////////////////
@@ -1129,6 +1222,14 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 'x-access-token': CommonFunctions.getToken()
             }
         }).then(function (response) {
+            $scope.groups = response.data;
+        });
+
+        for(var i=0;i<$scope.statuses.length;i++) {
+            var status = $scope.statuses[i]; 
+            $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
+            $scope.getTasks(status, $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
+        }
             $scope.users = response.data;
 
             for (var i = 0; i < $scope.users.length; i++) {
@@ -1200,7 +1301,17 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
                 });
             }
-
+      
+            $http({
+                method: 'GET',
+                url: groupsApiBaseURL + '/groups',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                $scope.groups = response.data;
+            });
+      
             for(var i=0;i<$scope.statuses.length;i++) {
                 var status = $scope.statuses[i]; 
                 //Get company projects

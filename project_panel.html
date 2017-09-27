@@ -299,33 +299,52 @@
 </section>
 
 <section class="section users">
-    <header class="header">
-        <h2 class="title">Users Assigned to Project</h2>
-    </header>
-    <ul class="preview users">
-        <li class="item" ng-repeat="assigned_user in assigned_users">
-            <a class="link_block" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}">
-                <h3 class="key user" ng-if="assigned_user.role">{{assigned_user.role}}</h3>
-                <h3 class="key none user" ng-if="!assigned_user.role">Undefined Role</h2>
-                <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>
-            </a>
-            <a class="button permissions" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}/edit" 
-               ng-if="loggedin_user.admin || this_user_write_access > 1" title="Permissions">Permissions</a>
-            <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == assigned_user.user_id || this_user_write_access > 1"
-                ng-click="remove_user(assigned_user)" title="Remove User"
-                >Remove User</button>
-        </li>
-    </ul>
-
-    <form class="form assign_user">
-        <p class="title">Assign User to Project: </p>
-        <p class="field"><label class="label" for="selected_user_id">User Name: </label>
-            <select class="input select" ng-options="user.id as getFullName(user) for user in users track by user.id" ng-model="selected_user_id"></select>
-        </p>        
-        <p class="field">
-            <input class="button submit" type="submit" value="Assign User" ng-click="assign_user()">
-        </p>        
-    </form>
+    <section class="sub-section">
+        <header class="header">
+            <h2 class="title">Users Assigned to Project</h2>
+        </header>
+        <ul class="preview users">
+            <li class="item" ng-repeat="assigned_user in assigned_users">
+                <a class="link_block" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}">
+                    <h3 class="key user" ng-if="assigned_user.role">{{assigned_user.role}}</h3>
+                    <h3 class="key none user" ng-if="!assigned_user.role">Undefined Role</h2>
+                    <p class="value user">{{assigned_user.firstname}} {{assigned_user.lastname}}</p>
+                </a>
+                <a class="button permissions" href="./projects/{{this_project.id}}/users/{{assigned_user.user_id}}/edit" 
+                ng-if="loggedin_user.admin || this_user_write_access > 1" title="Permissions">Permissions</a>
+                <button class="button delete" ng-if="loggedin_user.admin || loggedin_user.id == assigned_user.user_id || this_user_write_access > 1"
+                    ng-click="remove_user(assigned_user)" title="Remove User"
+                    >Remove User</button>
+            </li>
+        </ul>
+        <form class="form assign_user">
+            <p class="title">Assign User to Project: </p>
+            <p class="field"><label class="label" for="selected_user_id">User Name: </label>
+                <select class="input select" ng-options="user.id as getFullName(user) for user in users track by user.id" ng-model="selected_user_id"></select>
+            </p>        
+            <p class="field">
+                <input class="button submit" type="submit" value="Assign User" ng-click="assign_user()">
+            </p>        
+        </form>
+    </section>
+    
+    <section ng-if="loggedin_user" class="sub-section groups {{isMaximizedClass('groups')}}">
+        <header class="header">
+            <h2 class="title">Groups List</h2>
+            <ul class="settings">
+                <li ng-if="loggedin_user.admin" class="item"><a class="link" ng-click="showDialog($event, group_assignment)">Add Project to Group</a></li>
+            </ul>
+        </header>
+    
+        <ul class="preview groups">
+            <li class="item" ng-repeat="group in group_assignment">
+                <a class="link_block" href="./groups/{{group.group_id}}">
+                    <h3 class="name">{{group.name}}</h3>
+                </a>
+                <button class="button delete submit" ng-click="delete_group_assignment($index, group.group_id, group.name)" ng-show="loggedin_user.admin || this_user_write_access > 0">Delete</button>
+            </li>
+        </ul>
+        <p ng-if="!group_assignment || group_assignment.length == 0" class="info none">No groups</p>
 </section>
 
 <section ng-show="this_code_checker_project" class="section code_checker_results {{isMaximizedClass('code_checker_results')}}">
