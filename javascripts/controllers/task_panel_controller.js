@@ -634,8 +634,6 @@ app.controller('taskPanelController', function ($scope, $http, $window, $timeout
     };
 
     if ($localStorage.loggedin_user) {
-
-
         //Get task information
         get_task_details();
 
@@ -645,7 +643,7 @@ app.controller('taskPanelController', function ($scope, $http, $window, $timeout
         //Get all users for assigning new users
         $http({
             method: 'GET',
-            url: usersApiBaseURL + '/users',
+            url: usersApiBaseURL + '/users?active=1',
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }

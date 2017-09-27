@@ -55,6 +55,8 @@
             <dd class="value status">{{this_user.status}}</dd>
             <dt class="key bio"><em ng-if="loggedin_user.id==this_user.id">My </em>Bio:</dt>
             <dd class="value bio">{{this_user.bio}}</dd>
+            <dt class="key active_status">Active:</dt>
+            <dd class="value active_status">{{active(this_user)}}</dd>
         </dl>
     </section>
     
