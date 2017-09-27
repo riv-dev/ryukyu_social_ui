@@ -339,6 +339,14 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
         }
     }
 
+    $scope.active = function(user) {
+        if(user.active) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
     $scope.delete_user = function() {
         var email = prompt("WARNING: This will completely delete the user from the system.  This is not the same as removing a user from a project.  Visit the project page and click the 'x' if you wish to only remove a user from a project. Type in user's email address to confirm delete.");
         if (email == $scope.this_user.email) {
