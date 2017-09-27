@@ -21,12 +21,12 @@ app.controller('loginController', function($scope, $http, $location, $localStora
                         $location.path('/');
                     }
                 } else {
-                    $scope.$parent.flash_message = "Invalid Credentials";
+                    $scope.$parent.flash_message = response.data.message;
                     $scope.$parent.flash_level = "fail";
                 }
             },
             function errorCallback(response) {
-                $scope.$parent.flash_message = "Invalid Credentials";
+                $scope.$parent.flash_message = response.data.message;
                 $scope.$parent.flash_level = "fail";
             }
         );
