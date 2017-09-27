@@ -285,6 +285,15 @@
     .form.assign_user {
         margin-top: 10px;
     }
+
+    .settings .item {
+        display: inline-block;
+        margin-left: 10px;
+        .input.active_status {
+            text-align: center;
+            width: 110px;
+        }
+    }
 }
 
 .sub-section {
