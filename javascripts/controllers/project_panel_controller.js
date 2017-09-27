@@ -425,8 +425,29 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
 
                 //try block for users removed, get undefined error
                 try {
-                    $scope.assigned_users[i]["firstname"] = $scope.users_cache[current_user_id].firstname;
-                    $scope.assigned_users[i]["lastname"] = $scope.users_cache[current_user_id].lastname;
+                    if($scope.users_cache[current_user_id]) {
+                        $scope.assigned_users[i]["firstname"] = $scope.users_cache[current_user_id].firstname;
+                        $scope.assigned_users[i]["lastname"] = $scope.users_cache[current_user_id].lastname;
+                    } else {
+                        $http({
+                            method: 'GET',
+                            url: usersApiBaseURL + '/users/' + current_user_id,
+                            headers: {
+                                'x-access-token': CommonFunctions.getToken()
+                            },
+                            params: {
+                                'i': i,
+                            }
+                        }).then(function (response) { 
+                            var i = parseInt(response.config["params"]["i"]);
+                            var user = response.data;
+                            if(user && user.id) {
+                                $scope.users_cache[user.id] = user;
+                            }
+                            $scope.assigned_users[i]["firstname"] = user.firstname;
+                            $scope.assigned_users[i]["lastname"] = user.lastname;
+                        });  
+                    }
                 } catch(err) {
                     console.log(err);
                 }
@@ -624,8 +645,31 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                                 var i = parseInt(response.config["params"]["i"]);
                      
                                 try {
-                                    $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
-                                    $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                                    if($scope.users_cache[current_user_id]) {
+                                        $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
+                                        $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                                    } else {
+                                        $http({
+                                            method: 'GET',
+                                            url: usersApiBaseURL + '/users/' + current_user_id,
+                                            headers: {
+                                                'x-access-token': CommonFunctions.getToken()
+                                            },
+                                            params: {
+                                                'i': i,
+                                                'j': j
+                                            }
+                                        }).then(function (response) { 
+                                            var i = parseInt(response.config["params"]["i"]);
+                                            var j = parseInt(response.config["params"]["j"]);
+                                            var user = response.data;
+                                            if(user && user.id) {
+                                                $scope.users_cache[user.id] = user;
+                                            }
+                                            $scope.tasks[status][i]["users"][j].firstname = user.firstname;
+                                            $scope.tasks[status][i]["users"][j].lastname = user.lastname;
+                                        });  
+                                    }
                                 } catch(err) {
                                     console.log(err);
                                 }
@@ -1509,7 +1553,7 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             //Get all users for assigning new users
             $http({
                 method: 'GET',
-                url: usersApiBaseURL + '/users',
+                url: usersApiBaseURL + '/users?active=1',
                 headers: {
                     'x-access-token': CommonFunctions.getToken()
                 }

@@ -20,6 +20,8 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
     }
 
     $scope.statuses = ["dump","waiting","doing","finished"];
+    $scope.active_statuses = ["active","de-activated"];
+    $scope.active_status = $scope.active_statuses[0];
 
     //Default settings
     if (!("projects_params" in $localStorage)) {
@@ -647,8 +649,31 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             var i = parseInt(response.config["params"]["i"]);
                             //try block for removed users, get undefined error
                             try {
-                                $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
-                                $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;
+                                if($scope.users_cache[user_id]) {
+                                    $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
+                                    $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;
+                                } else {
+                                    $http({
+                                        method: 'GET',
+                                        url: usersApiBaseURL + '/users/' + user_id,
+                                        headers: {
+                                            'x-access-token': CommonFunctions.getToken()
+                                        },
+                                        params: {
+                                            'i': i,
+                                            'j': j
+                                        }
+                                    }).then(function (response) { 
+                                        var i = parseInt(response.config["params"]["i"]);
+                                        var j = parseInt(response.config["params"]["j"]);
+                                        var user = response.data;
+                                        if(user && user.id) {
+                                            $scope.users_cache[user.id] = user;
+                                        }
+                                        $scope.tasks[status][i]["users"][j].firstname = user.firstname;
+                                        $scope.tasks[status][i]["users"][j].lastname = user.lastname;
+                                    });    
+                                }
                             } catch(err) {
                                 console.log(err);
                             }
@@ -846,8 +871,32 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                             var i = parseInt(response.config["params"]["i"]);
                             //use the cache
                             try {
-                                $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
-                                $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;                                
+                         
+                                if($scope.users_cache[user_id]) {
+                                    $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[user_id].firstname;
+                                    $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[user_id].lastname;       
+                                } else {
+                                    $http({
+                                        method: 'GET',
+                                        url: usersApiBaseURL + '/users/' + user_id,
+                                        headers: {
+                                            'x-access-token': CommonFunctions.getToken()
+                                        },
+                                        params: {
+                                            'i': i,
+                                            'j': j
+                                        }
+                                    }).then(function (response) { 
+                                        var i = parseInt(response.config["params"]["i"]);
+                                        var j = parseInt(response.config["params"]["j"]);
+                                        var user = response.data;
+                                        if(user && user.id) {
+                                            $scope.users_cache[user.id] = user;
+                                        }
+                                        $scope.projects[status][i]["users"][j].firstname = user.firstname;
+                                        $scope.projects[status][i]["users"][j].lastname = user.lastname;
+                                    });    
+                                }
                             } catch(err) {
                                 console.log(err);
                             }
@@ -979,16 +1028,103 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
         });
     }
 
+    $scope.getUsers = function(status) {
+        var active_status = 0;
+        if(status == "active") {
+            active_status = 1;
+        }
+
+        $http({
+            method: 'GET',
+            url: usersApiBaseURL + '/users?active=' + active_status,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.users = response.data;
+
+            for (var i = 0; i < $scope.users.length; i++) {
+                //Cache the user by id for optimization
+                $scope.users_cache[$scope.users[i].id] = $scope.users[i];
+
+                //Get projects for each users
+                $scope.getProjectsByUser($scope.users[i].id);
+
+                //Get task metrics for each user
+                $http({
+                    method: 'GET',
+                    url: tasksApiBaseURL + '/users/' + $scope.users[i].id + '/tasks-count',
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    },
+                    params: {
+                        'i': i
+                    }
+                }).then(function (response) {
+                    var i = parseInt(response.config["params"]["i"]);
+                    $scope.users[i].tasks_count = response.data;
+                });
+
+                $http({
+                    method: 'GET',
+                    url: tasksApiBaseURL + '/users/' + $scope.users[i].id + '/tasks-count?status=doing',
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    },
+                    params: {
+                        'i': i
+                    }
+                }).then(function (response) {
+                    var i = parseInt(response.config["params"]["i"]);
+                    $scope.users[i].doing_count = response.data;
+                });
+
+                $http({
+                    method: 'GET',
+                    url: tasksApiBaseURL + '/users/' + $scope.users[i].id + '/tasks-count?status=finished',
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    },
+                    params: {
+                        'i': i
+                    }
+                }).then(function (response) {
+                    var i = parseInt(response.config["params"]["i"]);
+                    $scope.users[i].finished_count = response.data;
+                });
+
+                $http({
+                    method: 'GET',
+                    url: userPhotosApiBaseURL + "/users/"+$scope.users[i].id+"/photo",
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    },
+                    params: {
+                        'i': i
+                    }
+                }).then(
+                function successCallback(response) {
+                    var i = parseInt(response.config["params"]["i"]);
+                    $scope.users[i].photo = response.data;
+                    $scope.users[i].photo.uri = userPhotosApiBaseURL+"/users/"+$scope.users[i].id+"/photo.image";
+                },
+                function errorCallback(response) { 
+
+                });
+            }
+        });
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////// 
     /////////////////////////////// On Page Load //////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
     if($localStorage.loggedin_user) {
-        //Get users list
+        //Get list of all users and cache
         $http({
             method: 'GET',
-            url: usersApiBaseURL + '/users',
+            url: usersApiBaseURL + '/users?active=1',
             headers: {
                 'x-access-token': CommonFunctions.getToken()
             }
@@ -1065,7 +1201,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 });
             }
 
-            //Users cache already exists here
             for(var i=0;i<$scope.statuses.length;i++) {
                 var status = $scope.statuses[i]; 
                 //Get company projects
@@ -1074,8 +1209,6 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
                 $scope.getTasks(status, $scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
             }
         });
-
-
     } 
 
 });

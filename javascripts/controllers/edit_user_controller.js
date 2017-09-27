@@ -14,7 +14,7 @@ app.controller('editUserController', function($scope, $http, $location, $localSt
     //User's can only edit their user profile, which is in a different microservice
     if($localStorage.loggedin_user && ($localStorage.loggedin_user.admin || $localStorage.loggedin_user.id == $routeParams.user_id)) {
         $scope.$parent.hero = "Edit User";
-        $scope.checkboxModel = {admin : 0};
+        $scope.checkboxModel = {admin : 0, active: 0};
         $scope.this_user_id = $routeParams.user_id;
 
         $scope.back = function() {
@@ -34,6 +34,7 @@ app.controller('editUserController', function($scope, $http, $location, $localSt
             $scope.title = response.data.title;
             $scope.email = response.data.email;
             $scope.checkboxModel.admin = response.data.admin;
+            $scope.checkboxModel.active = response.data.active;
         });
 
         $scope.put = function() {
@@ -75,7 +76,7 @@ app.controller('editUserController', function($scope, $http, $location, $localSt
                     headers: {
                         'x-access-token': CommonFunctions.getToken()
                     },
-                    data: {firstname: $scope.firstname, lastname: $scope.lastname, title: $scope.title, email: $scope.email, password: $scope.password, admin: $scope.checkboxModel.admin}
+                    data: {firstname: $scope.firstname, lastname: $scope.lastname, title: $scope.title, email: $scope.email, password: $scope.password, admin: $scope.checkboxModel.admin, active: $scope.checkboxModel.active}
                 }).then(
                     function successCallback(response) {
                         $localStorage.flash_message = "Successfully edited user!";
