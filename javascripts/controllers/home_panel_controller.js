@@ -21,6 +21,7 @@ app.controller('homePanelController', function($scope, $http, $location, $localS
 
     $scope.statuses = ["dump","waiting","doing","finished"];
     $scope.active_statuses = ["active","de-activated"];
+    $scope.active_status = $scope.active_statuses[0];
 
     //Default settings
     if (!("projects_params" in $localStorage)) {
