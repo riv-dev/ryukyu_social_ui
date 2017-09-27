@@ -64,7 +64,7 @@
         <button ng-show="!this_code_checker_project" class="button add_code_checker" ng-click="add_code_checker()">Add Code Checker Service</button>
         <div class="heading">
             <h4 class="title check_settings" ng-show="this_code_checker_project">SASS Check Settings</h4>
-            <input class="checkbox" type="checkbox" ng-model="this_code_checker_project.check_sass" ng-true-value="1" ng-false-value="0" ng-click="update_code_checker_check_sass_html()">
+            <input class="checkbox" type="checkbox" ng-show="this_code_checker_project" ng-model="this_code_checker_project.check_sass" ng-true-value="1" ng-false-value="0" ng-click="update_code_checker_check_sass_html()">
         </div>
         <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form['sass']">
             <button ng-show="this_code_checker_project" class="button edit metrics" ng-click="show_edit_code_checker_form('sass')" ng-show="loggedin_user.admin || this_user_write_access > 0">Edit Metrics</button>
@@ -109,7 +109,7 @@
         </form>
         <div class="heading">
             <h4 class="title check_settings" ng-show="this_code_checker_project">HTML Check Settings</h4>
-            <input class="checkbox" type="checkbox" ng-model="this_code_checker_project.check_html" ng-true-value="1" ng-false-value="0" ng-click="update_code_checker_check_sass_html()">
+            <input class="checkbox" type="checkbox" ng-show="this_code_checker_project" ng-model="this_code_checker_project.check_html" ng-true-value="1" ng-false-value="0" ng-click="update_code_checker_check_sass_html()">
         </div>
         <dl class="attributes metrics code_checker_project" ng-show="this_code_checker_project && !edit_code_checker_form['html']">
             <button ng-show="this_code_checker_project" class="button edit metrics" ng-click="show_edit_code_checker_form('html')" ng-show="loggedin_user.admin || this_user_write_access > 0">Edit Metrics</button>
