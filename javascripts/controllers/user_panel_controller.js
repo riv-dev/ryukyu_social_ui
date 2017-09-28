@@ -4,6 +4,11 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
 
     $scope.statuses = ["dump","waiting","doing","finished"];
 
+    //Caches for optimization
+    $scope.users_cache = {
+        //Cache by user id
+    }
+
     //Default settings
     if (!("user_panel_projects_params" in $localStorage)) {
         $localStorage.user_panel_projects_params = {
@@ -334,6 +339,14 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
         }
     }
 
+    $scope.active = function(user) {
+        if(user.active) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
     $scope.delete_user = function() {
         var email = prompt("WARNING: This will completely delete the user from the system.  This is not the same as removing a user from a project.  Visit the project page and click the 'x' if you wish to only remove a user from a project. Type in user's email address to confirm delete.");
         if (email == $scope.this_user.email) {
@@ -499,31 +512,23 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
                            'i': i
                         }
                     }).then(function (response) {
-                        $scope.tasks[status][parseInt(response.config["params"]["i"])]["users"] = response.data;
+                        var i = parseInt(response.config["params"]["i"]);
+                        $scope.tasks[status][i]["users"] = response.data;
 
                         for(var j=0;j<response.data.length;j++) {
                             if($routeParams.user_id == response.data[j]["user_id"]) {
                                 $scope.this_task_user = response.data[j];
                             }
 
-                            $http({
-                                method: 'GET',
-                                url: usersApiBaseURL + '/users/'+response.data[j]["user_id"],
-                                headers: {
-                                    'x-access-token': CommonFunctions.getToken()
-                                },
-                                params: {
-                                    'i': response.config["params"]["i"],
-                                    'j': j
-                                }
-                            }).then(function (response) {
-                                var i = parseInt(response.config["params"]["i"]);
-                                var j = parseInt(response.config["params"]["j"]);
-                                $scope.tasks[status][i]["users"][j].firstname = response.data.firstname; 
-                                $scope.tasks[status][i]["users"][j].lastname = response.data.lastname; 
-                            });                          
+                            var current_user_id = response.data[j]["user_id"];
+         
+                            try {
+                                $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
+                                $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                            } catch(err) {
+                                console.log(err);
+                            }
                         }
-
                     });                   
                 }
             });  
@@ -635,25 +640,17 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
                             'i': i
                         }
                     }).then(function (response) {
-                        $scope.projects[status][parseInt(response.config["params"]["i"])]["users"] = response.data;
+                        var i = parseInt(response.config["params"]["i"]);
+                        $scope.projects[status][i]["users"] = response.data;
 
                         for(var j=0;j<response.data.length;j++) {
-                            $http({
-                                method: 'GET',
-                                url: usersApiBaseURL + '/users/'+response.data[j]["user_id"],
-                                headers: {
-                                    'x-access-token': CommonFunctions.getToken()
-                                },
-                                params: {
-                                    'i': response.config["params"]["i"],
-                                    'j': j
-                                }
-                            }).then(function (response) {
-                                var i = parseInt(response.config["params"]["i"]);
-                                var j = parseInt(response.config["params"]["j"]);
-                                $scope.projects[status][i]["users"][j].firstname = response.data.firstname; 
-                                $scope.projects[status][i]["users"][j].lastname = response.data.lastname; 
-                            });                          
+                            var current_user_id = response.data[j]["user_id"];
+                            try {
+                                $scope.projects[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
+                                $scope.projects[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                            } catch(err) {
+                                console.log(err);
+                            }
                         }
                     });                    
 
@@ -1049,6 +1046,11 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////// 
+    /////////////////////////////// On Page Load //////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
     if($localStorage.loggedin_user) {
         //Get user information
         $http({
@@ -1108,11 +1110,27 @@ app.controller('userPanelController', function($scope, $http, $timeout, $locatio
             $scope.group_assignment = response.data;
         });
 
-        for(var i=0;i<$scope.statuses.length;i++) {
-            var status = $scope.statuses[i]; 
-            $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
-            $scope.getTasks(status, $scope.getTasksParam(status,'project_id_filter'),$scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
-        }
+        //Get users list for caching optimization
+        $http({
+            method: 'GET',
+            url: usersApiBaseURL + '/users',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.users = response.data;
+
+            for (var i = 0; i < $scope.users.length; i++) {
+                //Cache the user by id for optimization
+                $scope.users_cache[$scope.users[i].id] = $scope.users[i];
+            }
+
+            for(var i=0;i<$scope.statuses.length;i++) {
+                var status = $scope.statuses[i]; 
+                $scope.getProjects(status, $scope.getProjectsParam(status,'limit'), $scope.getProjectsParam(status,'page'));
+                $scope.getTasks(status, $scope.getTasksParam(status,'project_id_filter'),$scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
+            }
+        });
     } 
 
 });

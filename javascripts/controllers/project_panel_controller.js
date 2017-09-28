@@ -3,6 +3,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
     $scope.$parent.panel_class = "project";
 
     $scope.statuses = ["dump","waiting","doing","finished"];
+    $scope.validator_types = ["W3C","Ryukyu","AChecker"];
+
+    //Caches for optimization
+    $scope.users_cache = {
+        //Cache by user id
+    }
 
     //Default settings
     if (!("project_panel_tasks_params" in $localStorage)) {
@@ -34,7 +40,32 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }
     }
 
+    if (!("project_panel_code_checker_results_params" in $localStorage)) {
+        $localStorage.project_panel_code_checker_results_params = {
+            "W3C": {
+                limit: 10,
+                page: 1,
+                count: null,
+                file: "all"
+            },
+            "Ryukyu": {
+                limit: 10,
+                page: 1,
+                count: null,
+                file: "all"
+            },
+            "AChecker": {
+                limit: 10,
+                page: 1,
+                count: null,
+                file: "all" 
+            }
+        }
+    }
+
     $scope.project_panel_tasks_params = $localStorage.project_panel_tasks_params;
+
+    $scope.project_panel_code_checker_results_params = $localStorage.project_panel_code_checker_results_params;
 
     $scope.getTasksParam = function(status,setting) {
         return $localStorage.project_panel_tasks_params[status][setting];
@@ -45,6 +76,15 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         $scope.project_panel_tasks_params[status][setting] = value;
     }
 
+    $scope.getCodeCheckerResultsParam = function(status,setting) {
+        return $localStorage.project_panel_code_checker_results_params[status][setting];
+    }
+
+    $scope.setCodeCheckerResultsParam = function(status,setting,value) {
+        $localStorage.project_panel_code_checker_results_params[status][setting] = value; 
+        $scope.project_panel_code_checker_results_params[status][setting] = value;
+    }
+
     //Default settings, always reset
     $localStorage.project_panel_show_settings = {
         "tasks": {
@@ -52,6 +92,11 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             "waiting": false,
             "doing": false,
             "finished": false
+        },
+        "code_checker_results": {
+            "W3C": false,
+            "Ryukyu": false,
+            "AChecker": false
         }
     }
 
@@ -62,6 +107,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             var status = $scope.statuses[i]; 
             $scope.setTasksParam(status,'page',1);
             $scope.setTasksParam(status,'user_id_filter',0); 
+
+        }
+
+        for(var i=0;i<$scope.validator_types.length;i++) {
+            var validator_type = $scope.validator_types[i]; 
+            $scope.setCodeCheckerResultsParam(validator_type,'page',1);
         }
     } 
 
@@ -84,7 +135,19 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             "tasks": {
                 type: "layered",
                 selected: "dump"
+            },
+            "code_checker_results": {
+                type: "layered",
+                selected: "W3C"
             }
+        }
+    }
+
+    //Gracefull upgrade
+    if(!$localStorage.project_panel_layout_settings["code_checker_results"]) {
+        $localStorage.project_panel_layout_settings["code_checker_results"] = {
+            type: "layered",
+            selected: "W3C"            
         }
     }
 
@@ -123,8 +186,11 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         "finished":[]        
     }
 
-
-
+    $scope.code_checker_results = {
+        "W3C":[],
+        "Ryukyu":[],
+        "AChecker":[]
+    };
 
     //Default settings
     if(!("project_panel_view_advanced" in $localStorage)) {
@@ -167,8 +233,9 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
 
     if(!("project_panel_maximized" in $localStorage)) {
         $localStorage.project_panel_maximized = {
-        "projects": false,
-        "tasks": false
+            "projects": false,
+            "tasks": false,
+            "code_checker_results": false
         }
     }
 
@@ -296,6 +363,14 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }
     }
 
+    $scope.currentCodeCheckerResultsPageClass = function (validator_type,page) {
+        if (page == $scope.getCodeCheckerResultsParam(validator_type, 'page')) {
+            return "selected";
+        } else {
+            return "";
+        }
+    }
+
     var createNumbersArray = function(num) {
         return new Array(num);   
     }
@@ -348,19 +423,34 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 //Use the "user_id" field
                 var current_user_id = current_user.user_id;
 
-                $http({
-                    method: 'GET',
-                    url: usersApiBaseURL + '/users/'+current_user_id,
-                    headers: {
-                        'x-access-token': CommonFunctions.getToken()
-                    },
-                    params: {
-                        'i': i
+                //try block for users removed, get undefined error
+                try {
+                    if($scope.users_cache[current_user_id]) {
+                        $scope.assigned_users[i]["firstname"] = $scope.users_cache[current_user_id].firstname;
+                        $scope.assigned_users[i]["lastname"] = $scope.users_cache[current_user_id].lastname;
+                    } else {
+                        $http({
+                            method: 'GET',
+                            url: usersApiBaseURL + '/users/' + current_user_id,
+                            headers: {
+                                'x-access-token': CommonFunctions.getToken()
+                            },
+                            params: {
+                                'i': i,
+                            }
+                        }).then(function (response) { 
+                            var i = parseInt(response.config["params"]["i"]);
+                            var user = response.data;
+                            if(user && user.id) {
+                                $scope.users_cache[user.id] = user;
+                            }
+                            $scope.assigned_users[i]["firstname"] = user.firstname;
+                            $scope.assigned_users[i]["lastname"] = user.lastname;
+                        });  
                     }
-                }).then(function (response) {
-                    $scope.assigned_users[parseInt(response.config["params"]["i"])]["firstname"] = response.data.firstname;
-                    $scope.assigned_users[parseInt(response.config["params"]["i"])]["lastname"] = response.data.lastname;
-                });                    
+                } catch(err) {
+                    console.log(err);
+                }
             }
 
             $scope.users_filter = [{firstname: "all", lastname: "", user_id: 0},{firstname: "unassigned", lastname: "", user_id: -1}];
@@ -421,6 +511,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         "waiting":[],
         "doing":[],
         "finished":[]
+    };
+
+    $scope.code_checker_results_page_count_arr = {
+        "W3C":[],
+        "Ryukyu":[],
+        "AChecker":[]
     };
 
     $scope.getTasks = function(status,user_id,limit,page) {
@@ -522,22 +618,8 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                     var current_task = $scope.tasks[status][i];
                     var current_project_id = current_task.project_id;
 
-                    //Get the project name
-                    if(current_project_id) {
-                        $http({
-                            method: 'GET',
-                            url: projectsApiBaseURL + '/projects/'+current_project_id,
-                            headers: {
-                                'x-access-token': CommonFunctions.getToken()
-                            },
-                            params: {
-                                'i': i
-                            }
-                        }).then(function (response) {
-                            var current_project = response.data;
-                            $scope.tasks[status][parseInt(response.config["params"]["i"])]["project_name"] = current_project.name;
-                        });                    
-                    }
+
+                     $scope.tasks[status][i]["project_name"] = $scope.this_project.name;
 
                     if (user_id != -1) { //if this is an assigned task
                         //Get all users on the current task
@@ -558,22 +640,39 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                                     $scope.this_task_user = response.data[j];
                                 }
 
-                                $http({
-                                    method: 'GET',
-                                    url: usersApiBaseURL + '/users/' + response.data[j]["user_id"],
-                                    headers: {
-                                        'x-access-token': CommonFunctions.getToken()
-                                    },
-                                    params: {
-                                        'i': response.config["params"]["i"],
-                                        'j': j
+                                var current_user_id = response.data[j]["user_id"];
+
+                                var i = parseInt(response.config["params"]["i"]);
+                     
+                                try {
+                                    if($scope.users_cache[current_user_id]) {
+                                        $scope.tasks[status][i]["users"][j].firstname = $scope.users_cache[current_user_id].firstname;
+                                        $scope.tasks[status][i]["users"][j].lastname = $scope.users_cache[current_user_id].lastname;
+                                    } else {
+                                        $http({
+                                            method: 'GET',
+                                            url: usersApiBaseURL + '/users/' + current_user_id,
+                                            headers: {
+                                                'x-access-token': CommonFunctions.getToken()
+                                            },
+                                            params: {
+                                                'i': i,
+                                                'j': j
+                                            }
+                                        }).then(function (response) { 
+                                            var i = parseInt(response.config["params"]["i"]);
+                                            var j = parseInt(response.config["params"]["j"]);
+                                            var user = response.data;
+                                            if(user && user.id) {
+                                                $scope.users_cache[user.id] = user;
+                                            }
+                                            $scope.tasks[status][i]["users"][j].firstname = user.firstname;
+                                            $scope.tasks[status][i]["users"][j].lastname = user.lastname;
+                                        });  
                                     }
-                                }).then(function (response) {
-                                    var i = parseInt(response.config["params"]["i"]);
-                                    var j = parseInt(response.config["params"]["j"]);
-                                    $scope.tasks[status][i]["users"][j].firstname = response.data.firstname;
-                                    $scope.tasks[status][i]["users"][j].lastname = response.data.lastname;
-                                });
+                                } catch(err) {
+                                    console.log(err);
+                                }
                             }
                         });
                     }
@@ -581,6 +680,104 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             });        
         });
     } //End getTasks()
+
+
+    $scope.getCodeCheckerResults = function(validator_type,limit,page,file) {
+        //Save/Default settings
+        console.log("Get Code Checker Results");
+        console.log("Status: " + validator_type + ", limit: " + limit + ", page: " + page + ", file: " + file);
+        //Save settings
+        $scope.setCodeCheckerResultsParam(validator_type,'limit',limit);
+        $scope.setCodeCheckerResultsParam(validator_type,'page',page);
+        $scope.setCodeCheckerResultsParam(validator_type,'file',file);
+
+        var queryStr = "?validator="+validator_type;
+
+        if(file && file != "all") {
+            queryStr = queryStr + "&url="+file;
+        }
+
+        var codeCheckerResultsCountURL = codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/result-messages-count' + queryStr;
+
+        //Get total code_checker_results count first in order to calculate pagination parameters
+        $http({
+            method: 'GET',
+            url: codeCheckerResultsCountURL,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            var code_checker_results_count = parseInt(response.data); 
+            $scope.setCodeCheckerResultsParam(validator_type,'count', code_checker_results_count);
+
+            //For pagination
+            if(limit != "all" && code_checker_results_count && code_checker_results_count > 0) {
+                var code_checker_results_page_count = Math.ceil(code_checker_results_count / parseInt(limit));
+                $scope.code_checker_results_page_count_arr[validator_type] = createNumbersArray(code_checker_results_page_count);
+            } else {
+                $scope.code_checker_results_page_count_arr[validator_type] = createNumbersArray(1);
+            }
+
+            //Set the current page
+            var pageInt = parseInt(page,10);
+            if(pageInt) {
+                if(pageInt <= 0) { //don't let pages go below zero
+                    $scope.setCodeCheckerResultsParam(validator_type,'page',1);
+                } else if (pageInt > $scope.code_checker_results_page_count_arr[validator_type].length) { //don't let pages go past max pages
+                    $scope.setCodeCheckerResultsParam(validator_type,'page',$scope.code_checker_results_page_count_arr[validator_type].length);
+                } else {
+                    $scope.setCodeCheckerResultsParam(validator_type,'page',pageInt);
+                }
+            } else {
+                $scope.setCodeCheckerResultsParam(validator_type,'page',1);
+            }
+
+            //Build the query string to get the code_checker_results for the current page
+            var queryArr = [];
+            var queryStr = "";
+            var queryStatus = null;
+            var queryLimit = null;
+            var queryPage = null;
+            var queryFile = null;
+
+            //Query to filter by validator_type
+            if(validator_type && validator_type != "all") {
+                queryStatus = "validator="+validator_type;
+                queryArr.push(queryStatus);
+            }
+
+            //Query for limiting results and pagination
+            if(limit && limit != "all") {
+                queryLimit = "limit="+limit;
+                queryArr.push(queryLimit);
+                queryPage = "page="+$scope.getCodeCheckerResultsParam(validator_type,'page'); //processed page
+                queryArr.push(queryPage);
+            }
+
+             //Query to filter by file 
+             if(file && file != "all") {
+                queryFile = "url="+file;
+                queryArr.push(queryFile);
+            }           
+
+            if(queryArr.length > 0) {
+                queryStr = "?" + queryArr.join("&");
+            }
+
+            var codeCheckerResultsURL = codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/result-messages' + queryStr;
+
+            //Get the project's code_checker_results
+            $http({
+                method: 'GET',
+                url: codeCheckerResultsURL,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                $scope.code_checker_results[validator_type] = response.data;
+            });        
+        });
+    } //End getCodeCheckerResults()
 
     $scope.taskPinnedClass = function(status,task) {
         if(task.project_pinned) {
@@ -1109,6 +1306,308 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }
     }
 
+
+    $scope.get_code_checker_project = function() {
+        //Get project information
+        $http({
+            method: 'GET',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.this_code_checker_project = response.data;
+                $scope.this_code_checker_project.source_password = ""; //do not show github password
+
+                //Get url's to check
+                $http({
+                    method: 'GET',
+                    url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/urls-to-check',
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    }
+                }).then(
+                    function successCallback(response) {
+                        $scope.this_code_checker_project.urls_to_check = response.data;
+                    },
+                    function errorCallback(response) { 
+                        $scope.this_code_checker_project.urls_to_check = [];
+                    }
+                );
+
+                //Get sass folders to check
+                $http({
+                    method: 'GET',
+                    url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/sass-folders',
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    }
+                }).then(
+                    function successCallback(response) {
+                        $scope.this_code_checker_project.sass_folders = response.data;
+                    },
+                    function errorCallback(response) { 
+                        $scope.this_code_checker_project.sass_folders = [];
+                    }
+                );
+            },
+            function errorCallback(response) { 
+                $scope.this_code_checker_project = null;
+            }
+        );
+    }
+
+    $scope.add_code_checker = function() {
+        $http({
+            method: 'POST',
+            url: codeCheckerApiBaseURL + '/code-checker-projects',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                project_id: $routeParams.project_id
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
+
+    $scope.update_code_checker_check_sass_html = function() {
+        $http({
+            method: 'PUT',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                check_sass: $scope.this_code_checker_project.check_sass,
+                check_html: $scope.this_code_checker_project.check_html
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
+
+    $scope.update_code_checker = function(type) {
+        var update_data = {}
+        if(type == "html") {
+            update_data = {
+                development_server: $scope.this_code_checker_project.development_server,
+                dev_server_username: $scope.this_code_checker_project.dev_server_username,
+                dev_server_password: $scope.this_code_checker_project.dev_server_password           
+            }
+        } else if (type == "sass") {
+            update_data = {
+                source_code_server: $scope.this_code_checker_project.source_code_server,
+                source_username: $scope.this_code_checker_project.source_username,
+            }
+            if($scope.this_code_checker_project.source_password && $scope.this_code_checker_project.source_password.length > 0) {
+                update_data.source_password = $scope.this_code_checker_project.source_password;
+                console.log("Github password: " + update_data.source_password);
+            }
+        }
+
+        $http({
+            method: 'PUT',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: update_data
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+                $scope.edit_code_checker_form[type] = false;
+            },
+            function errorCallback(response) {
+            }
+        );
+    }
+
+    $scope.add_url_to_check = function(url) {
+        $http({
+            method: 'POST',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/urls-to-check',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                url: url
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+                $scope.url_to_add = null;
+            },
+            function errorCallback(response) {
+            }
+        );        
+    }
+
+    $scope.add_sass_folder = function(relative_path) {
+        $http({
+            method: 'POST',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/sass-folders',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                relative_path: relative_path
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+                $scope.sass_folder_to_add = null;
+            },
+            function errorCallback(response) {
+            }
+        );        
+    }
+
+    $scope.remove_url_to_check = function(id) {
+        $http({
+            method: 'DELETE',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/urls-to-check/' + id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+            },
+            function errorCallback(response) {
+            }
+        );        
+    }
+
+    $scope.remove_sass_folder = function(id) {
+        $http({
+            method: 'DELETE',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/sass-folders/' + id,
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.get_code_checker_project();
+            },
+            function errorCallback(response) {
+            }
+        );        
+    }
+
+    $scope.code_checker_running = false;
+    $scope.code_checker_results = {};
+    $scope.run_code_checker = function() {
+        $scope.code_checker_running = true;
+        $('.code_checker .button').prop('disabled', true);
+        $http({
+            method: 'PUT',
+            url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/run',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            },
+            data: {
+                hi: "world"
+            }
+        }).then(
+            function successCallback(response) {
+                $scope.code_checker_running = false;
+                $scope.get_code_checker_project();
+                $('.code_checker .button').prop('disabled', false);
+                for(var i=0;i<$scope.validator_types.length;i++) {
+                    var validator_type = $scope.validator_types[i]; 
+                    $scope.setCodeCheckerResultsParam(validator_type,'page',1);
+                    $scope.getCodeCheckerResults(validator_type, $scope.getCodeCheckerResultsParam(validator_type,'limit'), $scope.getCodeCheckerResultsParam(validator_type,'page'));
+                }
+
+                //Get the checked urls list for select box filter
+                $scope.get_code_checker_checked_files();
+            },
+            function errorCallback(response) {
+                $scope.code_checker_running = false;
+                $scope.get_code_checker_project();
+                $('.code_checker .button').prop('disabled', false);
+            }
+        );
+    }    
+
+    $scope.output_urls = {
+        "W3C": [],
+        "Ryukyu": [],
+        "AChecker": []
+    }
+    $scope.get_code_checker_checked_files = function () {
+        for (var i = 0; i < $scope.validator_types.length; i++) {
+            $http({
+                method: 'GET',
+                url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id + '/output-urls?validator='+$scope.validator_types[i],
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                },
+                params: {
+                   'i': i
+                }
+            }).then(
+                function successCallback(response) {
+                    var i = parseInt(response.config["params"]["i"]);
+                    var output_urls = response.data;
+                    output_urls.push({url: "all"});
+                    $scope.output_urls[$scope.validator_types[i]] = output_urls;
+                },
+                function errorCallback(response) {
+                    var i = parseInt(response.config["params"]["i"]);
+                    $scope.output_urls[$scope.validator_types[i]] = [];
+                }
+            );
+        }
+    }
+
+
+    $scope.remove_code_checker = function() {
+        var answer = prompt('Remove Code Checker from this project?  Type "yes" to confirm');
+        if(answer == "yes") {
+            //(this) is equivalent to ($scope) inside the function
+            $http({
+                method: 'DELETE',
+                url: codeCheckerApiBaseURL + '/code-checker-projects/' + $routeParams.project_id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                $scope.$parent.flash_message = "Removed Code Checker from this project";
+                $scope.$parent.flash_level = "alert";
+                $scope.this_code_checker_project = null;
+            });      
+        } else {
+            $scope.$parent.flash_message = 'Did not type "yes". Code Checker not removed from the project.';
+            $scope.$parent.flash_level = "fail";
+        }
+    }
+
+    $scope.edit_code_checker_form = {
+        html: false,
+        sass: false
+    }
+
+    $scope.show_edit_code_checker_form = function(type) {
+        $scope.edit_code_checker_form[type] = true;
+    }
+
+    $scope.cancel_update_code_checker = function(type) {
+        $scope.edit_code_checker_form[type] = false;
+        $scope.get_code_checker_project();
+    }
+
     $scope.quick_task_form_data = {};
 
     $scope.quick_post_task = function() {
@@ -1134,6 +1633,12 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
 
     }
 
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////// 
+    /////////////////////////////// On Page Load //////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
     if($localStorage.loggedin_user) {
         //Get permissions information
         $http({
@@ -1176,26 +1681,39 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
                 $scope.this_project_photo.uri = "./images/default_project.png";
                 $scope.this_project_photo.caption = "Todo project photo microservice";
             });
+
+            //Get all users for assigning new users
+            $http({
+                method: 'GET',
+                url: usersApiBaseURL + '/users?active=1',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                $scope.users = response.data;
+                //Cache the users
+                for (var i = 0; i < $scope.users.length; i++) {
+                    //Cache the user by id for optimization
+                    $scope.users_cache[$scope.users[i].id] = $scope.users[i];
+                }
+
+                //Get all users on the current project
+                get_project_users();
+
+                //Get all tasks on the curent project
+                for(var i=0;i<$scope.statuses.length;i++) {
+                    var status = $scope.statuses[i]; 
+                    $scope.getTasks(status, $scope.getTasksParam(status,'user_id_filter'),$scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
+                }
+            });
         });
 
-
-        get_project_users();
-
-        for(var i=0;i<$scope.statuses.length;i++) {
-            var status = $scope.statuses[i]; 
-            $scope.getTasks(status, $scope.getTasksParam(status,'user_id_filter'),$scope.getTasksParam(status,'limit'), $scope.getTasksParam(status,'page'));
+        for(var i=0;i<$scope.validator_types.length;i++) {
+            var validator_type = $scope.validator_types[i]; 
+            $scope.getCodeCheckerResults(validator_type, $scope.getCodeCheckerResultsParam(validator_type,'limit'), $scope.getCodeCheckerResultsParam(validator_type,'page'));
         }
 
-        //Get all users for assigning new users
-        $http({
-            method: 'GET',
-            url: usersApiBaseURL + '/users',
-            headers: {
-                'x-access-token': CommonFunctions.getToken()
-            }
-        }).then(function (response) {
-            $scope.users = response.data;
-        });
+        $scope.get_code_checker_checked_files();
 
         //Get all files for project
         $http({
@@ -1217,6 +1735,9 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }).then(function (response) {
             $scope.group_assignment = response.data;
         });
+
+        $scope.get_code_checker_project();
+
     } 
 
 });

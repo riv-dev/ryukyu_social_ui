@@ -174,6 +174,7 @@
         <h2 class="title">Users List</h2>
         <ul class="settings">
             <li ng-if="loggedin_user.admin" class="item"><a class="link" href="./users/new">Add User</a></li>
+            <li ng-if="loggedin_user.admin" class="item"><select class="input select active_status" ng-options="active_status for active_status in active_statuses" ng-change="getUsers(active_status)" ng-model="active_status"></select></li>
         </ul>
         <button ng-show="!isMaximized('users')" class="button maximize" ng-click="maximize('users')">Maximize</button>
         <button ng-show="isMaximized('users')" class="button minimize" ng-click="minimize('users')">Minimize</button>

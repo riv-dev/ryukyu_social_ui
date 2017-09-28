@@ -98,11 +98,7 @@
 .preview.users {
     position: relative;
     .item.alert {}
-
-    .item {
-
-    }
-
+    .item {}
     .link_block {
         padding: 10px 5px;
         @include clearfix();
@@ -141,23 +137,20 @@
         color: $green;
         padding-left: 5px;
     }
-
     .details {
         margin-top: 10px;
         position: relative;
         @include clearfix();
         width: 100%;
     }
-
     .attributes {
-        -webkit-box-shadow: 1px 1px 5px 1px rgba(138,138,138,1);
-        -moz-box-shadow: 1px 1px 5px 1px rgba(138,138,138,1);
-        box-shadow: 1px 1px 5px 1px rgba(138,138,138,1);
+        -webkit-box-shadow: 1px 1px 5px 1px rgba(138, 138, 138, 1);
+        -moz-box-shadow: 1px 1px 5px 1px rgba(138, 138, 138, 1);
+        box-shadow: 1px 1px 5px 1px rgba(138, 138, 138, 1);
         background-color: $light_blue;
         margin-left: 15px;
         margin-right: 15px;
     }
-
     .attributes.projects {
         margin-top: 10px;
         padding: 5px;
@@ -228,7 +221,6 @@
             color: red;
         }
     }
-
     .button.trash {
         height: 24px;
         line-height: 24px;
@@ -333,39 +325,9 @@
     }
 }
 
-.tabs {
-    position: relative;
-    &:after {
-        position: relative;
-        display: block;
-        content: '';
-        border-top: 1px solid $black;
-        z-index: 2;
-    }
-    .item {
-        position: relative;
-        top: 1px;
-        display: inline-block;
-        margin-right: 5px;
-        z-index: 1;
-        &.selected {
-            z-index: 3;
-            .tab {
-                border-color: $black;
-                color: $black;
-                font-weight: bold;
-            }
-        }
-        .tab {
-            border: 1px solid $grey;
-            border-bottom: none;
-            border-radius: 3px 3px 0px 0px;
-            color: $grey;
-        }
-    }
-}
-
-.section.projects, .section.tasks {
+.section.projects,
+.section.tasks,
+.section.code_checker_results {
     .header {
         border-bottom: none;
     }
@@ -373,12 +335,10 @@
 
 .sub-section {
     background-color: transparent;
-
     text-align: center; //to center pagination
     * {
         text-align: left;
     }
-
     .pagination {
         margin-top: 15px;
     }
@@ -387,17 +347,15 @@
 .context-menu {
     padding: 5px 0px;
     background-color: $light_grey;
-    -webkit-box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);
-    -moz-box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);
-    box-shadow: 1px 1px 5px 1px rgba(139,139,139,1);    
+    -webkit-box-shadow: 1px 1px 5px 1px rgba(139, 139, 139, 1);
+    -moz-box-shadow: 1px 1px 5px 1px rgba(139, 139, 139, 1);
+    box-shadow: 1px 1px 5px 1px rgba(139, 139, 139, 1);
     position: absolute;
     display: none;
-
     .item {
         padding: 5px 15px;
         font-size: 12px;
         font-family: 'Arial';
-
         &:hover {
             background-color: $light_blue;
             cursor: pointer;
@@ -411,10 +369,171 @@
     width: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(200,200,200,0.4);
+    background-color: rgba(200, 200, 200, 0.4);
     overflow-y: auto;
     height: calc(100% - 50px);
     .form {
         background-color: white;
+    }
+}
+
+.code_checker {
+    background-color: #e2e2e2;
+    padding: 15px;
+    text-align: center;
+    .button.add_code_checker {
+        margin-top: 15px;
+    }
+
+    h3.title {
+        font-size: 18px !important;
+        display: block !important;
+        padding-top: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .heading {
+        position: relative;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+
+    h4.title.check_settings {
+        font-size: 16px !important;
+        text-align: left !important;
+        display: block;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        padding-top: 0px !important;
+        padding-right: 0px !important;
+        margin-left: 20px;
+    }
+
+    .checkbox {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
+    .attributes.metrics {
+        position: relative;
+        text-align: left;
+        padding: 0px !important;
+    }
+    .attributes.metrics.code_checker_project {
+        margin-bottom: 0px !important;
+    }
+    .attributes.metrics.add_url, .attributes.metrics.add_sass_folder {
+        margin-top: 0px !important;
+    }
+    .status.run {
+        margin-top: 30px;
+        color: $green;
+    }
+    .button.run {
+        margin-top: 30px;
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 20px;
+    }
+    .key {
+        margin-bottom: 3px !important;
+    }
+    .key.add_url, .key.add_sass_folder {
+        margin-top: 10px;
+    }
+    .value.add_url, .value.add_sass_folder {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin-bottom: 0px !important;
+        .form {
+            padding-bottom: 0px; 
+            .field {
+                .input {
+                    height: 20px;
+                    line-height: 20px;
+                    font-size: 14px;
+                    margin-bottom: 0px;
+                }
+                padding-right: 43px;
+                margin-bottom: 0px;
+            }
+            .button.submit {
+                width: 40px;
+                height: 20px;
+                line-height: 20px;
+                padding: 0px !important;
+                font-size: 12px !important;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                margin-right: 0px !important;
+            }
+        }
+    }
+
+    .value.urls_to_check.none, .value.sass_folders.none {
+        margin-bottom: 3px !important;
+    }
+    .value_item.urls_to_check, .value_item.sass_folders {
+        display: list-item;
+        list-style-type: disc;
+        list-style-position: inside;
+        &:hover {
+            background-color: $light_blue;
+        }
+        .button.delete {
+            height: 10px;
+            width: 10px;
+            line-height: 10px;
+            top: 0px;
+            &:before {
+                font-size: 10px;
+            }
+        }
+    }
+    margin-bottom: 15px;
+    .button.edit.metrics {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        &:before {
+            font-size: 12px;
+        }
+    }
+    .form.metrics {
+        text-align: left;
+        .label {
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+        .field {
+            margin-bottom: 10px;
+        }
+        .input {
+            height: 20px !important;
+            line-height: 20px !important;
+            font-size: 12px !important;
+            margin-bottom: 0px;
+        }
+        .buttons {
+            .button.submit {
+                font-size: 12px;
+                padding: 3px;
+                margin-right: 3px;
+            }
+        }
+    }
+    .button.remove {
+
+    }
+}
+
+.code_checker_results {
+    .item.error {
+        .name {
+            color: $red;
+        }
     }
 }

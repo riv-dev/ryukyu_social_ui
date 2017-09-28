@@ -243,6 +243,9 @@
     .section.users {
         width: 33.33%;
     }
+    .section.code_checker_results {
+        width: 66.67%;
+    }
 }
 
 .main.task {
@@ -281,6 +284,15 @@
 .section.users {
     .form.assign_user {
         margin-top: 10px;
+    }
+
+    .settings .item {
+        display: inline-block;
+        margin-left: 10px;
+        .input.active_status {
+            text-align: center;
+            width: 110px;
+        }
     }
 }
 
@@ -337,6 +349,16 @@
         &.finished {
             left: 161px;
         }
+
+        &.W3C {
+            left: 15px;
+        }
+        &.Ryukyu {
+            left: 57px;
+        }
+        &.AChecker {
+            left: 110px;
+        }
     }
     .settings {
         display: none;
@@ -363,6 +385,9 @@
             z-index: 3;
         }
         .preview {
+            display: block;
+        }
+        .info.none {
             display: block;
         }
         .pagination {
@@ -550,5 +575,11 @@
     .preview {
         padding-left: 25px;
         background-color: transparent;
+    }
+}
+
+.sub-section.code_checker_results {
+    .input.select.file {
+        width: 50%;
     }
 }

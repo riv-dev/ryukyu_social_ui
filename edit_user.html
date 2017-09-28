@@ -1,5 +1,7 @@
 <form class="form user" name="user_form">
   <h2 class="title">Edit User</h2>
+  <p ng-if="loggedin_user.admin && loggedin_user.id != this_user_id"><label class="label" for="active">Active: </label><input class="checkbox" type="checkbox" ng-model="checkboxModel.active"
+     ng-true-value="1" ng-false-value="0" ng-disabled="not_admin()"></p>
   <p class="field">
     <label class="label" for="firstname">First name: </label><input class="input" type="text" ng-model="firstname" required ng-disabled="not_admin()">
     <ul class="validation_errors" ng-if="errors.firstname">
@@ -41,7 +43,7 @@
       </li>
     </ul>
   </p>
-  <p ng-if="loggedin_user.admin"><label class="label" for="admin">Admin: </label><input class="checkbox" type="checkbox" ng-model="checkboxModel.admin"
+  <p ng-if="loggedin_user.admin && loggedin_user.id != this_user_id"><label class="label" for="admin">Admin: </label><input class="checkbox" type="checkbox" ng-model="checkboxModel.admin"
       ng-true-value="1" ng-false-value="0" ng-disabled="not_admin()"></p>
   <p class="field">
     <input class="button submit" type="submit" value="Submit" ng-click="put()">
