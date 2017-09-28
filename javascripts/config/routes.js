@@ -87,6 +87,10 @@ app.config(function($routeProvider, $locationProvider) {
   .when("/users/:user_id/profile/edit", {
     templateUrl: "edit_user_profile.html",
     controller: "editUserProfileController"
+  })
+  .when("/groups/:group_id", {
+    templateUrl: "group_panel.html",
+    controller: "groupPanelController"
   });
 
   // use the HTML5 History API

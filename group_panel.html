@@ -1,0 +1,21 @@
+<section class="section details">
+    <header class="header">
+        <h2 class="title">{{ group_info.name }}</h2>
+    </header>
+    <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-swipe-content>
+        <md-tab ng-repeat="tab in group_categories"
+                ng-disabled="tab.disabled"
+                label="{{tab.title}}">
+            <div class="tab{{$index%4}}">
+                <ul class="preview groups">
+                    <li class="item" ng-repeat="item in tab.content">
+                        <a class="link_block" href="./{{item.item_type}}/{{item.item_id}}">
+                            <h3 class="item-name">{{getItemName(item)}}</h3>
+                        </a>
+                    </li>
+                </ul>
+                <p ng-if="!tab.content || tab.content.length == 0" class="info none">No assignment</p>
+            </div>
+        </md-tab>
+    </md-tabs>
+</section>
