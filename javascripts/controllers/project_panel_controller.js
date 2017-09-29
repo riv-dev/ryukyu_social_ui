@@ -1,4 +1,4 @@
-app.controller('projectPanelController', function($scope, $http, $window, $timeout, $routeParams, $location, $localStorage, Upload, CommonFunctions) {
+app.controller('projectPanelController', function($scope, $http, $window, $timeout, $routeParams, $location, $localStorage, $mdDialog, Upload, CommonFunctions) {
     $scope.$parent.hero = "Project Panel";
     $scope.$parent.panel_class = "project";
 
@@ -1173,6 +1173,138 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
             });
         }
     };
+    
+    $scope.showDialog = function(ev, data_group_assignment) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var parentEl = angular.element(document.body);
+        var template = '<md-dialog aria-label="list dialog">' +
+        '  <form name="groupForm" novalidate ng-submit="groupForm.$valid && assignment()">' +
+        '    <md-dialog-content class="md-dialog-content">'+
+        '      <h2 class="md-title">Add project ' + $scope.this_project.name + ' to group</h2>' +
+        '      <div layout="row" layout-align="start" flex>' +
+        '        <md-input-container flex="100">' +
+        '          <md-select ng-model="group_select" placeholder="Select a group" required>' +
+        '            <md-option ng-repeat="item in items" ng-value="item" ng-disabled="checkGroups(item.id)">' +
+        '              {{item.name}}' +
+        '            </md-option>' +
+        '          </md-select>' +
+        '        </md-input-container>' +
+        '      </div>' +
+        '    </md-dialog-content>' +
+        '    <md-dialog-actions>' +
+        '      <md-button ng-click="closeDialog()" class="md-primary md-cancel-button md-button">' +
+        '        Cancel' +
+        '      </md-button>' +
+        '      <md-button type="submit" class="md-primary md-confirm-button md-button">' +
+        '        Add to group' +
+        '      </md-button>' +
+        '    </md-dialog-actions>' +
+        '  </form>' +
+        '</md-dialog>';
+    
+        $mdDialog.show({
+            parent: parentEl,
+            targetEvent: ev,
+            template: template,
+            focusOnOpen: false,
+            locals: {
+                items: $scope.items
+            },
+            controller: DialogController
+        });
+
+        function DialogController($scope, $mdDialog, items) {
+            $scope.group_select = 0;
+            $http({
+                method: 'GET',
+                url: groupsApiBaseURL + '/groups',
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(function (response) {
+                $scope.items = response.data;
+            });
+            
+            $scope.closeDialog = function() {
+                $mdDialog.hide();
+            }
+
+            $scope.checkGroups = function(id) {
+                var result = $.grep(data_group_assignment, function(e){ return e.group_id == id; });
+                if (result.length == 0) return false;
+                return true;
+            }
+
+            $scope.assignment = function() {
+                $http({
+                    method: 'POST',
+                    url: groupsApiBaseURL + '/projects/' + $routeParams.project_id + '/groups/' + $scope.group_select.id,
+                    headers: {
+                        'x-access-token': CommonFunctions.getToken()
+                    }
+                }).then(
+                    function successCallback(response) {
+                        data_group_assignment.push({id: response.data.group_assignment_id, group_id: $scope.group_select.id, name: $scope.group_select.name})
+                        $scope.group_assignment = data_group_assignment;
+                        $mdDialog.hide($scope.group_assignment);
+                        Lobibox.notify('success', {
+                            position: 'top right',
+                            sound: false,
+                            size: 'mini',
+                            msg: 'Added project to group!'
+                        });
+                    },
+                    function errorCallback(response) {
+                        Lobibox.notify('error', {
+                            position: 'top right',
+                            sound: false,
+                            size: 'mini',
+                            msg: 'Error adding project to group.'
+                        });
+                    }
+                );
+            }
+        }
+    };
+
+    $scope.delete_group_assignment = function(index, group_id, group_name) {
+        var answer = prompt('Remove group ' + group_name + '?  Type "yes" to confirm');
+        if(answer == "yes") {
+            $http({
+                method: 'DELETE',
+                url: groupsApiBaseURL + '/projects/' + $routeParams.project_id + '/groups/' + group_id,
+                headers: {
+                    'x-access-token': CommonFunctions.getToken()
+                }
+            }).then(
+                function successCallback(response) {
+                    delete $scope.group_assignment[index];
+                    $scope.group_assignment.splice(index, 1);
+                    Lobibox.notify('success', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Deleted assign to group ' + group_name + '!'
+                    });
+                },
+                function errorCallback(response) {
+                    Lobibox.notify('error', {
+                        position: 'top right',
+                        sound: false,
+                        size: 'mini',
+                        msg: 'Error deleting assign to group ' + group_name + '.'
+                    });
+                }
+            );
+        } else {
+            Lobibox.notify('error', {
+                position: 'top right',
+                sound: false,
+                size: 'mini',
+                msg: 'Did not type "yes". Cannot not removed assign the project to group' + group_name + '.'
+            });
+        }
+    }
 
 
     $scope.get_code_checker_project = function() {
@@ -1593,8 +1725,19 @@ app.controller('projectPanelController', function($scope, $http, $window, $timeo
         }).then(function (response) {
             $scope.projectFiles = response.data;
         });
+        
+        $http({
+            method: 'GET',
+            url: groupsApiBaseURL + '/projects/' + $routeParams.project_id + '/groups',
+            headers: {
+                'x-access-token': CommonFunctions.getToken()
+            }
+        }).then(function (response) {
+            $scope.group_assignment = response.data;
+        });
 
         $scope.get_code_checker_project();
+
     } 
 
 });
